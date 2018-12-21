@@ -4,7 +4,7 @@ public class ManagerTirocinio {
 
 //locale
 
- int y;
+ int z;
 //branch reository
 
 }
