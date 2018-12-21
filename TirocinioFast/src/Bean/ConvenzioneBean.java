@@ -10,37 +10,6 @@ public class ConvenzioneBean implements java.io.Serializable {
 	
 	/**Getter e Setter*/
 	
-	public String getUrl() {
-		return url;
-	}
-	
-	public void setUrl(String url) {
-		this.url = url;
-	}
-	
-	public int getAzienda() {
-		return azienda;
-	}
-	
-	public void setAzienda(int azienda) {
-		this.azienda = azienda;
-	}
-	
-	public int getTutorAccademico() {
-		return tutorAccademico;
-	}
-	
-	public void setTutorAccademico(int tutorAccademico) {
-		this.tutorAccademico = tutorAccademico;
-	}
-	
-	public boolean isConvalida() {
-		return convalida;
-	}
-	
-	public void setConvalida(boolean convalida) {
-		this.convalida = convalida;
-	}
 	
 	/**toString*/
 	
@@ -49,14 +18,31 @@ public class ConvenzioneBean implements java.io.Serializable {
 		return "ConvenzioneBean [Url: " + this.getUrl() + 
 				"][Azienda: " + this.getAzienda() + 
 				"][TutorAccademico: " + this.getTutorAccademico() +
-				"][Convalida: " + this.isConvalida() + "]";
+				"][Impiegato: " + this.getImpiegato() + 
+				"][Luogo nascita CEO: " + this.getLuogoNascitaCEO() +
+				"][Data nascita CEO: " + this.getDataNascitaCEO() +
+				"][Numero dipendenti: " + this.getNumeroDipendenti() +
+				"][Referente: " + this.getReferente() +
+				"][Telefono referente: " + this.getTelefonoReferente() +
+				"][E-mail referente: " + this.getEmailReferente() +
+				"][Attivita: " + this.getAttivita() + 
+				"][Convalida: " + this.isConvalida() + 
+				"][Url: " + this.getUrl() + "]";
 	}
 	
 	/**Variabili di istanza*/
 	
-	private String url;
 	private int azienda;
 	private int tutorAccademico;
+	private int impiegato;
+	private String luogoNascitaCeo;
+	private String dataNascitaCeo;
+	private int numeroDipendenti;
+	private String referente;
+	private String telefonoReferente;
+	private String emailReferente;
+	private String attivita;
 	private boolean convalida;
+	private String url;
 	
 }
