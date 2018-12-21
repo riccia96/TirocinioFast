@@ -15,8 +15,7 @@ public class ConvenzioneBean implements java.io.Serializable {
 	
 	@Override
 	public String toString() {
-		return "ConvenzioneBean [Url: " + this.getUrl() + 
-				"][Azienda: " + this.getAzienda() + 
+		return "ConvenzioneBean [Azienda: " + this.getAzienda() + 
 				"][TutorAccademico: " + this.getTutorAccademico() +
 				"][Impiegato: " + this.getImpiegato() + 
 				"][Luogo nascita CEO: " + this.getLuogoNascitaCEO() +
