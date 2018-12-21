@@ -17,8 +17,8 @@ public class AziendaBean implements java.io.Serializable {
 	public String toString(){
 		return "Azienda [Nome: " + this.getNome() +
 				"][Partita Iva: " + this.getPartitaIva() +
-				"][CEO: " + this.getCEO() +
-				"][Sede: " + this.getSede() +
+				"][CEO: " + this.getCeo() +
+				"][Sede: " + this.getIndirizzo() +
 				"][E-mail: " + this.getEmail() +
 				"][Telefono: " + this.getTelefono() +
 				"][Username: " + this.getUsername() +
@@ -30,8 +30,8 @@ public class AziendaBean implements java.io.Serializable {
 
 	private String nome;
 	private String partitaIva;
-	private String CEO;
-	private String sede;
+	private String ceo;
+	private String indirizzo;
 	private String email;
 	private String telefono;
 	private String username;
