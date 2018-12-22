@@ -32,7 +32,7 @@ private static DataSource ds;
 		}
 	}
 	
-	private static final String TABLE_NAME = "Convenzione";
+	private static final String TABLE_NAME = "convenzione";
 
 	@Override
 	public synchronized int doSave(ConvenzioneBean convenzione) throws SQLException {

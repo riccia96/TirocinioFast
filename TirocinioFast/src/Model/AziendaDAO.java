@@ -31,7 +31,7 @@ public class AziendaDAO extends AbstractDAO<AziendaBean>{
 		}
 	}
 	
-	private static final String TABLE_NAME = "Azienda";
+	private static final String TABLE_NAME = "azienda";
 	
 	@Override
 	public synchronized int doSave(AziendaBean azienda) throws SQLException {

@@ -32,7 +32,7 @@ public class StudenteDAO extends AbstractDAO<StudenteBean>{
 		}
 	}
 
-	private static final String TABLE_NAME = "Studente";
+	private static final String TABLE_NAME = "studente";
 
 	@Override
 	public synchronized int doSave(StudenteBean studente) throws SQLException {
