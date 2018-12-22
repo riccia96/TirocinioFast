@@ -161,21 +161,14 @@ public class AziendaDAO extends AbstractDAO<AziendaBean>{
 				
 				a.setNome(result.getString("nome"));
 				a.setPartitaIva(result.getString("partitaIva"));
-				a.setCEO(result.getString("CEO"));
-				a.setSede(result.getString("sede"));
+				a.setCeo(result.getString("ceo"));
+				a.setIndirizzo(result.getString("indirizzo"));
 				a.setEmail(result.getString("email"));
 				a.setTelefono(result.getString("telefono"));
 				a.setUsername(result.getString("username"));
 				a.setPassword(result.getString("password"));
 				a.setDomanda(result.getString("domanda"));
-				a.setLuogoNascitaCEO(result.getString("luogoNascitaCEO"));
-				a.setDataNascitaCEO(result.getDate("dataNascitaCEO"));
-				a.setNumeroDipendenti(result.getInt("numeroDipendenti"));
-				a.setReferente(result.getString("referente"));
-				a.setTelefonoReferente(result.getString("telefonoReferente"));
-				a.setEmailReferente(result.getString("emailReferente"));
-				a.setAttivita(result.getString("attivita"));
-				
+								
 				aziende.add(a);
 			}
 		} catch (SQLException e) {
@@ -201,15 +194,24 @@ public class AziendaDAO extends AbstractDAO<AziendaBean>{
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
-		String querySQL = "UPDATE " + AziendaDAO.TABLE_NAME + " SET nome = ?, partitaIva = ?, CEO = ?, sede = ?, email = ?, telefono = ?, username = ?, password = ?, domanda = ?, " +
-				 "luogoNascitaCEO = ?, dataNascitaCEO = ?, numeroDipendenti = ?, referente = ?, telefonoReferente = ?, emailReferente = ?, attivita = ?";
+		String querySQL = "UPDATE " + AziendaDAO.TABLE_NAME + " SET nome = ?, CEO = ?, sede = ?, email = ?, "
+				+ "telefono = ?, username = ?, password = ?, domanda = ? WHERE partitaIva = ?";
 		
 		try {
 
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(querySQL);
-
-			preparedStatement.setString(1, azienda.getPartitaIva());
+			
+			preparedStatement.setString(1, azienda.getNome());
+			preparedStatement.setString(2, azienda.getCeo());
+			preparedStatement.setString(3, azienda.getIndirizzo());
+			preparedStatement.setString(4, azienda.getEmail());
+			preparedStatement.setString(5, azienda.getTelefono());
+			preparedStatement.setString(6, azienda.getUsername());
+			preparedStatement.setString(7, azienda.getPassword());
+			preparedStatement.setString(8, azienda.getDomanda());
+			
+			preparedStatement.setString(9, azienda.getPartitaIva());
 
 			preparedStatement.execute();
 			return true;

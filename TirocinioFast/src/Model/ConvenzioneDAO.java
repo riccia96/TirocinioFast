@@ -40,26 +40,27 @@ private static DataSource ds;
 		PreparedStatement preparedStatement = null;
 		ResultSet result = null;
 		
-		String querySQL = "INSERT INTO " + ConvenzioneDAO.TABLE_NAME + " (url, azienda, tutorAccademico, convalida)" +
-				"VALUES (?, ?, ?, ?, ?)";
+		String querySQL = "INSERT INTO " + ConvenzioneDAO.TABLE_NAME + " (azienda, tutorAccademico, impiegato,"
+				+ " luogoNascitaCeo, dataNascitaCeo, numeroDipendenti, referente, telefonoReferente, emailReferente,"
+				+ " convalida, url)" + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		try{
 			
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(querySQL, Statement.RETURN_GENERATED_KEYS);
 			
-			preparedStatement.setString(1, convenzione.getAllegato());
-			preparedStatement.setString(2, convenzione.getUrl());
-			preparedStatement.setString(3, convenzione.getAzienda());
-			preparedStatement.setString(4, convenzione.getTutorAccademico());
-			preparedStatement.setBoolean(5, convenzione.isConvalida());
-			preparedStatement.setString(10, convenzione.getLuogoNascitaCeo());
-			preparedStatement.setString(11, convenzione.getDataNascitaCeo());
-			preparedStatement.setInt(12, convenzione.getNumeroDipendenti());
-			preparedStatement.setString(13, convenzione.getReferente());
-			preparedStatement.setString(14, convenzione.getTelefonoReferente());
-			preparedStatement.setString(15, convenzione.getEmailReferente());
-			preparedStatement.setString(16, convenzione.getAttivita());
+			preparedStatement.setString(1, convenzione.getAzienda());
+			preparedStatement.setString(2, convenzione.getTutorAccademico());
+			preparedStatement.setString(3, convenzione.getImpiegato());
+			preparedStatement.setString(4, convenzione.getLuogoNascitaCeo());
+			preparedStatement.setString(5, convenzione.getDataNascitaCeo());
+			preparedStatement.setInt(6, convenzione.getNumeroDipendenti());
+			preparedStatement.setString(7, convenzione.getReferente());
+			preparedStatement.setString(8, convenzione.getTelefonoReferente());
+			preparedStatement.setString(9, convenzione.getEmailReferente());
+			preparedStatement.setString(10, convenzione.getAttivita());
+			preparedStatement.setBoolean(11, convenzione.isConvalida());
+			preparedStatement.setString(12, convenzione.getUrl());
 			
 			preparedStatement.execute();
 			result = preparedStatement.getResultSet();
@@ -107,26 +108,26 @@ private static DataSource ds;
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(querySQL);
 
-			preparedStatement.setInt(1, convenzione.getAzienda());
+			preparedStatement.setString(1, convenzione.getAzienda());
 
 			preparedStatement.execute();
 			result = preparedStatement.getResultSet();
 			
 			while(result.next()){
 				
-				c.setAllegato(result.getString("allegato"));
-				c.setUrl(result.getString("url"));
-				c.setAzienda(result.getInt("azienda"));
-				c.setTutorAccademico(result.getInt("tutorAccademico"));
+				c.setAzienda(result.getString("azienda"));
+				c.setTutorAccademico(result.getString("tutorAccademico"));
+				c.setImpiegato(result.getString("impiegato"));
+				c.setLuogoNascitaCeo(result.getString("luogoNascitaCEO"));
+				c.setDataNascitaCeo(result.getString("dataNascitaCEO"));
+				c.setNumeroDipendenti(result.getInt("numeroDipendenti"));
+				c.setReferente(result.getString("referente"));
+				c.setTelefonoReferente(result.getString("telefonoReferente"));
+				c.setEmailReferente(result.getString("emailReferente"));
+				c.setAttivita(result.getString("attivita"));
 				c.setConvalida(result.getBoolean("convalida"));
-				a.setLuogoNascitaCEO(result.getString("luogoNascitaCEO"));
-				a.setDataNascitaCEO(result.getDate("dataNascitaCEO"));
-				a.setNumeroDipendenti(result.getInt("numeroDipendenti"));
-				a.setReferente(result.getString("referente"));
-				a.setTelefonoReferente(result.getString("telefonoReferente"));
-				a.setEmailReferente(result.getString("emailReferente"));
-				a.setAttivita(result.getString("attivita"));
-				
+				c.setUrl(result.getString("url"));
+			
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -167,11 +168,18 @@ private static DataSource ds;
 			
 			while(result.next()){
 				
-				c.setAllegato(result.getString("allegato"));
-				c.setUrl(result.getString("url"));
-				c.setAzienda(result.getInt("azienda"));
-				c.setTutorAccademico(result.getInt("tutorAccademico"));
+				c.setAzienda(result.getString("azienda"));
+				c.setTutorAccademico(result.getString("tutorAccademico"));
+				c.setImpiegato(result.getString("impiegato"));
+				c.setLuogoNascitaCeo(result.getString("luogoNascitaCEO"));
+				c.setDataNascitaCeo(result.getString("dataNascitaCEO"));
+				c.setNumeroDipendenti(result.getInt("numeroDipendenti"));
+				c.setReferente(result.getString("referente"));
+				c.setTelefonoReferente(result.getString("telefonoReferente"));
+				c.setEmailReferente(result.getString("emailReferente"));
+				c.setAttivita(result.getString("attivita"));
 				c.setConvalida(result.getBoolean("convalida"));
+				c.setUrl(result.getString("url"));
 				
 				convenzioni.add(c);
 			}			
@@ -200,18 +208,28 @@ private static DataSource ds;
 		PreparedStatement preparedStatement = null;
 		
 		String querySQL = "UPDATE " + ConvenzioneDAO.TABLE_NAME + 
-				" SET allegato = ?, url = ?, azienda = ?, tutorAccademico = ?, convalida = ?";
+				" SET tutorAccademico = ?, impiegato = ?" +
+				"luogoNascitaCeo = ?, dataNascitaCeo = ?, numeroDipendenti = ?, referente = ?, "
+				+ "telefonoReferente = ?, emailReferente = ?, attivita = ?, convalida = ?, url = ? WHERE azienda = ?";
 		
 		try{
 			
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(querySQL);
 			
-			preparedStatement.setString(1, convenzione.getAllegato());
-			preparedStatement.setString(2, convenzione.getUrl());
-			preparedStatement.setInt(3, convenzione.getAzienda());
-			preparedStatement.setInt(4, convenzione.getTutorAccademico());
-			preparedStatement.setBoolean(5, convenzione.isConvalida());
+			preparedStatement.setString(1, convenzione.getTutorAccademico());
+			preparedStatement.setString(2, convenzione.getImpiegato());
+			preparedStatement.setString(3, convenzione.getLuogoNascitaCeo());
+			preparedStatement.setString(4, convenzione.getDataNascitaCeo());
+			preparedStatement.setInt(5, convenzione.getNumeroDipendenti());
+			preparedStatement.setString(6, convenzione.getReferente());
+			preparedStatement.setString(7, convenzione.getTelefonoReferente());
+			preparedStatement.setString(8, convenzione.getEmailReferente());
+			preparedStatement.setString(9, convenzione.getAttivita());
+			preparedStatement.setBoolean(10, convenzione.isConvalida());
+			preparedStatement.setString(11, convenzione.getUrl());
+			
+			preparedStatement.setString(12, convenzione.getAzienda());
 			
 			preparedStatement.execute();
 			return true;
@@ -245,7 +263,7 @@ private static DataSource ds;
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(querySQL);
 			
-			preparedStatement.setInt(1, convenzione.getAzienda());
+			preparedStatement.setString(1, convenzione.getAzienda());
 			
 			preparedStatement.execute();
 			

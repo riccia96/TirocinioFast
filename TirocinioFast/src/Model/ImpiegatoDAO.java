@@ -186,7 +186,8 @@ public class ImpiegatoDAO extends AbstractDAO<ImpiegatoBean>{
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
-		String querySQL = "UPDATE " + ImpiegatoDAO.TABLE_NAME + " SET nome = ?, cognome = ?, matricola = ?, username = ?, password = ?, domanda = ?";
+		String querySQL = "UPDATE " + ImpiegatoDAO.TABLE_NAME + " SET nome = ?, cognome = ?, username = ?,"
+				+ " password = ?, domanda = ? WHERE matricola = ?";
 		
 		try{
 			
@@ -195,10 +196,11 @@ public class ImpiegatoDAO extends AbstractDAO<ImpiegatoBean>{
 			
 			preparedStatement.setString(1, impiegato.getNome());
 			preparedStatement.setString(2, impiegato.getCognome());
-			preparedStatement.setString(3, impiegato.getMatricola());
-			preparedStatement.setString(4, impiegato.getUsername());
-			preparedStatement.setString(5, impiegato.getPassword());
-			preparedStatement.setString(6, impiegato.getDomanda());
+			preparedStatement.setString(3, impiegato.getUsername());
+			preparedStatement.setString(4, impiegato.getPassword());
+			preparedStatement.setString(5, impiegato.getDomanda());
+			
+			preparedStatement.setString(6, impiegato.getMatricola());
 			
 			preparedStatement.execute();
 			return true;

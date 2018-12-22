@@ -32,7 +32,7 @@ public class TutorAccademicoDAO extends AbstractDAO<TutorBean>{
 		}
 	}
 	
-	private static final String TABLE_NAME = "tutorAccademico";
+	private static final String TABLE_NAME = "tutoraccademico";
 
 	@Override
 	public synchronized int doSave(TutorBean tutor) throws SQLException {
@@ -187,7 +187,8 @@ public class TutorAccademicoDAO extends AbstractDAO<TutorBean>{
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
-		String querySQL = "UPDATE " + TutorAccademicoDAO.TABLE_NAME + " SET nome = ?, cognome = ?, matricola = ?, username = ?, password = ?, domanda = ?";
+		String querySQL = "UPDATE " + TutorAccademicoDAO.TABLE_NAME + " SET nome = ?, cognome = ?, username = ?, password = ?, "
+				+ "domanda = ? WHERE  matricola = ?";
 		
 		try{
 			
@@ -196,10 +197,11 @@ public class TutorAccademicoDAO extends AbstractDAO<TutorBean>{
 			
 			preparedStatement.setString(1, tutor.getNome());
 			preparedStatement.setString(2, tutor.getCognome());
-			preparedStatement.setString(3, tutor.getMatricola());
-			preparedStatement.setString(4, tutor.getUsername());
-			preparedStatement.setString(5, tutor.getPassword());
-			preparedStatement.setString(6, tutor.getDomanda());
+			preparedStatement.setString(3, tutor.getUsername());
+			preparedStatement.setString(4, tutor.getPassword());
+			preparedStatement.setString(5, tutor.getDomanda());
+			
+			preparedStatement.setString(6, tutor.getMatricola());
 			
 			preparedStatement.execute();
 			return true;
