@@ -10,6 +10,101 @@ public class ConvenzioneBean implements java.io.Serializable {
 	
 	/**Getter e Setter*/
 	
+	public String getAzienda() {
+		return azienda;
+	}
+
+	public void setAzienda(String azienda) {
+		this.azienda = azienda;
+	}
+
+	public String getTutorAccademico() {
+		return tutorAccademico;
+	}
+
+	public void setTutorAccademico(String tutorAccademico) {
+		this.tutorAccademico = tutorAccademico;
+	}
+
+	public String getImpiegato() {
+		return impiegato;
+	}
+
+	public void setImpiegato(String impiegato) {
+		this.impiegato = impiegato;
+	}
+
+	public String getLuogoNascitaCeo() {
+		return luogoNascitaCeo;
+	}
+
+	public void setLuogoNascitaCeo(String luogoNascitaCeo) {
+		this.luogoNascitaCeo = luogoNascitaCeo;
+	}
+
+	public String getDataNascitaCeo() {
+		return dataNascitaCeo;
+	}
+
+	public void setDataNascitaCeo(String dataNascitaCeo) {
+		this.dataNascitaCeo = dataNascitaCeo;
+	}
+
+	public int getNumeroDipendenti() {
+		return numeroDipendenti;
+	}
+
+	public void setNumeroDipendenti(int numeroDipendenti) {
+		this.numeroDipendenti = numeroDipendenti;
+	}
+
+	public String getReferente() {
+		return referente;
+	}
+
+	public void setReferente(String referente) {
+		this.referente = referente;
+	}
+
+	public String getTelefonoReferente() {
+		return telefonoReferente;
+	}
+
+	public void setTelefonoReferente(String telefonoReferente) {
+		this.telefonoReferente = telefonoReferente;
+	}
+
+	public String getEmailReferente() {
+		return emailReferente;
+	}
+
+	public void setEmailReferente(String emailReferente) {
+		this.emailReferente = emailReferente;
+	}
+
+	public String getAttivita() {
+		return attivita;
+	}
+
+	public void setAttivita(String attivita) {
+		this.attivita = attivita;
+	}
+
+	public boolean isConvalida() {
+		return convalida;
+	}
+
+	public void setConvalida(boolean convalida) {
+		this.convalida = convalida;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
 	
 	/**toString*/
 	
@@ -18,8 +113,8 @@ public class ConvenzioneBean implements java.io.Serializable {
 		return "ConvenzioneBean [Azienda: " + this.getAzienda() + 
 				"][TutorAccademico: " + this.getTutorAccademico() +
 				"][Impiegato: " + this.getImpiegato() + 
-				"][Luogo nascita CEO: " + this.getLuogoNascitaCEO() +
-				"][Data nascita CEO: " + this.getDataNascitaCEO() +
+				"][Luogo nascita CEO: " + this.getLuogoNascitaCeo() +
+				"][Data nascita CEO: " + this.getDataNascitaCeo() +
 				"][Numero dipendenti: " + this.getNumeroDipendenti() +
 				"][Referente: " + this.getReferente() +
 				"][Telefono referente: " + this.getTelefonoReferente() +
@@ -31,9 +126,9 @@ public class ConvenzioneBean implements java.io.Serializable {
 	
 	/**Variabili di istanza*/
 	
-	private int azienda;
-	private int tutorAccademico;
-	private int impiegato;
+	private String azienda;
+	private String tutorAccademico;
+	private String impiegato;
 	private String luogoNascitaCeo;
 	private String dataNascitaCeo;
 	private int numeroDipendenti;

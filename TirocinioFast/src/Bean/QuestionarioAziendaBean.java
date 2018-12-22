@@ -2,6 +2,8 @@ package Bean;
 
 public class QuestionarioAziendaBean implements java.io.Serializable {
 
+	
+
 	private static final long serialVersionUID = 8L;
 	
 	/**Costruttore*/
@@ -10,52 +12,52 @@ public class QuestionarioAziendaBean implements java.io.Serializable {
 
 	/**Getter e Setter*/
 
-	public int getStudente() {
+	public String getStudente() {
 		return studente;
 	}
 
-	public void setStudente(int studente) {
+	public void setStudente(String studente) {
 		this.studente = studente;
 	}
 
-	public int getTutorAccademico() {
-		return tutorAccademico;
-	}
-
-	public void setTutorAccademico(int tutorAccademico) {
-		this.tutorAccademico = tutorAccademico;
-	}
-
-	public int getAzienda() {
+	public String getAzienda() {
 		return azienda;
 	}
 
-	public void setAzienda(int azienda) {
+	public void setAzienda(String azienda) {
 		this.azienda = azienda;
 	}
 
-	public String getPeriodo() {
-		return periodo;
+	public String getTutorAccademico() {
+		return tutorAccademico;
 	}
 
-	public void setPeriodo(String periodo) {
-		this.periodo = periodo;
+	public void setTutorAccademico(String tutorAccademico) {
+		this.tutorAccademico = tutorAccademico;
 	}
 
-	public String getTitolo() {
-		return titolo;
+	public String getImpiegato() {
+		return impiegato;
 	}
 
-	public void setTitolo(String titolo) {
-		this.titolo = titolo;
+	public void setImpiegato(String impiegato) {
+		this.impiegato = impiegato;
 	}
 
-	public String getUrl() {
-		return url;
+	public String getPeriodoTirocinio() {
+		return periodoTirocinio;
 	}
 
-	public void setUrl(String url) {
-		this.url = url;
+	public void setPeriodoTirocinio(String periodoTirocinio) {
+		this.periodoTirocinio = periodoTirocinio;
+	}
+
+	public String getTitoloTirocinio() {
+		return titoloTirocinio;
+	}
+
+	public void setTitoloTirocinio(String titoloTirocinio) {
+		this.titoloTirocinio = titoloTirocinio;
 	}
 
 	public String getPosizioneRicoperta() {
@@ -66,8 +68,28 @@ public class QuestionarioAziendaBean implements java.io.Serializable {
 		this.posizioneRicoperta = posizioneRicoperta;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public boolean isConvalida() {
+		return convalida;
+	}
+
+	public void setConvalida(boolean convalida) {
+		this.convalida = convalida;
+	}
+
+	public String getTirocinio() {
+		return tirocinio;
+	}
+
+	public void setTirocinio(String tirocinio) {
+		this.tirocinio = tirocinio;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	/**toString*/
@@ -75,22 +97,28 @@ public class QuestionarioAziendaBean implements java.io.Serializable {
 	@Override
 	public String toString(){
 		return "Questionario azienda [Studente: " + this.getStudente() +
-				"][Tutor accademico: " + this.getTutorAccademico() +
 				"][Azienda: " + this.getAzienda() +
-				"][Periodo: " + this.getPeriodo() +
-				"][Titolo: " + this.getTitolo() +
-				"][Url: " + this.getUrl() +
-				"][Posizione ricoperta: " + this.getPosizioneRicoperta() + "]";
+				"][Tutor accademico: " + this.getTutorAccademico() +
+				"][Impiegato: " + this.getImpiegato() +
+				"][Periodo: " + this.getPeriodoTirocinio() +
+				"][Titolo: " + this.getTitoloTirocinio() +
+				"][Posizione ricoperta: " + this.getPosizioneRicoperta() + 
+				"][Convalida: " + this.isConvalida() +
+				"][Tirocinio: " + this.getTirocinio() +
+				"][Url: " + this.getUrl() + "]";
 	}
 
 	/**Variabili di istanza*/
 
-	private int studente;
-	private int tutorAccademico;
-	private int azienda;
-	private String periodo;
-	private String titolo;
-	private String url;
+	private String studente;
+	private String azienda;
+	private String tutorAccademico;
+	private String impiegato;
+	private String periodoTirocinio;
+	private String titoloTirocinio;
 	private String posizioneRicoperta;
+	private boolean convalida;
+	private String tirocinio;
+	private String url;
 
 }
