@@ -33,7 +33,7 @@ public class ConvenzioneBean implements java.io.Serializable {
 	public void setImpiegato(String impiegato) {
 		this.impiegato = impiegato;
 	}
-
+ 
 	public String getLuogoNascitaCeo() {
 		return luogoNascitaCeo;
 	}

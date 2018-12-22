@@ -69,7 +69,7 @@ public class TutorBean implements java.io.Serializable {
 				"][Password: " + this.getPassword() +
 				"][Risposta: " + this.getDomanda() + "]";
 	}
-
+ 
 	/**Variabili di istanza*/
 
 	private String nome;

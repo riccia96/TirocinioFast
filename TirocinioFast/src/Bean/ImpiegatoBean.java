@@ -79,4 +79,4 @@ public class ImpiegatoBean implements java.io.Serializable {
 	private String password;
 	private String domanda;
 
-}
+} 

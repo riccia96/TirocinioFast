@@ -51,7 +51,7 @@ public class StudenteBean implements Serializable{
 	public void setIndirizzo(String indirizzo) {
 		this.indirizzo = indirizzo;
 	}
-
+ 
 	public String getCitta() {
 		return citta;
 	}

@@ -11,7 +11,7 @@ public class QuestionarioAziendaBean implements java.io.Serializable {
 	public QuestionarioAziendaBean() {}
 
 	/**Getter e Setter*/
-
+ 
 	public String getStudente() {
 		return studente;
 	}
