@@ -10,7 +10,6 @@ public class AziendaBean implements java.io.Serializable {
 
 	/**Getter e Setter*/
 
-
 	/**toString*/
 	
 	@Override
