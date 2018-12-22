@@ -40,9 +40,8 @@ public class AziendaDAO extends AbstractDAO<AziendaBean>{
 		PreparedStatement preparedStatement = null;
 		ResultSet result = null;
 		
-		String querySQL = "INSERT INTO " + AziendaDAO.TABLE_NAME + " (nome, partitaIva, CEO, sede, email, telefono, username, password, domanda, " + 
-				"luogoNascitaCEO, dataNascitaCEO, numeroDipendenti, referente, telefonoReferente, emailReferente, Attivita) " + 
-				"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String querySQL = "INSERT INTO " + AziendaDAO.TABLE_NAME + " (nome, partitaIva, ceo, indirizzo, email, telefono, username, password, domanda" + 
+				"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		try{
 			
@@ -51,20 +50,13 @@ public class AziendaDAO extends AbstractDAO<AziendaBean>{
 			
 			preparedStatement.setString(1, azienda.getNome());
 			preparedStatement.setString(2, azienda.getPartitaIva());
-			preparedStatement.setString(3, azienda.getCEO());
-			preparedStatement.setString(4, azienda.getSede());
+			preparedStatement.setString(3, azienda.getCeo());
+			preparedStatement.setString(4, azienda.getIndirizzo());
 			preparedStatement.setString(5, azienda.getEmail());
 			preparedStatement.setString(6, azienda.getTelefono());
 			preparedStatement.setString(7, azienda.getUsername());
 			preparedStatement.setString(8, azienda.getPassword());
 			preparedStatement.setString(9, azienda.getDomanda());
-			preparedStatement.setString(10, azienda.getLuogoNascitaCEO());
-			preparedStatement.setDate(11, azienda.getDataNascitaCEO());
-			preparedStatement.setInt(12, azienda.getNumeroDipendenti());
-			preparedStatement.setString(13, azienda.getReferente());
-			preparedStatement.setString(14, azienda.getTelefonoReferente());
-			preparedStatement.setString(15, azienda.getEmailReferente());
-			preparedStatement.setString(16, azienda.getAttivita());
 			
 			preparedStatement.execute();
 			result = preparedStatement.getResultSet();
@@ -120,21 +112,14 @@ public class AziendaDAO extends AbstractDAO<AziendaBean>{
 				
 				a.setNome(result.getString("nome"));
 				a.setPartitaIva(result.getString("partitaIva"));
-				a.setCEO(result.getString("CEO"));
-				a.setSede(result.getString("sede"));
+				a.setCeo(result.getString("ceo"));
+				a.setIndirizzo(result.getString("indirizzo"));
 				a.setEmail(result.getString("email"));
 				a.setTelefono(result.getString("telefono"));
 				a.setUsername(result.getString("username"));
 				a.setPassword(result.getString("password"));
 				a.setDomanda(result.getString("domanda"));
-				a.setLuogoNascitaCEO(result.getString("luogoNascitaCEO"));
-				a.setDataNascitaCEO(result.getDate("dataNascitaCEO"));
-				a.setNumeroDipendenti(result.getInt("numeroDipendenti"));
-				a.setReferente(result.getString("referente"));
-				a.setTelefonoReferente(result.getString("telefonoReferente"));
-				a.setEmailReferente(result.getString("emailReferente"));
-				a.setAttivita(result.getString("attivita"));
-				
+								
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

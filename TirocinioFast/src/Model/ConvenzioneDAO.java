@@ -40,7 +40,7 @@ private static DataSource ds;
 		PreparedStatement preparedStatement = null;
 		ResultSet result = null;
 		
-		String querySQL = "INSERT INTO " + ConvenzioneDAO.TABLE_NAME + " (allegato, url, azienda, tutorAccademico, convalida)" +
+		String querySQL = "INSERT INTO " + ConvenzioneDAO.TABLE_NAME + " (url, azienda, tutorAccademico, convalida)" +
 				"VALUES (?, ?, ?, ?, ?)";
 		
 		try{
@@ -50,9 +50,16 @@ private static DataSource ds;
 			
 			preparedStatement.setString(1, convenzione.getAllegato());
 			preparedStatement.setString(2, convenzione.getUrl());
-			preparedStatement.setInt(3, convenzione.getAzienda());
-			preparedStatement.setInt(4, convenzione.getTutorAccademico());
+			preparedStatement.setString(3, convenzione.getAzienda());
+			preparedStatement.setString(4, convenzione.getTutorAccademico());
 			preparedStatement.setBoolean(5, convenzione.isConvalida());
+			preparedStatement.setString(10, convenzione.getLuogoNascitaCeo());
+			preparedStatement.setString(11, convenzione.getDataNascitaCeo());
+			preparedStatement.setInt(12, convenzione.getNumeroDipendenti());
+			preparedStatement.setString(13, convenzione.getReferente());
+			preparedStatement.setString(14, convenzione.getTelefonoReferente());
+			preparedStatement.setString(15, convenzione.getEmailReferente());
+			preparedStatement.setString(16, convenzione.getAttivita());
 			
 			preparedStatement.execute();
 			result = preparedStatement.getResultSet();
@@ -112,6 +119,13 @@ private static DataSource ds;
 				c.setAzienda(result.getInt("azienda"));
 				c.setTutorAccademico(result.getInt("tutorAccademico"));
 				c.setConvalida(result.getBoolean("convalida"));
+				a.setLuogoNascitaCEO(result.getString("luogoNascitaCEO"));
+				a.setDataNascitaCEO(result.getDate("dataNascitaCEO"));
+				a.setNumeroDipendenti(result.getInt("numeroDipendenti"));
+				a.setReferente(result.getString("referente"));
+				a.setTelefonoReferente(result.getString("telefonoReferente"));
+				a.setEmailReferente(result.getString("emailReferente"));
+				a.setAttivita(result.getString("attivita"));
 				
 			}
 		} catch (SQLException e) {
