@@ -10,35 +10,35 @@ public class TirocinioBean implements java.io.Serializable {
 
 	/**Getter e Setter*/
 
-	public int getStudente() {
+	public String getStudente() {
 		return studente;
 	}
 
-	public void setStudente(int studente) {
+	public void setStudente(String studente) {
 		this.studente = studente;
 	}
 
-	public int getAzienda() {
+	public String getAzienda() {
 		return azienda;
 	}
 
-	public void setAzienda(int azienda) {
+	public void setAzienda(String azienda) {
 		this.azienda = azienda;
 	}
 
-	public int getTutorAccademico() {
+	public String getTutorAccademico() {
 		return tutorAccademico;
 	}
 
-	public void setTutorAccademico(int tutorAccademico) {
+	public void setTutorAccademico(String tutorAccademico) {
 		this.tutorAccademico = tutorAccademico;
 	}
 
-	public int getImpiegato() {
+	public String getImpiegato() {
 		return impiegato;
 	}
 
-	public void setImpiegato(int impiegato) {
+	public void setImpiegato(String impiegato) {
 		this.impiegato = impiegato;
 	}
 
@@ -154,19 +154,19 @@ public class TirocinioBean implements java.io.Serializable {
 		this.registroOre = registroOre;
 	}
 
-	public String getQuestionarioStudente() {
+	public int getQuestionarioStudente() {
 		return questionarioStudente;
 	}
 
-	public void setQuestionarioStudente(String questionarioStudente) {
+	public void setQuestionarioStudente(int questionarioStudente) {
 		this.questionarioStudente = questionarioStudente;
 	}
 
-	public String getQuestionarioAzienda() {
+	public int getQuestionarioAzienda() {
 		return questionarioAzienda;
 	}
 
-	public void setQuestionarioAzienda(String questionarioAzienda) {
+	public void setQuestionarioAzienda(int questionarioAzienda) {
 		this.questionarioAzienda = questionarioAzienda;
 	}
 
@@ -207,10 +207,10 @@ public class TirocinioBean implements java.io.Serializable {
 
 	/**Variabili di istanza*/
 
-	private int studente;
-	private int azienda;
-	private int tutorAccademico;
-	private int impiegato;
+	private String studente;
+	private String azienda;
+	private String tutorAccademico;
+	private String impiegato;
 	private String annoAccademico;
 	private int cfu;
 	private boolean handicap;
@@ -225,8 +225,8 @@ public class TirocinioBean implements java.io.Serializable {
 	private boolean convalidaRichiesta;
 	private boolean convalidaAttivita;
 	private String registroOre;
-	private String questionarioStudente;
-	private String questionarioAzienda;
+	private int questionarioStudente;
+	private int questionarioAzienda;
 	private String url;
 	
 }

@@ -10,28 +10,36 @@ public class QuestionarioStudenteBean implements java.io.Serializable {
 
 	/**Getter e Setter*/
 
-	public int getStudente() {
+	public String getStudente() {
 		return studente;
 	}
 
-	public void setStudente(int studente) {
+	public void setStudente(String studente) {
 		this.studente = studente;
 	}
 
-	public int getTutorAccademico() {
+	public String getTutorAccademico() {
 		return tutorAccademico;
 	}
 
-	public void setTutorAccademico(int tutorAccademico) {
+	public void setTutorAccademico(String tutorAccademico) {
 		this.tutorAccademico = tutorAccademico;
 	}
 
-	public int getAzienda() {
+	public String getAzienda() {
 		return azienda;
 	}
 
-	public void setAzienda(int azienda) {
+	public void setAzienda(String azienda) {
 		this.azienda = azienda;
+	}
+	
+	public String getImpiegato() {
+		return impiegato;
+	}
+
+	public void setImpiegato(String impiegato) {
+		this.impiegato = impiegato;
 	}
 
 	public String getPeriodo() {
@@ -48,6 +56,14 @@ public class QuestionarioStudenteBean implements java.io.Serializable {
 
 	public void setTitolo(String titolo) {
 		this.titolo = titolo;
+	}
+	
+	public boolean isConvalida() {
+		return convalida;
+	}
+
+	public void setConvalida(boolean convalida) {
+		this.convalida = convalida;
 	}
 
 	public String getUrl() {
@@ -69,18 +85,22 @@ public class QuestionarioStudenteBean implements java.io.Serializable {
 		return "Questionario azienda [Studente: " + this.getStudente() +
 				"][Tutor accademico: " + this.getTutorAccademico() +
 				"][Azienda: " + this.getAzienda() +
+				"][Impiegato: " + this.getImpiegato() +
 				"][Periodo: " + this.getPeriodo() +
 				"][Titolo: " + this.getTitolo() +
+				"][Convalida: " + this.isConvalida() +
 				"][Url: " + this.getUrl() + "]";
 	}
 
 	/**Variabili di istanza*/
 
-	private int studente;
-	private int tutorAccademico;
-	private int azienda;
+	private String studente;
+	private String tutorAccademico;
+	private String azienda;
+	private String impiegato;
 	private String periodo;
 	private String titolo;
+	private boolean	convalida;
 	private String url;
 
 }
