@@ -25,7 +25,7 @@ public class StudenteDAO extends AbstractDAO<StudenteBean>{
 			Context initCtx = new InitialContext();
 			Context envCtx = (Context) initCtx.lookup("java:comp/env");
 
-			ds = (DataSource) envCtx.lookup("jdbc/TirocinioFast");
+			ds = (DataSource) envCtx.lookup("jdbc/tirocinioFast");
 
 		} catch (NamingException e) {
 			System.out.println("Error:" + e.getMessage());
