@@ -105,7 +105,7 @@ public class TirocinioDAO extends AbstractDAO<TirocinioBean>{
 	}
 
 
-	@Override
+	
 	public synchronized TirocinioBean doRetrieveByKey(TirocinioBean tirocinio) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -331,6 +331,20 @@ public class TirocinioDAO extends AbstractDAO<TirocinioBean>{
 			}
 		}
 
+		return false;
+	}
+
+
+	@Override
+	public TirocinioBean doRetrieveByKey(String key) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public boolean doDelete(String key) throws SQLException {
+		// TODO Auto-generated method stub
 		return false;
 	}
 

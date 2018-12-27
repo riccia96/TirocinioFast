@@ -92,7 +92,6 @@ public class QuestionarioAziendaDAO extends AbstractDAO<QuestionarioAziendaBean>
 		return -1;
 	}
 
-	@Override
 	public synchronized QuestionarioAziendaBean doRetrieveByKey(QuestionarioAziendaBean questionarioAzienda) throws SQLException {
 		
 		Connection connection = null;
@@ -243,7 +242,7 @@ public class QuestionarioAziendaDAO extends AbstractDAO<QuestionarioAziendaBean>
 		return false;
 	}
 
-	@Override
+	
 	public synchronized boolean doDelete(QuestionarioAziendaBean questionarioAzienda) throws SQLException {
 		
 		Connection connection = null;
@@ -276,6 +275,18 @@ public class QuestionarioAziendaDAO extends AbstractDAO<QuestionarioAziendaBean>
 			}
 		}
 
+		return false;
+	}
+
+	@Override
+	public QuestionarioAziendaBean doRetrieveByKey(String key) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean doDelete(String key) throws SQLException {
+		// TODO Auto-generated method stub
 		return false;
 	}
 

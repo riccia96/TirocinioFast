@@ -97,7 +97,7 @@ public class StudenteDAO extends AbstractDAO<StudenteBean>{
 	}
 
 
-	@Override
+	
 	public synchronized StudenteBean doRetrieveByKey(StudenteBean studente) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -259,7 +259,7 @@ public class StudenteDAO extends AbstractDAO<StudenteBean>{
 	}
 
 
-	@Override
+	
 	public boolean doDelete(StudenteBean studente) throws SQLException {
 
 		Connection connection = null;
@@ -293,6 +293,20 @@ public class StudenteDAO extends AbstractDAO<StudenteBean>{
 			}
 		}
 
+		return false;
+	}
+
+
+	@Override
+	public StudenteBean doRetrieveByKey(String key) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public boolean doDelete(String key) throws SQLException {
+		// TODO Auto-generated method stub
 		return false;
 	}
 

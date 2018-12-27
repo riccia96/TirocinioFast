@@ -87,7 +87,6 @@ public class TutorAccademicoDAO extends AbstractDAO<TutorBean>{
 		return -1;
 	}
 
-	@Override
 	public synchronized TutorBean doRetrieveByKey(TutorBean tutor) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -223,7 +222,6 @@ public class TutorAccademicoDAO extends AbstractDAO<TutorBean>{
 		return false;
 	}
 
-	@Override
 	public synchronized boolean doDelete(TutorBean tutor) throws SQLException {
 		
 		Connection connection = null;
