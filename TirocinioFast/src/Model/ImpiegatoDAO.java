@@ -87,7 +87,7 @@ public class ImpiegatoDAO extends AbstractDAO<ImpiegatoBean>{
 	}
 
 	@Override
-	public synchronized ImpiegatoBean doRetrieveByKey(ImpiegatoBean impiegato) throws SQLException {
+	public synchronized ImpiegatoBean doRetrieveByKey(String key) throws SQLException {
 		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -101,7 +101,7 @@ public class ImpiegatoDAO extends AbstractDAO<ImpiegatoBean>{
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(querySQL);
 
-			preparedStatement.setString(1, impiegato.getMatricola());
+			preparedStatement.setString(1, key);
 
 			preparedStatement.execute();
 			result = preparedStatement.getResultSet();
@@ -223,7 +223,7 @@ public class ImpiegatoDAO extends AbstractDAO<ImpiegatoBean>{
 	}
 
 	@Override
-	public synchronized boolean doDelete(ImpiegatoBean impiegato) throws SQLException {
+	public synchronized boolean doDelete(String key) throws SQLException {
 		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -234,7 +234,7 @@ public class ImpiegatoDAO extends AbstractDAO<ImpiegatoBean>{
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(querySQL);
 			
-			preparedStatement.setString(1, impiegato.getMatricola());
+			preparedStatement.setString(1, key);
 			
 			preparedStatement.execute();
 			

@@ -94,7 +94,7 @@ private static DataSource ds;
 	}
 
 	@Override
-	public synchronized ConvenzioneBean doRetrieveByKey(ConvenzioneBean convenzione) throws SQLException {
+	public synchronized ConvenzioneBean doRetrieveByKey(String key) throws SQLException {
 		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -108,7 +108,7 @@ private static DataSource ds;
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(querySQL);
 
-			preparedStatement.setString(1, convenzione.getAzienda());
+			preparedStatement.setString(1, key);
 
 			preparedStatement.execute();
 			result = preparedStatement.getResultSet();
@@ -252,7 +252,7 @@ private static DataSource ds;
 	}
 
 	@Override
-	public synchronized boolean doDelete(ConvenzioneBean convenzione) throws SQLException {
+	public synchronized boolean doDelete(String key) throws SQLException {
 		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -263,7 +263,7 @@ private static DataSource ds;
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(querySQL);
 			
-			preparedStatement.setString(1, convenzione.getAzienda());
+			preparedStatement.setString(1, key);
 			
 			preparedStatement.execute();
 			
