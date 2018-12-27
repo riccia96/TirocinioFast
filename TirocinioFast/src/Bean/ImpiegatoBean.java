@@ -36,6 +36,7 @@ public class ImpiegatoBean implements java.io.Serializable {
 
 	public String getUsername() {
 		return username;
+		
 	}
 
 	public void setUsername(String username) {
