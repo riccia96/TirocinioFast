@@ -13,5 +13,5 @@ public abstract class AbstractDAO <T> {
 
 	public abstract boolean doUpdate(T entity) throws SQLException;
 
-	public abstract boolean doDelete(T key) throws SQLException;
+	public abstract boolean doDelete(String key) throws SQLException;
 }
