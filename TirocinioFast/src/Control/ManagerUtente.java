@@ -68,4 +68,24 @@ public class ManagerUtente {
 		return aDAO.doUpdate(azienda);
 	}
 	
+	public boolean reimpostaPasswordStudente(String username, String domanda) throws SQLException{
+		StudenteBean sDAO = this.getStudenteDaUsername(username);
+		return sDAO.getDomanda().equals(domanda);
+	}
+	
+	public boolean reimpostaPasswordAzienda(String username, String domanda) throws SQLException{
+		AziendaBean aDAO = this.getAziendaDaUsername(username);
+		return aDAO.getDomanda().equals(domanda);
+	}
+	
+	public boolean reimpostaPasswordTutor(String username, String domanda) throws SQLException{
+		TutorBean tDAO = this.getTutorDaUsername(username);
+		return tDAO.getDomanda().equals(domanda);
+	}
+	
+	public boolean reimpostaPasswordImpiegato(String username, String domanda) throws SQLException{
+		ImpiegatoBean iDAO = this.getImpiegatoDaUsername(username);
+		return iDAO.getDomanda().equals(domanda);
+	}
+	
 }
