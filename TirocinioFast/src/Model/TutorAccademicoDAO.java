@@ -87,20 +87,20 @@ public class TutorAccademicoDAO extends AbstractDAO<TutorBean>{
 		return -1;
 	}
 
-	public synchronized TutorBean doRetrieveByKey(TutorBean tutor) throws SQLException {
+	public synchronized TutorBean doRetrieveByKey(String key) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet result = null;
 		TutorBean t = new TutorBean();
 		
-		String querySQL = "SELECT * FROM " + TutorAccademicoDAO.TABLE_NAME + " WHERE matricola = ?";
+		String querySQL = "SELECT * FROM " + TutorAccademicoDAO.TABLE_NAME + " WHERE username = ?";
 		
 		try {
 
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(querySQL);
 
-			preparedStatement.setString(1, tutor.getMatricola());
+			preparedStatement.setString(1, key);
 
 			preparedStatement.execute();
 			result = preparedStatement.getResultSet();
@@ -187,7 +187,7 @@ public class TutorAccademicoDAO extends AbstractDAO<TutorBean>{
 		PreparedStatement preparedStatement = null;
 		
 		String querySQL = "UPDATE " + TutorAccademicoDAO.TABLE_NAME + " SET nome = ?, cognome = ?, username = ?, password = ?, "
-				+ "domanda = ? WHERE  matricola = ?";
+				+ "domanda = ? WHERE  username = ?";
 		
 		try{
 			
@@ -200,7 +200,7 @@ public class TutorAccademicoDAO extends AbstractDAO<TutorBean>{
 			preparedStatement.setString(4, tutor.getPassword());
 			preparedStatement.setString(5, tutor.getDomanda());
 			
-			preparedStatement.setString(6, tutor.getMatricola());
+			preparedStatement.setString(6, tutor.getUsername());
 			
 			preparedStatement.execute();
 			return true;
@@ -222,18 +222,18 @@ public class TutorAccademicoDAO extends AbstractDAO<TutorBean>{
 		return false;
 	}
 
-	public synchronized boolean doDelete(TutorBean tutor) throws SQLException {
+	public synchronized boolean doDelete(String key) throws SQLException {
 		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
-		String querySQL = "DELETE FROM " + TutorAccademicoDAO.TABLE_NAME + " WHERE matricola = ?";
+		String querySQL = "DELETE FROM " + TutorAccademicoDAO.TABLE_NAME + " WHERE username = ?";
 		
 		try{
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(querySQL);
 			
-			preparedStatement.setString(1, tutor.getMatricola());
+			preparedStatement.setString(1, key);
 			
 			preparedStatement.execute();
 			
