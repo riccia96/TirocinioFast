@@ -96,7 +96,7 @@ public class AziendaDAO extends AbstractDAO<AziendaBean>{
 		ResultSet result = null;
 		AziendaBean a = new AziendaBean();
 		
-		String querySQL = "SELECT * FROM " + AziendaDAO.TABLE_NAME + " WHERE partitaIva = ?";
+		String querySQL = "SELECT * FROM " + AziendaDAO.TABLE_NAME + " WHERE username = ?";
 		
 		try{
 			
@@ -195,7 +195,7 @@ public class AziendaDAO extends AbstractDAO<AziendaBean>{
 		PreparedStatement preparedStatement = null;
 		
 		String querySQL = "UPDATE " + AziendaDAO.TABLE_NAME + " SET nome = ?, CEO = ?, sede = ?, email = ?, "
-				+ "telefono = ?, username = ?, password = ?, domanda = ? WHERE partitaIva = ?";
+				+ "telefono = ?, username = ?, password = ?, domanda = ? WHERE username = ?";
 		
 		try {
 
@@ -211,7 +211,7 @@ public class AziendaDAO extends AbstractDAO<AziendaBean>{
 			preparedStatement.setString(7, azienda.getPassword());
 			preparedStatement.setString(8, azienda.getDomanda());
 			
-			preparedStatement.setString(9, azienda.getPartitaIva());
+			preparedStatement.setString(9, azienda.getUsername());
 
 			preparedStatement.execute();
 			return true;
@@ -238,7 +238,7 @@ public class AziendaDAO extends AbstractDAO<AziendaBean>{
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
-		String querySQL = "DELETE FROM " + AziendaDAO.TABLE_NAME + " WHERE partitaIva = ?";
+		String querySQL = "DELETE FROM " + AziendaDAO.TABLE_NAME + " WHERE username = ?";
 		
 		try {
 
