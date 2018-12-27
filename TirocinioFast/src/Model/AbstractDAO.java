@@ -7,7 +7,7 @@ public abstract class AbstractDAO <T> {
  
 	public abstract int doSave(T entity) throws SQLException;
 
-	public abstract T doRetrieveByKey(T key) throws SQLException;
+	public abstract T doRetrieveByKey(String key) throws SQLException;
 	
 	public abstract List<T> doRetrieveAll() throws SQLException;
 

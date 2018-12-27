@@ -90,7 +90,7 @@ public class AziendaDAO extends AbstractDAO<AziendaBean>{
 	}
 
 	@Override
-	public synchronized AziendaBean doRetrieveByKey(AziendaBean azienda) throws SQLException {
+	public synchronized AziendaBean doRetrieveByKey(String key) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet result = null;
@@ -103,7 +103,7 @@ public class AziendaDAO extends AbstractDAO<AziendaBean>{
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(querySQL);
 			
-			preparedStatement.setString(1, azienda.getPartitaIva());
+			preparedStatement.setString(1, key);
 			
 			preparedStatement.execute();
 			result = preparedStatement.getResultSet();
