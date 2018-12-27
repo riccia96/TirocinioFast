@@ -295,9 +295,7 @@ public class TirocinioDAO extends AbstractDAO<TirocinioBean>{
 		return false;
 	}
 
-
-	@Override
-	public boolean doDelete(TirocinioBean tirocinio) throws SQLException {
+	public synchronized boolean doDelete(TirocinioBean tirocinio) throws SQLException {
 
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -340,6 +338,7 @@ public class TirocinioDAO extends AbstractDAO<TirocinioBean>{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 
 	@Override
