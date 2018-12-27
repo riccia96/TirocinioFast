@@ -51,7 +51,7 @@ public class ManagerDocumento {
 		
 		TirocinioDAO tirocinio = new TirocinioDAO();
 		TirocinioBean t = new TirocinioBean();
-		/*StudenteBean studente = new StudenteBean();
+		StudenteBean studente = new StudenteBean();
 		AziendaBean azienda = new AziendaBean();
 		TutorBean tutor = new TutorBean();
 		StudenteDAO dStudente = new StudenteDAO();
@@ -87,16 +87,16 @@ public class ManagerDocumento {
 				tutor = lTutor.get(i);
 				break;
 			}
-		}*/
+		}
 		
-		t.setStudente(/*studente.getMatricola()*/ idStudente);
-		t.setAzienda(/*azienda.getPartitaIva()*/ idAzienda);
-		t.setTutorAccademico(/*tutor.getMatricola()*/ idTutor);
+		t.setStudente(studente.getMatricola());
+		t.setAzienda(azienda.getPartitaIva());
+		t.setTutorAccademico(tutor.getMatricola());
 		t.setImpiegato(null);
 		t.setAnnoAccademico(annoAccademico);
 		t.setCfu(cfu);
 		t.setHandicap(handicap);
-		
+				
 		if(tirocinio.doSave(t) != -1)
 			return true;
 		
@@ -116,7 +116,7 @@ public class ManagerDocumento {
 		t.setPeriodoTirocinio(periodoTirocinio);
 		t.setObiettivoTirocinio(obiettivoTirocinio);
 		t.setFacilitazioni(facilitazioni);
-		t.setConvalidaAzienda(true);
+		//t.setConvalidaAzienda(true);
 		
 		if(tirocinio.doSave(t) != -1)
 			return true;
