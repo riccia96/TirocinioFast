@@ -15,7 +15,7 @@ import javax.sql.DataSource;
 
 import Bean.TutorBean;
 
-public class TutorAccademicoDAO extends AbstractDAO<TutorBean>{
+public class TutorDAO extends AbstractDAO<TutorBean>{
 	
 	private static DataSource ds;
 	
@@ -41,7 +41,7 @@ public class TutorAccademicoDAO extends AbstractDAO<TutorBean>{
 		PreparedStatement preparedStatement = null;
 		ResultSet result = null;
 		
-		String querySQL = "INSERT INTO " + TutorAccademicoDAO.TABLE_NAME + " (nome, cognome, matricola, username, password, domanda)" +
+		String querySQL = "INSERT INTO " + TutorDAO.TABLE_NAME + " (nome, cognome, matricola, username, password, domanda)" +
 				"VALUES (?, ?, ?, ?, ?, ?)";
 		
 		try{
@@ -94,7 +94,7 @@ public class TutorAccademicoDAO extends AbstractDAO<TutorBean>{
 		ResultSet result = null;
 		TutorBean t = new TutorBean();
 		
-		String querySQL = "SELECT * FROM " + TutorAccademicoDAO.TABLE_NAME + " WHERE matricola = ?";
+		String querySQL = "SELECT * FROM " + TutorDAO.TABLE_NAME + " WHERE matricola = ?";
 		
 		try {
 
@@ -143,7 +143,7 @@ public class TutorAccademicoDAO extends AbstractDAO<TutorBean>{
 		List<TutorBean> tutor = new ArrayList<TutorBean>();
 		TutorBean t = new TutorBean();
 		
-		String querySQL = "SELECT * FROM " + TutorAccademicoDAO.TABLE_NAME;
+		String querySQL = "SELECT * FROM " + TutorDAO.TABLE_NAME;
 		
 		try {
 
@@ -187,7 +187,7 @@ public class TutorAccademicoDAO extends AbstractDAO<TutorBean>{
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
-		String querySQL = "UPDATE " + TutorAccademicoDAO.TABLE_NAME + " SET nome = ?, cognome = ?, username = ?, password = ?, "
+		String querySQL = "UPDATE " + TutorDAO.TABLE_NAME + " SET nome = ?, cognome = ?, username = ?, password = ?, "
 				+ "domanda = ? WHERE  matricola = ?";
 		
 		try{
@@ -229,7 +229,7 @@ public class TutorAccademicoDAO extends AbstractDAO<TutorBean>{
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
-		String querySQL = "DELETE FROM " + TutorAccademicoDAO.TABLE_NAME + " WHERE matricola = ?";
+		String querySQL = "DELETE FROM " + TutorDAO.TABLE_NAME + " WHERE matricola = ?";
 		
 		try{
 			connection = ds.getConnection();
