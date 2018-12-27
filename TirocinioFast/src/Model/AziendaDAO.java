@@ -89,21 +89,21 @@ public class AziendaDAO extends AbstractDAO<AziendaBean>{
 		return -1;
 	}
 
-	
-	public synchronized AziendaBean doRetrieveByKey(AziendaBean azienda) throws SQLException {
+	@Override
+	public synchronized AziendaBean doRetrieveByKey(String key) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet result = null;
 		AziendaBean a = new AziendaBean();
 		
-		String querySQL = "SELECT * FROM " + AziendaDAO.TABLE_NAME + " WHERE username = ?";
+		String querySQL = "SELECT * FROM " + AziendaDAO.TABLE_NAME + " WHERE partitaIva = ?";
 		
 		try{
 			
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(querySQL);
 			
-			preparedStatement.setString(1, azienda.getUsername());
+			preparedStatement.setString(1, key);
 			
 			preparedStatement.execute();
 			result = preparedStatement.getResultSet();
@@ -195,7 +195,7 @@ public class AziendaDAO extends AbstractDAO<AziendaBean>{
 		PreparedStatement preparedStatement = null;
 		
 		String querySQL = "UPDATE " + AziendaDAO.TABLE_NAME + " SET nome = ?, CEO = ?, sede = ?, email = ?, "
-				+ "telefono = ?, username = ?, password = ?, domanda = ? WHERE username = ?";
+				+ "telefono = ?, username = ?, password = ?, domanda = ? WHERE partitaIva = ?";
 		
 		try {
 
@@ -211,7 +211,7 @@ public class AziendaDAO extends AbstractDAO<AziendaBean>{
 			preparedStatement.setString(7, azienda.getPassword());
 			preparedStatement.setString(8, azienda.getDomanda());
 			
-			preparedStatement.setString(9, azienda.getUsername());
+			preparedStatement.setString(9, azienda.getPartitaIva());
 
 			preparedStatement.execute();
 			return true;
@@ -233,19 +233,19 @@ public class AziendaDAO extends AbstractDAO<AziendaBean>{
 	}
 
 	@Override
-	public synchronized boolean doDelete(AziendaBean azienda) throws SQLException {
+	public synchronized boolean doDelete(String key) throws SQLException {
 		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
-		String querySQL = "DELETE FROM " + AziendaDAO.TABLE_NAME + " WHERE username = ?";
+		String querySQL = "DELETE FROM " + AziendaDAO.TABLE_NAME + " WHERE partitaIva = ?";
 		
 		try {
 
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(querySQL);
 
-			preparedStatement.setString(1, azienda.getUsername());
+			preparedStatement.setString(1, key);
 			
 			preparedStatement.execute();
 			
