@@ -3,6 +3,7 @@ package Control;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,18 +25,17 @@ import Model.TutorAccademicoDAO;
 @WebServlet("/GestioneUtente")
 public class GestioneUtente extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	static StudenteDAO studenteDAO = new StudenteDAO();
+	
 	StudenteBean studente = new StudenteBean();
 	
-	static AziendaDAO aziendaDAO = new AziendaDAO();
 	AziendaBean azienda = new AziendaBean();
 	
-	static TutorAccademicoDAO tutorDAO = new TutorAccademicoDAO();
 	TutorBean tutor = new TutorBean();
 	
-	static ImpiegatoDAO impiegatoDAO = new ImpiegatoDAO();
 	ImpiegatoBean impiegato = new ImpiegatoBean();
+	
+	ManagerUtente utente = new ManagerUtente();
+	
 	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -53,9 +53,57 @@ public class GestioneUtente extends HttpServlet {
 		if(azioneUtente.equals("Login")) {
 
 			try {
-				String email = request.getParameter("username");
+				String username = request.getParameter("username");
 				String password = request.getParameter("password");
 				
+				studente.setUsername(username);
+				azienda.setUsername(username);
+				impiegato.setUsername(username);
+				tutor.setUsername(username);
+				
+				
+				if(utente.getStudente(studente).equals(null)){
+					if(utente.getAzienda(azienda).equals(null)) {
+						if(utente.getTutor(tutor).equals(null)) {
+							if(utente.getImpiegato(impiegato).equals(null)) {
+								response.setContentType("text/html;charset=utf-8");
+								response.getWriter().write("username no");
+							}else {
+								if(utente.getImpiegato(impiegato).getPassword().equals(password)) {
+									RequestDispatcher view = request.getRequestDispatcher("HomeImpiegato.jsp");
+									view.forward(request, response);
+								}else {
+									response.setContentType("text/html;charset=utf-8");
+									response.getWriter().write("password no");
+								}
+							}
+						}else {
+							if(utente.getTutor(tutor).getPassword().equals(password)) {
+								RequestDispatcher view = request.getRequestDispatcher("HomeTutor.jsp");
+								view.forward(request, response);
+							}else {
+								response.setContentType("text/html;charset=utf-8");
+								response.getWriter().write("password no");
+							}
+						}
+					}else {
+						if(utente.getAzienda(azienda).getPassword().equals(password)) {
+							RequestDispatcher view = request.getRequestDispatcher("HomeAzienda.jsp");
+							view.forward(request, response);
+						}else {
+							response.setContentType("text/html;charset=utf-8");
+							response.getWriter().write("password no");
+						}
+					}
+				}else {
+					if(utente.getStudente(studente).getPassword().equals(password)) {
+						RequestDispatcher view = request.getRequestDispatcher("HomeStudente.jsp");
+						view.forward(request, response);
+					}else {
+						response.setContentType("text/html;charset=utf-8");
+						response.getWriter().write("password no");
+					}
+				}
 				
 				
 				
