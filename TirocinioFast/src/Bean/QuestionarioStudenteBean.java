@@ -83,8 +83,8 @@ public class QuestionarioStudenteBean implements java.io.Serializable {
 	@Override
 	public String toString(){
 		return "Questionario azienda [Studente: " + this.getStudente() +
-				"][Tutor accademico: " + this.getTutorAccademico() +
 				"][Azienda: " + this.getAzienda() +
+				"][Tutor accademico: " + this.getTutorAccademico() +
 				"][Impiegato: " + this.getImpiegato() +
 				"][Periodo: " + this.getPeriodo() +
 				"][Titolo: " + this.getTitolo() +
@@ -95,8 +95,8 @@ public class QuestionarioStudenteBean implements java.io.Serializable {
 	/**Variabili di istanza*/
 
 	private String studente;
-	private String tutorAccademico;
 	private String azienda;
+	private String tutorAccademico;
 	private String impiegato;
 	private String periodo;
 	private String titolo;
