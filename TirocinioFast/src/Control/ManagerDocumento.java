@@ -112,6 +112,10 @@ public class ManagerDocumento {
 		
 		TirocinioDAO tirocinio = new TirocinioDAO();
 		TirocinioBean t = new TirocinioBean();
+		ConvenzioneDAO convenzione = new ConvenzioneDAO();
+		ConvenzioneBean c = new ConvenzioneBean();
+		
+		c = convenzione.doRetrieveByKey(idAzienda);
 		
 		t = tirocinio.doRetrieveByKey(idStudente);
 		
@@ -120,7 +124,11 @@ public class ManagerDocumento {
 		t.setPeriodoTirocinio(periodoTirocinio);
 		t.setObiettivoTirocinio(obiettivoTirocinio);
 		t.setFacilitazioni(facilitazioni);
-		//t.setConvalidaAzienda(true);
+		
+		if(c.isConvalida())
+			t.setConvalidaAzienda(true);
+		else
+			t.setConvalidaAzienda(false);
 		
 		if(tirocinio.doSave(t) != -1) {
 			return true;
