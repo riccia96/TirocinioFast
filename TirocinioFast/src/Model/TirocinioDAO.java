@@ -112,7 +112,7 @@ public class TirocinioDAO extends AbstractDAO<TirocinioBean>{
 		ResultSet result = null;
 		TirocinioBean t = new TirocinioBean();
 
-		String querySQL = "SELECT * FROM " + TirocinioDAO.TABLE_NAME + " WHERE (studente = ? AND aienda = ?) ";
+		String querySQL = "SELECT * FROM " + TirocinioDAO.TABLE_NAME + " WHERE (studente = ? AND azienda = ?) ";
 
 		try {
 

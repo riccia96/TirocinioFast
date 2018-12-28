@@ -6,11 +6,15 @@ import java.util.List;
 
 import Bean.AziendaBean;
 import Bean.ConvenzioneBean;
+import Bean.QuestionarioAziendaBean;
+import Bean.QuestionarioStudenteBean;
 import Bean.StudenteBean;
 import Bean.TirocinioBean;
 import Bean.TutorBean;
 import Model.AziendaDAO;
 import Model.ConvenzioneDAO;
+import Model.QuestionarioAziendaDAO;
+import Model.QuestionarioStudenteDAO;
 import Model.StudenteDAO;
 import Model.TirocinioDAO;
 import Model.TutorAccademicoDAO;
@@ -118,9 +122,76 @@ public class ManagerDocumento {
 		t.setFacilitazioni(facilitazioni);
 		//t.setConvalidaAzienda(true);
 		
-		if(tirocinio.doSave(t) != -1)
+		if(tirocinio.doSave(t) != -1) {
 			return true;
-		
+		}
+		else {
 		return false;
+		}
 	}
+	
+	public boolean compilaConvenzione(String idAzienda, String luogoNascita, String dataNascita, int numDipendenti, String referente, String telefonoReferente, String emailReferente, String descrizione, String docente) throws SQLException{
+		ConvenzioneDAO convenzione = new ConvenzioneDAO();
+		ConvenzioneBean c = new ConvenzioneBean();
+		
+		c.setAzienda(idAzienda);
+		c.setLuogoNascitaCeo(luogoNascita);
+		c.setDataNascitaCeo(dataNascita);
+		c.setNumeroDipendenti(numDipendenti);
+		c.setReferente(referente);
+		c.setTelefonoReferente(telefonoReferente);
+		c.setEmailReferente(emailReferente);
+		c.setAttivita(descrizione);
+		c.setTutorAccademico(docente);
+		
+		convenzione.doSave(c);
+		
+		return true;
+	}
+	
+	public boolean compilaQuestionarioStudente(String idStudente, String idAzienda, String idTutor, String titolo, String periodo) throws SQLException{
+		QuestionarioStudenteDAO qsd = new QuestionarioStudenteDAO();
+		QuestionarioStudenteBean qsb = new QuestionarioStudenteBean();
+		TirocinioDAO td = new TirocinioDAO();
+		TirocinioBean tb = new TirocinioBean();
+		
+		qsb.setStudente(idStudente);
+		qsb.setAzienda(idAzienda);
+		qsb.setTutorAccademico(idTutor);
+		qsb.setTitolo(titolo);
+		qsb.setPeriodo(periodo);
+		
+		qsd.doSave(qsb);
+		
+		/*
+		tb.setStudente(idStudente);
+		tb.setAzienda(idAzienda);
+		tb = td.doRetrieveByKey(tb);
+		tb.setQuestionarioStudente(questionarioStudente);
+	*/	
+		return true;
+	}
+	
+	public boolean compilaQuestionarioAzienda(String idAzienda, String idStudente, String idTutor, String titolo, String periodo, String posizioneRicoperta) throws SQLException{
+		QuestionarioAziendaDAO qad = new QuestionarioAziendaDAO();
+		QuestionarioAziendaBean qab = new QuestionarioAziendaBean();
+		
+		qab.setAzienda(idAzienda);
+		qab.setStudente(idStudente);
+		qab.setTutorAccademico(idTutor);
+		qab.setTitoloTirocinio(titolo);
+		qab.setPeriodoTirocinio(periodo);
+		qab.setPosizioneRicoperta(posizioneRicoperta);
+		
+		qad.doSave(qab);
+		
+		
+		
+		return true;
+	}
+	/*
+	public boolean convalidaTirocinio(String idStudente, String idAzienda, String idTutor, String pathRichiestaTirocinio, String pathQuestionarioStudente, String pathQuestionarioAzienda, String pathQuestionarioAzienda){
+		
+	}
+	*/
 }

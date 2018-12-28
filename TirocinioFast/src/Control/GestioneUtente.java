@@ -16,7 +16,7 @@ import Bean.TutorBean;
 import Model.AziendaDAO;
 import Model.ImpiegatoDAO;
 import Model.StudenteDAO;
-import Model.TutorDAO;
+import Model.TutorAccademicoDAO;
 
 /**
  * Servlet implementation class GestioneUtente
@@ -31,7 +31,7 @@ public class GestioneUtente extends HttpServlet {
 	static AziendaDAO aziendaDAO = new AziendaDAO();
 	AziendaBean azienda = new AziendaBean();
 	
-	static TutorDAO tutorDAO = new TutorDAO();
+	static TutorAccademicoDAO tutorDAO = new TutorAccademicoDAO();
 	TutorBean tutor = new TutorBean();
 	
 	static ImpiegatoDAO impiegatoDAO = new ImpiegatoDAO();
