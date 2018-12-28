@@ -1,6 +1,11 @@
 @CHARSET "ISO-8859-1";
 
-container {font-family: Arial, Helvetica, sans-serif;}
+.container{
+	margin: 20%;
+	padding: 10%;
+}
+
+formContainer {font-family: Arial, Helvetica, sans-serif;}
 #login {border: 3px solid orange; position: center;}
 
 input[type=text], input[type=password] {
@@ -27,7 +32,7 @@ button:hover {
 }
 
 
-.imgcontainer {
+.imgContainer {
   text-align: center;
   margin: 0px 0 12px 0;
 }
@@ -37,9 +42,7 @@ img.avatar {
   border-radius: 50%;
 }
 
-.container {
-  padding: 16px;
-}
+
 
 span.psw {
   float: right;
