@@ -198,7 +198,7 @@ public class TirocinioBean implements java.io.Serializable {
 				"][Convalida tutor: " + this.isConvalidaTutor() +
 				"][Convalida studente: " + this.isConvalidaStudente() +
 				"][Convalida richiesta: " + this.isConvalidaRichiesta() +
-				"][Convalida attività: " + this.isConvalidaAttivita() +
+				"][Convalida attivita: " + this.isConvalidaAttivita() +
 				"][Registro ore: " + this.getRegistroOre() +
 				"][Questionario studente: " + this.getQuestionarioStudente() +
 				"][Questionario azienda: " + this.getQuestionarioAzienda() +
