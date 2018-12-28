@@ -50,7 +50,7 @@ public class GestioneUtente extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String azioneUtente = request.getParameter("azioneUtente");
 
-		if(azioneUtente.equals("Login")) {
+		if(azioneUtente.equals("login")) {
 
 			try {
 				String username = request.getParameter("username");

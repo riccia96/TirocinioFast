@@ -38,7 +38,7 @@
     <input type="password" placeholder="Enter Password" name="psw" required>
     <br>
     <div class ="new">
-    <button name = "accedi" class=" button" type="submit">Login</button>
+    <button name = "azioneUtente" value="login" id="loginButton" class=" button" type="submit">Login</button> 
     <br>
     <span class="psw">Forgot <a href="#">password?</a></span>
     </div>
