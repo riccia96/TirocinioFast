@@ -99,19 +99,20 @@ public class StudenteDAO extends AbstractDAO<StudenteBean>{
 
 	@Override
 	public synchronized StudenteBean doRetrieveByKey(StudenteBean studente) throws SQLException {
+		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet result = null;
 		StudenteBean s = new StudenteBean();
 
-		String querySQL = "SELECT * FROM " + StudenteDAO.TABLE_NAME + " WHERE matricola = ?";
+		String querySQL = "SELECT * FROM " + StudenteDAO.TABLE_NAME + " WHERE username = ?";
 
 		try {
 
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(querySQL);
 
-			preparedStatement.setString(1, studente.getMatricola());
+			preparedStatement.setString(1, studente.getUsername());
 
 			preparedStatement.execute();
 			result = preparedStatement.getResultSet();
