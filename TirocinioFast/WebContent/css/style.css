@@ -1,0 +1,124 @@
+@CHARSET "ISO-8859-1";
+
+.container-fluid {
+	background-color: orange;
+}
+
+#unisa {
+  display: block;
+  margin-left: 85%;
+  width: 150px;
+  height: 150px;
+}
+
+#logo {
+  
+  margin-top: 4%;
+  margin-bottom: 0px;
+}
+
+container {font-family: Arial, Helvetica, sans-serif;}
+#login {border: 3px solid orange; position: center;}
+
+input[type=text], input[type=password] {
+  width: 70%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: orange;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 15%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+
+.imgcontainer {
+  text-align: center;
+  margin: 0px 0 12px 0;
+}
+
+img.avatar {
+  width: 20%;
+  border-radius: 50%;
+}
+
+.container {
+  padding: 16px;
+}
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+@media screen and (max-width: 300px) {
+  span.psw {
+     display: block;
+     float: none;
+  }
+}
+
+body {
+  margin: 0;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 15%;
+  background-color: white;
+  position: fixed;
+  height: auto;
+  overflow: auto;
+  border-left-color: black;
+}
+
+li a {
+  display: block;
+  color: black;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+li a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+li a:hover:not(.active) {
+  background-color: orange;
+  color: white;
+}
+
+.new {
+	text-align: center;
+}
+
+.button {
+	position: relative;
+	right : 8%;
+	top:81,5%;
+	width: 100px;
+}
+
+.psw{
+	position: relative;
+	right : 53%;
+	top:81,5%;
+}
+
+.footer{background: #333; padding:30px;color:#fff; margin-top: 40px}
+
