@@ -52,8 +52,10 @@ public class GestioneUtente extends HttpServlet {
 			try {
 				
 				String username = request.getParameter("username");
+				System.out.println(username);
 				String password = request.getParameter("password");
-
+				System.out.println(password);
+				
 				studente.setUsername(username);
 				azienda.setUsername(username);
 				impiegato.setUsername(username);
@@ -100,11 +102,11 @@ public class GestioneUtente extends HttpServlet {
 						}
 					}
 				}else {
-					if(utente.getStudente(studente).getPassword().equals(password)) {
+					if(utente.getStudente(studente).getPassword() == password) {
 						request.getSession().setAttribute("utenteSessione", utente.getStudente(studente));
-						
-						RequestDispatcher view = request.getRequestDispatcher("homeStudente.jsp");
-						view.forward(request, response);
+						System.out.println("KITEBIIIIIIIIIIIIIIIIIIV SONO TROPPO UN GENIACCIO");
+						//RequestDispatcher view = request.getRequestDispatcher("homeStudente.jsp");
+						//view.forward(request, response);
 					}else {
 						response.setContentType("text/html;charset=ISO-8859-1");
 						response.getWriter().write("password no");

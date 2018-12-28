@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context>
-    <Resource name="jdbc/tirocinioFast"
+    <Resource name="jdbc/TirocinioFast"
         auth="Container"
-        driverClassName="com.mysql.jdbc.Driver"
+        driverClassName="com.mysql.cj.jdbc.Driver"
         type="javax.sql.DataSource"
         username="root"
-        password=""
-        url="jdbc:mysql://localhost:3306/tirocinioFast"/>
+        password="root.123"
+        url="jdbc:mysql://localhost:3306/TirocinioFast?autoReconnect=true&amp;useSSL=false"/>
 </Context>
 
 
