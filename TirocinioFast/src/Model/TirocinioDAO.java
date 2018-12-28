@@ -105,14 +105,14 @@ public class TirocinioDAO extends AbstractDAO<TirocinioBean>{
 	}
 
 
-	
+	@Override
 	public synchronized TirocinioBean doRetrieveByKey(TirocinioBean tirocinio) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet result = null;
 		TirocinioBean t = new TirocinioBean();
 
-		String querySQL = "SELECT * FROM " + TirocinioDAO.TABLE_NAME + " WHERE (studente = ? AND azienda = ?) ";
+		String querySQL = "SELECT * FROM " + TirocinioDAO.TABLE_NAME + " WHERE (studente = ? AND aienda = ?) ";
 
 		try {
 
@@ -295,7 +295,9 @@ public class TirocinioDAO extends AbstractDAO<TirocinioBean>{
 		return false;
 	}
 
-	public synchronized boolean doDelete(TirocinioBean tirocinio) throws SQLException {
+
+	@Override
+	public boolean doDelete(TirocinioBean tirocinio) throws SQLException {
 
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -329,21 +331,6 @@ public class TirocinioDAO extends AbstractDAO<TirocinioBean>{
 			}
 		}
 
-		return false;
-	}
-
-
-	@Override
-	public TirocinioBean doRetrieveByKey(String key) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-
-	@Override
-	public boolean doDelete(String key) throws SQLException {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

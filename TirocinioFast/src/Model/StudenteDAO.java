@@ -97,21 +97,21 @@ public class StudenteDAO extends AbstractDAO<StudenteBean>{
 	}
 
 
-	
-	public synchronized StudenteBean doRetrieveByKey(String key) throws SQLException {
+	@Override
+	public synchronized StudenteBean doRetrieveByKey(StudenteBean studente) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet result = null;
 		StudenteBean s = new StudenteBean();
 
-		String querySQL = "SELECT * FROM " + StudenteDAO.TABLE_NAME + " WHERE username = ?";
+		String querySQL = "SELECT * FROM " + StudenteDAO.TABLE_NAME + " WHERE matricola = ?";
 
 		try {
 
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(querySQL);
 
-			preparedStatement.setString(1, key);
+			preparedStatement.setString(1, studente.getMatricola());
 
 			preparedStatement.execute();
 			result = preparedStatement.getResultSet();
@@ -215,7 +215,7 @@ public class StudenteDAO extends AbstractDAO<StudenteBean>{
 		PreparedStatement preparedStatement = null;
 
 		String querySQL = "UPDATE " + StudenteDAO.TABLE_NAME + " SET nome = ?, cognome = ?, luogoNascita = ?, dataNascita = ?,"
-				+ " indirizzo = ?, citta = ?, codiceFiscale = ?, telefono = ?, password = ?, domanda = ? WHERE username = ?";
+				+ " indirizzo = ?, citta = ?, codiceFiscale = ?, telefono = ?, password = ?, domanda = ? WHERE matricola = ?";
 
 		try {
 
@@ -235,7 +235,7 @@ public class StudenteDAO extends AbstractDAO<StudenteBean>{
 			preparedStatement.setString(11, studente.getPassword());
 			preparedStatement.setString(12, studente.getDomanda());
 			
-			preparedStatement.setString(13, studente.getUsername());
+			preparedStatement.setString(13, studente.getMatricola());
 
 			preparedStatement.execute();
 			return true;
@@ -259,20 +259,20 @@ public class StudenteDAO extends AbstractDAO<StudenteBean>{
 	}
 
 
-	
-	public boolean doDelete(String key) throws SQLException {
+	@Override
+	public boolean doDelete(StudenteBean studente) throws SQLException {
 
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
-		String querySQL = "DELETE FROM " + StudenteDAO.TABLE_NAME + " WHERE username = ?";
+		String querySQL = "DELETE FROM " + StudenteDAO.TABLE_NAME + " WHERE matricola = ?";
 		
 		try {
 
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(querySQL);
 
-			preparedStatement.setString(1, key);
+			preparedStatement.setString(1, studente.getMatricola());
 
 			preparedStatement.execute();
 			

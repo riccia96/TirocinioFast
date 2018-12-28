@@ -13,24 +13,24 @@ import Model.TutorAccademicoDAO;
 
 public class ManagerUtente {
 
-	public StudenteBean getStudente(String username) throws SQLException{
+	public StudenteBean getStudente(StudenteBean studente) throws SQLException{
 		StudenteDAO sDAO = new StudenteDAO();
-		return sDAO.doRetrieveByKey(username);
+		return sDAO.doRetrieveByKey(studente);
 	}
 	
-	public AziendaBean getAzienda(String username) throws SQLException{
+	public AziendaBean getAzienda(AziendaBean azienda) throws SQLException{
 		AziendaDAO aDAO = new AziendaDAO();
-		return aDAO.doRetrieveByKey(username);
+		return aDAO.doRetrieveByKey(azienda);
 	}
 	
-	public TutorBean getTutor(String username) throws SQLException{
+	public TutorBean getTutor(TutorBean tutor) throws SQLException{
 		TutorAccademicoDAO tDAO = new TutorAccademicoDAO();
-		return tDAO.doRetrieveByKey(username);
+		return tDAO.doRetrieveByKey(tutor);
 	}
 	
-	public ImpiegatoBean getImpiegato(String username) throws SQLException{
+	public ImpiegatoBean getImpiegato(ImpiegatoBean impiegato) throws SQLException{
 		ImpiegatoDAO iDAO = new ImpiegatoDAO();
-		return iDAO.doRetrieveByKey(username);
+		return iDAO.doRetrieveByKey(impiegato);
 	}
 	
 	public int registraStudente(StudenteBean studente) throws SQLException{

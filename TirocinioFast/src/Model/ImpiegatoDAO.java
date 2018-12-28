@@ -87,21 +87,21 @@ public class ImpiegatoDAO extends AbstractDAO<ImpiegatoBean>{
 	}
 
 	@Override
-	public synchronized ImpiegatoBean doRetrieveByKey(String key) throws SQLException {
+	public synchronized ImpiegatoBean doRetrieveByKey(ImpiegatoBean impiegato) throws SQLException {
 		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet result = null;
 		ImpiegatoBean i = new ImpiegatoBean();
 		
-		String querySQL = "SELECT * FROM " + ImpiegatoDAO.TABLE_NAME + " WHERE username = ?";
+		String querySQL = "SELECT * FROM " + ImpiegatoDAO.TABLE_NAME + " WHERE matricola = ?";
 		
 		try {
 
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(querySQL);
 
-			preparedStatement.setString(1, key);
+			preparedStatement.setString(1, impiegato.getMatricola());
 
 			preparedStatement.execute();
 			result = preparedStatement.getResultSet();
@@ -187,7 +187,7 @@ public class ImpiegatoDAO extends AbstractDAO<ImpiegatoBean>{
 		PreparedStatement preparedStatement = null;
 		
 		String querySQL = "UPDATE " + ImpiegatoDAO.TABLE_NAME + " SET nome = ?, cognome = ?, username = ?,"
-				+ " password = ?, domanda = ? WHERE username = ?";
+				+ " password = ?, domanda = ? WHERE matricola = ?";
 		
 		try{
 			
@@ -200,7 +200,7 @@ public class ImpiegatoDAO extends AbstractDAO<ImpiegatoBean>{
 			preparedStatement.setString(4, impiegato.getPassword());
 			preparedStatement.setString(5, impiegato.getDomanda());
 			
-			preparedStatement.setString(6, impiegato.getUsername());
+			preparedStatement.setString(6, impiegato.getMatricola());
 			
 			preparedStatement.execute();
 			return true;
@@ -223,18 +223,18 @@ public class ImpiegatoDAO extends AbstractDAO<ImpiegatoBean>{
 	}
 
 	@Override
-	public synchronized boolean doDelete(String key) throws SQLException {
+	public synchronized boolean doDelete(ImpiegatoBean impiegato) throws SQLException {
 		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
-		String querySQL = "DELETE FROM " + ImpiegatoDAO.TABLE_NAME + " WHERE username = ?";
+		String querySQL = "DELETE FROM " + ImpiegatoDAO.TABLE_NAME + " WHERE matricola = ?";
 		
 		try{
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(querySQL);
 			
-			preparedStatement.setString(1, key);
+			preparedStatement.setString(1, impiegato.getMatricola());
 			
 			preparedStatement.execute();
 			
