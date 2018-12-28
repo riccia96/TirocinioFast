@@ -66,14 +66,14 @@ public class GestioneUtente extends HttpServlet {
 					if(utente.getAzienda(azienda).equals(null)) {
 						if(utente.getTutor(tutor).equals(null)) {
 							if(utente.getImpiegato(impiegato).equals(null)) {
-								response.setContentType("text/html;charset=utf-8");
+								response.setContentType("text/html;charset=ISO-8859-1");
 								response.getWriter().write("username no");
 							}else {
 								if(utente.getImpiegato(impiegato).getPassword().equals(password)) {
 									RequestDispatcher view = request.getRequestDispatcher("HomeImpiegato.jsp");
 									view.forward(request, response);
 								}else {
-									response.setContentType("text/html;charset=utf-8");
+									response.setContentType("text/html;charset=ISO-8859-1");
 									response.getWriter().write("password no");
 								}
 							}
@@ -82,7 +82,7 @@ public class GestioneUtente extends HttpServlet {
 								RequestDispatcher view = request.getRequestDispatcher("HomeTutor.jsp");
 								view.forward(request, response);
 							}else {
-								response.setContentType("text/html;charset=utf-8");
+								response.setContentType("text/html;charset=ISO-8859-1");
 								response.getWriter().write("password no");
 							}
 						}
@@ -91,7 +91,7 @@ public class GestioneUtente extends HttpServlet {
 							RequestDispatcher view = request.getRequestDispatcher("HomeAzienda.jsp");
 							view.forward(request, response);
 						}else {
-							response.setContentType("text/html;charset=utf-8");
+							response.setContentType("text/html;charset=ISO-8859-1");
 							response.getWriter().write("password no");
 						}
 					}
@@ -100,7 +100,7 @@ public class GestioneUtente extends HttpServlet {
 						RequestDispatcher view = request.getRequestDispatcher("HomeStudente.jsp");
 						view.forward(request, response);
 					}else {
-						response.setContentType("text/html;charset=utf-8");
+						response.setContentType("text/html;charset=ISO-8859-1");
 						response.getWriter().write("password no");
 					}
 				}
