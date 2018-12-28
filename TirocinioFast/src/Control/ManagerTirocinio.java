@@ -8,6 +8,17 @@ import Bean.AziendaBean;
 import Model.AziendaDAO;
 
 public class ManagerTirocinio {
+	
+	public List<AziendaBean> ricercaAzienda() throws SQLException{
+		List<AziendaBean> lAzienda = new ArrayList<AziendaBean>();
+		AziendaDAO aziende = new AziendaDAO();
+		lAzienda.addAll(aziende.doRetrieveAll());
+		return lAzienda;
+	}
+	
+	
+	
+	/*
 
 	public List<AziendaBean> ricercaAzienda(String nome, String sede) throws SQLException{
 		
@@ -69,5 +80,7 @@ public class ManagerTirocinio {
 		return lAzienda;
 		
 	}
+	
+	*/
 	
 }
