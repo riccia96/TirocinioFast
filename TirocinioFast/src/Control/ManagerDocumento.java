@@ -16,15 +16,47 @@ import Model.TirocinioDAO;
 
 public class ManagerDocumento {
 
-	public boolean Download(String pathDoc){
-		return false;
+	public TirocinioBean DownloadTirocinio(TirocinioBean pathDoc) throws SQLException {
+		TirocinioDAO tirocinio = new TirocinioDAO();
+		return tirocinio.doRetrieveByKey(pathDoc);
 	}
 
-	public boolean Upload(String pathDoc){
-		return false;
+	public boolean UploadTirocinio(TirocinioBean pathDoc) throws SQLException {
+		TirocinioDAO tirocinio = new TirocinioDAO();
+		return tirocinio.doUpdate(pathDoc);
+	}
+	
+	public ConvenzioneBean DownloadConvenzione(ConvenzioneBean pathDoc) throws SQLException {
+		ConvenzioneDAO convenzione = new ConvenzioneDAO();
+		return convenzione.doRetrieveByKey(pathDoc);
 	}
 
-	public List<TirocinioBean> richiesteTirocinio() throws SQLException{
+	public boolean UploadConvenzione(ConvenzioneBean pathDoc) throws SQLException {
+		ConvenzioneDAO convenzione = new ConvenzioneDAO();
+		return convenzione.doUpdate(pathDoc);
+	}
+	
+	public QuestionarioStudenteBean DownloadQuestionarioStudente(QuestionarioStudenteBean pathDoc) throws SQLException {
+		QuestionarioStudenteDAO questionario = new QuestionarioStudenteDAO();
+		return questionario.doRetrieveByKey(pathDoc);
+	}
+
+	public boolean UploadQuestionarioStudente(QuestionarioStudenteBean pathDoc) throws SQLException {
+		QuestionarioStudenteDAO questionario = new QuestionarioStudenteDAO();
+		return questionario.doUpdate(pathDoc);
+	}
+	
+	public QuestionarioAziendaBean DownloadQuestionarioAzienda(QuestionarioAziendaBean pathDoc) throws SQLException {
+		QuestionarioAziendaDAO questionario = new QuestionarioAziendaDAO();
+		return questionario.doRetrieveByKey(pathDoc);
+	}
+
+	public boolean UploadQuestionarioAienda(QuestionarioAziendaBean pathDoc) throws SQLException {
+		QuestionarioAziendaDAO questionario = new QuestionarioAziendaDAO();
+		return questionario.doUpdate(pathDoc);
+	}
+	
+	public List<TirocinioBean> richiesteTirocinio() throws SQLException {
 
 		List<TirocinioBean> lTirocinio = new ArrayList<TirocinioBean>();
 		TirocinioDAO tirocinio = new TirocinioDAO();
@@ -35,7 +67,7 @@ public class ManagerDocumento {
 
 	}
 
-	public List<ConvenzioneBean> convenzioni() throws SQLException{
+	public List<ConvenzioneBean> convenzioni() throws SQLException {
 
 		List<ConvenzioneBean> lConvenzioni = new ArrayList<ConvenzioneBean>();
 		ConvenzioneDAO convenzione = new ConvenzioneDAO();
