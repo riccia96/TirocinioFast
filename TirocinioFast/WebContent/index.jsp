@@ -25,7 +25,7 @@
 </ul>
 
 <div style="margin-left:25%;height:500px;">
-<form id="login" action="/action_page.php">
+<form id="login" action="GestioneUtente" method="POST">
   <div class="imgcontainer">
     <img src="img\avatar-default-icon.png" alt="Avatar" class="avatar">
   </div>
