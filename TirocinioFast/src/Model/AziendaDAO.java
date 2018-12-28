@@ -96,14 +96,14 @@ public class AziendaDAO extends AbstractDAO<AziendaBean>{
 		ResultSet result = null;
 		AziendaBean a = new AziendaBean();
 		
-		String querySQL = "SELECT * FROM " + AziendaDAO.TABLE_NAME + " WHERE partitaIva = ?";
+		String querySQL = "SELECT * FROM " + AziendaDAO.TABLE_NAME + " WHERE nome = ?";
 		
 		try{
 			
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(querySQL);
 			
-			preparedStatement.setString(1, azienda.getPartitaIva());
+			preparedStatement.setString(1, azienda.getNome());
 			
 			preparedStatement.execute();
 			result = preparedStatement.getResultSet();
@@ -194,24 +194,23 @@ public class AziendaDAO extends AbstractDAO<AziendaBean>{
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
-		String querySQL = "UPDATE " + AziendaDAO.TABLE_NAME + " SET nome = ?, CEO = ?, sede = ?, email = ?, "
-				+ "telefono = ?, username = ?, password = ?, domanda = ? WHERE partitaIva = ?";
+		String querySQL = "UPDATE " + AziendaDAO.TABLE_NAME + " SET CEO = ?, sede = ?, email = ?, "
+				+ "telefono = ?, username = ?, password = ?, domanda = ? WHERE nome = ?";
 		
 		try {
 
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(querySQL);
 			
-			preparedStatement.setString(1, azienda.getNome());
-			preparedStatement.setString(2, azienda.getCeo());
-			preparedStatement.setString(3, azienda.getIndirizzo());
-			preparedStatement.setString(4, azienda.getEmail());
-			preparedStatement.setString(5, azienda.getTelefono());
-			preparedStatement.setString(6, azienda.getUsername());
-			preparedStatement.setString(7, azienda.getPassword());
-			preparedStatement.setString(8, azienda.getDomanda());
+			preparedStatement.setString(1, azienda.getCeo());
+			preparedStatement.setString(2, azienda.getIndirizzo());
+			preparedStatement.setString(3, azienda.getEmail());
+			preparedStatement.setString(4, azienda.getTelefono());
+			preparedStatement.setString(5, azienda.getUsername());
+			preparedStatement.setString(6, azienda.getPassword());
+			preparedStatement.setString(7, azienda.getDomanda());
 			
-			preparedStatement.setString(9, azienda.getPartitaIva());
+			preparedStatement.setString(8, azienda.getNome());
 
 			preparedStatement.execute();
 			return true;
@@ -238,14 +237,14 @@ public class AziendaDAO extends AbstractDAO<AziendaBean>{
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
-		String querySQL = "DELETE FROM " + AziendaDAO.TABLE_NAME + " WHERE partitaIva = ?";
+		String querySQL = "DELETE FROM " + AziendaDAO.TABLE_NAME + " WHERE nome = ?";
 		
 		try {
 
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(querySQL);
 
-			preparedStatement.setString(1, azienda.getPartitaIva());
+			preparedStatement.setString(1, azienda.getNome());
 			
 			preparedStatement.execute();
 			
