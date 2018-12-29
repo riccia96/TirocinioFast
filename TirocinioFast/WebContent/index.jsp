@@ -62,26 +62,21 @@ else { %>
 
 </ul>
 
-<div style="margin-left:25%;height:500px;">
+<div style="margin-left:25%;height:500px;width: 700px;">
 <form id="login" action="GestioneUtente" method="POST">
   <div class="imgcontainer">
     <img src="img\avatar-default-icon.png" alt="Avatar" class="avatar">
   </div>
 
-  <div class="container">
-    <label for="uname"><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="uname" required>
+    <input type="text" placeholder="Username" name="uname" required>
 	<br>
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" required>
+    <input type="password" placeholder="Password" name="psw" required>
     <br>
     <div class ="new">
     <button name = "azioneUtente" value="login" id="loginButton" class=" button" type="submit">Login</button> 
     <br>
-    <span class="psw">Forgot <a href="#">password?</a></span>
+    <span class="dimenticata"><a href="#">Password dimenticata?</a></span>
     </div>
-  </div>
-
 </form>
   
 </div>
