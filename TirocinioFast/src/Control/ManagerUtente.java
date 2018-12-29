@@ -9,7 +9,7 @@ import Bean.TutorBean;
 import Model.AziendaDAO;
 import Model.ImpiegatoDAO;
 import Model.StudenteDAO;
-import Model.TutorAccademicoDAO;
+import Model.TutorDAO;
 
 public class ManagerUtente {
 
@@ -24,7 +24,7 @@ public class ManagerUtente {
 	}
 	
 	public TutorBean getTutor(TutorBean tutor) throws SQLException{
-		TutorAccademicoDAO tDAO = new TutorAccademicoDAO();
+		TutorDAO tDAO = new TutorDAO();
 		return tDAO.doRetrieveByKey(tutor);
 	}
 	
@@ -54,7 +54,7 @@ public class ManagerUtente {
 	}
 
 	public boolean impostaPasswordTutor(TutorBean tutor) throws SQLException{
-		TutorAccademicoDAO tDAO = new TutorAccademicoDAO();
+		TutorDAO tDAO = new TutorDAO();
 		return tDAO.doUpdate(tutor);
 	}
 	

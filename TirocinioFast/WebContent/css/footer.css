@@ -1,0 +1,8 @@
+@CHARSET "ISO-8859-1";
+
+.footer{
+	background: #333;
+	padding:30px;
+	color:#fff;
+	margin-top: 40px
+}

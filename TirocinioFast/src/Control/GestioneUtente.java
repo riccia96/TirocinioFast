@@ -52,8 +52,10 @@ public class GestioneUtente extends HttpServlet {
 			try {
 				
 				String username = request.getParameter("username");
+				System.out.println(username);
 				String password = request.getParameter("password");
-
+				System.out.println(password);
+				
 				studente.setUsername(username);
 				azienda.setUsername(username);
 				impiegato.setUsername(username);
@@ -65,7 +67,7 @@ public class GestioneUtente extends HttpServlet {
 						if(utente.getTutor(tutor).equals(null)) {
 							if(utente.getImpiegato(impiegato).equals(null)) {
 								response.setContentType("text/html;charset=ISO-8859-1");
-								response.getWriter().write("username no");
+								response.getWriter().write("username no1");
 							}else {
 								if(utente.getImpiegato(impiegato).getPassword().equals(password)) {
 									request.getSession().setAttribute("utenteSessione", utente.getImpiegato(impiegato));
@@ -74,7 +76,7 @@ public class GestioneUtente extends HttpServlet {
 									view.forward(request, response);
 								}else {
 									response.setContentType("text/html;charset=ISO-8859-1");
-									response.getWriter().write("password no");
+									response.getWriter().write("password no2");
 								}
 							}
 						}else {
@@ -85,7 +87,7 @@ public class GestioneUtente extends HttpServlet {
 								view.forward(request, response);
 							}else {
 								response.setContentType("text/html;charset=ISO-8859-1");
-								response.getWriter().write("password no");
+								response.getWriter().write("password no3");
 							}
 						}
 					}else {
@@ -96,18 +98,18 @@ public class GestioneUtente extends HttpServlet {
 							view.forward(request, response);
 						}else {
 							response.setContentType("text/html;charset=ISO-8859-1");
-							response.getWriter().write("password no");
+							response.getWriter().write("password no4");
 						}
 					}
 				}else {
 					if(utente.getStudente(studente).getPassword().equals(password)) {
 						request.getSession().setAttribute("utenteSessione", utente.getStudente(studente));
-						
-						RequestDispatcher view = request.getRequestDispatcher("homeStudente.jsp");
-						view.forward(request, response);
+						System.out.println("KITEBIIIIIIIIIIIIIIIIIIV SONO TROPPO UN GENIACCIO");
+						//RequestDispatcher view = request.getRequestDispatcher("homeStudente.jsp");
+						//view.forward(request, response);
 					}else {
 						response.setContentType("text/html;charset=ISO-8859-1");
-						response.getWriter().write("password no");
+						response.getWriter().write("password no5");
 					}
 				}
 

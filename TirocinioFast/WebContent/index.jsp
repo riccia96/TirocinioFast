@@ -1,6 +1,5 @@
 <%@page import="Bean.ImpiegatoBean"%>
 <%@page import="Bean.TutorBean"%>
-<%@page import="Model.TutorAccademicoDAO"%>
 <%@page import="Bean.AziendaBean"%>
 <%@page import="Bean.StudenteBean"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"

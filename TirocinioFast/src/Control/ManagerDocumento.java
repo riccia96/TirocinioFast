@@ -124,7 +124,7 @@ public class ManagerDocumento {
 		TutorBean tutor = new TutorBean();
 		StudenteDAO dStudente = new StudenteDAO();
 		AziendaDAO dAzienda = new AziendaDAO();
-		TutorAccademicoDAO dTutor = new TutorAccademicoDAO();
+		TutorDAO dTutor = new TutorDAO();
 		List<StudenteBean> lStudente = new ArrayList<StudenteBean>();
 		List<AziendaBean> lAzienda = new ArrayList<AziendaBean>();
 		List<TutorBean> lTutor = new ArrayList<TutorBean>();
