@@ -282,13 +282,16 @@ public class GestioneUtente extends HttpServlet {
 				for(int i = 0; i < studenti.size(); i++){
 					if(studenti.get(i).getEmail().equals(email) ){
 						response.setContentType("text/html;charset=ISO-8859-1");
-						response.getWriter().write("email gia' esistente");
-					}else if(studenti.get(i).getMatricola().equals(matricola)){
+						response.getWriter().write("codice fiscale gia' esistente");
+					}else if(studenti.get(i).getCodiceFiscale().equals(codiceFiscale)){
 						response.setContentType("text/html;charset=ISO-8859-1");
 						response.getWriter().write("matricola gia' esistente");
 					}else if(studenti.get(i).getUsername().equals(username)){
 						response.setContentType("text/html;charset=ISO-8859-1");
 						response.getWriter().write("username gia' esistente");
+					}else if(studenti.get(i).getMatricola().equals(matricola)){
+						response.setContentType("text/html;charset=ISO-8859-1");
+						response.getWriter().write("email gia' esistente");
 					}
 				}
 				
