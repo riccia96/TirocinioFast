@@ -19,19 +19,17 @@ pageEncoding="ISO-8859-1"%>
 <%@include file = "menu.jsp" %>
 
 <div style="margin-left:25%;height:500px;width: 700px;">
-<form class="dialogo" id="login" action="GestioneUtente" method="POST">
+<form class="dialogo" id="recupero" action="GestioneUtente" method="POST">
   <div class="imgcontainer">
     <img src="img\avatar-default-icon.png" alt="Avatar" class="avatar">
   </div>
 
-    <input type="text" placeholder="Username" name="uname" required>
+    <input type="text" placeholder="Username" name="username" required>
 	<br>
-    <input type="password" placeholder="Password" name="psw" required>
+    <input type="text" placeholder="Film preferito" name="risposta" required>
     <br>
     <div class ="new">
-    <button name = "azioneUtente" value="login" id="loginButton" class=" button" type="submit">Login</button> 
-    <br>
-    <span class="dimenticata"><a href="recupero.jsp">Password dimenticata?</a></span>
+    <button name = "azioneUtente" value="recupero" id="RecuperoButton" class=" button" type="submit">Avanti</button> 
     </div>
 </form>
   

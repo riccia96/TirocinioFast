@@ -14,59 +14,16 @@ pageEncoding="ISO-8859-1"%>
 </head>
 <body>
 
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#"><img id="logo" alt="Logo" src="img\LogoTF.png" height="120px" width="300px"></a>
-    <a href="#"><img id="unisa" alt="Unisa" src="img\logo_standard.png" width="100px" height="100px"></a>  
-    </div>
- </nav>
+<%@include file = "navbar.jsp" %>
 
-<ul id="menu">
-<%
-StudenteBean currentStudente = (StudenteBean)session.getAttribute("currentSessionStudente");
-if (currentStudente != null){ %>
-	<li><a href="#">Area Personale</a></li>
-	<li><a href="#">Ricerca azienda</a></li>
-	<li><a href="#">Richiesta tirocinio</a></li>
-	<li><a href="#">Registro ore</a></li>
-	<li><a href="#">Questionario</a></li>
-	<li><a href="#">Logout</a></li>	
-<%}
-AziendaBean currentAzienda = (AziendaBean)session.getAttribute("currentSessionAzienda");
-if (currentAzienda != null){ %>
-	<li><a href="#">Area Personale</a></li>
-	<li><a href="#">Convenzione</a></li>
-	<li><a href="#">Richieste tirocinio</a></li>
-	<li><a href="#">Logout</a></li>
-<%} 
-TutorBean currentTutor = (TutorBean)session.getAttribute("currentSessionTutor");
-if (currentTutor != null) { %>
-	<li><a href="#">Area Personale</a></li>
-	<li><a href="#">Richieste tirocinio</a></li>
-	<li><a href="#">Logout</a></li>
-<%} 
-ImpiegatoBean currentImpiegato = (ImpiegatoBean)session.getAttribute("currentSessionImpiegato");
-if (currentImpiegato != null) { %>
-	<li><a href="#">Area Personale</a>
-	<li><a href="#">Richieste tirocinio</a>
-	<li><a href="#">Attività tirocinio</a>
-	<li><a href="#">Convenzioni aziende</a>
-	<li><a href="#">Elenco aziende convenzionate</a>
-	<li><a href="#">Logout</a>
-<%}
-else { %>
-	<li><a href="#">Home</a>
-	<li><a href="#">Registrati</a>
-<%} %>
-
-</ul>
+<%@include file = "menu.jsp" %>
 
 <div style="margin-left:25%;height:1200px;width: 700px;">
 <form name="tipo">
   	<input type=radio onclick="cambia()" name=radioB checked>Studente
 	<input type=radio onclick="cambia()" name=radioB>Azienda
 </form>
-<form name="form0" id="registrazione" action="GestioneUtente" method="POST" style="position:absolute;width: 700px;">
+<form class="dialogo" name="form0" id="registrazione" action="GestioneUtente" method="POST" style="position:absolute;width: 700px;">
   <div class="imgcontainer">
     <img src="img\avatar-default-icon.png" alt="Avatar" class="avatar">
   </div>
@@ -105,7 +62,7 @@ else { %>
 
 </form>
 
-<form name="form1" id="registrazione" action="GestioneUtente" method="POST" style="visibility:hidden;position:absolute;width: 700px;">
+<form class="dialogo" name="form1" id="registrazione" action="GestioneUtente" method="POST" style="visibility:hidden;position:absolute;width: 700px;">
   <div class="imgcontainer">
     <img src="img\avatar-default-icon.png" alt="Avatar" class="avatar">
   </div>
@@ -139,9 +96,7 @@ else { %>
 </div>
 
 
-<footer class="footer">
-	<a href="#"><img src="img/logo2.png" alt="unisa" width="400px" height="100px" ></a>
-</footer>
+<%@include file = "footer.jsp" %>
 
 <script> 
 function cambia() { 
