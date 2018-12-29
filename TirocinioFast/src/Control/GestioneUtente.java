@@ -2,6 +2,8 @@ package Control;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,6 +16,8 @@ import Bean.AziendaBean;
 import Bean.ImpiegatoBean;
 import Bean.StudenteBean;
 import Bean.TutorBean;
+import Model.AziendaDAO;
+import Model.StudenteDAO;
 
 /**
  * Servlet implementation class GestioneUtente
@@ -244,6 +248,18 @@ public class GestioneUtente extends HttpServlet {
 
 		if(azioneUtente.equals("registra")) {
 			String tipo = request.getParameter("tipo");
+			List<StudenteBean> studenti = new ArrayList<StudenteBean>();
+			List<AziendaBean> aziende = new ArrayList<AziendaBean>();
+			StudenteDAO s = new StudenteDAO();
+			AziendaDAO a = new AziendaDAO();
+			
+			try {
+				studenti.addAll(s.doRetrieveAll());
+				aziende.addAll(a.doRetrieveAll());
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
 			
 			if(tipo.equals("radioS")){
 				String nome = request.getParameter("nome");
@@ -260,6 +276,21 @@ public class GestioneUtente extends HttpServlet {
 				String password = request.getParameter("password");
 				String conferma = request.getParameter("conferma");
 				String risposta = request.getParameter("domanda");
+				
+				//controlli per la registrazione
+				
+				for(int i = 0; i < studenti.size(); i++){
+					if(studenti.get(i).getEmail().equals(email) ){
+						response.setContentType("text/html;charset=ISO-8859-1");
+						response.getWriter().write("email gia' esistente");
+					}else if(studenti.get(i).getMatricola().equals(matricola)){
+						response.setContentType("text/html;charset=ISO-8859-1");
+						response.getWriter().write("matricola gia' esistente");
+					}else if(studenti.get(i).getUsername().equals(username)){
+						response.setContentType("text/html;charset=ISO-8859-1");
+						response.getWriter().write("username gia' esistente");
+					}
+				}
 				
 				if(password.equals(conferma)){
 					studente.setNome(nome);
@@ -281,16 +312,33 @@ public class GestioneUtente extends HttpServlet {
 				}
 			}else{
 				String nome = request.getParameter("nome");
-				String partitaIva = request.getParameter("nome");
-				String ceo = request.getParameter("nome");
-				String indirizzo = request.getParameter("nome");
-				String email = request.getParameter("nome");
-				String telefono = request.getParameter("nome");
-				String username = request.getParameter("nome");
-				String password = request.getParameter("nome");
-				String conferma = request.getParameter("nome");
-				String risposta = request.getParameter("nome");
-
+				String partitaIva = request.getParameter("iva");
+				String ceo = request.getParameter("ceo");
+				String indirizzo = request.getParameter("sede");
+				String email = request.getParameter("email");
+				String telefono = request.getParameter("telefono");
+				String username = request.getParameter("username");
+				String password = request.getParameter("password");
+				String conferma = request.getParameter("conferma");
+				String risposta = request.getParameter("domanda");
+				
+				//Controlli per la registrazione
+				
+				for(int i = 0; i < aziende.size(); i++){
+					if(aziende.get(i).getEmail().equals(email) ){
+						response.setContentType("text/html;charset=ISO-8859-1");
+						response.getWriter().write("email gia' esistente");
+					}else if(aziende.get(i).getNome().equals(nome)){
+						response.setContentType("text/html;charset=ISO-8859-1");
+						response.getWriter().write("matricola gia' esistente");
+					}else if(aziende.get(i).getUsername().equals(username)){
+						response.setContentType("text/html;charset=ISO-8859-1");
+						response.getWriter().write("username gia' esistente");
+					}else if(aziende.get(i).getTelefono().equals(telefono)){
+						response.setContentType("text/html;charset=ISO-8859-1");
+						response.getWriter().write("telefono gia' esistente");
+					}
+				}
 				if(password.equals(conferma)){
 					azienda.setNome(nome);
 					azienda.setPartitaIva(partitaIva);
