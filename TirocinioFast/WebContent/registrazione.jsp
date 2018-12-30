@@ -34,7 +34,7 @@ pageEncoding="ISO-8859-1"%>
     <br>
     <input type="text" placeholder="Indirizzo di residenza" name="indirizzo" required>
     <br>
-    <input type="text" placeholder="Città di residenza" name="citta" required>
+    <input type="text" placeholder="Cittï¿½ di residenza" name="citta" required>
     <br>
     <input type="text" placeholder="Codice Fiscale" name="codice" required>
     <br>
