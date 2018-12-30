@@ -20,8 +20,8 @@ pageEncoding="ISO-8859-1"%>
 
 <div style="margin-left:25%;height:1200px;width: 700px;">
 <form name="tipo">
-  	<input type=radio onclick="cambia()" name=radioS checked>Studente
-	<input type=radio onclick="cambia()" name=radioA>Azienda
+  	<input type=radio onclick="cambia()" name=radioB checked>Studente
+	<input type=radio onclick="cambia()" name=radioB>Azienda
 </form>
 <form class="dialogo" name="form0" id="registrazione" action="GestioneUtente" method="POST" style="position:absolute;width: 700px;">
   <div class="imgcontainer">
