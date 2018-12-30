@@ -14,7 +14,7 @@
 
 <%@include file = "menu.jsp" %>
 
-<form class="dialogo" name="form1" id="registraAzienda" action="GestioneUtente" method="POST" style="margin-left:25%;width: 700px;">
+<form class="dialogo" action="GestioneUtente" method="POST" style="margin-left:25%;width: 700px;">
   <div class="imgcontainer">
     <img src="img\avatar-default-icon.png" alt="Avatar" class="avatar">
   </div>
@@ -40,7 +40,7 @@
     <input type="text" placeholder="Film preferito? (utilizzato per recupero password)" name="domanda" required>
     <br>
     <div class ="new">
-    <button name = "azioneUtente" value="registrati" id="registratiButton" class=" button" type="submit">Registrati</button> 
+    <button name ="azioneUtente" value="registraAzienda" id="registratiButton" class=" button" type="submit">Registrati</button> 
   </div>
 
 </form>

@@ -258,11 +258,9 @@ public class GestioneUtente extends HttpServlet {
 
 
 
-		if(azioneUtente.equals("registrati")) {
-			String tipo = request.getParameter("radioB");
-			System.out.println(tipo);
+		if(azioneUtente.equals("registraStudente")) {
 			try{
-				if(tipo.equals("studente")){
+				
 					String nome = request.getParameter("nome");
 					String cognome = request.getParameter("cognome");
 					String luogoNascita = request.getParameter("luogo");
@@ -277,9 +275,19 @@ public class GestioneUtente extends HttpServlet {
 					String password = request.getParameter("password");
 					String conferma = request.getParameter("conferma");
 					String risposta = request.getParameter("domanda");
-	
-					
-	
+					studente.setNome(nome);
+					studente.setCognome(cognome);
+					studente.setLuogoNascita(luogoNascita);
+					studente.setDataNascita(dataNascita);
+					studente.setIndirizzo(indirizzo);
+					studente.setCitta(citta);
+					studente.setCodiceFiscale(codiceFiscale);
+					studente.setMatricola(matricola);
+					studente.setEmail(email);
+					studente.setTelefono(telefono);
+					studente.setUsername(username);
+					studente.setPassword(password);
+					studente.setDomanda(risposta);
 					
 					if(utente.getStudente(studente).getEmail().equals(email) ){
 						response.setContentType("text/html;charset=ISO-8859-1");
@@ -293,10 +301,7 @@ public class GestioneUtente extends HttpServlet {
 					}else if(utente.getStudente(studente).getMatricola().equals(matricola)){
 						response.setContentType("text/html;charset=ISO-8859-1");
 						response.getWriter().write("email gia' esistente");
-					}
-					
-	
-					if(password.equals(conferma)){
+					} else if(password.equals(conferma)){
 						studente.setNome(nome);
 						studente.setCognome(cognome);
 						studente.setLuogoNascita(luogoNascita);
@@ -310,7 +315,7 @@ public class GestioneUtente extends HttpServlet {
 						studente.setUsername(username);
 						studente.setPassword(password);
 						studente.setDomanda(risposta);
-	
+						System.out.println("sono qui kitebi");
 						utente.registraStudente(studente);
 						
 						RequestDispatcher view = request.getRequestDispatcher("homeStudente");
@@ -319,7 +324,17 @@ public class GestioneUtente extends HttpServlet {
 						response.setContentType("text/html;charset=ISO-8859-1");
 						response.getWriter().write("password non corrispondenti");
 					}
-				}else{
+			
+			}catch(SQLException e){
+				e.printStackTrace();
+			}
+		}
+
+
+		if(azioneUtente.equals("registraAzienda")) {
+		
+			try{
+				
 					String nome = request.getParameter("nome");
 					String partitaIva = request.getParameter("iva");
 					String ceo = request.getParameter("ceo");
@@ -330,9 +345,6 @@ public class GestioneUtente extends HttpServlet {
 					String password = request.getParameter("password");
 					String conferma = request.getParameter("conferma");
 					String risposta = request.getParameter("domanda");
-	
-					
-	
 					
 					if(utente.getAzienda(azienda).getEmail().equals(email) ){
 						response.setContentType("text/html;charset=ISO-8859-1");
@@ -367,14 +379,11 @@ public class GestioneUtente extends HttpServlet {
 						response.setContentType("text/html;charset=ISO-8859-1");
 						response.getWriter().write("password non corrispondenti");
 					}
-				}
+				
 			}catch(SQLException e){
 				e.printStackTrace();
 			}
 		}
-
-
-
 
 		if(azioneUtente.equals("areaPersonale")) {
 
