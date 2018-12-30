@@ -21,7 +21,7 @@ pageEncoding="ISO-8859-1"%>
   
 <form class="dialogo" name="form" id="registrazione" action="GestioneUtente" method="POST" style="position:absolute;width: 700px;">
  	
- 	<input type="radio" name="tipo" value="studente" checked id="radioS" onclick="myAccFunc()">Studente
+ 	<input type="radio" name="tipo" value="studente" id="radioS" onclick="myAccFunc()">Studente
 	<input type="radio" name="tipo" value="azienda" id="radioA" onclick="myAccFunc()">Azienda
  
   <div class="imgcontainer">
@@ -44,9 +44,11 @@ pageEncoding="ISO-8859-1"%>
 <%@include file = "footer.jsp" %>
 
 <script>
+
 $(document).ready(function(){
 	$("#nomeAzienda").hide();
 });
+
 
 function myAccFunc() {
     var x = document.getElementById("radioA");
@@ -59,7 +61,6 @@ function myAccFunc() {
    	 	$("#nomeAzienda").hide();
 		$("#nomeStudente").show();
     }
-
 }
 </script>
 
