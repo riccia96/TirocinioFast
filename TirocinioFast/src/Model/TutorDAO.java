@@ -94,14 +94,14 @@ public class TutorDAO extends AbstractDAO<TutorBean>{
 		ResultSet result = null;
 		TutorBean t = new TutorBean();
 		
-		String querySQL = "SELECT * FROM " + TutorDAO.TABLE_NAME + " WHERE matricola = ?";
+		String querySQL = "SELECT * FROM " + TutorDAO.TABLE_NAME + " WHERE username = ?";
 		
 		try {
 
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(querySQL);
 
-			preparedStatement.setString(1, tutor.getMatricola());
+			preparedStatement.setString(1, tutor.getUsername());
 
 			preparedStatement.execute();
 			result = preparedStatement.getResultSet();
