@@ -261,107 +261,116 @@ public class GestioneUtente extends HttpServlet {
 		if(azioneUtente.equals("registrati")) {
 			String tipo = request.getParameter("tipo");
 			System.out.println(tipo);
-
-			if(tipo.equals("studente")){
-				String nome = request.getParameter("nome");
-				String cognome = request.getParameter("cognome");
-				String luogoNascita = request.getParameter("luogo");
-				String dataNascita = request.getParameter("data");
-				String indirizzo = request.getParameter("indirizzo");
-				String citta = request.getParameter("citta");
-				String codiceFiscale = request.getParameter("codice");
-				String matricola = request.getParameter("matricola");
-				String email = request.getParameter("email");
-				String telefono = request.getParameter("telefono");
-				String username = request.getParameter("username");
-				String password = request.getParameter("password");
-				String conferma = request.getParameter("conferma");
-				String risposta = request.getParameter("domanda");
-
-				
-
-				
-				if(utente.getStudente(studente).getEmail().equals(email) ){
-					response.setContentType("text/html;charset=ISO-8859-1");
-					response.getWriter().write("codice fiscale gia' esistente");
-				}else if(utente.getStudente(studente).getCodiceFiscale().equals(codiceFiscale)){
-					response.setContentType("text/html;charset=ISO-8859-1");
-					response.getWriter().write("matricola gia' esistente");
-				}else if(utente.getStudente(studente).getUsername().equals(username)){
-					response.setContentType("text/html;charset=ISO-8859-1");
-					response.getWriter().write("username gia' esistente");
-				}else if(utente.getStudente(studente).getMatricola().equals(matricola)){
-					response.setContentType("text/html;charset=ISO-8859-1");
-					response.getWriter().write("email gia' esistente");
-				}
-				
-
-				if(password.equals(conferma)){
-					studente.setNome(nome);
-					studente.setCognome(cognome);
-					studente.setLuogoNascita(luogoNascita);
-					studente.setDataNascita(dataNascita);
-					studente.setIndirizzo(indirizzo);
-					studente.setCitta(citta);
-					studente.setCodiceFiscale(codiceFiscale);
-					studente.setMatricola(matricola);
-					studente.setEmail(email);
-					studente.setTelefono(telefono);
-					studente.setUsername(username);
-					studente.setPassword(password);
-					studente.setDomanda(risposta);
-
-					RequestDispatcher view = request.getRequestDispatcher("homeStudente");
-					view.forward(request, response);
-				}else {
-					response.setContentType("text/html;charset=ISO-8859-1");
-					response.getWriter().write("");
-				}
-			}else{
-				String nome = request.getParameter("nome");
-				String partitaIva = request.getParameter("iva");
-				String ceo = request.getParameter("ceo");
-				String indirizzo = request.getParameter("sede");
-				String email = request.getParameter("email");
-				String telefono = request.getParameter("telefono");
-				String username = request.getParameter("username");
-				String password = request.getParameter("password");
-				String conferma = request.getParameter("conferma");
-				String risposta = request.getParameter("domanda");
-
-				
-
-				for(int i = 0; i < aziende.size(); i++){
-					if(aziende.get(i).getEmail().equals(email) ){
+			try{
+				if(tipo.equals("studente")){
+					String nome = request.getParameter("nome");
+					String cognome = request.getParameter("cognome");
+					String luogoNascita = request.getParameter("luogo");
+					String dataNascita = request.getParameter("data");
+					String indirizzo = request.getParameter("indirizzo");
+					String citta = request.getParameter("citta");
+					String codiceFiscale = request.getParameter("codice");
+					String matricola = request.getParameter("matricola");
+					String email = request.getParameter("email");
+					String telefono = request.getParameter("telefono");
+					String username = request.getParameter("username");
+					String password = request.getParameter("password");
+					String conferma = request.getParameter("conferma");
+					String risposta = request.getParameter("domanda");
+	
+					
+	
+					
+					if(utente.getStudente(studente).getEmail().equals(email) ){
 						response.setContentType("text/html;charset=ISO-8859-1");
-						response.getWriter().write("email gia' esistente");
-					}else if(aziende.get(i).getNome().equals(nome)){
+						response.getWriter().write("codice fiscale gia' esistente");
+					}else if(utente.getStudente(studente).getCodiceFiscale().equals(codiceFiscale)){
 						response.setContentType("text/html;charset=ISO-8859-1");
 						response.getWriter().write("matricola gia' esistente");
-					}else if(aziende.get(i).getUsername().equals(username)){
+					}else if(utente.getStudente(studente).getUsername().equals(username)){
 						response.setContentType("text/html;charset=ISO-8859-1");
 						response.getWriter().write("username gia' esistente");
-					}else if(aziende.get(i).getTelefono().equals(telefono)){
+					}else if(utente.getStudente(studente).getMatricola().equals(matricola)){
+						response.setContentType("text/html;charset=ISO-8859-1");
+						response.getWriter().write("email gia' esistente");
+					}
+					
+	
+					if(password.equals(conferma)){
+						studente.setNome(nome);
+						studente.setCognome(cognome);
+						studente.setLuogoNascita(luogoNascita);
+						studente.setDataNascita(dataNascita);
+						studente.setIndirizzo(indirizzo);
+						studente.setCitta(citta);
+						studente.setCodiceFiscale(codiceFiscale);
+						studente.setMatricola(matricola);
+						studente.setEmail(email);
+						studente.setTelefono(telefono);
+						studente.setUsername(username);
+						studente.setPassword(password);
+						studente.setDomanda(risposta);
+	
+						utente.registraStudente(studente);
+						
+						RequestDispatcher view = request.getRequestDispatcher("homeStudente");
+						view.forward(request, response);
+					}else {
+						response.setContentType("text/html;charset=ISO-8859-1");
+						response.getWriter().write("password non corrispondenti");
+					}
+				}else{
+					String nome = request.getParameter("nome");
+					String partitaIva = request.getParameter("iva");
+					String ceo = request.getParameter("ceo");
+					String indirizzo = request.getParameter("sede");
+					String email = request.getParameter("email");
+					String telefono = request.getParameter("telefono");
+					String username = request.getParameter("username");
+					String password = request.getParameter("password");
+					String conferma = request.getParameter("conferma");
+					String risposta = request.getParameter("domanda");
+	
+					
+	
+					
+					if(utente.getAzienda(azienda).getEmail().equals(email) ){
+						response.setContentType("text/html;charset=ISO-8859-1");
+						response.getWriter().write("email gia' esistente");
+					}else if(utente.getAzienda(azienda).getNome().equals(nome)){
+						response.setContentType("text/html;charset=ISO-8859-1");
+						response.getWriter().write("matricola gia' esistente");
+					}else if(utente.getAzienda(azienda).getUsername().equals(username)){
+						response.setContentType("text/html;charset=ISO-8859-1");
+						response.getWriter().write("username gia' esistente");
+					}else if(utente.getAzienda(azienda).getTelefono().equals(telefono)){
 						response.setContentType("text/html;charset=ISO-8859-1");
 						response.getWriter().write("telefono gia' esistente");
 					}
+					
+					if(password.equals(conferma)){
+						azienda.setNome(nome);
+						azienda.setPartitaIva(partitaIva);
+						azienda.setCeo(ceo);
+						azienda.setEmail(email);
+						azienda.setIndirizzo(indirizzo);
+						azienda.setTelefono(telefono);
+						azienda.setUsername(username);
+						azienda.setPassword(password);
+						azienda.setDomanda(risposta);
+	
+						utente.registraAzienda(azienda);
+						
+						RequestDispatcher view = request.getRequestDispatcher("homeAzienda");
+						view.forward(request, response);
+					}else {
+						response.setContentType("text/html;charset=ISO-8859-1");
+						response.getWriter().write("password non corrispondenti");
+					}
 				}
-				if(password.equals(conferma)){
-					azienda.setNome(nome);
-					azienda.setPartitaIva(partitaIva);
-					azienda.setCeo(ceo);
-					azienda.setEmail(email);
-					azienda.setIndirizzo(indirizzo);
-					azienda.setTelefono(telefono);
-					azienda.setUsername(username);
-					azienda.setPassword(password);
-					azienda.setDomanda(risposta);
-
-					RequestDispatcher view = request.getRequestDispatcher("homeAzienda");
-					view.forward(request, response);
-				}
+			}catch(SQLException e){
+				e.printStackTrace();
 			}
-			
 		}
 
 
