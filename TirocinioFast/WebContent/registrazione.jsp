@@ -15,9 +15,9 @@ pageEncoding="ISO-8859-1"%>
 <%@include file = "menu.jsp" %>
 
 <div style="margin-left:25%;height:1200px;width: 700px;">
-<form name="tipo">
-  	<input type=radio onclick="cambia()" name=radioB checked>Studente
-	<input type=radio onclick="cambia()" name=radioB>Azienda
+<form name="tipo" action="GestioneUtente" method="POST">
+  	<input type="radio" onclick="cambia()" name="radioB" value="studente" checked>Studente
+	<input type="radio" onclick="cambia()" name="radioB" value="azienda">Azienda
 </form>
 <form class="dialogo" name="form0" id="registrazione" action="GestioneUtente" method="POST" style="position:absolute;width: 700px;">
   <div class="imgcontainer">
@@ -34,7 +34,7 @@ pageEncoding="ISO-8859-1"%>
     <br>
     <input type="text" placeholder="Indirizzo di residenza" name="indirizzo" required>
     <br>
-    <input type="text" placeholder="Citt� di residenza" name="citta" required>
+    <input type="text" placeholder="Città di residenza" name="citta" required>
     <br>
     <input type="text" placeholder="Codice Fiscale" name="codice" required>
     <br>

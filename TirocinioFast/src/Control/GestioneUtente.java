@@ -259,7 +259,7 @@ public class GestioneUtente extends HttpServlet {
 
 
 		if(azioneUtente.equals("registrati")) {
-			String tipo = request.getParameter("tipo");
+			String tipo = request.getParameter("radioB");
 			System.out.println(tipo);
 			try{
 				if(tipo.equals("studente")){
