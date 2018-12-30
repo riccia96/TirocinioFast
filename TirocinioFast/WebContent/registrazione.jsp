@@ -1,5 +1,3 @@
-<%@page import="Bean.ImpiegatoBean"%>
-<%@page import="Bean.TutorBean"%>
 <%@page import="Bean.AziendaBean"%>
 <%@page import="Bean.StudenteBean"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -19,74 +17,21 @@ pageEncoding="ISO-8859-1"%>
 <%@include file = "menu.jsp" %>
 
 <div style="margin-left:25%;height:1200px;width: 700px;">
-<form name="tipo">
-  	<input type=radio onclick="cambia()" name=radioS checked>Studente
-	<input type=radio onclick="cambia()" name=radioA>Azienda
-</form>
-<form class="dialogo" name="form0" id="registrazione" action="GestioneUtente" method="POST" style="position:absolute;width: 700px;">
+
+  
+<form class="dialogo" name="form" id="registrazione" action="GestioneUtente" method="POST" style="position:absolute;width: 700px;">
+ 	
+ 	<input type="radio" name="tipo" value="studente" checked id="radioS" onclick="myAccFunc()">Studente
+	<input type="radio" name="tipo" value="azienda" id="radioA" onclick="myAccFunc()">Azienda
+ 
   <div class="imgcontainer">
     <img src="img\avatar-default-icon.png" alt="Avatar" class="avatar">
   </div>
+	
+    <input type="text" placeholder="Nome" name="nome" required id="nomeStudente">
 
-    <input type="text" placeholder="Nome" name="nome" required>
-	<br>
-    <input type="text" placeholder="Cognome" name="cognome" required>
-    <br>
-    <input type="text" placeholder="Luogo di nascita" name="luogo" required>
-    <br>
-    <input type="text" placeholder="Data di nascita" name="data" required>
-    <br>
-    <input type="text" placeholder="Indirizzo di residenza" name="indirizzo" required>
-    <br>
-    <input type="text" placeholder="Città di residenza" name="citta" required>
-    <br>
-    <input type="text" placeholder="Codice Fiscale" name="codice" required>
-    <br>
-    <input type="text" placeholder="Matricola" name="matricola" required>
-    <br>
-    <input type="text" placeholder="E-mail" name="email" required>
-    <br>
-    <input type="text" placeholder="Numero di telefono" name="telefono" required>
-    <br>
-    <input type="text" placeholder="Username" name="username" required>
-    <br>
-    <input type="password" placeholder="Password" name="password" required>
-    <br>
-    <input type="password" placeholder="Conferma password" name="conferma" required>
-    <br>
-    <input type="text" placeholder="Film preferito? (utilizzato per recupero password)" name="domanda" required>
-    <br>
-    <div class ="new">
-    <button name = "azioneUtente" value="registrati" id="registratiButton" class=" button" type="submit">Registrati</button> 
-  </div>
-
-</form>
-
-<form class="dialogo" name="form1" id="registrazione" action="GestioneUtente" method="POST" style="visibility:hidden;position:absolute;width: 700px;">
-  <div class="imgcontainer">
-    <img src="img\avatar-default-icon.png" alt="Avatar" class="avatar">
-  </div>
-
-    <input type="text" placeholder="Nome azienda" name="nome" required>
-	<br>
-    <input type="text" placeholder="Partita Iva" name="iva" required>
-    <br>
-    <input type="text" placeholder="Rappresentante azienda" name="ceo" required>
-    <br>
-    <input type="text" placeholder="Sede" name="sede" required>
-    <br>
-    <input type="text" placeholder="E-mail" name="email" required>
-    <br>
-    <input type="text" placeholder="Telefono" name="telefono" required>
-    <br>
-    <input type="text" placeholder="Username" name="username" required>
-    <br>
-    <input type="password" placeholder="Password" name="password" required>
-    <br>
-    <input type="password" placeholder="Conferma password" name="conferma" required>
-    <br>
-    <input type="text" placeholder="Film preferito? (utilizzato per recupero password)" name="domanda" required>
-    <br>
+	<input type="text" placeholder="Nome azienda" name="nome" required id="nomeAzienda">
+	
     <div class ="new">
     <button name = "azioneUtente" value="registrati" id="registratiButton" class=" button" type="submit">Registrati</button> 
   </div>
@@ -98,15 +43,27 @@ pageEncoding="ISO-8859-1"%>
 
 <%@include file = "footer.jsp" %>
 
-<script> 
-function cambia() { 
-y=document.tipo.radioB;
-for(i=0;i<y.length;i++){
-if(y[i].checked)document.forms["form"+i].style.visibility='visible'
-else document.forms["form"+i].style.visibility='hidden';
+<script>
+$(document).ready(function(){
+	$("#nomeAzienda").hide();
+});
+
+function myAccFunc() {
+    var x = document.getElementById("radioA");
+    var y = document.getElementById("radioS");
+    if(x.checked) {
+   	 	$("#nomeAzienda").show();
+		$("#nomeStudente").hide();
+    }
+    if(y.checked) {
+   	 	$("#nomeAzienda").hide();
+		$("#nomeStudente").show();
+    }
+
 }
-} 
-</script> 
+</script>
+
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>

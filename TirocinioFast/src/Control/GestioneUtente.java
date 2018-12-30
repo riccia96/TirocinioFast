@@ -197,10 +197,6 @@ public class GestioneUtente extends HttpServlet {
 			}
 		}
 
-
-
-
-
 		if(azioneUtente.equals("impostaPassword")) {
 
 			String password = request.getParameter("password");
@@ -262,12 +258,10 @@ public class GestioneUtente extends HttpServlet {
 
 
 
-
-
-
-
-		if(azioneUtente.equals("registra")) {
+		if(azioneUtente.equals("registrati")) {
 			String tipo = request.getParameter("tipo");
+			System.out.println(tipo);
+			/*
 			List<StudenteBean> studenti = new ArrayList<StudenteBean>();
 			List<AziendaBean> aziende = new ArrayList<AziendaBean>();
 			StudenteDAO s = new StudenteDAO();
@@ -330,8 +324,8 @@ public class GestioneUtente extends HttpServlet {
 					studente.setPassword(password);
 					studente.setDomanda(risposta);
 
-					/*RequestDispatcher view = request.getRequestDispatcher("homeStudente");
-					view.forward(request, response);*/
+					RequestDispatcher view = request.getRequestDispatcher("homeStudente");
+					view.forward(request, response);
 				}
 			}else{
 				String nome = request.getParameter("nome");
@@ -345,7 +339,7 @@ public class GestioneUtente extends HttpServlet {
 				String conferma = request.getParameter("conferma");
 				String risposta = request.getParameter("domanda");
 
-				//Controlli per la registrazione
+				Controlli per la registrazione
 
 				for(int i = 0; i < aziende.size(); i++){
 					if(aziende.get(i).getEmail().equals(email) ){
@@ -373,10 +367,11 @@ public class GestioneUtente extends HttpServlet {
 					azienda.setPassword(password);
 					azienda.setDomanda(risposta);
 
-					/*RequestDispatcher view = request.getRequestDispatcher("homeAzienda");
-					view.forward(request, response);*/
+					RequestDispatcher view = request.getRequestDispatcher("homeAzienda");
+					view.forward(request, response);
 				}
 			}
+			*/
 		}
 
 

@@ -1,7 +1,4 @@
-<%@page import="Bean.ImpiegatoBean"%>
-<%@page import="Bean.TutorBean"%>
-<%@page import="Bean.AziendaBean"%>
-<%@page import="Bean.StudenteBean"%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -14,9 +11,9 @@ pageEncoding="ISO-8859-1"%>
 </head>
 <body>
  
-<%@include file = "navbar.jsp" %>
+<%@include file ="navbar.jsp"%>
 
-<%@include file = "menu.jsp" %>
+<%@include file ="menu.jsp"%>
 
 <div style="margin-left:25%;width: 700px;">
 <form class="dialogo" id="login" action="GestioneUtente" method="POST">
@@ -24,12 +21,12 @@ pageEncoding="ISO-8859-1"%>
     <img src="img\avatar-default-icon.png" alt="Avatar" class="avatar">
   </div>
 
-    <input type="text" placeholder="Username" name="uname" required>
+    <input type="text" placeholder="Username" name="username" required>
 	<br>
-    <input type="password" placeholder="Password" name="psw" required>
+    <input type="password" placeholder="Password" name="password" required>
     <br>
     <div class ="new">
-    <button name = "azioneUtente" value="login" id="loginButton" class=" button" type="submit">Login</button> 
+    <button name = "azioneUtente" value="login" id="loginButton" class="button" type="submit">Login</button> 
     <br>
     <span class="dimenticata"><a href="recupero.jsp">Password dimenticata?</a></span>
     </div>
