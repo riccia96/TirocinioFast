@@ -21,20 +21,20 @@ if (currentStudente != null){ %>
 	<li><a href="#">Richiesta tirocinio</a></li>
 	<li><a href="#">Registro ore</a></li>
 	<li><a href="#">Questionario</a></li>
-	<li><a href="#">Logout</a></li>	
+	<li><a href="logout.jsp">Logout</a></li>	
 <%}
 AziendaBean currentAzienda = (AziendaBean)session.getAttribute("currentSessionAzienda");
 if (currentAzienda != null){ %>
 	<li><a href="#">Area Personale</a></li>
 	<li><a href="#">Convenzione</a></li>
 	<li><a href="#">Richieste tirocinio</a></li>
-	<li><a href="#">Logout</a></li>
+	<li><a href="logout.jsp">Logout</a></li>
 <%} 
 TutorBean currentTutor = (TutorBean)session.getAttribute("currentSessionTutor");
 if (currentTutor != null) { %>
 	<li><a href="#">Area Personale</a></li>
 	<li><a href="#">Richieste tirocinio</a></li>
-	<li><a href="#">Logout</a></li>
+	<li><a href="logout.jsp">Logout</a></li>
 <%} 
 ImpiegatoBean currentImpiegato = (ImpiegatoBean)session.getAttribute("currentSessionImpiegato");
 if (currentImpiegato != null) { %>
@@ -43,7 +43,7 @@ if (currentImpiegato != null) { %>
 	<li><a href="#">Attività tirocinio</a>
 	<li><a href="#">Convenzioni aziende</a>
 	<li><a href="#">Elenco aziende convenzionate</a>
-	<li><a href="#">Logout</a>
+	<li><a href="logout.jsp">Logout</a>
 <%}
 else { %>
 	<li><a href="index.jsp">Home</a>
