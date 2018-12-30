@@ -288,7 +288,7 @@ public class GestioneUtente extends HttpServlet {
 					studente.setUsername(username);
 					studente.setPassword(password);
 					studente.setDomanda(risposta);
-					
+					System.out.println(studente);
 					if(utente.getStudente(studente).getEmail().equals(email) ){
 						response.setContentType("text/html;charset=ISO-8859-1");
 						response.getWriter().write("codice fiscale gia' esistente");
