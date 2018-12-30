@@ -20,8 +20,8 @@ pageEncoding="ISO-8859-1"%>
 
 <div style="margin-left:25%;height:1200px;width: 700px;">
 <form name="tipo">
-  	<input type=radio onclick="cambia()" name=radioB checked>Studente
-	<input type=radio onclick="cambia()" name=radioB>Azienda
+  	<input type=radio onclick="cambia()" name=radioS checked>Studente
+	<input type=radio onclick="cambia()" name=radioA>Azienda
 </form>
 <form class="dialogo" name="form0" id="registrazione" action="GestioneUtente" method="POST" style="position:absolute;width: 700px;">
   <div class="imgcontainer">
@@ -52,7 +52,7 @@ pageEncoding="ISO-8859-1"%>
     <br>
     <input type="password" placeholder="Password" name="password" required>
     <br>
-    <input type="password" placeholder="Conferma password" name="password" required>
+    <input type="password" placeholder="Conferma password" name="conferma" required>
     <br>
     <input type="text" placeholder="Film preferito? (utilizzato per recupero password)" name="domanda" required>
     <br>
@@ -83,7 +83,7 @@ pageEncoding="ISO-8859-1"%>
     <br>
     <input type="password" placeholder="Password" name="password" required>
     <br>
-    <input type="password" placeholder="Conferma password" name="password" required>
+    <input type="password" placeholder="Conferma password" name="conferma" required>
     <br>
     <input type="text" placeholder="Film preferito? (utilizzato per recupero password)" name="domanda" required>
     <br>

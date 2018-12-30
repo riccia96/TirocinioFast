@@ -2,6 +2,8 @@ package Control;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,6 +16,8 @@ import Bean.AziendaBean;
 import Bean.ImpiegatoBean;
 import Bean.StudenteBean;
 import Bean.TutorBean;
+import Model.AziendaDAO;
+import Model.StudenteDAO;
 
 /**
  * Servlet implementation class GestioneUtente
@@ -125,15 +129,234 @@ public class GestioneUtente extends HttpServlet {
 		}
 
 		if(azioneUtente.equals("recuperaPassword")) {
-
+			try{
+				String username = request.getParameter("username");
+				String risposta = request.getParameter("risposta");
+				
+				studente.setUsername(username);
+				azienda.setUsername(username);
+				impiegato.setUsername(username);
+				tutor.setUsername(username);
+				
+				if(utente.getStudente(studente).equals(null)){
+					response.setContentType("text/html;charset=ISO-8859-1");
+					response.getWriter().write("username no1");
+					if(utente.getAzienda(azienda).equals(null)){
+						response.setContentType("text/html;charset=ISO-8859-1");
+						response.getWriter().write("username no2");
+						if(utente.getImpiegato(impiegato).equals(null)){
+							response.setContentType("text/html;charset=ISO-8859-1");
+							response.getWriter().write("username no3");
+							if(utente.getTutor(tutor).equals(null)){
+								response.setContentType("text/html;charset=ISO-8859-1");
+								response.getWriter().write("username no4");
+							}else {
+								if(utente.getTutor(tutor).getDomanda().equals(risposta)){
+									request.setAttribute("tutorSessione", utente.getTutor(tutor));
+									
+									RequestDispatcher view = request.getRequestDispatcher("reimposta.jsp");
+									view.forward(request, response);
+								}else {
+									response.setContentType("text/html;charset=ISO-8859-1");
+									response.getWriter().write("risposta errata");
+								}
+							}
+						}else {
+							if(utente.getImpiegato(impiegato).getDomanda().equals(risposta)){
+								request.setAttribute("impiegatoSessione", utente.getImpiegato(impiegato));
+								
+								RequestDispatcher view = request.getRequestDispatcher("reimposta.jsp");
+								view.forward(request, response);
+							}else {
+								response.setContentType("text/html;charset=ISO-8859-1");
+								response.getWriter().write("risposta errata");
+							}
+						}
+					}else {
+						if(utente.getAzienda(azienda).getDomanda().equals(risposta)){
+							request.setAttribute("aziendaSessione", utente.getAzienda(azienda));
+							
+							RequestDispatcher view = request.getRequestDispatcher("reimposta.jsp");
+							view.forward(request, response);
+						}else {
+							response.setContentType("text/html;charset=ISO-8859-1");
+							response.getWriter().write("risposta errata");
+						}
+					}
+				}else {
+					if(utente.getStudente(studente).getDomanda().equals(risposta)){
+						request.setAttribute("studenteSessione", utente.getStudente(studente));
+						
+						RequestDispatcher view = request.getRequestDispatcher("reimposta.jsp");
+						view.forward(request, response);
+					}else {
+						response.setContentType("text/html;charset=ISO-8859-1");
+						response.getWriter().write("risposta errata");
+					}
+				}
+			}catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		if(azioneUtente.equals("impostaPassword")) {
-
+			String password = request.getParameter("password");
+			String conferma = request.getParameter("conferma");
+			
+			if(request.getSession().equals("studenteSessione")){
+				if(password.equals(conferma)){
+					studente.setPassword(password);
+					
+					RequestDispatcher view = request.getRequestDispatcher("index.jsp");
+					view.forward(request, response);
+				}else {
+					response.setContentType("text/html;charset=ISO-8859-1");
+					response.getWriter().write("password non corrispondenti");
+				}
+			}else if(request.getSession().equals("aziendaSessione")){
+				if(password.equals(conferma)){
+					azienda.setPassword(password);
+					
+					RequestDispatcher view = request.getRequestDispatcher("index.jsp");
+					view.forward(request, response);
+				}else {
+					response.setContentType("text/html;charset=ISO-8859-1");
+					response.getWriter().write("password non corrispondenti");
+				}
+			}else if(request.getSession().equals("impiegatoSessione")){
+				if(password.equals(conferma)){
+					impiegato.setPassword(password);
+					
+					RequestDispatcher view = request.getRequestDispatcher("index.jsp");
+					view.forward(request, response);
+				}else {
+					response.setContentType("text/html;charset=ISO-8859-1");
+					response.getWriter().write("password non corrispondenti");
+				}
+			}else if(request.getSession().equals("tutorSessione")){
+				if(password.equals(conferma)){
+					tutor.setPassword(password);
+					
+					RequestDispatcher view = request.getRequestDispatcher("index.jsp");
+					view.forward(request, response);
+				}else {
+					response.setContentType("text/html;charset=ISO-8859-1");
+					response.getWriter().write("password non corrispondenti");
+				}
+			}
 		}
 
 		if(azioneUtente.equals("registra")) {
-
+			String tipo = request.getParameter("tipo");
+			List<StudenteBean> studenti = new ArrayList<StudenteBean>();
+			List<AziendaBean> aziende = new ArrayList<AziendaBean>();
+			StudenteDAO s = new StudenteDAO();
+			AziendaDAO a = new AziendaDAO();
+			
+			try {
+				studenti.addAll(s.doRetrieveAll());
+				aziende.addAll(a.doRetrieveAll());
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			
+			if(tipo.equals("radioS")){
+				String nome = request.getParameter("nome");
+				String cognome = request.getParameter("cognome");
+				String luogoNascita = request.getParameter("luogo");
+				String dataNascita = request.getParameter("data");
+				String indirizzo = request.getParameter("indirizzo");
+				String citta = request.getParameter("citta");
+				String codiceFiscale = request.getParameter("codice");
+				String matricola = request.getParameter("matricola");
+				String email = request.getParameter("email");
+				String telefono = request.getParameter("telefono");
+				String username = request.getParameter("username");
+				String password = request.getParameter("password");
+				String conferma = request.getParameter("conferma");
+				String risposta = request.getParameter("domanda");
+				
+				//controlli per la registrazione
+				
+				for(int i = 0; i < studenti.size(); i++){
+					if(studenti.get(i).getEmail().equals(email) ){
+						response.setContentType("text/html;charset=ISO-8859-1");
+						response.getWriter().write("codice fiscale gia' esistente");
+					}else if(studenti.get(i).getCodiceFiscale().equals(codiceFiscale)){
+						response.setContentType("text/html;charset=ISO-8859-1");
+						response.getWriter().write("matricola gia' esistente");
+					}else if(studenti.get(i).getUsername().equals(username)){
+						response.setContentType("text/html;charset=ISO-8859-1");
+						response.getWriter().write("username gia' esistente");
+					}else if(studenti.get(i).getMatricola().equals(matricola)){
+						response.setContentType("text/html;charset=ISO-8859-1");
+						response.getWriter().write("email gia' esistente");
+					}
+				}
+				
+				if(password.equals(conferma)){
+					studente.setNome(nome);
+					studente.setCognome(cognome);
+					studente.setLuogoNascita(luogoNascita);
+					studente.setDataNascita(dataNascita);
+					studente.setIndirizzo(indirizzo);
+					studente.setCitta(citta);
+					studente.setCodiceFiscale(codiceFiscale);
+					studente.setMatricola(matricola);
+					studente.setEmail(email);
+					studente.setTelefono(telefono);
+					studente.setUsername(username);
+					studente.setPassword(password);
+					studente.setDomanda(risposta);
+					
+					/*RequestDispatcher view = request.getRequestDispatcher("homeStudente");
+					view.forward(request, response);*/
+				}
+			}else{
+				String nome = request.getParameter("nome");
+				String partitaIva = request.getParameter("iva");
+				String ceo = request.getParameter("ceo");
+				String indirizzo = request.getParameter("sede");
+				String email = request.getParameter("email");
+				String telefono = request.getParameter("telefono");
+				String username = request.getParameter("username");
+				String password = request.getParameter("password");
+				String conferma = request.getParameter("conferma");
+				String risposta = request.getParameter("domanda");
+				
+				//Controlli per la registrazione
+				
+				for(int i = 0; i < aziende.size(); i++){
+					if(aziende.get(i).getEmail().equals(email) ){
+						response.setContentType("text/html;charset=ISO-8859-1");
+						response.getWriter().write("email gia' esistente");
+					}else if(aziende.get(i).getNome().equals(nome)){
+						response.setContentType("text/html;charset=ISO-8859-1");
+						response.getWriter().write("matricola gia' esistente");
+					}else if(aziende.get(i).getUsername().equals(username)){
+						response.setContentType("text/html;charset=ISO-8859-1");
+						response.getWriter().write("username gia' esistente");
+					}else if(aziende.get(i).getTelefono().equals(telefono)){
+						response.setContentType("text/html;charset=ISO-8859-1");
+						response.getWriter().write("telefono gia' esistente");
+					}
+				}
+				if(password.equals(conferma)){
+					azienda.setNome(nome);
+					azienda.setPartitaIva(partitaIva);
+					azienda.setCeo(ceo);
+					azienda.setEmail(email);
+					azienda.setIndirizzo(indirizzo);
+					azienda.setTelefono(telefono);
+					azienda.setUsername(username);
+					azienda.setPassword(password);
+					azienda.setDomanda(risposta);
+					
+					/*RequestDispatcher view = request.getRequestDispatcher("homeAzienda");
+					view.forward(request, response);*/
+				}
+			}
 		}
 
 		if(azioneUtente.equals("areaPersonale")) {
