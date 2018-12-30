@@ -384,7 +384,7 @@ public class GestioneUtente extends HttpServlet {
 		}
 
 		if(azioneUtente.equals("areaPersonale")) {
-			//imposta password
+			//imposta password vedere se funziona l'equals invece che == di imposta
 			if(!(request.getSession().getAttribute("tipoUtente").equals(studente))){
 				if(!(request.getSession().getAttribute("tipoUtente").equals(azienda))){
 					if(!(request.getSession().getAttribute("tipoUtente").equals(tutor))){
@@ -407,7 +407,16 @@ public class GestioneUtente extends HttpServlet {
 
 		
 		if(azioneUtente.equals("salvaScheda")) {
-
+			String descrizione = request.getParameter("descrizione");
+			String logo = request.getParameter("logo");
+			
+			azienda = (AziendaBean) request.getSession().getAttribute("utenteSessione");
+			//controllare path immagine 
+			String pathLogo = "/img/logo" + azienda.getNome();
+			//aggiungere questi due campi alle cose di sopra :D 
+			azienda.setDescrizione(descrizione);
+			azienda.setLogo(logo);
+			
 		}
 
 		
