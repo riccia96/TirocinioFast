@@ -204,17 +204,18 @@ public class GestioneUtente extends HttpServlet {
 		if(azioneUtente.equals("impostaPassword")) {
 			String password = request.getParameter("password");
 			String conferma = request.getParameter("conferma");
-			
-			if(!(request.getSession().equals("studente"))) {
-				if(!(request.getSession().equals("azienda"))) {
-					if(!(request.getSession().equals("tutor"))) {
-						if(password.equals(conferma)) {
-							impiegato = (ImpiegatoBean) request.getSession().getAttribute("utenteSessione");
+			if(password.equals(conferma)) {
+				if(!(request.getSession().getAttribute("tipoUtente").equals("studente"))) {
+					if(!(request.getSession().getAttribute("tipoUtente").equals("azienda"))) {
+						if(!(request.getSession().getAttribute("tipoUtente").equals("tutor"))) {
+								impiegato = (ImpiegatoBean) request.getSession().getAttribute("utenteSessione");
+								
 							
 						}
 					}
 				}
 			}
+			
 			
 			
 			
