@@ -187,7 +187,7 @@ public class ImpiegatoDAO extends AbstractDAO<ImpiegatoBean>{
 		PreparedStatement preparedStatement = null;
 		
 		String querySQL = "UPDATE " + ImpiegatoDAO.TABLE_NAME + " SET nome = ?, cognome = ?, username = ?,"
-				+ " password = ?, domanda = ? WHERE matricola = ?";
+				+ " password = ?, domanda = ? WHERE username = ?";
 		
 		try{
 			
@@ -196,11 +196,10 @@ public class ImpiegatoDAO extends AbstractDAO<ImpiegatoBean>{
 			
 			preparedStatement.setString(1, impiegato.getNome());
 			preparedStatement.setString(2, impiegato.getCognome());
-			preparedStatement.setString(3, impiegato.getUsername());
 			preparedStatement.setString(4, impiegato.getPassword());
 			preparedStatement.setString(5, impiegato.getDomanda());
 			
-			preparedStatement.setString(6, impiegato.getMatricola());
+			preparedStatement.setString(6, impiegato.getUsername());
 			
 			preparedStatement.execute();
 			return true;
@@ -228,13 +227,13 @@ public class ImpiegatoDAO extends AbstractDAO<ImpiegatoBean>{
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
-		String querySQL = "DELETE FROM " + ImpiegatoDAO.TABLE_NAME + " WHERE matricola = ?";
+		String querySQL = "DELETE FROM " + ImpiegatoDAO.TABLE_NAME + " WHERE username = ?";
 		
 		try{
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(querySQL);
 			
-			preparedStatement.setString(1, impiegato.getMatricola());
+			preparedStatement.setString(1, impiegato.getUsername());
 			
 			preparedStatement.execute();
 			

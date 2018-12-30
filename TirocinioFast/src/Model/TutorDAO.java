@@ -188,7 +188,7 @@ public class TutorDAO extends AbstractDAO<TutorBean>{
 		PreparedStatement preparedStatement = null;
 		
 		String querySQL = "UPDATE " + TutorDAO.TABLE_NAME + " SET nome = ?, cognome = ?, username = ?, password = ?, "
-				+ "domanda = ? WHERE  matricola = ?";
+				+ "domanda = ? WHERE  username = ?";
 		
 		try{
 			
@@ -197,11 +197,10 @@ public class TutorDAO extends AbstractDAO<TutorBean>{
 			
 			preparedStatement.setString(1, tutor.getNome());
 			preparedStatement.setString(2, tutor.getCognome());
-			preparedStatement.setString(3, tutor.getUsername());
-			preparedStatement.setString(4, tutor.getPassword());
-			preparedStatement.setString(5, tutor.getDomanda());
+			preparedStatement.setString(3, tutor.getPassword());
+			preparedStatement.setString(4, tutor.getDomanda());
 			
-			preparedStatement.setString(6, tutor.getMatricola());
+			preparedStatement.setString(5, tutor.getUsername());
 			
 			preparedStatement.execute();
 			return true;
@@ -229,13 +228,13 @@ public class TutorDAO extends AbstractDAO<TutorBean>{
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
-		String querySQL = "DELETE FROM " + TutorDAO.TABLE_NAME + " WHERE matricola = ?";
+		String querySQL = "DELETE FROM " + TutorDAO.TABLE_NAME + " WHERE username = ?";
 		
 		try{
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(querySQL);
 			
-			preparedStatement.setString(1, tutor.getMatricola());
+			preparedStatement.setString(1, tutor.getUsername());
 			
 			preparedStatement.execute();
 			

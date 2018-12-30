@@ -216,7 +216,7 @@ public class StudenteDAO extends AbstractDAO<StudenteBean>{
 		PreparedStatement preparedStatement = null;
 
 		String querySQL = "UPDATE " + StudenteDAO.TABLE_NAME + " SET nome = ?, cognome = ?, luogoNascita = ?, dataNascita = ?,"
-				+ " indirizzo = ?, citta = ?, codiceFiscale = ?, telefono = ?, password = ?, domanda = ? WHERE matricola = ?";
+				+ " indirizzo = ?, citta = ?, codiceFiscale = ?, telefono = ?, password = ?, domanda = ? WHERE username = ?";
 
 		try {
 
@@ -230,13 +230,13 @@ public class StudenteDAO extends AbstractDAO<StudenteBean>{
 			preparedStatement.setString(5, studente.getIndirizzo());
 			preparedStatement.setString(6, studente.getCitta());
 			preparedStatement.setString(7, studente.getCodiceFiscale());
-			preparedStatement.setString(8, studente.getTelefono());
-			preparedStatement.setString(9, studente.getEmail());
-			preparedStatement.setString(10, studente.getUsername());
+			preparedStatement.setString(8, studente.getMatricola());
+			preparedStatement.setString(9, studente.getTelefono());
+			preparedStatement.setString(10, studente.getEmail());
 			preparedStatement.setString(11, studente.getPassword());
 			preparedStatement.setString(12, studente.getDomanda());
 			
-			preparedStatement.setString(13, studente.getMatricola());
+			preparedStatement.setString(13, studente.getUsername());
 
 			preparedStatement.execute();
 			return true;
@@ -266,14 +266,14 @@ public class StudenteDAO extends AbstractDAO<StudenteBean>{
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
-		String querySQL = "DELETE FROM " + StudenteDAO.TABLE_NAME + " WHERE matricola = ?";
+		String querySQL = "DELETE FROM " + StudenteDAO.TABLE_NAME + " WHERE username = ?";
 		
 		try {
 
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(querySQL);
 
-			preparedStatement.setString(1, studente.getMatricola());
+			preparedStatement.setString(1, studente.getUsername());
 
 			preparedStatement.execute();
 			
