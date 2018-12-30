@@ -70,47 +70,34 @@ public class ManagerUtente {
 		return aDAO.doUpdate(azienda);
 	}
 	
-	public List<StudenteBean> getStudenti(){
+	public List<StudenteBean> getStudenti() throws SQLException{
 		StudenteDAO sDAO = new StudenteDAO();
 		List<StudenteBean> studenti = new ArrayList<StudenteBean>();
-		try {
-			studenti.addAll(sDAO.doRetrieveAll());
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		studenti.addAll(sDAO.doRetrieveAll());
 		return studenti;
 	}
 	
-	public List<AziendaBean> getAziende(){
+	public List<AziendaBean> getAziende() throws SQLException{
 		AziendaDAO aDAO = new AziendaDAO();
 		List<AziendaBean> aziende = new ArrayList<AziendaBean>();
-		try {
-			aziende.addAll(aDAO.doRetrieveAll());
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		aziende.addAll(aDAO.doRetrieveAll());
+		
 		return aziende;
 	}
 	
-	public List<ImpiegatoBean> getImpiegati(){
+	public List<ImpiegatoBean> getImpiegati() throws SQLException{
 		ImpiegatoDAO iDAO = new ImpiegatoDAO();
 		List<ImpiegatoBean> impiegati = new ArrayList<ImpiegatoBean>();
-		try {
-			impiegati.addAll(iDAO.doRetrieveAll());
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	    impiegati.addAll(iDAO.doRetrieveAll());
+		
 		return impiegati;
 	}
 	
-	public List<TutorBean> getTutorAccademici(){
+	public List<TutorBean> getTutorAccademici() throws SQLException{
 		TutorDAO tDAO = new TutorDAO();
 		List<TutorBean> tutorAccademici = new ArrayList<TutorBean>();
-		try {
-			tutorAccademici.addAll(tDAO.doRetrieveAll());
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		tutorAccademici.addAll(tDAO.doRetrieveAll());
+		
 		return tutorAccademici;
 	}
 }

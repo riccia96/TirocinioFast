@@ -40,7 +40,7 @@ public class AziendaDAO extends AbstractDAO<AziendaBean>{
 		PreparedStatement preparedStatement = null;
 		ResultSet result = null;
 		
-		String querySQL = "INSERT INTO " + AziendaDAO.TABLE_NAME + " (nome, partitaIva, ceo, indirizzo, email, telefono, username, password, domanda" + 
+		String querySQL = "INSERT INTO " + AziendaDAO.TABLE_NAME + " (nome, partitaIva, ceo, indirizzo, email, telefono, username, password, domanda) " + 
 				"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		try{
@@ -59,7 +59,7 @@ public class AziendaDAO extends AbstractDAO<AziendaBean>{
 			preparedStatement.setString(9, azienda.getDomanda());
 			
 			preparedStatement.execute();
-			result = preparedStatement.getResultSet();
+			result = preparedStatement.getGeneratedKeys();
 			
 			if(result.next() && result != null){
 				return result.getInt(1);
