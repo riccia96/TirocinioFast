@@ -47,7 +47,8 @@
  <%}
  else { %>
  	<li><a href="index.jsp">Home</a>
- 	<li><a href="registrazione.jsp">Registrati</a>
+ 	<li><a href="registraAzienda.jsp">Registra azienda</a>
+ 	<li><a href="registraStudente.jsp">Registra studente</a>
  <%} %>
  
   </ul>
