@@ -18,7 +18,7 @@ pageEncoding="ISO-8859-1"%>
 
 <%@include file = "menu.jsp" %>
 
-<div style="margin-left:25%;height:500px;width: 700px;">
+<div style="margin-left:25%;width: 700px;">
 <form class="dialogo" id="login" action="GestioneUtente" method="POST">
   <div class="imgcontainer">
     <img src="img\avatar-default-icon.png" alt="Avatar" class="avatar">

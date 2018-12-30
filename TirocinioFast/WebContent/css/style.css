@@ -39,7 +39,6 @@ button {
   margin-bottom: 10px;
   border: none;
   cursor: pointer;
-  width: 15%;
 }
 
 button:hover {
@@ -102,14 +101,23 @@ li a:hover:not(.active) {
 	text-align: center;
 	margin-bottom: 10px;
 	margin-left: 10%;
+	margin-top: 40px;
 }
 
 .button {
 	position: relative;
-	right : 8%;
+	right : 5%;
 	top:81,5%;
-	width: 100px;
+	width: 25%;
 }
 
 .footer{background: #333; padding:30px;color:#fff; margin-top: 40px}
+
+
+th, td {
+  padding: 15px;
+  text-align: left;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;    
+}
 
