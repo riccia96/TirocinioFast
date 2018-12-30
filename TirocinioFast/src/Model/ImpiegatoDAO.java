@@ -94,14 +94,14 @@ public class ImpiegatoDAO extends AbstractDAO<ImpiegatoBean>{
 		ResultSet result = null;
 		ImpiegatoBean i = new ImpiegatoBean();
 		
-		String querySQL = "SELECT * FROM " + ImpiegatoDAO.TABLE_NAME + " WHERE matricola = ?";
+		String querySQL = "SELECT * FROM " + ImpiegatoDAO.TABLE_NAME + " WHERE username = ?";
 		
 		try {
 
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(querySQL);
 
-			preparedStatement.setString(1, impiegato.getMatricola());
+			preparedStatement.setString(1, impiegato.getUsername());
 
 			preparedStatement.execute();
 			result = preparedStatement.getResultSet();

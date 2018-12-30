@@ -96,14 +96,14 @@ public class AziendaDAO extends AbstractDAO<AziendaBean>{
 		ResultSet result = null;
 		AziendaBean a = new AziendaBean();
 		
-		String querySQL = "SELECT * FROM " + AziendaDAO.TABLE_NAME + " WHERE nome = ?";
+		String querySQL = "SELECT * FROM " + AziendaDAO.TABLE_NAME + " WHERE username = ?";
 		
 		try{
 			
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(querySQL);
 			
-			preparedStatement.setString(1, azienda.getNome());
+			preparedStatement.setString(1, azienda.getUsername());
 			
 			preparedStatement.execute();
 			result = preparedStatement.getResultSet();
