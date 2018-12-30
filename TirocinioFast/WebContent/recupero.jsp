@@ -29,7 +29,7 @@ pageEncoding="ISO-8859-1"%>
     <input type="text" placeholder="Film preferito" name="risposta" required>
     <br>
     <div class ="new">
-    <button name = "azioneUtente" value="recupero" id="RecuperoButton" class=" button" type="submit">Avanti</button> 
+    <button name = "azioneUtente" value="recuperaPassword" id="RecuperoButton" class=" button" type="submit">Avanti</button> 
     </div>
 </form>
   
