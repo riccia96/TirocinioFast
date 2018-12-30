@@ -76,7 +76,6 @@ public class ManagerUtente {
 		try {
 			studenti.addAll(sDAO.doRetrieveAll());
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return studenti;
@@ -88,7 +87,6 @@ public class ManagerUtente {
 		try {
 			aziende.addAll(aDAO.doRetrieveAll());
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return aziende;
@@ -100,7 +98,6 @@ public class ManagerUtente {
 		try {
 			impiegati.addAll(iDAO.doRetrieveAll());
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return impiegati;
@@ -112,7 +109,6 @@ public class ManagerUtente {
 		try {
 			tutorAccademici.addAll(tDAO.doRetrieveAll());
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return tutorAccademici;
