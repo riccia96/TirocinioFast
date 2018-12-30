@@ -261,21 +261,8 @@ public class GestioneUtente extends HttpServlet {
 		if(azioneUtente.equals("registrati")) {
 			String tipo = request.getParameter("tipo");
 			System.out.println(tipo);
-			/*
-			List<StudenteBean> studenti = new ArrayList<StudenteBean>();
-			List<AziendaBean> aziende = new ArrayList<AziendaBean>();
-			StudenteDAO s = new StudenteDAO();
-			AziendaDAO a = new AziendaDAO();
 
-			try {
-				studenti.addAll(s.doRetrieveAll());
-				aziende.addAll(a.doRetrieveAll());
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-
-
-			if(tipo.equals("radioS")){
+			if(tipo.equals("studente")){
 				String nome = request.getParameter("nome");
 				String cognome = request.getParameter("cognome");
 				String luogoNascita = request.getParameter("luogo");
@@ -291,23 +278,23 @@ public class GestioneUtente extends HttpServlet {
 				String conferma = request.getParameter("conferma");
 				String risposta = request.getParameter("domanda");
 
-				//controlli per la registrazione
+				
 
-				for(int i = 0; i < studenti.size(); i++){
-					if(studenti.get(i).getEmail().equals(email) ){
-						response.setContentType("text/html;charset=ISO-8859-1");
-						response.getWriter().write("codice fiscale gia' esistente");
-					}else if(studenti.get(i).getCodiceFiscale().equals(codiceFiscale)){
-						response.setContentType("text/html;charset=ISO-8859-1");
-						response.getWriter().write("matricola gia' esistente");
-					}else if(studenti.get(i).getUsername().equals(username)){
-						response.setContentType("text/html;charset=ISO-8859-1");
-						response.getWriter().write("username gia' esistente");
-					}else if(studenti.get(i).getMatricola().equals(matricola)){
-						response.setContentType("text/html;charset=ISO-8859-1");
-						response.getWriter().write("email gia' esistente");
-					}
+				
+				if(utente.getStudente(studente).getEmail().equals(email) ){
+					response.setContentType("text/html;charset=ISO-8859-1");
+					response.getWriter().write("codice fiscale gia' esistente");
+				}else if(utente.getStudente(studente).getCodiceFiscale().equals(codiceFiscale)){
+					response.setContentType("text/html;charset=ISO-8859-1");
+					response.getWriter().write("matricola gia' esistente");
+				}else if(utente.getStudente(studente).getUsername().equals(username)){
+					response.setContentType("text/html;charset=ISO-8859-1");
+					response.getWriter().write("username gia' esistente");
+				}else if(utente.getStudente(studente).getMatricola().equals(matricola)){
+					response.setContentType("text/html;charset=ISO-8859-1");
+					response.getWriter().write("email gia' esistente");
 				}
+				
 
 				if(password.equals(conferma)){
 					studente.setNome(nome);
@@ -326,6 +313,9 @@ public class GestioneUtente extends HttpServlet {
 
 					RequestDispatcher view = request.getRequestDispatcher("homeStudente");
 					view.forward(request, response);
+				}else {
+					response.setContentType("text/html;charset=ISO-8859-1");
+					response.getWriter().write("");
 				}
 			}else{
 				String nome = request.getParameter("nome");
@@ -339,7 +329,7 @@ public class GestioneUtente extends HttpServlet {
 				String conferma = request.getParameter("conferma");
 				String risposta = request.getParameter("domanda");
 
-				Controlli per la registrazione
+				
 
 				for(int i = 0; i < aziende.size(); i++){
 					if(aziende.get(i).getEmail().equals(email) ){
@@ -371,7 +361,7 @@ public class GestioneUtente extends HttpServlet {
 					view.forward(request, response);
 				}
 			}
-			*/
+			
 		}
 
 
