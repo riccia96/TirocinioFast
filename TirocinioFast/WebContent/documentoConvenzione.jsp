@@ -55,7 +55,8 @@
 </div>
 
 <script> 
-function download() { 
+function download() {
+	document.getElementById("downloadButton").style.display = "none";
 	window.print()
 } 
 </script> 
