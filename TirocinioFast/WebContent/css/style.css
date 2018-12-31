@@ -31,6 +31,18 @@ input[type=text], input[type=password] {
   box-sizing: border-box;
 }
 
+input[type=file], label {
+  width: 80%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  margin-left: 10%;
+  display: inline-block;
+}
+
+select {
+	margin-left: 30%;
+} 
+
 button {
   background-color: orange;
   color: white;
