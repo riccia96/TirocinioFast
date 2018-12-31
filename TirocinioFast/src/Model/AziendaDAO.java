@@ -40,8 +40,8 @@ public class AziendaDAO extends AbstractDAO<AziendaBean>{
 		PreparedStatement preparedStatement = null;
 		ResultSet result = null;
 		
-		String querySQL = "INSERT INTO " + AziendaDAO.TABLE_NAME + " (nome, partitaIva, ceo, indirizzo, email, telefono, username, password, domanda) " + 
-				"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String querySQL = "INSERT INTO " + AziendaDAO.TABLE_NAME + " (nome, partitaIva, ceo, indirizzo, email, telefono, username, password, domanda, descrizione, logo) " + 
+				"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		try{
 			
@@ -57,6 +57,8 @@ public class AziendaDAO extends AbstractDAO<AziendaBean>{
 			preparedStatement.setString(7, azienda.getUsername());
 			preparedStatement.setString(8, azienda.getPassword());
 			preparedStatement.setString(9, azienda.getDomanda());
+			preparedStatement.setString(10, azienda.getDescrizione());
+			preparedStatement.setString(11, azienda.getLogo());
 			
 			preparedStatement.execute();
 			result = preparedStatement.getGeneratedKeys();
@@ -119,6 +121,8 @@ public class AziendaDAO extends AbstractDAO<AziendaBean>{
 				a.setUsername(result.getString("username"));
 				a.setPassword(result.getString("password"));
 				a.setDomanda(result.getString("domanda"));
+				a.setDescrizione(result.getString("descrizione"));
+				a.setLogo(result.getString("logo"));
 								
 			}
 		} catch (SQLException e) {
@@ -168,7 +172,9 @@ public class AziendaDAO extends AbstractDAO<AziendaBean>{
 				a.setUsername(result.getString("username"));
 				a.setPassword(result.getString("password"));
 				a.setDomanda(result.getString("domanda"));
-								
+				a.setDescrizione(result.getString("descrizione"));
+				a.setLogo(result.getString("logo"));
+				
 				aziende.add(a);
 			}
 		} catch (SQLException e) {
@@ -195,7 +201,7 @@ public class AziendaDAO extends AbstractDAO<AziendaBean>{
 		PreparedStatement preparedStatement = null;
 		
 		String querySQL = "UPDATE " + AziendaDAO.TABLE_NAME + " SET CEO = ?, sede = ?, email = ?, "
-				+ "telefono = ?, username = ?, password = ?, domanda = ? WHERE username = ?";
+				+ "telefono = ?, username = ?, password = ?, domanda = ?, descrizione = ?, logo = ? WHERE username = ?";
 		
 		try {
 
@@ -208,8 +214,10 @@ public class AziendaDAO extends AbstractDAO<AziendaBean>{
 			preparedStatement.setString(4, azienda.getTelefono());
 			preparedStatement.setString(6, azienda.getPassword());
 			preparedStatement.setString(7, azienda.getDomanda());
+			preparedStatement.setString(8, azienda.getDescrizione());
+			preparedStatement.setString(9, azienda.getLogo());
 			
-			preparedStatement.setString(8, azienda.getUsername());
+			preparedStatement.setString(10, azienda.getUsername());
 
 			preparedStatement.execute();
 			return true;

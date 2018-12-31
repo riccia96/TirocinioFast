@@ -349,6 +349,8 @@ public class GestioneUtente extends HttpServlet {
 				azienda.setUsername(username);
 				azienda.setPassword(password);
 				azienda.setDomanda(risposta);
+				azienda.setDescrizione("");
+				azienda.setLogo("");
 				
 				aziende.addAll(utente.getAziende());
 				

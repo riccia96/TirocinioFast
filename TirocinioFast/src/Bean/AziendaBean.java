@@ -82,6 +82,21 @@ public class AziendaBean implements java.io.Serializable {
 		this.domanda = domanda;
 	}
 	
+	public String getDescrizione(){
+		return this.descrizione;
+	}
+	
+	public void setDescrizione(String descrizione){
+		this.descrizione = descrizione;
+	}
+	
+	public String getLogo(){
+		return this.logo;
+	}
+	
+	public void setLogo(String logo){
+		this.logo = logo;
+	}
 	/**toString*/
 	
 	@Override
@@ -94,7 +109,9 @@ public class AziendaBean implements java.io.Serializable {
 				"][Telefono: " + this.getTelefono() +
 				"][Username: " + this.getUsername() +
 				"][Password: " + this.getPassword() +
-				"][Risposta: " + this.getDomanda() + "]";
+				"][Risposta: " + this.getDomanda() + 
+				"][Descrizione: " + this.descrizione + 
+				"][Logo: "+ this.logo +"]";
 	}
 
 	/**Variabili di istanza*/
@@ -108,5 +125,7 @@ public class AziendaBean implements java.io.Serializable {
 	private String username;
 	private String password;
 	private String domanda;
+	private String descrizione;
+	private String logo;
 
 }
