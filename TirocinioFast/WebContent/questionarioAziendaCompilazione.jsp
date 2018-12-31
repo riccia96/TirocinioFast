@@ -26,36 +26,35 @@
 	<br>
 	<label>Relativamente al progetto di tirocinio:</label>
 	<br>
-    <label>La durata del tirocinio &egrave; stata adeguata agli obiettivi formativi</label><select name="prima"><option value="uno">1/insufficiente</option><option value="due">2</option><option value="tre">3</option><option value="quattro">4</option><option value="cinque">5/eccessiva</option></select>
+    <label>La durata del tirocinio &egrave; stata adeguata agli obiettivi formativi</label><select name="prima" style="margin-left: 25%;"><option value="uno">1/insufficiente</option><option value="due">2</option><option value="tre">3</option><option value="quattro">4</option><option value="cinque">5/eccessiva</option></select>
 	<br>
-    <label>Gli obiettivi formativi previsti sono stati raggiunti</label><select name="seconda"><option value="uno">1/per niente</option><option value="due">2</option><option value="tre">3</option><option value="quattro">4</option><option value="cinque">5/completamente</option></select>
+    <label>Gli obiettivi formativi previsti sono stati raggiunti</label><select name="seconda" style="margin-left: 25%;"><option value="uno">1/per niente</option><option value="due">2</option><option value="tre">3</option><option value="quattro">4</option><option value="cinque">5/completamente</option></select>
     <br>
-    <label>Il tirocinio formativo &egrave; utile all'Ente Ospitante</label><select name="terza"><option value="uno">1/per niente</option><option value="due">2</option><option value="tre">3</option><option value="quattro">4</option><option value="cinque">5/molto</option></select>
+    <label>Il tirocinio formativo &egrave; utile all'Ente Ospitante</label><select name="terza" style="margin-left: 25%;"><option value="uno">1/per niente</option><option value="due">2</option><option value="tre">3</option><option value="quattro">4</option><option value="cinque">5/molto</option></select>
     <br>
     <br>
     <label>Relativamente al tirocinante:</label>
     <br>
-    <label>Competenze informatiche possedute in ingresso</label><select name="quarta"><option value="uno">1/insufficiente</option><option value="due">2</option><option value="tre">3</option><option value="quattro">4</option><option value="cinque">5/ottime</option></select>
+    <label>Competenze informatiche possedute in ingresso</label><select name="quarta" style="margin-left: 25%;"><option value="uno">1/insufficiente</option><option value="due">2</option><option value="tre">3</option><option value="quattro">4</option><option value="cinque">5/ottime</option></select>
 	<br>
-    <label>Competenze acquisite al termine del tirocinio nella specifica disciplina</label><select name="sesta"><option value="uno">1/insufficiente</option><option value="due">2</option><option value="tre">3</option><option value="quattro">4</option><option value="cinque">5/ottime</option></select>
+    <label>Competenze acquisite al termine del tirocinio nella specifica disciplina</label><select name="quinta" style="margin-left: 25%;"><option value="uno">1/insufficiente</option><option value="due">2</option><option value="tre">3</option><option value="quattro">4</option><option value="cinque">5/ottime</option></select>
     <br>
-    <label>Motivazione e interesse</label><select name="settima"><option value="uno">1/insufficiente</option><option value="due">2</option><option value="tre">3</option><option value="quattro">4</option><option value="cinque">5/molto buono</option></select>
+    <label>Motivazione e interesse</label><select name="sesta" style="margin-left: 25%;"><option value="uno">1/insufficiente</option><option value="due">2</option><option value="tre">3</option><option value="quattro">4</option><option value="cinque">5/molto buono</option></select>
     <br>
-    <label>Soft skill (capacit&agrave; di relazionarsi, di comunicare, di lavorare in team ...)</label><select name="ottava"><option value="uno">1/per niente</option><option value="due">2</option><option value="tre">3</option><option value="quattro">4</option><option value="cinque">5/ottime</option></select>
+    <label>Soft skill (capacit&agrave; di relazionarsi, di comunicare, di lavorare in team ...)</label><select name="settima" style="margin-left: 25%;"><option value="uno">1/per niente</option><option value="due">2</option><option value="tre">3</option><option value="quattro">4</option><option value="cinque">5/ottime</option></select>
    	<br>
     <br>
     <label>Relativamente alle strutture universitarie addette alla gestione dei Tirocini</label>
     <br>
-    <label>Hanno fornito informazioni chiare ed esaustive</label><select name="nona"><option value="uno">1/per niente</option><option value="due">2</option><option value="tre">3</option><option value="quattro">4</option><option value="cinque">5/molto</option></select>
+    <label>Hanno fornito informazioni chiare ed esaustive</label><select name="ottava" style="margin-left: 25%;"><option value="uno" >1/per niente</option><option value="due">2</option><option value="tre">3</option><option value="quattro">4</option><option value="cinque">5/molto</option></select>
 	<br>
-    <label>Hanno fornito assistenza e disponibilità</label><select name="nona"><option value="uno">1/per niente</option><option value="due">2</option><option value="tre">3</option><option value="quattro">4</option><option value="cinque">5/molto</option></select>
+    <label>Hanno fornito assistenza e disponibilità</label><select name="nona" style="margin-left: 25%;"><option value="uno">1/per niente</option><option value="due">2</option><option value="tre">3</option><option value="quattro">4</option><option value="cinque">5/molto</option></select>
     <br>
-    <label>I servizi/informazioni fornite via Web sono esaustivi</label><select name="nona"><option value="uno">1/per niente</option><option value="due">2</option><option value="tre">3</option><option value="quattro">4</option><option value="cinque">5/molto</option></select>
+    <label>I servizi/informazioni fornite via Web sono esaustivi</label><select name="decima" style="margin-left: 25%;"><option value="uno">1/per niente</option><option value="due">2</option><option value="tre">3</option><option value="quattro">4</option><option value="cinque">5/molto</option></select>
     <br>
     <label>Eventuali osservazioni:</label>
     <br>
     <textarea style="margin-left: 13%" rows="4" cols="50"></textarea>
-    <br>
     <br>
     <div class ="new">
     <button name = "azioneUtente" value="questionarioAzienda" id="questionarioAziendaButton" class=" button" type="submit">Invia questionario</button> 
