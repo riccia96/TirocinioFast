@@ -29,7 +29,7 @@ pageEncoding="ISO-8859-1"%>
     <input type="password" placeholder="Conferma nuova password" name="conferma" required>
     <br>
     <div class ="new">
-    <button name = "azioneUtente" value="reimposta" id="ReimpostaButton" class=" button" type="submit">Avanti</button> 
+    <button name = "azioneUtente" value="impostaPassword" id="ReimpostaButton" class=" button" type="submit">Avanti</button> 
     </div>
 </form>
   

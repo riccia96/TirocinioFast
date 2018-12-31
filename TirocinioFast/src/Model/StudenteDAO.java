@@ -43,7 +43,7 @@ public class StudenteDAO extends AbstractDAO<StudenteBean>{
 
 		String querySQL = "INSERT INTO " + StudenteDAO.TABLE_NAME
 				+ " (nome, cognome, luogoNascita, dataNascita, "
-				+ "indirizzo, citta, codiceFiscale, matricola, telefono, email, username, password, domanda) "
+				+ "indirizzo, citta, codiceFiscale, matricola, email, telefono, username, password, domanda) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		try {
 
@@ -58,8 +58,8 @@ public class StudenteDAO extends AbstractDAO<StudenteBean>{
 			preparedStatement.setString(6, studente.getCitta());
 			preparedStatement.setString(7, studente.getCodiceFiscale());
 			preparedStatement.setString(8, studente.getMatricola());
-			preparedStatement.setString(9, studente.getTelefono());
-			preparedStatement.setString(10, studente.getEmail());
+			preparedStatement.setString(9, studente.getEmail());
+			preparedStatement.setString(10, studente.getTelefono());
 			preparedStatement.setString(11, studente.getUsername());
 			preparedStatement.setString(12, studente.getPassword());
 			preparedStatement.setString(13, studente.getDomanda());
@@ -123,11 +123,12 @@ public class StudenteDAO extends AbstractDAO<StudenteBean>{
 				s.setCognome(result.getString("cognome"));
 				s.setLuogoNascita(result.getString("luogoNascita"));
 				s.setDataNascita(result.getString("dataNascita"));
-				s.setIndirizzo(result.getString("citta"));
+				s.setIndirizzo(result.getString("indirizzo"));
+				s.setCitta(result.getString("citta"));
 				s.setCodiceFiscale(result.getString("codiceFiscale"));
 				s.setMatricola(result.getString("matricola"));
-				s.setTelefono(result.getString("telefono"));
 				s.setEmail(result.getString("email"));
+				s.setTelefono(result.getString("telefono"));
 				s.setUsername(result.getString("username"));
 				s.setPassword(result.getString("password"));
 				s.setDomanda(result.getString("domanda"));
@@ -177,11 +178,12 @@ public class StudenteDAO extends AbstractDAO<StudenteBean>{
 				s.setCognome(result.getString("cognome"));
 				s.setLuogoNascita(result.getString("luogoNascita"));
 				s.setDataNascita(result.getString("dataNascita"));
-				s.setIndirizzo(result.getString("citta"));
+				s.setIndirizzo(result.getString("indirizzo"));
+				s.setCitta(result.getString("citta"));
 				s.setCodiceFiscale(result.getString("codiceFiscale"));
 				s.setMatricola(result.getString("matricola"));
-				s.setTelefono(result.getString("telefono"));
 				s.setEmail(result.getString("email"));
+				s.setTelefono(result.getString("telefono"));
 				s.setUsername(result.getString("username"));
 				s.setPassword(result.getString("password"));
 				s.setDomanda(result.getString("domanda"));
@@ -216,7 +218,7 @@ public class StudenteDAO extends AbstractDAO<StudenteBean>{
 		PreparedStatement preparedStatement = null;
 
 		String querySQL = "UPDATE " + StudenteDAO.TABLE_NAME + " SET nome = ?, cognome = ?, luogoNascita = ?, dataNascita = ?,"
-				+ " indirizzo = ?, citta = ?, codiceFiscale = ?, telefono = ?, password = ?, domanda = ? WHERE username = ?";
+				+ " indirizzo = ?, citta = ?, telefono = ?, password = ?, domanda = ? WHERE username = ?";
 
 		try {
 
@@ -229,14 +231,11 @@ public class StudenteDAO extends AbstractDAO<StudenteBean>{
 			preparedStatement.setString(4, studente.getDataNascita());
 			preparedStatement.setString(5, studente.getIndirizzo());
 			preparedStatement.setString(6, studente.getCitta());
-			preparedStatement.setString(7, studente.getCodiceFiscale());
-			preparedStatement.setString(8, studente.getMatricola());
-			preparedStatement.setString(9, studente.getTelefono());
-			preparedStatement.setString(10, studente.getEmail());
-			preparedStatement.setString(11, studente.getPassword());
-			preparedStatement.setString(12, studente.getDomanda());
+			preparedStatement.setString(7, studente.getTelefono());
+			preparedStatement.setString(8, studente.getPassword());
+			preparedStatement.setString(9, studente.getDomanda());
 			
-			preparedStatement.setString(13, studente.getUsername());
+			preparedStatement.setString(10, studente.getUsername());
 
 			preparedStatement.execute();
 			return true;
