@@ -5,7 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Bean.AziendaBean;
+import Bean.TirocinioBean;
 import Model.AziendaDAO;
+
+import Model.TirocinioDAO;
 
 public class ManagerTirocinio {
 	
@@ -16,7 +19,17 @@ public class ManagerTirocinio {
 		return lAzienda;
 	}
 	
+	public int salvaTirocinio(TirocinioBean tirocinio) throws SQLException{
+		TirocinioDAO tDAO = new TirocinioDAO();
+		return tDAO.doSave(tirocinio);
+	}
 	
+	public List<TirocinioBean> richiesteTirocinio()throws SQLException {
+		List<TirocinioBean> lTirocinio = new ArrayList<TirocinioBean>();
+		TirocinioDAO tirocini = new TirocinioDAO();
+		lTirocinio.addAll(tirocini.doRetrieveAll());
+		return lTirocinio;
+	}
 	
 	/*
 
