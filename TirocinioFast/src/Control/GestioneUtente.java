@@ -72,6 +72,7 @@ public class GestioneUtente extends HttpServlet {
 							}else {
 								if(utente.getImpiegato(impiegato).getPassword().equals(password)) {
 									request.getSession().setAttribute("utenteSessione", utente.getImpiegato(impiegato));
+									request.getSession().setAttribute("tipoUtente", "impiegato");
 
 									RequestDispatcher view = request.getRequestDispatcher("homeImpiegato.jsp");
 									view.forward(request, response);
@@ -83,7 +84,8 @@ public class GestioneUtente extends HttpServlet {
 						}else {
 							if(utente.getTutor(tutor).getPassword().equals(password)) {
 								request.getSession().setAttribute("utenteSessione", utente.getTutor(tutor));
-
+								request.getSession().setAttribute("tipoUtente", "tutor");
+								
 								RequestDispatcher view = request.getRequestDispatcher("homeTutor.jsp");
 								view.forward(request, response);
 							}else {
@@ -94,7 +96,8 @@ public class GestioneUtente extends HttpServlet {
 					}else {
 						if(utente.getAzienda(azienda).getPassword().equals(password)) {
 							request.getSession().setAttribute("utenteSessione", utente.getAzienda(azienda));
-
+							request.getSession().setAttribute("tipoUtente", "azienda");
+							
 							RequestDispatcher view = request.getRequestDispatcher("homeAzienda.jsp");
 							view.forward(request, response);
 						}else {
@@ -105,6 +108,8 @@ public class GestioneUtente extends HttpServlet {
 				}else {
 					if(utente.getStudente(studente).getPassword().equals(password)) {
 						request.getSession().setAttribute("utenteSessione", utente.getStudente(studente));
+						request.getSession().setAttribute("tipoUtente", "azienda");
+						
 						RequestDispatcher view = request.getRequestDispatcher("homeStudente.jsp");
 						view.forward(request, response);
 					}else {
