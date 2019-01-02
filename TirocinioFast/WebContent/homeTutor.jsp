@@ -29,34 +29,6 @@
     <td>Matricola</td>
     <td>MATRICOLA</td>
   </tr>
-  <tr>
-    <td>Luogo nascita</td>
-    <td>LUOGO</td>
-  </tr>
-  <tr>
-    <td>Data nascita</td>
-    <td>DATA</td>
-  </tr>
-  <tr>
-    <td>Indirizzo di residenza</td>
-    <td>INDIRIZZO</td>
-  </tr>
-  <tr>
-    <td>Citt&agrave; di residenza</td>
-    <td>CITTA</td>
-  </tr>  
-  <tr>
-    <td>Codice Fiscale</td>
-    <td>CF</td>
-  </tr>
-  <tr>
-    <td>E-mail</td>
-    <td>EMAIL</td>
-  </tr>
-  <tr>
-    <td>Telefono</td>
-    <td>TELEFONO</td>
-  </tr>
 </table>
 
 <%@include file = "footer.jsp" %>

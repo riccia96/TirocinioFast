@@ -12,5 +12,6 @@
 <div style="text-align: center; margin-bottom: 10px; margin-left: 10%; margin-top: 40px;">
     <button name = "azioneUtente" value="accettaAttivita" id="accettaAttivitaButton" class=" button" type="submit" style="background-color: orange;color: white; padding: 14px 20px; margin: 8px 0; margin-bottom: 10px; border: none; cursor: pointer; color: black;">Conferma fine attività di tirocinio</button> 
 </div>
+
 </body>
 </html>

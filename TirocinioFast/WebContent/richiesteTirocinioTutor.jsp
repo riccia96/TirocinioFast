@@ -9,30 +9,31 @@
 <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 <body>
- 
+
 <%@include file = "navbar.jsp" %>
 
 <%@include file = "menu.jsp" %>
 
 <table style="margin-left: 25%; width: 1000px;">
   <tr>
-    <td><a href="mostraPDF.jsp">RichiestaNxxxxxx</a></td>
+    <th>Richiesta di inizio Attivit&agrave; di Tirocinio</th>
     <th>Studente</th>
-    <th>Tutor</th>
+    <th>Azienda</th>
     <th></th>
   </tr>
   <tr>
-    <td>Numero 200</td>
+    <td><a href="mostraPDF.jsp">RichiestaNxxxxxx</a></td>
     <td>Mario De Cicco</td>
-    <td>Prof.ssa Filomena Ferrucci</td>
+    <td>NAMIRIAL SPA</td>
     <td>
     	<form>
-  			Seleziona PDF della richiesta di tirocinio associata firmata<br>
-  			<input type="file" name="convenzioneFirmataAzienda"><br>
+  			Seleziona PDF richista inizio attivit&agrave; di tirocinio firmata<br>
+  			<input type="file" name="attivitaTirocinioTutor"><br>
   			<input type="submit">
 		</form>
+</td>
   </tr>
-</table>
+  </table>
 
 <%@include file = "footer.jsp" %>
 
