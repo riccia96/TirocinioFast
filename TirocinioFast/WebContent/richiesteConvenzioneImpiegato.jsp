@@ -16,8 +16,8 @@
 
 <table style="margin-left: 25%; width: 1000px;">
   <tr>
-    <th>Richieste di Convenzione</th>
-    <th>Azienda</th>
+    <th style="text-align: center;">Richieste di Convenzione</th>
+    <th style="text-align: center;">Azienda</th>
     <th></th>
   </tr>
   <tr>
@@ -26,7 +26,7 @@
     <td>
     	<form>
   			Seleziona PDF richista di convenzione firmata<br>
-  			<input type="file" name="attivitaTirocinio"><br>
+  			<input type="file" name="attivitaTirocinio" accept=".pdf"><br>
   			<input type="submit">
 		</form>
 </td>

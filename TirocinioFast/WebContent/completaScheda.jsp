@@ -21,7 +21,7 @@
   </div>
 
 	<label>Carica l'immagine del logo dell'azienda</label><br>
-    <input type="file" placeholder="Logo aziendale" name="luogo" required>
+    <input type="file" name="logo" accept=".jpg,.jpeg,png" required>
 	<br>
 	<label>Descrizione delle attività su cui saranno impiegati i tirocinanti</label><br>
     <textarea style="margin-left: 13%" rows="4" cols="50" name="attivita"></textarea>

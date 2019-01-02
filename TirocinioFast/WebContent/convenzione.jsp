@@ -33,7 +33,7 @@
     <input type="text" placeholder="E-mail del referente" name="email" required>
 	<br>
 	<label>Descrizione delle attivit&agrave; svolte</label>
-    <textarea name="descrizione"></textarea>
+    <textarea style= "margin-left: 10%" rows="4" cols="50" name="descrizione"></textarea>
     <br>
     <input type="text" placeholder="Eventuale docente di riferimento" name="docente">
     <br>

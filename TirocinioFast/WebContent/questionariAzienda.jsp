@@ -16,12 +16,11 @@
 
 <table style="margin-left: 25%; width: 1000px;">
   <tr>
-    <th>Tirocinio N.XXXXX</th>
-    <th>Azienda</th>
-    <th>Tutor</th>
-    <th>Titolo tirocinio</th>
+    <th style="text-align: center">Tirocinio N.XXXXX</th>
+    <th style="text-align: center">Azienda</th>
+    <th style="text-align: center">Tutor</th>
+    <th style="text-align: center">Titolo tirocinio</th>
     <th></th>
-    <th>STATUS</th>
   </tr>
   <tr>
     <td>Numero 200</td>
@@ -31,11 +30,10 @@
     <td>
     	<form>
   			Seleziona PDF del questionario relativo a questo tirocinio firmato<br>
-  			<input type="file" name="questionarioFirmatoStudente"><br>
+  			<input type="file" name="questionarioFirmatoStudente" accept=".pdf"><br>
   			<input type="submit">
 		</form>
 		</td>
-	<<td>PALLINO</td>
   </tr>
 </table>
 

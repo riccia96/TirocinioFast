@@ -16,21 +16,15 @@
 
 <table style="margin-left: 25%; width: 1000px;">
   <tr>
-    <td><a href="mostraPDF.jsp">RichiestaNxxxxxx</a></td>
-    <th>Studente</th>
-    <th>Tutor</th>
-    <th></th>
+    <th style="text-align: center;">Richiesta di inizio Attivit&agrave; di Tirocinio</th>
+    <th style="text-align: center;">Studente</th>
+    <th style="text-align: center;">Tutor</th>
   </tr>
   <tr>
-    <td>Numero 200</td>
+    <td><a href="compilazioneCampiAzienda.jsp">RichiestaNxxxxxx</a></td>
     <td>Mario De Cicco</td>
     <td>Prof.ssa Filomena Ferrucci</td>
     <td>
-    	<form>
-  			Seleziona PDF della richiesta di tirocinio associata firmata<br>
-  			<input type="file" name="convenzioneFirmataAzienda"><br>
-  			<input type="submit">
-		</form>
   </tr>
 </table>
 

@@ -24,13 +24,12 @@
 	<br>
     <input style="width: 80%; padding: 12px 20px; margin: 8px 0; margin-left: 10%; display: inline-block; border: 1px solid #ccc; box-sizing: border-box;" type="number" placeholder="CFU tirocinio" name="cfu" required>
     <br>
-    <label>Tutor accademico
-    <select name="tutor" style="margin-left: 25%;"><option value="nomeTutor">Prof.ssa Ferrucci Filomena</option></select></label>
+    <p class="question" style="margin-top: 2%">Tutor accademico</p>
+    <select class ="scelte" name="tutor"><option value="nomeTutor">Prof.ssa Ferrucci Filomena</option></select></label>
     <br>
-    <label>Handicap?
-    <input style="margin-left: 40%" type="radio" name="tutor" value="si">SI
+    <p class="question" style="margin-top: 2%">Handicap?</p>
+    <input style="margin-left: 10%" type="radio" name="tutor" value="si">SI
     <input type="radio" name="tutor" value="no" checked>NO
-    </label>
     <br>
     <div class ="new">
     <button name = "azioneUtente" value="richiestaTirocinio" id="richiestaTirocinioButton" class=" button" type="submit">Richiedi inizio attivit&agrave; tirocinio</button> 

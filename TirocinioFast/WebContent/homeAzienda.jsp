@@ -14,7 +14,7 @@
 
 <%@include file = "menu.jsp" %>
 
-<a href="homeAzienda.jsp" style="margin-left:30%"><img alt="Logo" src="img\timthumb.png" width="500px" height="300px"></a>
+<a href="homeAzienda.jsp" style="margin-left:35%"><img alt="Logo" src="img\timthumb.png" width="500px" height="300px"></a>
 
 <table style="margin-left:30%; width: 700px;">
   <tr>

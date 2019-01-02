@@ -16,18 +16,16 @@
 
 <table style="margin-left: 25%; width: 1000px;">
   <tr>
-    <th>Registro ore relativo all'attivit&agrave; di Tirocinio</th>
-    <th>Azienda</th>
-    <th>Tutor</th>
-    <th>Status</th>
+    <th style="text-align: center">Registro ore relativo all'Attivit&agrave; di Tirocinio (DOWNLOAD SOLO QUANDO RICHIESTA ACCETTATA)</th>
+    <th style="text-align: center">Azienda</th>
+    <th style="text-align: center">Tutor</th>
     <th></th>
   </tr>
   <tr>
     <td><a href="documentoRegistroOre.jsp">Attivit&agrave; di Tirocinio N.xxxxxxxx</a></td>
     <td>NAMIRIAL</td>
     <td>Prof.ssa Filomena Ferrucci</td>
-    <td>PALLINO</td>
-    <td>UPLOAD QUANDO STATUS VERDE</td>
+    <td>UPLOAD DOPO DOWNLOAD</td>
   </tr>
   </table>
 

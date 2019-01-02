@@ -14,12 +14,72 @@
 
 <%@include file = "menu.jsp" %>
 
-<table style="margin-left: 25%; width: 1000px;">
+<table style="margin-left: 25%; width: 1000px; height: 80%;">
   <tr>
-    <th>Attivit&agrave; di Tirocinio</th>
-    <th>Studente</th>
-    <th>Azienda</th>
-    <th>Tutor</th>
+    <th style="text-align: center">Attivit&agrave; di Tirocinio</th>
+    <th style="text-align: center">Studente</th>
+    <th style="text-align: center">Tutor</th>
+    <th style="text-align: center">Azienda</th>
+  </tr>
+  <tr>
+    <td><a href="mostraPDFConferma.jsp">RichiestaNxxxxxx</a></td>
+    <td>Mario De Cicco</td>
+    <td>Prof.ssa Filomena Ferrucci </td>
+    <td>NAMIRIAL SPA</td>
+  </tr>
+  <tr>
+    <td><a href="mostraPDFConferma.jsp">RichiestaNxxxxxx</a></td>
+    <td>Mario De Cicco</td>
+    <td>Prof.ssa Filomena Ferrucci </td>
+    <td>NAMIRIAL SPA</td>
+  </tr>
+  <tr>
+    <td><a href="mostraPDFConferma.jsp">RichiestaNxxxxxx</a></td>
+    <td>Mario De Cicco</td>
+    <td>Prof.ssa Filomena Ferrucci </td>
+    <td>NAMIRIAL SPA</td>
+  </tr>
+  <tr>
+    <td><a href="mostraPDFConferma.jsp">RichiestaNxxxxxx</a></td>
+    <td>Mario De Cicco</td>
+    <td>Prof.ssa Filomena Ferrucci </td>
+    <td>NAMIRIAL SPA</td>
+  </tr>
+  <tr>
+    <td><a href="mostraPDFConferma.jsp">RichiestaNxxxxxx</a></td>
+    <td>Mario De Cicco</td>
+    <td>Prof.ssa Filomena Ferrucci </td>
+    <td>NAMIRIAL SPA</td>
+  </tr>
+  <tr>
+    <td><a href="mostraPDFConferma.jsp">RichiestaNxxxxxx</a></td>
+    <td>Mario De Cicco</td>
+    <td>Prof.ssa Filomena Ferrucci </td>
+    <td>NAMIRIAL SPA</td>
+  </tr>
+  <tr>
+    <td><a href="mostraPDFConferma.jsp">RichiestaNxxxxxx</a></td>
+    <td>Mario De Cicco</td>
+    <td>Prof.ssa Filomena Ferrucci </td>
+    <td>NAMIRIAL SPA</td>
+  </tr>
+  <tr>
+    <td><a href="mostraPDFConferma.jsp">RichiestaNxxxxxx</a></td>
+    <td>Mario De Cicco</td>
+    <td>Prof.ssa Filomena Ferrucci </td>
+    <td>NAMIRIAL SPA</td>
+  </tr>
+  <tr>
+    <td><a href="mostraPDFConferma.jsp">RichiestaNxxxxxx</a></td>
+    <td>Mario De Cicco</td>
+    <td>Prof.ssa Filomena Ferrucci </td>
+    <td>NAMIRIAL SPA</td>
+  </tr>
+  <tr>
+    <td><a href="mostraPDFConferma.jsp">RichiestaNxxxxxx</a></td>
+    <td>Mario De Cicco</td>
+    <td>Prof.ssa Filomena Ferrucci </td>
+    <td>NAMIRIAL SPA</td>
   </tr>
   <tr>
     <td><a href="mostraPDFConferma.jsp">RichiestaNxxxxxx</a></td>

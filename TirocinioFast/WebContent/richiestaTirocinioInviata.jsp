@@ -16,10 +16,10 @@
 
 <table style="margin-left: 25%; width: 1000px;">
   <tr>
-    <th>Richiesta di Inizio Attivit&agrave; di Tirocinio</th>
-    <th>Azienda</th>
-    <th>Tutor</th>
-    <th>Status</th>
+    <th style="text-align: center;">Richiesta di Inizio Attivit&agrave; di Tirocinio</th>
+    <th style="text-align: center;">Azienda</th>
+    <th style="text-align: center;">Tutor</th>
+    <th style="text-align: center;">Status</th>
     <th></th>
   </tr>
   <tr>

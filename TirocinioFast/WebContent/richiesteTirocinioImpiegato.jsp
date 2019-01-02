@@ -16,10 +16,10 @@
 
 <table style="margin-left: 25%; width: 1000px;">
   <tr>
-    <th>Richieste di inizio Attivit&agrave; di Tirocinio</th>
-    <th>Studente</th>
-    <th>Azienda</th>
-    <th>Tutor</th>
+    <th style="text-align: center;">Richieste di inizio Attivit&agrave; di Tirocinio</th>
+    <th style="text-align: center;">Studente</th>
+    <th style="text-align: center;">Azienda</th>
+    <th style="text-align: center;">Tutor</th>
     <th></th>
   </tr>
   <tr>
@@ -30,7 +30,7 @@
     <td>
     	<form>
   			Seleziona PDF richista inizio attivit&agrave; di tirocinio firmata<br>
-  			<input type="file" name="attivitaTirocinio"><br>
+  			<input type="file" name="attivitaTirocinio" accept=".pdf"><br>
   			<input type="submit">
 		</form>
 </td>

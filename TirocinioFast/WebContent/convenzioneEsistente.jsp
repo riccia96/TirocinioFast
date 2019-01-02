@@ -16,8 +16,8 @@
 
 <table style="margin-left: 25%; width: 1000px;">
   <tr>
-    <th>Richiesta convenzione</th>
-    <th>Status</th>
+    <th style="text-align: center">Richiesta convenzione</th>
+    <th style="text-align: center">Status</th>
     <th></th>
   </tr>
   <tr>
@@ -27,7 +27,7 @@
     	<form>
   			Seleziona PDF convenzione firmato con gli allegati richiesti<br>
   			(Convenzione + visura camerale + documento di riconoscimento del rappresentante legale)<br>
-  			<input type="file" name="convenzione"><br>
+  			<input type="file" name="convenzione" accept=".pdf" requider><br>
   			<input type="submit">
 		</form>
 </td>
