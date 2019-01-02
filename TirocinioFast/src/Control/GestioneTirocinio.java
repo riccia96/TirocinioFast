@@ -115,7 +115,7 @@ public class GestioneTirocinio extends HttpServlet {
 							}
 
 							request.getSession().setAttribute("richieste", richieste);
-							
+
 							if(richieste.equals(null)) {
 								response.setContentType("text/html;charset=ISO-8859-1");
 								response.getWriter().write("nessuna richiesta");
@@ -133,7 +133,7 @@ public class GestioneTirocinio extends HttpServlet {
 							}
 
 							request.getSession().setAttribute("richieste", richieste);
-							
+
 							if(richieste.equals(null)) {
 								response.setContentType("text/html;charset=ISO-8859-1");
 								response.getWriter().write("nessuna richiesta");
@@ -152,7 +152,7 @@ public class GestioneTirocinio extends HttpServlet {
 						}
 
 						request.getSession().setAttribute("richieste", richieste);
-						
+
 						if(richieste.equals(null)) {
 							response.setContentType("text/html;charset=ISO-8859-1");
 							response.getWriter().write("nessuna richiesta");
@@ -171,7 +171,7 @@ public class GestioneTirocinio extends HttpServlet {
 					}
 
 					request.getSession().setAttribute("richieste", richieste);
-					
+
 					if(richieste.equals(null)) {
 						response.setContentType("text/html;charset=ISO-8859-1");
 						response.getWriter().write("nessuna richiesta");
@@ -180,7 +180,7 @@ public class GestioneTirocinio extends HttpServlet {
 					RequestDispatcher view = request.getRequestDispatcher("elencoRichiesteTirocinio.jsp");
 					view.forward(request, response);
 				}
-				
+
 
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -197,7 +197,7 @@ public class GestioneTirocinio extends HttpServlet {
 			//dispatcher a mostra pdf , da chiedere a mario
 
 		}
-
+		//nome
 		if(azioneTirocinio.equals("AT")) {
 			try {
 				azienda = (AziendaBean) request.getSession().getAttribute("utenteSessione");
@@ -213,7 +213,7 @@ public class GestioneTirocinio extends HttpServlet {
 				tirocinio.setFacilitazioni(facilitazioni);
 				//salvataggio database do update
 				//url 
-				
+
 
 			} catch (SQLException e) {
 
@@ -225,7 +225,7 @@ public class GestioneTirocinio extends HttpServlet {
 		if(azioneTirocinio.equals("inoltroAT")) {
 
 		}
-		
+
 		if(azioneTirocinio.equals("inoltroTS")) {
 
 		}
