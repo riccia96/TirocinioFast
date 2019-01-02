@@ -108,7 +108,7 @@ public class GestioneUtente extends HttpServlet {
 				}else {
 					if(utente.getStudente(studente).getPassword().equals(password)) {
 						request.getSession().setAttribute("utenteSessione", utente.getStudente(studente));
-						request.getSession().setAttribute("tipoUtente", "azienda");
+						request.getSession().setAttribute("tipoUtente", "studente");
 						
 						RequestDispatcher view = request.getRequestDispatcher("homeStudente.jsp");
 						view.forward(request, response);
