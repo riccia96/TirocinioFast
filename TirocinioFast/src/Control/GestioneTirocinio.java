@@ -117,7 +117,26 @@ public class GestioneTirocinio extends HttpServlet {
 
 		}
 
+		if(azioneTirocinio.equals(""))
+		
 		if(azioneTirocinio.equals("inoltroAT")) {
+			try {
+				azienda = (AziendaBean) request.getSession().getAttribute("utenteSessione");
+				String sede = request.getParameter("sede");
+				String tempi = request.getParameter("tempi");
+				String periodo = request.getParameter("periodo");
+				String obiettivi = request.getParameter("obiettivi");
+				String facilitazioni = request.getParameter("facilitazioni");
+				tirocinio.setSedeTirocinio(sede);
+				tirocinio.setAccessoLocali(tempi);
+				tirocinio.setPeriodoTirocinio(periodo);
+				tirocinio.setObiettivoTirocinio(obiettivi);
+				tirocinio.setFacilitazioni(facilitazioni);
+				
+			} catch (SQLException e) {
+
+				e.printStackTrace();
+			}
 
 		}
 
