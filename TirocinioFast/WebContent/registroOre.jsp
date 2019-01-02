@@ -9,35 +9,27 @@
 <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 <body>
- 
+
 <%@include file = "navbar.jsp" %>
 
 <%@include file = "menu.jsp" %>
 
 <table style="margin-left: 25%; width: 1000px;">
   <tr>
-    <th>Tirocinio N.XXXXX</th>
+    <th>Registro ore relativo all'attivit&agrave; di Tirocinio</th>
     <th>Azienda</th>
     <th>Tutor</th>
-    <th>Titolo tirocinio</th>
+    <th>Status</th>
     <th></th>
-    <th>STATUS</th>
   </tr>
   <tr>
-    <td>Numero 200</td>
-    <td>Namirial SPA</td>
+    <td><a href="documentoRegistroOre.jsp">Attivit&agrave; di Tirocinio N.xxxxxxxx</a></td>
+    <td>NAMIRIAL</td>
     <td>Prof.ssa Filomena Ferrucci</td>
-    <td>Studio i media server</td>
-    <td>
-    	<form>
-  			Seleziona PDF del questionario relativo a questo tirocinio firmato<br>
-  			<input type="file" name="questionarioFirmatoStudente"><br>
-  			<input type="submit">
-		</form>
-		</td>
-	<<td>PALLINO</td>
+    <td>PALLINO</td>
+    <td>UPLOAD QUANDO STATUS VERDE</td>
   </tr>
-</table>
+  </table>
 
 <%@include file = "footer.jsp" %>
 

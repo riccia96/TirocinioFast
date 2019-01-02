@@ -17,7 +17,7 @@
 <table style="margin-left: 25%; width: 1000px;">
   <tr>
     <th>Tirocinio N.XXXXX</th>
-    <th>Azienda</th>
+    <th>Studente</th>
     <th>Tutor</th>
     <th>Titolo tirocinio</th>
     <th></th>
@@ -25,13 +25,13 @@
   </tr>
   <tr>
     <td>Numero 200</td>
-    <td>Namirial SPA</td>
+    <td>Mario De Cicco</td>
     <td>Prof.ssa Filomena Ferrucci</td>
     <td>Studio i media server</td>
     <td>
     	<form>
   			Seleziona PDF del questionario relativo a questo tirocinio firmato<br>
-  			<input type="file" name="questionarioFirmatoStudente"><br>
+  			<input type="file" name="questionarioFirmatoAzienda"><br>
   			<input type="submit">
 		</form>
 		</td>
