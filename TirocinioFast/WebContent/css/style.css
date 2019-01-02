@@ -147,3 +147,13 @@ th, td {
   font-size: 20px; 
   border: 1px solid orange;  
 }
+
+.cards{max-width: 1200px; margin: 40px auto;}
+.card{width: 30%; margin:0 1.5%; background: #fff;float:left;}
+.card__image{width:100%; height: auto;}
+.card__copy{padding:5px 20px;}
+.card__copy h3{margin-bottom:0}
+
+.contenitore{
+	margin-left: 30%;
+}
