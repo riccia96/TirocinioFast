@@ -36,7 +36,7 @@ public class GestioneTirocinio extends HttpServlet {
 	TirocinioBean tirocinio = new TirocinioBean();
 	List<TirocinioBean> tirocini = new ArrayList<TirocinioBean>();
 	List<ConvenzioneBean> convenzioni = new ArrayList<ConvenzioneBean>();
-	
+
 	ManagerUtente utente = new ManagerUtente();
 	ManagerTirocinio richiesta = new ManagerTirocinio();
 	ManagerDocumento documento = new ManagerDocumento();
@@ -97,95 +97,123 @@ public class GestioneTirocinio extends HttpServlet {
 			}
 		}
 
-		if(azioneTirocinio.equals("richiesteAzienda")) {
-			try {
-				azienda = (AziendaBean) request.getSession().getAttribute("utenteSessione");
 
-				tirocini.addAll(richiesta.richiesteTirocinio());
-				List<TirocinioBean> richieste = new ArrayList<TirocinioBean>();
-				for(TirocinioBean t : tirocini) {
-					if(t.getAzienda().equals(azienda.getUsername())) {
-						richieste.add(t);
-					}
-				}
 
-				request.getSession().setAttribute("richieste", richieste);
-
-				RequestDispatcher view = request.getRequestDispatcher("richiesteTirocinioA.jsp");
-				view.forward(request, response);
-
-			} catch (SQLException e) {
-
-				e.printStackTrace();
-			}
-
-		}
-		
 		if(azioneTirocinio.equals("elencoRichieste")) {
 			try {
 				tirocini.addAll(documento.richiesteTirocinio());
-				
+				List<TirocinioBean> richieste = new ArrayList<TirocinioBean>();
+
 				if(!(request.getSession().getAttribute("tipoUtente") == "studente")) {
 					if(!(request.getSession().getAttribute("tipoUtente") == "azienda")) {
 						if(!(request.getSession().getAttribute("tipoUtente") == "tutor")) {
+
+							for(TirocinioBean t : tirocini) {
+								if(t.isConvalidaAzienda() && t.isConvalidaTutor() && t.isConvalidaStudente()) {
+									richieste.add(t);
+								}
+							}
+
+							request.getSession().setAttribute("richieste", richieste);
 							
-							
-						
-							RequestDispatcher view = request.getRequestDispatcher("index.jsp");
+							if(richieste.equals(null)) {
+								response.setContentType("text/html;charset=ISO-8859-1");
+								response.getWriter().write("nessuna richiesta");
+							}
+
+							RequestDispatcher view = request.getRequestDispatcher("elencoRichiesteTirocinio.jsp");
 							view.forward(request, response);
 						} else {
 							tutor = (TutorBean) request.getSession().getAttribute("utenteSessione");
+
+							for(TirocinioBean t : tirocini) {
+								if(t.isConvalidaAzienda() && t.getTutorAccademico().equals(tutor.getUsername())) {
+									richieste.add(t);
+								}
+							}
+
+							request.getSession().setAttribute("richieste", richieste);
 							
-							RequestDispatcher view = request.getRequestDispatcher("index.jsp");
+							if(richieste.equals(null)) {
+								response.setContentType("text/html;charset=ISO-8859-1");
+								response.getWriter().write("nessuna richiesta");
+							}
+
+							RequestDispatcher view = request.getRequestDispatcher("elencoRichiesteTirocinio.jsp");
 							view.forward(request, response);
 						}
 					} else {
 						azienda = (AziendaBean) request.getSession().getAttribute("utenteSessione");
-						
 
-						RequestDispatcher view = request.getRequestDispatcher("index.jsp");
+						for(TirocinioBean t : tirocini) {
+							if(t.getAzienda().equals(azienda.getUsername())) {
+								richieste.add(t);
+							}
+						}
+
+						request.getSession().setAttribute("richieste", richieste);
+						
+						if(richieste.equals(null)) {
+							response.setContentType("text/html;charset=ISO-8859-1");
+							response.getWriter().write("nessuna richiesta");
+						}
+
+						RequestDispatcher view = request.getRequestDispatcher("elencoRichiesteTirocinio.jsp");
 						view.forward(request, response);
 					}
 				} else {
 					studente = (StudenteBean) request.getSession().getAttribute("utenteSessione");
-					
 
-					RequestDispatcher view = request.getRequestDispatcher("index.jsp");
+					for(TirocinioBean t : tirocini) {
+						if(t.getStudente().equals(studente.getUsername())) {
+							richieste.add(t);
+						}
+					}
+
+					request.getSession().setAttribute("richieste", richieste);
+					
+					if(richieste.equals(null)) {
+						response.setContentType("text/html;charset=ISO-8859-1");
+						response.getWriter().write("nessuna richiesta");
+					}
+
+					RequestDispatcher view = request.getRequestDispatcher("elencoRichiesteTirocinio.jsp");
 					view.forward(request, response);
 				}
 				
+
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			
+
 		}
 
 		if(azioneTirocinio.equals("richiestaSelezionata")) {
-			
-			
-			
+
+
+
 		}
 
-			if(azioneTirocinio.equals("inoltroAT")) {
-				try {
-					azienda = (AziendaBean) request.getSession().getAttribute("utenteSessione");
-					String sede = request.getParameter("sede");
-					String tempi = request.getParameter("tempi");
-					String periodo = request.getParameter("periodo");
-					String obiettivi = request.getParameter("obiettivi");
-					String facilitazioni = request.getParameter("facilitazioni");
-					tirocinio.setSedeTirocinio(sede);
-					tirocinio.setAccessoLocali(tempi);
-					tirocinio.setPeriodoTirocinio(periodo);
-					tirocinio.setObiettivoTirocinio(obiettivi);
-					tirocinio.setFacilitazioni(facilitazioni);
+		if(azioneTirocinio.equals("inoltroAT")) {
+			try {
+				azienda = (AziendaBean) request.getSession().getAttribute("utenteSessione");
+				String sede = request.getParameter("sede");
+				String tempi = request.getParameter("tempi");
+				String periodo = request.getParameter("periodo");
+				String obiettivi = request.getParameter("obiettivi");
+				String facilitazioni = request.getParameter("facilitazioni");
+				tirocinio.setSedeTirocinio(sede);
+				tirocinio.setAccessoLocali(tempi);
+				tirocinio.setPeriodoTirocinio(periodo);
+				tirocinio.setObiettivoTirocinio(obiettivi);
+				tirocinio.setFacilitazioni(facilitazioni);
 
-				} catch (SQLException e) {
+			} catch (SQLException e) {
 
-					e.printStackTrace();
-				}
-
+				e.printStackTrace();
 			}
+
+		}
 
 		if(azioneTirocinio.equals("inoltroTS")) {
 
@@ -207,6 +235,7 @@ public class GestioneTirocinio extends HttpServlet {
 						}
 					}
 				}
+
 				if(aziendeConv.equals(null)) {
 					response.setContentType("text/html;charset=ISO-8859-1");
 					response.getWriter().write("nessuna azienda convenzionata");
