@@ -9,26 +9,14 @@
 <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 <body>
- 
-<%@include file = "navbar.jsp" %>
 
-<%@include file = "menu.jsp" %>
-
-<table style="margin-left: 25%; width: 1000px;">
-  <tr>
-    <th style="text-align: center;">Richiesta di inizio Attivit&agrave; di Tirocinio</th>
-    <th style="text-align: center;">Studente</th>
-    <th style="text-align: center;">Tutor</th>
-  </tr>
-  <tr>
-    <td><a href="compilazioneCampiAzienda.jsp">RichiestaNxxxxxx</a></td>
-    <td>Mario De Cicco</td>
-    <td>Prof.ssa Filomena Ferrucci</td>
-    <td>
-  </tr>
-</table>
-
-<%@include file = "footer.jsp" %>
+<form name="ricerca" method="post" action="/search" style="border: 1px solid orange; margin-left: 25%;">
+<label>Cerca azienda per nome e/o geolocalizzazione <br>
+<input type="search" autocomplete="on" placeholder="Nome" name="nome">
+<input type="search" autocomplete="on" placeholder="Geolocalizzazione" name="geolocalizzazione">
+<input type="image" name="submit" src="img\icona-ricerca-dati.png" height="40px" width="40px">
+</label>
+</form>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>

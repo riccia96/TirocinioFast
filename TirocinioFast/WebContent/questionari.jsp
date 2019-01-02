@@ -14,6 +14,9 @@
 
 <%@include file = "menu.jsp" %>
 
+<h3 class="intestazione">Gestione dei questionari valutativi</h3>
+
+<% if (currentStudente != null){ %>
 <table style="margin-left: 25%; width: 1000px;">
   <tr>
     <th style="text-align: center">Tirocinio N.XXXXX</th>
@@ -36,6 +39,32 @@
 		</td>
   </tr>
 </table>
+
+<% } 
+if (currentAzienda != null){ %>
+	<table style="margin-left: 25%; width: 1000px;">
+  <tr>
+    <th style="margin-left: 10%">Tirocinio N.XXXXX</th>
+    <th style="margin-left: 10%">Studente</th>
+    <th style="margin-left: 10%">Tutor</th>
+    <th style="margin-left: 10%">Titolo tirocinio</th>
+    <th></th>
+  </tr>
+  <tr>
+    <td>Numero 200</td>
+    <td>Mario De Cicco</td>
+    <td>Prof.ssa Filomena Ferrucci</td>
+    <td>Studio i media server</td>
+    <td>
+    	<form>
+  			Seleziona PDF del questionario relativo a questo tirocinio firmato<br>
+  			<input type="file" name="questionarioFirmatoAzienda" accept=".pdf"><br>
+  			<input type="submit">
+		</form>
+		</td>
+  </tr>
+</table>
+<%} %>
 
 <%@include file = "footer.jsp" %>
 

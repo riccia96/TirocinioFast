@@ -14,6 +14,9 @@
 
 <%@include file = "menu.jsp" %>
 
+<h3 class="intestazione"> Gestione dei tirocini conclusi</h3>
+
+
 <table style="margin-left: 25%; width: 1000px; height: 80%;">
   <tr>
     <th style="text-align: center">Attivit&agrave; di Tirocinio</th>

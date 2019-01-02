@@ -14,6 +14,8 @@
 
 <%@include file = "menu.jsp" %>
 
+<h3 class="perForm">Registrazione azienda</h3>
+
 <form class="dialogo" action="GestioneUtente" method="POST" style="margin-left:25%;width: 700px;">
   <div class="imgcontainer">
     <img src="img\avatar-default-icon.png" alt="Avatar" class="avatar">

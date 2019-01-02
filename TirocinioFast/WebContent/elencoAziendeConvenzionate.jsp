@@ -19,6 +19,8 @@
 
 <%@include file = "menu.jsp" %>
 
+<%@include file = "ricerca.jsp" %>
+
 <% ArrayList<AziendaBean> convenzioni = (ArrayList<AziendaBean>)session.getAttribute("aziendeConvenzionate");
 
 			 if (convenzioni.size()>0 && convenzioni.size()%2==0) { %>
