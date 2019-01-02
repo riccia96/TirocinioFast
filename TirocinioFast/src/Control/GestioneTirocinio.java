@@ -195,12 +195,34 @@ public class GestioneTirocinio extends HttpServlet {
 			//la metti in un bean e lo imposti in sessione 
 			//nome attributo sessione sarà richiestaSelezionata
 			//dispatcher a mostra pdf , da chiedere a mario
-
+			try {
+				String url = request.getParameter("richiesta");
+				tirocini.addAll(documento.richiesteTirocinio());
+				
+				for(TirocinioBean t : tirocini){
+					if(t.getUrl().equals(url)){
+						tirocinio = t;
+					}
+				}
+				
+				request.getSession().setAttribute("richiestaSelezionata", tirocinio);
+				
+				if(tirocinio.equals(null)){
+					response.setContentType("text/html;charset=ISO-8859-1");
+					response.getWriter().write("nessuna richiesta");
+				}
+				
+				RequestDispatcher view = request.getRequestDispatcher("elencoRichiesteTirocinio.jsp");
+				view.forward(request, response);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		//nome
 		if(azioneTirocinio.equals("AT")) {
 			try {
 				azienda = (AziendaBean) request.getSession().getAttribute("utenteSessione");
+				
 				String sede = request.getParameter("sede");
 				String tempi = request.getParameter("tempi");
 				String periodo = request.getParameter("periodo");
@@ -213,7 +235,13 @@ public class GestioneTirocinio extends HttpServlet {
 				tirocinio.setFacilitazioni(facilitazioni);
 				//salvataggio database do update
 				//url 
+				tirocinio.setUrl("/pdf/richiestaTirocinio" + azienda.getNome() + "Studente" + tirocinio.getStudente());
+				richiesta.salvaTirocinio(tirocinio);
 
+				request.getSession().setAttribute("tirocinioAT", tirocinio);
+				
+				RequestDispatcher view = request.getRequestDispatcher("richiestaTirocinioAzienda.jsp");
+				view.forward(request, response);
 
 			} catch (SQLException e) {
 
@@ -265,11 +293,43 @@ public class GestioneTirocinio extends HttpServlet {
 		}
 
 		if(azioneTirocinio.equals("schedaAzienda")) {
-
+			azienda = (AziendaBean) request.getSession().getAttribute("visualizzaScheda");
+			
+			request.getSession().setAttribute("visualizzaSchedaAzienda", azienda);
+			RequestDispatcher view = request.getRequestDispatcher("da inserire il nome della jsp della scheda azienda");
+			view.forward(request, response);
 		}
 
 		if(azioneTirocinio.equals("ricercaAzienda")) {
-
+			try {
+				String nome = request.getParameter("nomeAzienda");
+				String localizzazione = request.getParameter("localizzazione");
+				
+				aziende.addAll(utente.getAziende());
+				List<AziendaBean> listaAziende = new ArrayList<AziendaBean>();
+				for(AziendaBean a : aziende){
+					if(nome != null && localizzazione != null){
+						if(a.getNome().equals(nome) && a.getIndirizzo().contains(localizzazione)){
+							listaAziende.add(a);
+						}
+					}else if(nome != null && localizzazione == null){
+						if(a.getNome().equals(nome)){
+							listaAziende.add(a);
+						}
+					}else{
+						if(a.getIndirizzo().contains(localizzazione)){
+							listaAziende.add(a);
+						}
+					}
+				}
+				
+				request.getSession().setAttribute("ricercaAziende", listaAziende);
+				
+				RequestDispatcher view = request.getRequestDispatcher("ricercaAzienda.jsp");
+				view.forward(request, response);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 	}
