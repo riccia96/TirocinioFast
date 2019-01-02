@@ -120,8 +120,51 @@ public class GestioneTirocinio extends HttpServlet {
 			}
 
 		}
+		
+		if(azioneTirocinio.equals("elencoRichieste")) {
+			try {
+				tirocini.addAll(documento.richiesteTirocinio());
+				
+				if(!(request.getSession().getAttribute("tipoUtente") == "studente")) {
+					if(!(request.getSession().getAttribute("tipoUtente") == "azienda")) {
+						if(!(request.getSession().getAttribute("tipoUtente") == "tutor")) {
+							
+							
+						
+							RequestDispatcher view = request.getRequestDispatcher("index.jsp");
+							view.forward(request, response);
+						} else {
+							tutor = (TutorBean) request.getSession().getAttribute("utenteSessione");
+							
+							RequestDispatcher view = request.getRequestDispatcher("index.jsp");
+							view.forward(request, response);
+						}
+					} else {
+						azienda = (AziendaBean) request.getSession().getAttribute("utenteSessione");
+						
 
-		if(azioneTirocinio.equals(""))
+						RequestDispatcher view = request.getRequestDispatcher("index.jsp");
+						view.forward(request, response);
+					}
+				} else {
+					studente = (StudenteBean) request.getSession().getAttribute("utenteSessione");
+					
+
+					RequestDispatcher view = request.getRequestDispatcher("index.jsp");
+					view.forward(request, response);
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+
+		if(azioneTirocinio.equals("richiestaSelezionata")) {
+			
+			
+			
+		}
 
 			if(azioneTirocinio.equals("inoltroAT")) {
 				try {
@@ -159,7 +202,7 @@ public class GestioneTirocinio extends HttpServlet {
 				List<AziendaBean> aziendeConv = new ArrayList<AziendaBean>();
 				for(AziendaBean a : aziende) {
 					for(ConvenzioneBean c : convenzioni) {
-						if(a.getNome().equals(c.getAzienda())) {
+						if(a.getNome().equals(c.getAzienda()) && c.isConvalida()) {
 							aziendeConv.add(a);
 						}
 					}

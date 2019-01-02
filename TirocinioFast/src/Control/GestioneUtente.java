@@ -205,7 +205,7 @@ public class GestioneUtente extends HttpServlet {
 
 			String password = request.getParameter("password");
 			String conferma = request.getParameter("conferma");
-			System.out.print(request.getSession().getAttribute("tipoUtente"));
+			
 			try {
 				if(password.equals(conferma)) {
 					if(!(request.getSession().getAttribute("tipoUtente") == "studente")) {
