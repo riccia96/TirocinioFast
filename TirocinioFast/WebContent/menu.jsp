@@ -12,7 +12,7 @@
  </head>
  <body>
  
-  <ul id="menu">
+  <ul id="menu" style="position: static;">
  <%
  StudenteBean currentStudente = (StudenteBean)session.getAttribute("currentSessionStudente");
  if (currentStudente != null){ %>
