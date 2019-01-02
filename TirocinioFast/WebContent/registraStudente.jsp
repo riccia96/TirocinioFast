@@ -14,6 +14,8 @@ pageEncoding="ISO-8859-1"%>
 
 <%@include file = "menu.jsp" %>
 
+<h3 class="perForm">Registrazione studente</h3>
+
 <div style="margin-left:25%;width: 700px;">
 
 <form class="dialogo" action="GestioneUtente" method="POST" ;width: 700px;">

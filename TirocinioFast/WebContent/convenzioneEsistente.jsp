@@ -14,6 +14,8 @@
 
 <%@include file = "menu.jsp" %>
 
+<h3 class="intestazione">Gestione delle richieste di convenzione effettuate</h3>
+
 <table style="margin-left: 25%; width: 1000px;">
   <tr>
     <th style="text-align: center">Richiesta convenzione</th>

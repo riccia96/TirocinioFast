@@ -14,6 +14,8 @@
 
 <%@include file = "menu.jsp" %>
 
+<h3 class="intestazione">Gestione dei questionari valutativi</h3>
+
 <% if (currentStudente != null){ %>
 <table style="margin-left: 25%; width: 1000px;">
   <tr>

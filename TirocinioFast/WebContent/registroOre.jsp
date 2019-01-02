@@ -14,6 +14,8 @@
 
 <%@include file = "menu.jsp" %>
 
+<h3 class="intestazione">Gestione del registro</h3>
+
 <table style="margin-left: 25%; width: 1000px;">
   <tr>
     <th style="text-align: center">Registro ore relativo all'Attivit&agrave; di Tirocinio (DOWNLOAD SOLO QUANDO RICHIESTA ACCETTATA)</th>

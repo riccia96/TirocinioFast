@@ -14,6 +14,8 @@
 
 <%@include file = "menu.jsp" %>
 
+<h3 class="intestazione">Gestione delle richieste di tirocinio</h3>
+
 <% if (currentImpiegato != null) { %>
 <table style="margin-left: 25%; width: 1000px;">
   <tr>

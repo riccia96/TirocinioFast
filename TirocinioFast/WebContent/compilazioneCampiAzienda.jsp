@@ -14,6 +14,8 @@
 
 <%@include file = "menu.jsp" %>
 
+<h3 class="perForm">Completamento di una richiesta di tirocinio</h3>
+
 <div style="margin-left:25%;width: 700px;">
 <form class="dialogo" id="compilazioneAzienda" action="GestioneUtente" method="POST">
   <div class="imgcontainer">
