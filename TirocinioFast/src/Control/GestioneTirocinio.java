@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Bean.AziendaBean;
+import Bean.ConvenzioneBean;
 import Bean.ImpiegatoBean;
 import Bean.StudenteBean;
 import Bean.TirocinioBean;
@@ -34,8 +35,11 @@ public class GestioneTirocinio extends HttpServlet {
 
 	TirocinioBean tirocinio = new TirocinioBean();
 	List<TirocinioBean> tirocini = new ArrayList<TirocinioBean>();
+	List<ConvenzioneBean> convenzioni = new ArrayList<ConvenzioneBean>();
+	
 	ManagerUtente utente = new ManagerUtente();
 	ManagerTirocinio richiesta = new ManagerTirocinio();
+	ManagerDocumento documento = new ManagerDocumento();
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -118,27 +122,27 @@ public class GestioneTirocinio extends HttpServlet {
 		}
 
 		if(azioneTirocinio.equals(""))
-		
-		if(azioneTirocinio.equals("inoltroAT")) {
-			try {
-				azienda = (AziendaBean) request.getSession().getAttribute("utenteSessione");
-				String sede = request.getParameter("sede");
-				String tempi = request.getParameter("tempi");
-				String periodo = request.getParameter("periodo");
-				String obiettivi = request.getParameter("obiettivi");
-				String facilitazioni = request.getParameter("facilitazioni");
-				tirocinio.setSedeTirocinio(sede);
-				tirocinio.setAccessoLocali(tempi);
-				tirocinio.setPeriodoTirocinio(periodo);
-				tirocinio.setObiettivoTirocinio(obiettivi);
-				tirocinio.setFacilitazioni(facilitazioni);
-				
-			} catch (SQLException e) {
 
-				e.printStackTrace();
+			if(azioneTirocinio.equals("inoltroAT")) {
+				try {
+					azienda = (AziendaBean) request.getSession().getAttribute("utenteSessione");
+					String sede = request.getParameter("sede");
+					String tempi = request.getParameter("tempi");
+					String periodo = request.getParameter("periodo");
+					String obiettivi = request.getParameter("obiettivi");
+					String facilitazioni = request.getParameter("facilitazioni");
+					tirocinio.setSedeTirocinio(sede);
+					tirocinio.setAccessoLocali(tempi);
+					tirocinio.setPeriodoTirocinio(periodo);
+					tirocinio.setObiettivoTirocinio(obiettivi);
+					tirocinio.setFacilitazioni(facilitazioni);
+
+				} catch (SQLException e) {
+
+					e.printStackTrace();
+				}
+
 			}
-
-		}
 
 		if(azioneTirocinio.equals("inoltroTS")) {
 
@@ -149,7 +153,32 @@ public class GestioneTirocinio extends HttpServlet {
 		}
 
 		if(azioneTirocinio.equals("elencoAziende")) {
-
+			try {
+				aziende.addAll(utente.getAziende());
+				convenzioni.addAll(documento.convenzioni());
+				List<AziendaBean> aziendeConv = new ArrayList<AziendaBean>();
+				for(AziendaBean a : aziende) {
+					for(ConvenzioneBean c : convenzioni) {
+						if(a.getNome().equals(c.getAzienda())) {
+							aziendeConv.add(a);
+						}
+					}
+				}
+				if(aziendeConv.equals(null)) {
+					response.setContentType("text/html;charset=ISO-8859-1");
+					response.getWriter().write("nessuna azienda convenzionata");
+					//BOH
+					//RequestDispatcher view = request.getRequestDispatcher("aziendeConvenzionate.jsp");
+					//view.forward(request, response);
+				}
+				else {
+					request.getSession().setAttribute("aziendeConvenzionate", aziendeConv);
+					RequestDispatcher view = request.getRequestDispatcher("aziendeConvenzionate.jsp");
+					view.forward(request, response);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		if(azioneTirocinio.equals("schedaAzienda")) {
