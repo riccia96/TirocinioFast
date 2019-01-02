@@ -64,7 +64,7 @@ public class GestioneTirocinio extends HttpServlet {
 			view.forward(request, response);
 		}
 
-		if(azioneTirocinio.equals("inoltroSA")) {
+		if(azioneTirocinio.equals("tirocinioDatiStudente")) {
 			try {
 				studente = (StudenteBean) request.getSession().getAttribute("utenteSessione");
 				String aziendaTirocinio = (String) request.getSession().getAttribute("aziendaTirocinio");
@@ -99,7 +99,7 @@ public class GestioneTirocinio extends HttpServlet {
 
 
 
-		if(azioneTirocinio.equals("elencoRichieste")) {
+		if(azioneTirocinio.equals("elencoRichiesteTirocinio")) {
 			try {
 				tirocini.addAll(documento.richiesteTirocinio());
 				List<TirocinioBean> richieste = new ArrayList<TirocinioBean>();
@@ -114,7 +114,7 @@ public class GestioneTirocinio extends HttpServlet {
 								}
 							}
 
-							request.getSession().setAttribute("richieste", richieste);
+							request.getSession().setAttribute("richiesteTirocinio", richieste);
 
 							if(richieste.equals(null)) {
 								response.setContentType("text/html;charset=ISO-8859-1");
@@ -132,7 +132,7 @@ public class GestioneTirocinio extends HttpServlet {
 								}
 							}
 
-							request.getSession().setAttribute("richieste", richieste);
+							request.getSession().setAttribute("richiesteTirocinio", richieste);
 
 							if(richieste.equals(null)) {
 								response.setContentType("text/html;charset=ISO-8859-1");
@@ -151,7 +151,7 @@ public class GestioneTirocinio extends HttpServlet {
 							}
 						}
 
-						request.getSession().setAttribute("richieste", richieste);
+						request.getSession().setAttribute("richiesteTirocinio", richieste);
 
 						if(richieste.equals(null)) {
 							response.setContentType("text/html;charset=ISO-8859-1");
@@ -170,7 +170,7 @@ public class GestioneTirocinio extends HttpServlet {
 						}
 					}
 
-					request.getSession().setAttribute("richieste", richieste);
+					request.getSession().setAttribute("richiesteTirocinio", richieste);
 
 					if(richieste.equals(null)) {
 						response.setContentType("text/html;charset=ISO-8859-1");
@@ -198,31 +198,32 @@ public class GestioneTirocinio extends HttpServlet {
 			try {
 				String url = request.getParameter("richiesta");
 				tirocini.addAll(documento.richiesteTirocinio());
-				
+
 				for(TirocinioBean t : tirocini){
 					if(t.getUrl().equals(url)){
 						tirocinio = t;
 					}
 				}
-				
+
 				request.getSession().setAttribute("richiestaSelezionata", tirocinio);
-				
+
 				if(tirocinio.equals(null)){
 					response.setContentType("text/html;charset=ISO-8859-1");
 					response.getWriter().write("nessuna richiesta");
 				}
-				
-				RequestDispatcher view = request.getRequestDispatcher("elencoRichiesteTirocinio.jsp");
+
+				RequestDispatcher view = request.getRequestDispatcher("mostraPDF.jsp");
 				view.forward(request, response);
+
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
-		//nome
-		if(azioneTirocinio.equals("AT")) {
+
+		if(azioneTirocinio.equals("tirocinioDatiAzienda")) {
 			try {
 				azienda = (AziendaBean) request.getSession().getAttribute("utenteSessione");
-				
+
 				String sede = request.getParameter("sede");
 				String tempi = request.getParameter("tempi");
 				String periodo = request.getParameter("periodo");
@@ -233,14 +234,11 @@ public class GestioneTirocinio extends HttpServlet {
 				tirocinio.setPeriodoTirocinio(periodo);
 				tirocinio.setObiettivoTirocinio(obiettivi);
 				tirocinio.setFacilitazioni(facilitazioni);
-				//salvataggio database do update
-				//url 
-				tirocinio.setUrl("/pdf/richiestaTirocinio" + azienda.getNome() + "Studente" + tirocinio.getStudente());
+
 				richiesta.salvaTirocinio(tirocinio);
 
-				request.getSession().setAttribute("tirocinioAT", tirocinio);
-				
-				RequestDispatcher view = request.getRequestDispatcher("richiestaTirocinioAzienda.jsp");
+				//portarsi avanti il nome della jsp da cui proviene il documento
+				RequestDispatcher view = request.getRequestDispatcher("mostraPDF.jsp");
 				view.forward(request, response);
 
 			} catch (SQLException e) {
@@ -251,7 +249,7 @@ public class GestioneTirocinio extends HttpServlet {
 		}
 
 		if(azioneTirocinio.equals("inoltroAT")) {
-
+			//settare la convalida
 		}
 
 		if(azioneTirocinio.equals("inoltroTS")) {
@@ -283,7 +281,7 @@ public class GestioneTirocinio extends HttpServlet {
 					//view.forward(request, response);
 				}
 				else {
-					request.getSession().setAttribute("aziendeConvenzionate", aziendeConv);
+					request.getSession().setAttribute("listaAziende", aziendeConv);
 					RequestDispatcher view = request.getRequestDispatcher("aziendeConvenzionate.jsp");
 					view.forward(request, response);
 				}
@@ -293,40 +291,48 @@ public class GestioneTirocinio extends HttpServlet {
 		}
 
 		if(azioneTirocinio.equals("schedaAzienda")) {
-			azienda = (AziendaBean) request.getSession().getAttribute("visualizzaScheda");
-			
-			request.getSession().setAttribute("visualizzaSchedaAzienda", azienda);
-			RequestDispatcher view = request.getRequestDispatcher("da inserire il nome della jsp della scheda azienda");
-			view.forward(request, response);
+			try {
+				azienda = (AziendaBean) request.getSession().getAttribute("scheda");
+
+				utente.getAzienda(azienda);
+
+				request.getSession().setAttribute("aziendaSelezionata", azienda);
+				RequestDispatcher view = request.getRequestDispatcher("schedaAzienda.jsp");
+				view.forward(request, response);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		if(azioneTirocinio.equals("ricercaAzienda")) {
 			try {
-				String nome = request.getParameter("nomeAzienda");
-				String localizzazione = request.getParameter("localizzazione");
+				String nome = request.getParameter("nomeAzienda").toLowerCase();
+				String sede = request.getParameter("sedeAzienda").toLowerCase();
+
 				
 				aziende.addAll(utente.getAziende());
 				List<AziendaBean> listaAziende = new ArrayList<AziendaBean>();
 				for(AziendaBean a : aziende){
-					if(nome != null && localizzazione != null){
-						if(a.getNome().equals(nome) && a.getIndirizzo().contains(localizzazione)){
+					if(!(nome.equals(null)) && !(sede.equals(null))){
+						if(a.getNome().toLowerCase().contains(nome) || a.getIndirizzo().toLowerCase().contains(sede)){
 							listaAziende.add(a);
 						}
-					}else if(nome != null && localizzazione == null){
-						if(a.getNome().equals(nome)){
+					}else if(!(nome.equals(null)) && sede.equals(null)){
+						if(a.getNome().toLowerCase().contains(nome)){
 							listaAziende.add(a);
 						}
-					}else{
-						if(a.getIndirizzo().contains(localizzazione)){
+					}else if(nome.equals(null) && !(sede.equals(null))){
+						if(a.getIndirizzo().toLowerCase().contains(sede)){
 							listaAziende.add(a);
 						}
-					}
+					} 
 				}
-				
-				request.getSession().setAttribute("ricercaAziende", listaAziende);
-				
-				RequestDispatcher view = request.getRequestDispatcher("ricercaAzienda.jsp");
+
+				request.getSession().setAttribute("listaAziende", listaAziende);
+
+				RequestDispatcher view = request.getRequestDispatcher("aziendeConvenzionate.jsp");
 				view.forward(request, response);
+				
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

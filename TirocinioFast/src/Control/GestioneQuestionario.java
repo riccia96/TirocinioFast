@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 public class GestioneQuestionario extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	   
-    
+    		
 
 		/**
 		 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -27,11 +27,27 @@ public class GestioneQuestionario extends HttpServlet {
 		 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 		 */
 		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			String azioneUtente = request.getParameter("azioneQuestionario");
+			String azioneQuestionario = request.getParameter("azioneQuestionario");
 
-			if(azioneUtente.equals("inoltroConvenzione")) {
+			if(azioneQuestionario.equals("QuestionarioStudente")) {
+				String titolo = request.getParameter("titolo");
+				
+				
+			}
+			
+			if(azioneQuestionario.equals("QuestionarioAzienda")) {
+				String titolo = request.getParameter("titolo");
+				String posizione = request.getParameter("posizione");
+			}
+			
+			if(azioneQuestionario.equals("inoltraQuestionarioStudente")) {
 
 			}
+			
+			if(azioneQuestionario.equals("inoltraQuestionarioAzienda")) {
+
+			}
+			
 		}
 
 }

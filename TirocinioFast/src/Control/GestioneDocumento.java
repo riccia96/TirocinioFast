@@ -27,9 +27,9 @@ public class GestioneDocumento extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String azioneUtente = request.getParameter("azioneDocumento");
+		String azioneDocumento = request.getParameter("azioneDocumento");
 
-		if(azioneUtente.equals("inoltroConvenzione")) {
+		if(azioneDocumento.equals("inoltroConvenzione")) {
 
 		}
 	}

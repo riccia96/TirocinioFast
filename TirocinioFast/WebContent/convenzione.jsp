@@ -22,11 +22,11 @@
     <img src="img\convenzione.png" alt="Convenzione" class="avatar">
   </div>
 
-    <input type="text" placeholder="Luogo di nascita del rappresentante" name="luogo" required>
+    <input type="text" placeholder="Luogo di nascita del rappresentante" name="luogoNascitaR" required>
 	<br>
-    <input type="text" placeholder="Data di nascita del rappresentante" name="data" required>
+    <input type="text" placeholder="Data di nascita del rappresentante" name="dataNascitaR" required>
     <br>
-    <input type="text" placeholder="Numero dipendenti" name="numero" required>
+    <input type="text" placeholder="Numero dipendenti" name="numeroDipendenti" required>
 	<br>
     <input type="text" placeholder="Referente tirocini" name="referente" required>
     <br>
@@ -35,7 +35,7 @@
     <input type="text" placeholder="E-mail del referente" name="email" required>
 	<br>
 	<label>Descrizione delle attivit&agrave; svolte</label>
-    <textarea style= "margin-left: 10%" rows="4" cols="50" name="descrizione"></textarea>
+    <textarea style= "margin-left: 10%" rows="4" cols="50" name="descrizioneAttivita"></textarea>
     <br>
     <input type="text" placeholder="Eventuale docente di riferimento" name="docente">
     <br>

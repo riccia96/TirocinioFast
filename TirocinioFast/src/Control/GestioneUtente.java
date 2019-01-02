@@ -394,17 +394,21 @@ public class GestioneUtente extends HttpServlet {
 			if(!(request.getSession().getAttribute("tipoUtente").equals(studente))){
 				if(!(request.getSession().getAttribute("tipoUtente").equals(azienda))){
 					if(!(request.getSession().getAttribute("tipoUtente").equals(tutor))){
+				
 						RequestDispatcher view = request.getRequestDispatcher("homeImpiegato.jsp");
 						view.forward(request, response);
 					} else {
+						
 						RequestDispatcher view = request.getRequestDispatcher("homeTutor.jsp");
 						view.forward(request, response);
 					}
 				} else {
+					
 					RequestDispatcher view = request.getRequestDispatcher("homeAzienda.jsp");
 					view.forward(request, response);
 				}
 			} else {
+				
 				RequestDispatcher view = request.getRequestDispatcher("homeStudente.jsp");
 				view.forward(request, response);
 			}
