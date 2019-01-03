@@ -26,7 +26,7 @@
 	<br>
     <input type="text" placeholder="Tempi di accesso ai locali" name="tempi" required>
     <br>
-    <input type="text" placeholder="Periodo tirocinio" name="periodo" required>
+    <input type="text" placeholder="Periodo tirocinio (indicativo)" name="periodo" required>
 	<br>
     <input type="text" placeholder="Obiettivi tirocinio" name="obiettivi" required>
     <br>

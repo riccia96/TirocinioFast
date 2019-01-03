@@ -24,6 +24,8 @@
 
 	<input type="text" placeholder="Titolo del tirocinio" name="titolo" required>
     <br>
+    <input type="text" placeholder="Perido di tirocinio (dal giorno - al giorno)" name ="periodo" required>
+	<br>
 	<label>Relativamente al progetto di Tirocinio e all'Esperienza:</label>
 	<br>
 	<br>

@@ -26,6 +26,8 @@
     <br>
     <input type="text" placeholder="Posizione ricoperta dal tutor aziendale" name="posizione" required>
 	<br>
+	<input type="text" placeholder="Perido di tirocinio (dal giorno - al giorno)" name ="periodo" required>
+	<br>
 	<label>Relativamente al progetto di tirocinio:</label>
 	<br>
 	<br>
