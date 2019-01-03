@@ -1,5 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-pageEncoding="ISO-8859-1"%>
+pageEncoding="ISO-8859-1" import="Bean.*" %>
+<% String tipoU = (String) request.getSession().getAttribute("tipoUtente");
+
+ if(tipoU.equals("studente")){
+	 StudenteBean s = (StudenteBean) request.getSession().getAttribute("utenteSessione");
+ }
+ if(tipoU.equals("azienda")){
+	 AziendaBean a = (AziendaBean) request.getSession().getAttribute("utenteSessione"); 
+ }
+ if(tipoU.equals("tutor")){
+	 TutorBean s = (TutorBean) request.getSession().getAttribute("utenteSessione");
+ }
+ if(tipoU.equals("impiegato")){
+	 ImpiegatoBean a = (ImpiegatoBean) request.getSession().getAttribute("utenteSessione"); 
+ }
+
+
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -14,7 +31,7 @@ pageEncoding="ISO-8859-1"%>
 
 <%@include file ="menu.jsp"%>
 
-<% if (currentStudente != null){ %>
+<% if (tipoU.equals("studente")){ %>
 <a href="index.jsp" style="margin-left:50%"><img alt="Logo" src="img\avatar-default-icon.png" width="150px" height="150px"></a>
 
 <table style="margin-left:30%; width: 700px;">

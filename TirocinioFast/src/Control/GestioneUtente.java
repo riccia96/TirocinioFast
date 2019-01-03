@@ -74,7 +74,7 @@ public class GestioneUtente extends HttpServlet {
 									request.getSession().setAttribute("utenteSessione", utente.getImpiegato(impiegato));
 									request.getSession().setAttribute("tipoUtente", "impiegato");
 
-									RequestDispatcher view = request.getRequestDispatcher("homeImpiegato.jsp");
+									RequestDispatcher view = request.getRequestDispatcher("home.jsp");
 									view.forward(request, response);
 								}else {
 									response.setContentType("text/html;charset=ISO-8859-1");
@@ -86,7 +86,7 @@ public class GestioneUtente extends HttpServlet {
 								request.getSession().setAttribute("utenteSessione", utente.getTutor(tutor));
 								request.getSession().setAttribute("tipoUtente", "tutor");
 								
-								RequestDispatcher view = request.getRequestDispatcher("homeTutor.jsp");
+								RequestDispatcher view = request.getRequestDispatcher("home.jsp");
 								view.forward(request, response);
 							}else {
 								response.setContentType("text/html;charset=ISO-8859-1");
@@ -98,7 +98,7 @@ public class GestioneUtente extends HttpServlet {
 							request.getSession().setAttribute("utenteSessione", utente.getAzienda(azienda));
 							request.getSession().setAttribute("tipoUtente", "azienda");
 							
-							RequestDispatcher view = request.getRequestDispatcher("homeAzienda.jsp");
+							RequestDispatcher view = request.getRequestDispatcher("home.jsp");
 							view.forward(request, response);
 						}else {
 							response.setContentType("text/html;charset=ISO-8859-1");
@@ -110,7 +110,7 @@ public class GestioneUtente extends HttpServlet {
 						request.getSession().setAttribute("utenteSessione", utente.getStudente(studente));
 						request.getSession().setAttribute("tipoUtente", "studente");
 						
-						RequestDispatcher view = request.getRequestDispatcher("homeStudente.jsp");
+						RequestDispatcher view = request.getRequestDispatcher("home.jsp");
 						view.forward(request, response);
 					}else {
 						response.setContentType("text/html;charset=ISO-8859-1");
@@ -153,7 +153,7 @@ public class GestioneUtente extends HttpServlet {
 									request.getSession().setAttribute("utenteSessione", utente.getTutor(tutor));
 									request.getSession().setAttribute("tipoUtente", "tutor");
 
-									RequestDispatcher view = request.getRequestDispatcher("reimposta.jsp");
+									RequestDispatcher view = request.getRequestDispatcher("impostaPassword.jsp");
 									view.forward(request, response);
 								}else {
 									response.setContentType("text/html;charset=ISO-8859-1");
@@ -165,7 +165,7 @@ public class GestioneUtente extends HttpServlet {
 								request.getSession().setAttribute("utenteSessione", utente.getImpiegato(impiegato));
 								request.getSession().setAttribute("tipoUtente", "impiegato");
 
-								RequestDispatcher view = request.getRequestDispatcher("reimposta.jsp");
+								RequestDispatcher view = request.getRequestDispatcher("impostaPassword.jsp");
 								view.forward(request, response);
 							}else {
 								response.setContentType("text/html;charset=ISO-8859-1");
@@ -177,7 +177,7 @@ public class GestioneUtente extends HttpServlet {
 							request.getSession().setAttribute("utenteSessione", utente.getAzienda(azienda));
 							request.getSession().setAttribute("tipoUtente", "azienda");
 
-							RequestDispatcher view = request.getRequestDispatcher("reimposta.jsp");
+							RequestDispatcher view = request.getRequestDispatcher("impostaPassword.jsp");
 							view.forward(request, response);
 						}else {
 							response.setContentType("text/html;charset=ISO-8859-1");
@@ -189,7 +189,7 @@ public class GestioneUtente extends HttpServlet {
 						request.getSession().setAttribute("utenteSessione", utente.getStudente(studente));
 						request.getSession().setAttribute("tipoUtente", "studente");
 
-						RequestDispatcher view = request.getRequestDispatcher("reimposta.jsp");
+						RequestDispatcher view = request.getRequestDispatcher("impostaPassword.jsp");
 						view.forward(request, response);
 					}else {
 						response.setContentType("text/html;charset=ISO-8859-1");
@@ -319,8 +319,11 @@ public class GestioneUtente extends HttpServlet {
 					response.getWriter().write("password non corrispondenti");
 				} else {
 					utente.registraStudente(studente);
+					
+					request.getSession().setAttribute("utenteSessione", studente);
+					request.getSession().setAttribute("tipoUtente", "studente");
 
-					RequestDispatcher view = request.getRequestDispatcher("homeStudente.jsp");
+					RequestDispatcher view = request.getRequestDispatcher("home.jsp");
 					view.forward(request, response);
 				}
 			}catch(SQLException e){
@@ -381,7 +384,10 @@ public class GestioneUtente extends HttpServlet {
 				} else {
 					utente.registraAzienda(azienda);
 
-					RequestDispatcher view = request.getRequestDispatcher("homeAzienda.jsp");
+					request.getSession().setAttribute("utenteSessione", azienda);
+					request.getSession().setAttribute("tipoUtente", "azienda");
+					
+					RequestDispatcher view = request.getRequestDispatcher("home.jsp");
 					view.forward(request, response);
 				}
 			}catch(SQLException e){

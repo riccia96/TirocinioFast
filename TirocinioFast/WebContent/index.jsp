@@ -25,9 +25,9 @@ pageEncoding="ISO-8859-1"%>
     <input type="password" placeholder="Password" name="password" required>
     <br>
     <div class ="new">
-    <button name = "azioneUtente" value="login" id="loginButton" class="button" type="submit">Login</button> 
+    <button name ="azioneUtente" value="login" id="loginButton" class="button" type="submit">Login</button> 
     <br>
-    <span class="dimenticata"><a href="recupero.jsp">Password dimenticata?</a></span>
+    <span class="dimenticata"><a href="recuperaPassword.jsp">Password dimenticata?</a></span>
     </div>
 </form>
   

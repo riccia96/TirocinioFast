@@ -294,9 +294,9 @@ public class GestioneTirocinio extends HttpServlet {
 			try {
 				azienda = (AziendaBean) request.getSession().getAttribute("scheda");
 
-				utente.getAzienda(azienda);
+				AziendaBean a = utente.getAzienda(azienda);
 
-				request.getSession().setAttribute("aziendaSelezionata", azienda);
+				request.getSession().setAttribute("aziendaSelezionata", a);
 				RequestDispatcher view = request.getRequestDispatcher("schedaAzienda.jsp");
 				view.forward(request, response);
 			} catch (SQLException e) {
