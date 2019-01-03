@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Aziende Convenzionate</title>
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
@@ -21,7 +21,7 @@
 
 <%@include file = "ricerca.jsp" %>
 
-<% ArrayList<AziendaBean> convenzioni = (ArrayList<AziendaBean>)session.getAttribute("aziendeConvenzionate");
+<% ArrayList<AziendaBean> convenzioni = (ArrayList<AziendaBean>) request.getSession().getAttribute("listaAziende");
 
 			 if (convenzioni.size()>0 && convenzioni.size()%2==0) { %>
 						<% for(int i = 0; i < convenzioni.size()/2 ; i++) { %>

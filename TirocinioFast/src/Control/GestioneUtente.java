@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import Bean.AziendaBean;
 import Bean.ImpiegatoBean;
@@ -73,7 +74,7 @@ public class GestioneUtente extends HttpServlet {
 								if(utente.getImpiegato(impiegato).getPassword().equals(password)) {
 									request.getSession().setAttribute("utenteSessione", utente.getImpiegato(impiegato));
 									request.getSession().setAttribute("tipoUtente", "impiegato");
-
+									
 									RequestDispatcher view = request.getRequestDispatcher("home.jsp");
 									view.forward(request, response);
 								}else {
@@ -107,6 +108,7 @@ public class GestioneUtente extends HttpServlet {
 					}
 				}else {
 					if(utente.getStudente(studente).getPassword().equals(password)) {
+						
 						request.getSession().setAttribute("utenteSessione", utente.getStudente(studente));
 						request.getSession().setAttribute("tipoUtente", "studente");
 						
