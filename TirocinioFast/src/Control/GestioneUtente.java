@@ -401,21 +401,21 @@ public class GestioneUtente extends HttpServlet {
 				if(!(request.getSession().getAttribute("tipoUtente").equals(azienda))){
 					if(!(request.getSession().getAttribute("tipoUtente").equals(tutor))){
 				
-						RequestDispatcher view = request.getRequestDispatcher("homeImpiegato.jsp");
+						RequestDispatcher view = request.getRequestDispatcher("home.jsp");
 						view.forward(request, response);
 					} else {
 						
-						RequestDispatcher view = request.getRequestDispatcher("homeTutor.jsp");
+						RequestDispatcher view = request.getRequestDispatcher("home.jsp");
 						view.forward(request, response);
 					}
 				} else {
 					
-					RequestDispatcher view = request.getRequestDispatcher("homeAzienda.jsp");
+					RequestDispatcher view = request.getRequestDispatcher("home.jsp");
 					view.forward(request, response);
 				}
 			} else {
 				
-				RequestDispatcher view = request.getRequestDispatcher("homeStudente.jsp");
+				RequestDispatcher view = request.getRequestDispatcher("home.jsp");
 				view.forward(request, response);
 			}
 			

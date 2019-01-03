@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Completa Scheda Azienda</title>
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
@@ -26,10 +26,10 @@
     <input type="file" name="logo" accept=".jpg,.jpeg,png" required>
 	<br>
 	<label>Descrizione delle attività su cui saranno impiegati i tirocinanti</label><br>
-    <textarea style="margin-left: 13%" rows="4" cols="50" name="attivita"></textarea>
+    <textarea style="margin-left: 13%" rows="4" cols="50" name="descrizione"></textarea>
     <br>
     <div class ="new">
-    <button name = "azioneUtente" value="compilaScheda" id="compilaSchedaButton" class=" button" type="submit">Compila scheda</button> 
+    <button name = "azioneUtente" value="salvaScheda" id="compilaSchedaButton" class=" button" type="submit">Salva scheda</button> 
     </div>
 </form>
   
