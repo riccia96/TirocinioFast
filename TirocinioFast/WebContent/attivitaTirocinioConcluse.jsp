@@ -1,3 +1,6 @@
+<%@page import="Control.ManagerUtente"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="Bean.*" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -14,6 +17,9 @@
 
 <%@include file = "menu.jsp" %>
 
+<%ArrayList<TirocinioBean> conclusi = (ArrayList<TirocinioBean>) request.getSession().getAttribute("");%>
+
+
 <h3 class="intestazione"> Gestione dei tirocini conclusi</h3>
 
 
@@ -24,71 +30,18 @@
     <th style="text-align: center">Tutor</th>
     <th style="text-align: center">Azienda</th>
   </tr>
+  <% if(conclusi.size()>0){
+	  for (int i = 0; i< conclusi.size(); i++){ 
+	  TirocinioBean tirocinio = conclusi.get(i);
+	  StudenteBean s;
+	  TutorBean t;
+	  AziendaBean b;
+	  %>
   <tr>
-    <td><a href="mostraPDFConferma.jsp">RichiestaNxxxxxx</a></td>
-    <td>Mario De Cicco</td>
-    <td>Prof.ssa Filomena Ferrucci </td>
-    <td>NAMIRIAL SPA</td>
-  </tr>
-  <tr>
-    <td><a href="mostraPDFConferma.jsp">RichiestaNxxxxxx</a></td>
-    <td>Mario De Cicco</td>
-    <td>Prof.ssa Filomena Ferrucci </td>
-    <td>NAMIRIAL SPA</td>
-  </tr>
-  <tr>
-    <td><a href="mostraPDFConferma.jsp">RichiestaNxxxxxx</a></td>
-    <td>Mario De Cicco</td>
-    <td>Prof.ssa Filomena Ferrucci </td>
-    <td>NAMIRIAL SPA</td>
-  </tr>
-  <tr>
-    <td><a href="mostraPDFConferma.jsp">RichiestaNxxxxxx</a></td>
-    <td>Mario De Cicco</td>
-    <td>Prof.ssa Filomena Ferrucci </td>
-    <td>NAMIRIAL SPA</td>
-  </tr>
-  <tr>
-    <td><a href="mostraPDFConferma.jsp">RichiestaNxxxxxx</a></td>
-    <td>Mario De Cicco</td>
-    <td>Prof.ssa Filomena Ferrucci </td>
-    <td>NAMIRIAL SPA</td>
-  </tr>
-  <tr>
-    <td><a href="mostraPDFConferma.jsp">RichiestaNxxxxxx</a></td>
-    <td>Mario De Cicco</td>
-    <td>Prof.ssa Filomena Ferrucci </td>
-    <td>NAMIRIAL SPA</td>
-  </tr>
-  <tr>
-    <td><a href="mostraPDFConferma.jsp">RichiestaNxxxxxx</a></td>
-    <td>Mario De Cicco</td>
-    <td>Prof.ssa Filomena Ferrucci </td>
-    <td>NAMIRIAL SPA</td>
-  </tr>
-  <tr>
-    <td><a href="mostraPDFConferma.jsp">RichiestaNxxxxxx</a></td>
-    <td>Mario De Cicco</td>
-    <td>Prof.ssa Filomena Ferrucci </td>
-    <td>NAMIRIAL SPA</td>
-  </tr>
-  <tr>
-    <td><a href="mostraPDFConferma.jsp">RichiestaNxxxxxx</a></td>
-    <td>Mario De Cicco</td>
-    <td>Prof.ssa Filomena Ferrucci </td>
-    <td>NAMIRIAL SPA</td>
-  </tr>
-  <tr>
-    <td><a href="mostraPDFConferma.jsp">RichiestaNxxxxxx</a></td>
-    <td>Mario De Cicco</td>
-    <td>Prof.ssa Filomena Ferrucci </td>
-    <td>NAMIRIAL SPA</td>
-  </tr>
-  <tr>
-    <td><a href="mostraPDFConferma.jsp">RichiestaNxxxxxx</a></td>
-    <td>Mario De Cicco</td>
-    <td>Prof.ssa Filomena Ferrucci </td>
-    <td>NAMIRIAL SPA</td>
+    <td><a href="mostraPDFConferma.jsp">Richiesta N.<%= tirocinio.get()%></a></td>
+    <td><%= studente %></td>
+    <td><%= tutor %> </td>
+    <td><%= azienda %></td>
   </tr>
   </table>
 

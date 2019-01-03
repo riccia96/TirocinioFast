@@ -17,7 +17,7 @@
 <h3 class="perForm">Compilazione di una richiesta di convenzione</h3>
 
 <div style="margin-left:25%;width: 700px;">
-<form class="dialogo" id="login" action="GestioneUtente" method="POST">
+<form class="dialogo" id="login" action="GestioneConvenzione" method="POST">
   <div class="imgcontainer">
     <img src="img\convenzione.png" alt="Convenzione" class="avatar">
   </div>
@@ -40,7 +40,7 @@
     <input type="text" placeholder="Eventuale docente di riferimento" name="docente">
     <br>
     <div class ="new">
-    <button name = "azioneUtente" value="convenzione" id="convenzioneButton" class=" button" type="submit">Richiedi convenzione</button> 
+    <button name = "azioneUtente" value="richiestaConvenzione" id="convenzioneButton" class=" button" type="submit">Richiedi convenzione</button> 
     </div>
 </form>
   
