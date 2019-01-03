@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -14,6 +15,8 @@
 
 <%@include file = "menu.jsp" %>
 
+<%ArrayList<ConvenzioneBean> convenzioniDaConvalidare = (ArrayList<ConvenzioneBean>) request.getSession().getAttribute(""); %>
+
 <h3 class="intestazione">Gestione delle richieste di convenzione</h3>
 
 <table style="margin-left: 25%; width: 1000px;">
@@ -22,19 +25,25 @@
     <th style="text-align: center;">Azienda</th>
     <th></th>
   </tr>
+  <% if (convenzioniDaConvalidare.size()>0){
+  		for (int i = 0; i < convenzioniDaConvalidare.size(); i++){
+  			ConvenzioneBean c = convenzioniDaConvalidare.get(i);
+  			AziendaBean a = (); 		
+	  %>
   <tr>
-    <td><a href="mostraPDF.jsp">RichiestaNxxxxxx</a></td>
-    <td>NAMIRIAL SPA</td>
+    <td><a href="mostraPDF.jsp">RichiestaN<%=xxx %></a></td>
+    <td><%= a.getNome() %></td>
     <td>
     	<form>
   			Seleziona PDF richista di convenzione firmata<br>
-  			<input type="file" name="attivitaTirocinio" accept=".pdf"><br>
+  			<input type="file" name="convalidaConvenzione" accept=".pdf"><br>
   			<input type="submit">
 		</form>
 </td>
   </tr>
+  <% } %>
   </table>
-
+<% } %>
 <%@include file = "footer.jsp" %>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

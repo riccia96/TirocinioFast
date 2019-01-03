@@ -17,7 +17,7 @@
 <h3 class="perForm">Compilazione di una richista di tirocinio</h3>
 
 <div style="margin-left:25%;width: 700px;">
-<form class="dialogo" id="richiestaTirocinio" action="GestioneUtente" method="POST">
+<form class="dialogo" id="richiestaTirocinio" action="GestioneTirocinio" method="POST">
   <div class="imgcontainer">
     <img src="img\convenzione.png" alt="Convenzione" class="avatar">
   </div>
@@ -34,7 +34,7 @@
     <input type="radio" name="tutor" value="no" checked>NO
     <br>
     <div class ="new">
-    <button name = "azioneUtente" value="richiestaTirocinio" id="richiestaTirocinioButton" class=" button" type="submit">Richiedi inizio attivit&agrave; tirocinio</button> 
+    <button name = "azioneUtente" value="tirocinioDatiStudente" id="richiestaTirocinioButton" class=" button" type="submit">Richiedi inizio attivit&agrave; tirocinio</button> 
     </div>
 </form>
   

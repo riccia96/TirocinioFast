@@ -1,5 +1,7 @@
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="Bean.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,7 +18,8 @@
 
 <h3 class="intestazione">Gestione dei questionari valutativi</h3>
 
-<% if (currentStudente != null){ %>
+<% if (tipo.equals("studente")){ %>
+<%ArrayList<QuestionarioStudenteBean> questionariS = (ArrayList<QuestionarioStudenteBean>) request.getSession().getAttribute("");}%>
 <table style="margin-left: 25%; width: 1000px;">
   <tr>
     <th style="text-align: center">Tirocinio N.XXXXX</th>
@@ -25,11 +28,17 @@
     <th style="text-align: center">Titolo tirocinio</th>
     <th></th>
   </tr>
+  <% if (questionariS.size()>0){
+  		for (int i = 0; i < questionariS.size(); i++){
+  			QuestionarioStudenteBean qs = questionariS.get(i);
+  			AziendaBean a = ();
+  			TutorBean t = ();  		
+	  %>
   <tr>
-    <td>Numero 200</td>
-    <td>Namirial SPA</td>
-    <td>Prof.ssa Filomena Ferrucci</td>
-    <td>Studio i media server</td>
+    <td>Questionario N.<%=xxx %></td>
+    <td><%= a.getNome() %></td>
+    <td><%= t.getCognome() + t.getNome() %></td>
+    <td><%= qs.getTitolo() %></td>
     <td>
     	<form>
   			Seleziona PDF del questionario relativo a questo tirocinio firmato<br>
@@ -38,10 +47,12 @@
 		</form>
 		</td>
   </tr>
+  <% } %>
 </table>
+<% 	} 
 
-<% } 
-if (currentAzienda != null){ %>
+if (tipo.equals("azienda")){ 
+ArrayList<QuestionarioAziendaBean> questionariA = (ArrayList<QuestionarioAziendaBean>) request.getSession().getAttribute(""); }%>
 	<table style="margin-left: 25%; width: 1000px;">
   <tr>
     <th style="margin-left: 10%">Tirocinio N.XXXXX</th>
@@ -50,11 +61,17 @@ if (currentAzienda != null){ %>
     <th style="margin-left: 10%">Titolo tirocinio</th>
     <th></th>
   </tr>
+  <% if (questionariA.size()>0){
+  		for (int i = 0; i < questionariA.size(); i++){
+  			QuestionarioAziendaBean qa = questionariA.get(i);
+  			StudenteBean s = ();
+  			TutorBean t = ();  		
+	  %>
   <tr>
-    <td>Numero 200</td>
-    <td>Mario De Cicco</td>
-    <td>Prof.ssa Filomena Ferrucci</td>
-    <td>Studio i media server</td>
+    <td>Questionario N.<%=xxx %></td>
+    <td><%= s.getCognome() + s.getNome() %></td>
+    <td><%= t.getCognome() + t.getNome() %></td>
+    <td><%= qa.getTitoloTirocinio()%></td>
     <td>
     	<form>
   			Seleziona PDF del questionario relativo a questo tirocinio firmato<br>
@@ -63,8 +80,9 @@ if (currentAzienda != null){ %>
 		</form>
 		</td>
   </tr>
+  <% } %>
 </table>
-<%} %>
+<% }%>
 
 <%@include file = "footer.jsp" %>
 
