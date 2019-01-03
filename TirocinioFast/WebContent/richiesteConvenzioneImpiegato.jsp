@@ -18,15 +18,14 @@
 <%ArrayList<ConvenzioneBean> convenzioniDaConvalidare = (ArrayList<ConvenzioneBean>) request.getSession().getAttribute(""); %>
 
 <h3 class="intestazione">Gestione delle richieste di convenzione</h3>
-
+ <% if (convenzioniDaConvalidare.size()>0){%>
 <table style="margin-left: 25%; width: 1000px;">
   <tr>
     <th style="text-align: center;">Richieste di Convenzione</th>
     <th style="text-align: center;">Azienda</th>
     <th></th>
   </tr>
-  <% if (convenzioniDaConvalidare.size()>0){
-  		for (int i = 0; i < convenzioniDaConvalidare.size(); i++){
+ <%for (int i = 0; i < convenzioniDaConvalidare.size(); i++){
   			ConvenzioneBean c = convenzioniDaConvalidare.get(i);
   			AziendaBean a = (); 		
 	  %>
@@ -44,6 +43,7 @@
   <% } %>
   </table>
 <% } %>
+
 <%@include file = "footer.jsp" %>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

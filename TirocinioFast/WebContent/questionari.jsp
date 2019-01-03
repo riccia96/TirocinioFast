@@ -20,6 +20,7 @@
 
 <% if (tipo.equals("studente")){ %>
 <%ArrayList<QuestionarioStudenteBean> questionariS = (ArrayList<QuestionarioStudenteBean>) request.getSession().getAttribute("");}%>
+  <% if (questionariS.size()>0){ %>
 <table style="margin-left: 25%; width: 1000px;">
   <tr>
     <th style="text-align: center">Tirocinio N.XXXXX</th>
@@ -28,8 +29,7 @@
     <th style="text-align: center">Titolo tirocinio</th>
     <th></th>
   </tr>
-  <% if (questionariS.size()>0){
-  		for (int i = 0; i < questionariS.size(); i++){
+  		<%for (int i = 0; i < questionariS.size(); i++){
   			QuestionarioStudenteBean qs = questionariS.get(i);
   			AziendaBean a = ();
   			TutorBean t = ();  		
@@ -39,20 +39,25 @@
     <td><%= a.getNome() %></td>
     <td><%= t.getCognome() + t.getNome() %></td>
     <td><%= qs.getTitolo() %></td>
-    <td>
+    <%if (qs.getUrl().equals("")){ %>
+        <td>
     	<form>
   			Seleziona PDF del questionario relativo a questo tirocinio firmato<br>
   			<input type="file" name="questionarioFirmatoStudente" accept=".pdf"><br>
   			<input type="submit">
 		</form>
 		</td>
+	<% } else { %>
+	<td>Questionario gi&agrave; compilato!</td>
+	<%} %>
   </tr>
   <% } %>
 </table>
-<% 	} 
+<% 	}
 
 if (tipo.equals("azienda")){ 
-ArrayList<QuestionarioAziendaBean> questionariA = (ArrayList<QuestionarioAziendaBean>) request.getSession().getAttribute(""); }%>
+ArrayList<QuestionarioAziendaBean> questionariA = (ArrayList<QuestionarioAziendaBean>) request.getSession().getAttribute(""); }
+	 if (questionariA.size()>0){ %>
 	<table style="margin-left: 25%; width: 1000px;">
   <tr>
     <th style="margin-left: 10%">Tirocinio N.XXXXX</th>
@@ -61,8 +66,7 @@ ArrayList<QuestionarioAziendaBean> questionariA = (ArrayList<QuestionarioAzienda
     <th style="margin-left: 10%">Titolo tirocinio</th>
     <th></th>
   </tr>
-  <% if (questionariA.size()>0){
-  		for (int i = 0; i < questionariA.size(); i++){
+  <% for (int i = 0; i < questionariA.size(); i++){
   			QuestionarioAziendaBean qa = questionariA.get(i);
   			StudenteBean s = ();
   			TutorBean t = ();  		
@@ -72,17 +76,21 @@ ArrayList<QuestionarioAziendaBean> questionariA = (ArrayList<QuestionarioAzienda
     <td><%= s.getCognome() + s.getNome() %></td>
     <td><%= t.getCognome() + t.getNome() %></td>
     <td><%= qa.getTitoloTirocinio()%></td>
-    <td>
+   <%if (qa.getUrl().equals("")){ %>
+        <td>
     	<form>
   			Seleziona PDF del questionario relativo a questo tirocinio firmato<br>
   			<input type="file" name="questionarioFirmatoAzienda" accept=".pdf"><br>
   			<input type="submit">
 		</form>
 		</td>
+	<% } else { %>
+	<td>Questionario gi&agrave; compilato!</td>
+	<%} %>
   </tr>
   <% } %>
 </table>
-<% }%>
+<% 	} %>
 
 <%@include file = "footer.jsp" %>
 

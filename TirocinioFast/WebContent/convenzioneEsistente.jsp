@@ -20,14 +20,14 @@
 
 <h3 class="intestazione">Gestione della richiesta di convenzione effettuata</h3>
 
+<% if (convenzioniInviate.size()>0){%>
 <table style="margin-left: 25%; width: 1000px;">
   <tr>
     <th style="text-align: center">Richiesta convenzione</th>
     <th style="text-align: center">Status</th>
     <th></th>
   </tr>
-  <% if (convenzioniInviate.size()>0){
-  		for(int i = 0; i< convenzioniInviate.size(); i++){
+  <%for(int i = 0; i< convenzioniInviate.size(); i++){
   			ConvenzioneBean c = convenzioniInviate.get(i);
   			%>
   <tr>
@@ -37,9 +37,8 @@
     <% }
     else { %>
      <td><img alt="giallo" src="img/giallo.png"> </td>   
-     <% 	}
-   		 }
-    }%>
+     <% } %>
+    <%if (c.isConvalida()==false){ %>
     <td>
     	<form>
   			Seleziona PDF convenzione firmato con gli allegati richiesti<br>
@@ -48,8 +47,13 @@
   			<input type="submit">
 		</form>
 </td>
+<% } else { %>
+<td>Convenzione gi&agrave; presentata!</td>
+<%} %>
   </tr>
+  <%} %>
   </table>
+<%} %>
 
 <%@include file = "footer.jsp" %>
 

@@ -33,13 +33,14 @@
   <% for (int i = 0; i < tirocini.size(); i++){
 	  TirocinioBean t = tirocini.get(i);
 	  StudenteBean s = ();
-	  TutorBean t = ();
+	  TutorBean tu = ();
 	  AziendaBean a = ();%>
   <tr>
     <td><a href="mostraPDF.jsp">RichiestaN. <%=xxx %></a></td>
     <td><%=s.getCognome() + s.getNome() %></td>
     <td><%=t.getCognome() + t.getNome() %> </td>
     <td><%=a.getNome() %></td>
+    <% if(t.isConvalidaAzienda()==true && t.isConvalidaTutor()==true && t.isConvalidaStudente()==true) { %>
     <td>
     	<form>
   			Seleziona PDF richista inizio attivit&agrave; di tirocinio firmata<br>
@@ -47,6 +48,9 @@
   			<input type="submit">
 		</form>
 </td>
+<%} else { %>
+<td> Appena sar&agrave; possibile potrai effettuare l'upload</td>
+<%} %>
   </tr>
   <%} %>
   </table>
@@ -62,11 +66,11 @@
   <% for (int i = 0; i < tirocini.size(); i++){
 	  TirocinioBean t = tirocini.get(i);
 	  StudenteBean s = ();
-	  TutorBean t = ();%>
+	  TutorBean tu = ();%>
   <tr>
     <td><a href="compilazioneCampiAzienda.jsp">RichiestaN. <%=xxx %></a></td>
     <td><%=s.getCognome() + s.getNome() %></td>
-    <td><%=t.getCognome() + t.getNome() %></td>
+    <td><%=tu.getCognome() + tu.getNome() %></td>
     <td>
     	<form>
   			Seleziona PDF richista inizio attivit&agrave; di tirocinio firmata<br>
@@ -75,6 +79,7 @@
 		</form>
 </td>
   </tr>
+  <%} %>
 </table>
 <%} 
  
@@ -86,10 +91,15 @@
     <th style="text-align: center;">Azienda</th>
     <th></th>
   </tr>
+  <% for (int i = 0; i < tirocini.size(); i++){
+	  TirocinioBean t = tirocini.get(i);
+	  StudenteBean s = ();
+	  AziendaBean a = ();%>
   <tr>
-    <td><a href="mostraPDF.jsp">RichiestaNxxxxxx</a></td>
-    <td>Mario De Cicco</td>
-    <td>NAMIRIAL SPA</td>
+    <td><a href="mostraPDF.jsp">RichiestaN. <%=xxx %></a></td>
+    <td><%=s.getCognome() + s.getNome() %></td>
+    <td><%=a.getNome() %></td>
+    <% if(t.isConvalidaAzienda()==true) { %>
     <td>
     	<form>
   			Seleziona PDF richista inizio attivit&agrave; di tirocinio firmata<br>
@@ -97,7 +107,11 @@
   			<input type="submit">
 		</form>
 </td>
+<%} else { %>
+<td> Appena sar&agrave; possibile potrai effettuare l'upload</td>
+<%} %>
   </tr>
+  <%} %>
   </table>
   <%}
  
@@ -110,15 +124,38 @@
     <th style="text-align: center;">Status</th>
     <th></th>
   </tr>
+  <% for (int i = 0; i < tirocini.size(); i++){
+	  TirocinioBean t = tirocini.get(i);%>
   <tr>
-    <td><a href="mostraPDF.jsp">RichiestaNxxxxxx</a></td>
-    <td>PALLINO</td>
-    <td>PALLINO</td>
-    <td>PALLINO</td>
-    <td>UPLOAD QUANDO AZIENDA E TUTOR HANNO FIRMATO</td>
+    <td><a href="mostraPDF.jsp"><%=xxx %></a></td>
+    <%if (t.isConvalidaAzienda()==true){ %>
+    <td><img alt="verde" src="img/verde.png"></td>
+    <%} else { %>
+    <td><img alt="giallo" src="img/giallo.png"></td>
+	<%} if (t.isConvalidaTutor()==true){ %>
+	<td><img alt="verde" src="img/verde.png"></td>
+     <%} else { %>
+    <td><img alt="giallo" src="img/giallo.png"></td>
+    <%} if (t.isConvalidaRichiesta()==true){ %>
+    <td><img alt="verde" src="img/verde.png"></td>
+    <%} else { %>
+    <td><img alt="giallo" src="img/giallo.png"></td>
+    <%} if (t.isConvalidaAzienda()==true && t.isConvalidaTutor()==true) { %>
+        <td>
+    	<form>
+  			Seleziona PDF richista inizio attivit&agrave; di tirocinio firmata<br>
+  			<input type="file" name="attivitaTirocinioTutor" accept=".pdf"><br>
+  			<input type="submit">
+		</form>
+</td>
+<%} else { %>
+<td> Appena sar&agrave; possibile potrai effettuare l'upload</td>
+<%} %>
   </tr>
+  <%} %>
   </table>
- <%} %>
+ <%}
+ }%>
   
 
 <%@include file = "footer.jsp" %>
