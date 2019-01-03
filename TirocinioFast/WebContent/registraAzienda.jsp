@@ -12,7 +12,11 @@
 
 <%@include file = "navbar.jsp" %>
 
-<%@include file = "menu.jsp" %>
+<ul id="menu">
+<li><a href="index.jsp">Home</a></li>
+<li><a href="registraAzienda.jsp">Registra azienda</a></li>
+<li><a href="registraStudente.jsp">Registra studente</a></li>
+</ul>
 
 <h3 class="perForm">Registrazione azienda</h3>
 

@@ -2,9 +2,7 @@
 	pageEncoding="ISO-8859-1" import="Bean.*"%>
 <%
 	String tipoU = (String) request.getSession().getAttribute("tipoUtente");
-	if (tipoU.equals("")) {
-
-	} else {
+	if (tipoU.equals("")){
 		
 		if (tipoU.equals("studente")) {
 			StudenteBean s = (StudenteBean) request.getSession().getAttribute("utenteSessione");
@@ -63,13 +61,7 @@
 		<li><a href="#">Convenzioni aziende</a>
 		<li><a href="#">Elenco aziende convenzionate</a>
 		<li><a href="#">Logout</a> <%
- 	} else if (tipoU.equals(null)) {
- %>
-		<li><a href="index.jsp">Home</a>
-		<li><a href="registraAzienda.jsp">Registra azienda</a>
-		<li><a href="registraStudente.jsp">Registra studente</a> <%
- 	}
- %>
+ 	} %>
 	</ul>
 
 </body>
