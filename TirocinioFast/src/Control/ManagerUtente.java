@@ -73,7 +73,8 @@ public class ManagerUtente {
 	public List<StudenteBean> getStudenti() throws SQLException{
 		StudenteDAO sDAO = new StudenteDAO();
 		List<StudenteBean> studenti = new ArrayList<StudenteBean>();
-		studenti.addAll(sDAO.doRetrieveAll());
+		
+		studenti = sDAO.doRetrieveAll();
 		return studenti;
 	}
 	

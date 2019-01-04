@@ -57,9 +57,8 @@ public class GestioneUtente extends HttpServlet {
 				String username = request.getParameter("username");
 				System.out.println(username);
 				String password = request.getParameter("password");
-<<<<<<< HEAD
+
 				System.out.println(password);
-=======
 
 				studenti = utente.getStudenti();
 				aziende = utente.getAziende();
@@ -113,7 +112,7 @@ public class GestioneUtente extends HttpServlet {
 				
 	/*			
 				
->>>>>>> branch 'master' of https://github.com/riccia96/TirocinioFast.git
+
 				studente.setUsername(username);
 				azienda.setUsername(username);
 				impiegato.setUsername(username);
