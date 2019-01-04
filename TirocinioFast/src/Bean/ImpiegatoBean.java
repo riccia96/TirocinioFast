@@ -6,7 +6,10 @@ public class ImpiegatoBean implements java.io.Serializable {
 	
 	/**Costruttore*/
 
-	public ImpiegatoBean() {}
+	public ImpiegatoBean() {
+		this.username = "";
+		this.password = "";
+	}
 
 	/**Getter e Setter*/
 

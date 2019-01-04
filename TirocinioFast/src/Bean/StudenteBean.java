@@ -8,7 +8,10 @@ public class StudenteBean implements Serializable{
 	
 	/**Costruttore*/
 	
-	public StudenteBean() {}
+	public StudenteBean() {
+		this.username = "";
+		this.password = "";
+	}
 
 	/**Getter e Setter*/
 
