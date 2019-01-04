@@ -2,18 +2,22 @@
 	pageEncoding="ISO-8859-1" import="Bean.*"%>
 <%
 	String tipoU = (String) request.getSession().getAttribute("tipoUtente");
+	StudenteBean s = new StudenteBean();
+	AziendaBean a = new AziendaBean();
+	TutorBean t = new TutorBean();
+	ImpiegatoBean i = new ImpiegatoBean();
 
 	if (tipoU.equals("studente")) {
-		StudenteBean s = (StudenteBean) request.getSession().getAttribute("utenteSessione");
+		s = (StudenteBean) request.getSession().getAttribute("utenteSessione");
 	}
 	if (tipoU.equals("azienda")) {
-		AziendaBean a = (AziendaBean) request.getSession().getAttribute("utenteSessione");
+		a = (AziendaBean) request.getSession().getAttribute("utenteSessione");
 	}
 	if (tipoU.equals("tutor")) {
-		TutorBean s = (TutorBean) request.getSession().getAttribute("utenteSessione");
+		t = (TutorBean) request.getSession().getAttribute("utenteSessione");
 	}
 	if (tipoU.equals("impiegato")) {
-		ImpiegatoBean a = (ImpiegatoBean) request.getSession().getAttribute("utenteSessione");
+		i = (ImpiegatoBean) request.getSession().getAttribute("utenteSessione");
 	}
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -39,43 +43,43 @@
 	<table style="margin-left: 30%; width: 700px;">
 		<tr>
 			<td>Nome</td>
-			<td>NOME</td>
+			<td><%= s.getNome() %></td>
 		</tr>
 		<tr>
 			<td>Cognome</td>
-			<td>COGNOME</td>
+			<td><%= s.getCognome() %></td>
 		</tr>
 		<tr>
 			<td>Matricola</td>
-			<td>MATRICOLA</td>
+			<td><%= s.getMatricola() %></td>
 		</tr>
 		<tr>
 			<td>Luogo nascita</td>
-			<td>LUOGO</td>
+			<td><%= s.getLuogoNascita() %></td>
 		</tr>
 		<tr>
 			<td>Data nascita</td>
-			<td>DATA</td>
+			<td><%= s.getDataNascita() %></td>
 		</tr>
 		<tr>
 			<td>Indirizzo di residenza</td>
-			<td>INDIRIZZO</td>
+			<td><%= s.getIndirizzo() %></td>
 		</tr>
 		<tr>
 			<td>Citt&agrave; di residenza</td>
-			<td>CITTA</td>
+			<td><%= s.getCitta() %></td>
 		</tr>
 		<tr>
 			<td>Codice Fiscale</td>
-			<td>CF</td>
+			<td><%= s.getCodiceFiscale() %></td>
 		</tr>
 		<tr>
 			<td>E-mail</td>
-			<td>EMAIL</td>
+			<td><%= s.getEmail() %></td>
 		</tr>
 		<tr>
 			<td>Telefono</td>
-			<td>TELEFONO</td>
+			<td><%= s.getTelefono() %></td>
 		</tr>
 	</table>
 	<%
@@ -88,27 +92,27 @@
 	<table style="margin-left: 30%; width: 700px;">
 		<tr>
 			<td>Nome azienda</td>
-			<td>NOME</td>
+			<td><%= a.getNome() %></td>
 		</tr>
 		<tr>
 			<td>Rappresentante</td>
-			<td>NOME</td>
+			<td><%= a.getCeo() %></td>
 		</tr>
 		<tr>
 			<td>Sede</td>
-			<td>SEDE</td>
+			<td><%= a.getIndirizzo() %></td>
 		</tr>
 		<tr>
 			<td>E-mail</td>
-			<td>E-MAIL</td>
+			<td><%= a.getEmail() %></td>
 		</tr>
 		<tr>
 			<td>Telefono</td>
-			<td>TELEFONO</td>
+			<td><%= a.getTelefono() %></td>
 		</tr>
 		<tr>
 			<td>Partita Iva</td>
-			<td>PI</td>
+			<td><%= a.getPartitaIva() %></td>
 		</tr>
 	</table>
 
@@ -127,15 +131,15 @@
 	<table style="margin-left: 30%; width: 700px;">
 		<tr>
 			<td>Nome</td>
-			<td>NOME</td>
+			<td><%= t.getNome()%></td>
 		</tr>
 		<tr>
 			<td>Cognome</td>
-			<td>COGNOME</td>
+			<td><%= t.getCognome()%></td>
 		</tr>
 		<tr>
 			<td>Matricola</td>
-			<td>MATRICOLA</td>
+			<td><%= t.getMatricola() %></td>
 		</tr>
 	</table>
 
@@ -150,15 +154,15 @@
 	<table style="margin-left: 30%; width: 700px;">
 		<tr>
 			<td>Nome</td>
-			<td>NOME</td>
+			<td><%= i.getNome()%></td>
 		</tr>
 		<tr>
 			<td>Cognome</td>
-			<td>COGNOME</td>
+			<td><%= i.getCognome()%></td>
 		</tr>
 		<tr>
 			<td>Matricola</td>
-			<td>MATRICOLA</td>
+			<td><%= i.getMatricola()%></td>
 		</tr>
 	</table>
 
