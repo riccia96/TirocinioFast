@@ -57,7 +57,7 @@
 		%>
 		<li><a href="Gestioneutente?azioneUtente=areaPersonale">Area Personale</a>
 		<li><a href="GestioneTirocinio?azioneTirocinio=elencoRichiesteTirocinio">Richieste tirocinio</a>
-		<li><a href="#">Attività tirocinio</a>
+		<li><a href="GestioneTirocinio?azioneTirocinio=tirociniConclusi">Attività tirocinio</a>
 		<li><a href="GestioneConvenzione?azioneConvenzione=elencoRichiesteConvenzione">Convenzioni aziende</a>
 		<li><a href="GestioneTirocinio?azioneTirocinio=elencoAziende">Elenco aziende convenzionate</a>
 		<li><a href="GestioneUtente?azioneUtente=logout">Logout</a> <%
