@@ -41,8 +41,8 @@ public class ImpiegatoDAO extends AbstractDAO<ImpiegatoBean>{
 		PreparedStatement preparedStatement = null;
 		ResultSet result = null;
 		
-		String querySQL = "INSERT INTO " + ImpiegatoDAO.TABLE_NAME + " (nome, cognome, matricola, username, password, domanda)" +
-				"VALUES (?, ?, ?, ?, ?, ?)";
+		String querySQL = "INSERT INTO " + ImpiegatoDAO.TABLE_NAME + " (nome, cognome, matricola, email, username, password, domanda)" +
+				"VALUES (?, ?, ?, ?, ?, ?, ?)";
 		try{
 			
 			connection = ds.getConnection();
@@ -111,6 +111,7 @@ public class ImpiegatoDAO extends AbstractDAO<ImpiegatoBean>{
 				i.setNome(result.getString("nome"));
 				i.setCognome(result.getString("cognome"));
 				i.setMatricola(result.getString("matricola"));
+				i.setEmail(result.getString("email"));
 				i.setUsername(result.getString("username"));
 				i.setPassword(result.getString("password"));
 				i.setDomanda(result.getString("domanda"));
@@ -158,6 +159,7 @@ public class ImpiegatoDAO extends AbstractDAO<ImpiegatoBean>{
 				i.setNome(result.getString("nome"));
 				i.setCognome(result.getString("cognome"));
 				i.setMatricola(result.getString("matricola"));
+				i.setEmail(result.getString("email"));
 				i.setUsername(result.getString("username"));
 				i.setPassword(result.getString("password"));
 				i.setDomanda(result.getString("domanda"));
@@ -187,7 +189,7 @@ public class ImpiegatoDAO extends AbstractDAO<ImpiegatoBean>{
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
-		String querySQL = "UPDATE " + ImpiegatoDAO.TABLE_NAME + " SET nome = ?, cognome = ?, username = ?,"
+		String querySQL = "UPDATE " + ImpiegatoDAO.TABLE_NAME + " SET nome = ?, cognome = ?, matricola = ?, email = ?, username = ?,"
 				+ " password = ?, domanda = ? WHERE username = ?";
 		
 		try{
@@ -197,10 +199,13 @@ public class ImpiegatoDAO extends AbstractDAO<ImpiegatoBean>{
 			
 			preparedStatement.setString(1, impiegato.getNome());
 			preparedStatement.setString(2, impiegato.getCognome());
-			preparedStatement.setString(4, impiegato.getPassword());
-			preparedStatement.setString(5, impiegato.getDomanda());
+			preparedStatement.setString(3, impiegato.getMatricola());
+			preparedStatement.setString(4, impiegato.getEmail());
+			preparedStatement.setString(5, impiegato.getUsername());
+			preparedStatement.setString(6, impiegato.getPassword());
+			preparedStatement.setString(7, impiegato.getDomanda());
 			
-			preparedStatement.setString(6, impiegato.getUsername());
+			preparedStatement.setString(8, impiegato.getUsername());
 			
 			preparedStatement.execute();
 			return true;

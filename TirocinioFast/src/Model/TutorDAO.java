@@ -41,8 +41,8 @@ public class TutorDAO extends AbstractDAO<TutorBean>{
 		PreparedStatement preparedStatement = null;
 		ResultSet result = null;
 		
-		String querySQL = "INSERT INTO " + TutorDAO.TABLE_NAME + " (nome, cognome, matricola, username, password, domanda)" +
-				"VALUES (?, ?, ?, ?, ?, ?)";
+		String querySQL = "INSERT INTO " + TutorDAO.TABLE_NAME + " (nome, cognome, matricola, email, username, password, domanda)" +
+				"VALUES (?, ?, ?, ?, ?, ?, ?)";
 		
 		try{
 			
@@ -52,9 +52,10 @@ public class TutorDAO extends AbstractDAO<TutorBean>{
 			preparedStatement.setString(1, tutor.getNome());
 			preparedStatement.setString(2, tutor.getCognome());
 			preparedStatement.setString(3, tutor.getMatricola());
-			preparedStatement.setString(4, tutor.getUsername());
-			preparedStatement.setString(5, tutor.getPassword());
-			preparedStatement.setString(6, tutor.getDomanda());
+			preparedStatement.setString(4, tutor.getEmail());
+			preparedStatement.setString(5, tutor.getUsername());
+			preparedStatement.setString(6, tutor.getPassword());
+			preparedStatement.setString(7, tutor.getDomanda());
 			
 			preparedStatement.execute();
 			result = preparedStatement.getResultSet();
@@ -111,6 +112,7 @@ public class TutorDAO extends AbstractDAO<TutorBean>{
 				t.setNome(result.getString("nome"));
 				t.setCognome(result.getString("cognome"));
 				t.setMatricola(result.getString("matricola"));
+				t.setEmail(result.getString("email"));
 				t.setUsername(result.getString("username"));
 				t.setPassword(result.getString("password"));
 				t.setDomanda(result.getString("domanda"));
@@ -159,6 +161,7 @@ public class TutorDAO extends AbstractDAO<TutorBean>{
 				t.setNome(result.getString("nome"));
 				t.setCognome(result.getString("cognome"));
 				t.setMatricola(result.getString("matricola"));
+				t.setEmail(result.getString("email"));
 				t.setUsername(result.getString("username"));
 				t.setPassword(result.getString("password"));
 				t.setDomanda(result.getString("domanda"));
@@ -188,7 +191,7 @@ public class TutorDAO extends AbstractDAO<TutorBean>{
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
-		String querySQL = "UPDATE " + TutorDAO.TABLE_NAME + " SET nome = ?, cognome = ?, username = ?, password = ?, "
+		String querySQL = "UPDATE " + TutorDAO.TABLE_NAME + " SET nome = ?, cognome = ?, matricola = ?, email = ?, username = ?, password = ?, "
 				+ "domanda = ? WHERE  username = ?";
 		
 		try{
@@ -198,10 +201,13 @@ public class TutorDAO extends AbstractDAO<TutorBean>{
 			
 			preparedStatement.setString(1, tutor.getNome());
 			preparedStatement.setString(2, tutor.getCognome());
-			preparedStatement.setString(3, tutor.getPassword());
-			preparedStatement.setString(4, tutor.getDomanda());
-			
+			preparedStatement.setString(3, tutor.getMatricola());
+			preparedStatement.setString(4, tutor.getEmail());
 			preparedStatement.setString(5, tutor.getUsername());
+			preparedStatement.setString(6, tutor.getPassword());
+			preparedStatement.setString(7, tutor.getDomanda());
+			
+			preparedStatement.setString(8, tutor.getUsername());
 			
 			preparedStatement.execute();
 			return true;
