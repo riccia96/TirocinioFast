@@ -33,6 +33,31 @@ private static DataSource ds;
 	}
 	
 	private static final String TABLE_NAME = "convenzione";
+	
+	public synchronized int generaCodice() throws SQLException{
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		String sql = "SELECT COUNT(*) AS TOTAL FROM "+ ConvenzioneDAO.TABLE_NAME;
+		connection = ds.getConnection();
+		preparedStatement = connection.prepareStatement(sql);
+		ResultSet rs = preparedStatement.executeQuery();
+		int rowCount = 0;
+		try{
+			while(rs.next()){
+				rowCount = rs.getInt("total");
+			}
+		}finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+
+		return rowCount;
+	}
 
 	@Override
 	public synchronized int doSave(ConvenzioneBean convenzione) throws SQLException {
@@ -42,7 +67,7 @@ private static DataSource ds;
 		
 		String querySQL = "INSERT INTO " + ConvenzioneDAO.TABLE_NAME + " (azienda, tutorAccademico, impiegato,"
 				+ " luogoNascitaCeo, dataNascitaCeo, numeroDipendenti, referente, telefonoReferente, emailReferente,"
-				+ " convalida, url)" + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ " convalida, url, id)" + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		try{
 			
@@ -61,6 +86,7 @@ private static DataSource ds;
 			preparedStatement.setString(10, convenzione.getAttivita());
 			preparedStatement.setBoolean(11, convenzione.isConvalida());
 			preparedStatement.setString(12, convenzione.getUrl());
+			preparedStatement.setInt(13, generaCodice());
 			
 			preparedStatement.execute();
 			result = preparedStatement.getResultSet();
@@ -101,14 +127,14 @@ private static DataSource ds;
 		ResultSet result = null;
 		ConvenzioneBean c = new ConvenzioneBean();
 		
-		String querySQL = "SELECT * FROM " + ConvenzioneDAO.TABLE_NAME + " WHERE azienda = ?";
+		String querySQL = "SELECT * FROM " + ConvenzioneDAO.TABLE_NAME + " WHERE id = ?";
 		
 		try {
 
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(querySQL);
 
-			preparedStatement.setString(1, convenzione.getAzienda());
+			preparedStatement.setInt(1, convenzione.getId());
 
 			preparedStatement.execute();
 			result = preparedStatement.getResultSet();
@@ -127,6 +153,7 @@ private static DataSource ds;
 				c.setAttivita(result.getString("attivita"));
 				c.setConvalida(result.getBoolean("convalida"));
 				c.setUrl(result.getString("url"));
+				c.setId(result.getInt("id"));
 			
 			}
 		} catch (SQLException e) {
@@ -181,6 +208,7 @@ private static DataSource ds;
 				c.setAttivita(result.getString("attivita"));
 				c.setConvalida(result.getBoolean("convalida"));
 				c.setUrl(result.getString("url"));
+				c.setId(result.getInt("id"));
 				
 				convenzioni.add(c);
 			}			
@@ -211,7 +239,7 @@ private static DataSource ds;
 		String querySQL = "UPDATE " + ConvenzioneDAO.TABLE_NAME + 
 				" SET tutorAccademico = ?, impiegato = ?" +
 				"luogoNascitaCeo = ?, dataNascitaCeo = ?, numeroDipendenti = ?, referente = ?, "
-				+ "telefonoReferente = ?, emailReferente = ?, attivita = ?, convalida = ?, url = ? WHERE azienda = ?";
+				+ "telefonoReferente = ?, emailReferente = ?, attivita = ?, convalida = ?, url = ? WHERE id = ?";
 		
 		try{
 			
@@ -230,7 +258,7 @@ private static DataSource ds;
 			preparedStatement.setBoolean(10, convenzione.isConvalida());
 			preparedStatement.setString(11, convenzione.getUrl());
 			
-			preparedStatement.setString(12, convenzione.getAzienda());
+			preparedStatement.setInt(12, convenzione.getId());
 			
 			preparedStatement.execute();
 			return true;
@@ -258,13 +286,13 @@ private static DataSource ds;
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
-		String querySQL = "DELETE FROM " + ConvenzioneDAO.TABLE_NAME + " WHERE azienda = ?";
+		String querySQL = "DELETE FROM " + ConvenzioneDAO.TABLE_NAME + " WHERE id = ?";
 		
 		try{
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(querySQL);
 			
-			preparedStatement.setString(1, convenzione.getAzienda());
+			preparedStatement.setInt(1, convenzione.getId());
 			
 			preparedStatement.execute();
 			

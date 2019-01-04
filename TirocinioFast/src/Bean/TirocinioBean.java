@@ -32,6 +32,14 @@ public class TirocinioBean implements java.io.Serializable {
 
 	/**Getter e Setter*/
 
+	public int getId(){
+		return id;
+	}
+	
+	public void setId(int id){
+		this.id = id;
+	}
+	
 	public String getStudente() {
 		return studente;
 	}
@@ -250,5 +258,6 @@ public class TirocinioBean implements java.io.Serializable {
 	private int questionarioStudente;
 	private int questionarioAzienda;
 	private String url;
+	private int id;
 	
 }

@@ -33,6 +33,31 @@ public class QuestionarioStudenteDAO extends AbstractDAO<QuestionarioStudenteBea
 	}
 	
 	private static final String TABLE_NAME = "questionarioStudente";
+	
+	public synchronized int generaCodice() throws SQLException{
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		String sql = "SELECT COUNT(*) AS TOTAL FROM "+ QuestionarioStudenteDAO.TABLE_NAME;
+		connection = ds.getConnection();
+		preparedStatement = connection.prepareStatement(sql);
+		ResultSet rs = preparedStatement.executeQuery();
+		int rowCount = 0;
+		try{
+			while(rs.next()){
+				rowCount = rs.getInt("total");
+			}
+		}finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+
+		return rowCount;
+	}
 
 	@Override
 	public synchronized int doSave(QuestionarioStudenteBean questionarioStudente) throws SQLException {
@@ -41,8 +66,8 @@ public class QuestionarioStudenteDAO extends AbstractDAO<QuestionarioStudenteBea
 		PreparedStatement preparedStatement = null;
 		ResultSet result = null;
 		
-		String querySQL = "INSERT INTO " + QuestionarioStudenteDAO.TABLE_NAME + " (studente, azienda, tutorAccademico, impiegato, periodoTirocinio, titoloTirocinio, convalida, url)" +
-				"VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+		String querySQL = "INSERT INTO " + QuestionarioStudenteDAO.TABLE_NAME + " (studente, azienda, tutorAccademico, impiegato, periodoTirocinio, titoloTirocinio, convalida, url, id)" +
+				"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		try{
 			
 			connection = ds.getConnection();
@@ -56,6 +81,7 @@ public class QuestionarioStudenteDAO extends AbstractDAO<QuestionarioStudenteBea
 			preparedStatement.setString(6, questionarioStudente.getTitolo());
 			preparedStatement.setBoolean(7, questionarioStudente.isConvalida());
 			preparedStatement.setString(8, questionarioStudente.getUrl());
+			preparedStatement.setInt(9, questionarioStudente.getId());
 			
 			preparedStatement.execute();
 			result = preparedStatement.getResultSet();
@@ -96,15 +122,14 @@ public class QuestionarioStudenteDAO extends AbstractDAO<QuestionarioStudenteBea
 		ResultSet result = null;
 		QuestionarioStudenteBean qs = new QuestionarioStudenteBean();
 		
-		String querySQL = "SELECT * FROM " + QuestionarioStudenteDAO.TABLE_NAME + " WHERE (studente = ? AND azienda = ?) ";
+		String querySQL = "SELECT * FROM " + QuestionarioStudenteDAO.TABLE_NAME + " WHERE id = ? ";
 		
 		try {
 
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(querySQL);
 
-			preparedStatement.setString(1, questionarioStudente.getStudente());
-			preparedStatement.setString(2, questionarioStudente.getAzienda());
+			preparedStatement.setInt(1, questionarioStudente.getId());
 
 			preparedStatement.execute();
 			result = preparedStatement.getResultSet();
@@ -119,6 +144,7 @@ public class QuestionarioStudenteDAO extends AbstractDAO<QuestionarioStudenteBea
 				qs.setTitolo(result.getString("titoloTirocinio"));
 				qs.setConvalida(result.getBoolean("convalida"));
 				qs.setUrl(result.getString("url"));
+				qs.setId(result.getInt("id"));
 				
 			}
 		} catch (SQLException e) {
@@ -168,6 +194,7 @@ public class QuestionarioStudenteDAO extends AbstractDAO<QuestionarioStudenteBea
 				qs.setTitolo(result.getString("titoloTirocinio"));
 				qs.setConvalida(result.getBoolean("convalida"));
 				qs.setUrl(result.getString("url"));
+				qs.setId(result.getInt("id"));
 				
 				questionariStudente.add(qs);
 			}			
@@ -195,7 +222,7 @@ public class QuestionarioStudenteDAO extends AbstractDAO<QuestionarioStudenteBea
 		PreparedStatement preparedStatement = null;
 		
 		String querySQL = "UPDATE " + QuestionarioStudenteDAO.TABLE_NAME + " SET studente = ?, azienda = ?, tutorAccademico = ?,"
-				+ " impiegato = ?, periodoTirocinio = ?, titoloTirocinio = ?, convalida = ?, url = ? WHERE (studente = ? AND azienda = ?) ";
+				+ " impiegato = ?, periodoTirocinio = ?, titoloTirocinio = ?, convalida = ?, url = ? WHERE id = ? ";
 		
 		try{
 			
@@ -211,8 +238,7 @@ public class QuestionarioStudenteDAO extends AbstractDAO<QuestionarioStudenteBea
 			preparedStatement.setBoolean(7, questionarioStudente.isConvalida());
 			preparedStatement.setString(8, questionarioStudente.getUrl());
 			
-			preparedStatement.setString(9, questionarioStudente.getStudente());
-			preparedStatement.setString(10, questionarioStudente.getAzienda());
+			preparedStatement.setInt(9, questionarioStudente.getId());
 			
 			preparedStatement.execute();
 			return true;
@@ -240,14 +266,13 @@ public class QuestionarioStudenteDAO extends AbstractDAO<QuestionarioStudenteBea
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
-		String querySQL = "DELETE FROM " + QuestionarioStudenteDAO.TABLE_NAME + " WHERE (studente = ? AND azienda = ?) ";
+		String querySQL = "DELETE FROM " + QuestionarioStudenteDAO.TABLE_NAME + " WHERE id = ? ";
 		
 		try{
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(querySQL);
 			
-			preparedStatement.setString(1, questionarioStudente.getStudente());
-			preparedStatement.setString(2, questionarioStudente.getAzienda());
+			preparedStatement.setInt(1, questionarioStudente.getId());
 			
 			preparedStatement.execute();
 			

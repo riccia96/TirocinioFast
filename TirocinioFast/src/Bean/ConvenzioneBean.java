@@ -23,6 +23,14 @@ public class ConvenzioneBean implements java.io.Serializable {
 	
 	/**Getter e Setter*/
 	
+	public int getId(){
+		return id;
+	}
+	
+	public void setId(int id){
+		this.id = id;
+	}
+	
 	public String getAzienda() {
 		return azienda;
 	}
@@ -139,6 +147,7 @@ public class ConvenzioneBean implements java.io.Serializable {
 	
 	/**Variabili di istanza*/
 	
+	
 	private String azienda;
 	private String tutorAccademico;
 	private String impiegato;
@@ -151,5 +160,6 @@ public class ConvenzioneBean implements java.io.Serializable {
 	private String attivita;
 	private boolean convalida;
 	private String url;
+	private int id;
 	
 }

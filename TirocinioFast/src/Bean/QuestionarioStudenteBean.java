@@ -19,6 +19,14 @@ public class QuestionarioStudenteBean implements java.io.Serializable {
 
 	/**Getter e Setter*/
 
+	public int getId(){
+		return id;
+	}
+	
+	public void setId(int id){
+		this.id = id;
+	}
+	
 	public String getStudente() {
 		return studente;
 	}
@@ -111,5 +119,6 @@ public class QuestionarioStudenteBean implements java.io.Serializable {
 	private String titolo;
 	private boolean	convalida;
 	private String url;
-
+	private int id;
+	
 }
