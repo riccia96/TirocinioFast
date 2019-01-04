@@ -255,11 +255,9 @@ public class GestioneTirocinio extends HttpServlet {
 		}
 
 		if(azioneTirocinio.equals("inoltroTS")) {
-
 		}
 
 		if(azioneTirocinio.equals("inoltroSI")) {
-
 		}
 
 		if(azioneTirocinio.equals("elencoAziende")) {
