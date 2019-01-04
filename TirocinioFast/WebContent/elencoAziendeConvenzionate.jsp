@@ -25,9 +25,10 @@
 	<%@include file="ricerca.jsp"%>
 
 <div id = "contenitore">
+<table>
 
 <% for(AziendaBean a: convenzioni){ %>
-<table>
+
 <th>
 <figure class="azienda-figure"><div class="images"><img src="<%=a.getLogo()%>" alt="images-azienda"/></div>
  

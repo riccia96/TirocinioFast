@@ -26,8 +26,8 @@ public class GestioneConvenzione extends HttpServlet {
 	ConvenzioneBean convenzione = new ConvenzioneBean();
 	List<ConvenzioneBean> convenzioni = new ArrayList<ConvenzioneBean>();
 
-	ManagerUtente utente = new ManagerUtente();
-	ManagerDocumento documento = new ManagerDocumento();
+	static ManagerUtente utente = new ManagerUtente();
+	static ManagerDocumento documento = new ManagerDocumento();
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
