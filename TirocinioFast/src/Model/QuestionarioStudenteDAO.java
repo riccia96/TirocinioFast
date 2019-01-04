@@ -81,7 +81,7 @@ public class QuestionarioStudenteDAO extends AbstractDAO<QuestionarioStudenteBea
 			preparedStatement.setString(6, questionarioStudente.getTitolo());
 			preparedStatement.setBoolean(7, questionarioStudente.isConvalida());
 			preparedStatement.setString(8, questionarioStudente.getUrl());
-			preparedStatement.setInt(9, questionarioStudente.getId());
+			preparedStatement.setInt(9, generaCodice());
 			
 			preparedStatement.execute();
 			result = preparedStatement.getResultSet();

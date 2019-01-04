@@ -96,7 +96,7 @@ public class TirocinioDAO extends AbstractDAO<TirocinioBean>{
 			preparedStatement.setInt(19, tirocinio.getQuestionarioStudente());
 			preparedStatement.setInt(20, tirocinio.getQuestionarioAzienda());
 			preparedStatement.setString(21, tirocinio.getUrl());
-			preparedStatement.setInt(22, tirocinio.getId());
+			preparedStatement.setInt(22, generaCodice());
 
 			preparedStatement.execute();
 			result = preparedStatement.getGeneratedKeys();
