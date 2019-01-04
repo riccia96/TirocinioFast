@@ -27,9 +27,10 @@
 <div id = "contenitore">
 
 <% for(AziendaBean a: convenzioni){ %>
-
+<table>
+<th>
 <figure class="azienda-figure"><div class="images"><img src="<%=a.getLogo()%>" alt="images-azienda"/></div>
-  
+ 
   <figcaption>
     <a href="GestioneTirocinio?azioneTirocinio=schedaAzienda&scheda=<%=a.getUsername()%>" class="c"><h3><%=a.getNome()%></h3></a>
     <p><%=a.getDescrizione()%></p>
@@ -38,9 +39,10 @@
     </div>
   </figcaption>
 </figure>
+</th>
 <%} %>
 </div>
-
+</table>
 <%@include file="footer.jsp"%>
 
 	<script
