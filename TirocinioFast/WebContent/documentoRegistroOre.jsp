@@ -49,6 +49,8 @@
 </div>
 <br>
 <img alt="registro" src = "img/CCI04012019.jpg" height="650px" width="100%">
+<img alt="registro" src = "img/CCI04012019.jpg" height="650px" width="100%">
+<img alt="registro" src = "img/CCI04012019.jpg" height="650px" width="100%">
 
 <script> 
 function download() {
