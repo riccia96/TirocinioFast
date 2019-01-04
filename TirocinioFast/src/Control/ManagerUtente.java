@@ -81,7 +81,6 @@ public class ManagerUtente {
 		AziendaDAO aDAO = new AziendaDAO();
 		List<AziendaBean> aziende = new ArrayList<AziendaBean>();
 		aziende.addAll(aDAO.doRetrieveAll());
-		
 		return aziende;
 	}
 	

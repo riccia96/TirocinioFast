@@ -145,6 +145,7 @@ public class AziendaDAO extends AbstractDAO<AziendaBean>{
 
 	@Override
 	public synchronized List<AziendaBean> doRetrieveAll() throws SQLException {
+		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet result = null;
