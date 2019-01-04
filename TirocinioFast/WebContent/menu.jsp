@@ -11,10 +11,10 @@
 			AziendaBean a = (AziendaBean) request.getSession().getAttribute("utenteSessione");
 		}
 		if (tipo.equals("tutor")) {
-			TutorBean s = (TutorBean) request.getSession().getAttribute("utenteSessione");
+			TutorBean t = (TutorBean) request.getSession().getAttribute("utenteSessione");
 		}
 		if (tipo.equals("impiegato")) {
-			ImpiegatoBean a = (ImpiegatoBean) request.getSession().getAttribute("utenteSessione");
+			ImpiegatoBean i = (ImpiegatoBean) request.getSession().getAttribute("utenteSessione");
 		}
 	
 %>

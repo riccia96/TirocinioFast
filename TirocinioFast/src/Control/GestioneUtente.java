@@ -61,133 +61,20 @@ public class GestioneUtente extends HttpServlet {
 				System.out.println(password);
 
 				studenti = utente.getStudenti();
-				aziende = utente.getAziende();
-				
-				boolean trovato = false;
-				
-				if (studenti.size()>0){
-					for (int i = 0; i<studenti.size(); i++){
-						StudenteBean s = studenti.get(i);
-						if (s.getUsername().equals(username)){
-							if (s.getPassword().equals(password)){
-								trovato = true;
-								System.out.println("ok");
-								break;
-							}
-						}
-						else {
-							trovato = false;
-							System.out.println("non trovato");
-						}
-					}
-				}
-				
-				if (aziende.size()>0 && trovato == false){
-					for (int s = 0; s<aziende.size(); s++){
-						AziendaBean a = aziende.get(s);
-						if (a.getUsername().equals(username)){
-							if (a.getPassword().equals(password)){
-								trovato = true;
-								System.out.println("ok");
-								break;
-							}
-						}
-						else {
-							trovato = false;
-							System.out.println("non trovato");
-						}
-					}
-				}
-				}
-			catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-				
-				
-				
-				
-				
-				
-				
-	/*			
-				
-
-				studente.setUsername(username);
-				azienda.setUsername(username);
-				impiegato.setUsername(username);
-				tutor.setUsername(username);
-
-				StudenteBean s = utente.getStudente(studente);
-				AziendaBean a = utente.getAzienda(azienda);
-				TutorBean t = utente.getTutor(tutor);
-				ImpiegatoBean i = utente.getImpiegato(impiegato);
-
-
-
-				if(s.equals(null)){
-					if(a.equals(null)) {
-						if(t.equals(null)) {
-							if(i.equals(null)) {
-								response.setContentType("text/html;charset=ISO-8859-1");
-								response.getWriter().write("username no1");
-							}else {
-								if(i.getPassword().equals(password)) {
-									request.getSession().setAttribute("utenteSessione", utente.getImpiegato(impiegato));
-									request.getSession().setAttribute("tipoUtente", "impiegato");
-
-									RequestDispatcher view = request.getRequestDispatcher("home.jsp");
-									view.forward(request, response);
-								}else {
-									response.setContentType("text/html;charset=ISO-8859-1");
-									response.getWriter().write("password no2");
-								}
-							}
-						}else {
-							if(t.getPassword().equals(password)) {
-								request.getSession().setAttribute("utenteSessione", utente.getTutor(tutor));
-								request.getSession().setAttribute("tipoUtente", "tutor");
-
-								RequestDispatcher view = request.getRequestDispatcher("home.jsp");
-								view.forward(request, response);
-							}else {
-								response.setContentType("text/html;charset=ISO-8859-1");
-								response.getWriter().write("password no3");
-							}
-						}
-					}else {
-						if(a.getPassword().equals(password)) {
-							request.getSession().setAttribute("utenteSessione", utente.getAzienda(azienda));
-							request.getSession().setAttribute("tipoUtente", "azienda");
-
-							RequestDispatcher view = request.getRequestDispatcher("home.jsp");
-							view.forward(request, response);
-						}else {
-							response.setContentType("text/html;charset=ISO-8859-1");
-							response.getWriter().write("password no4");
-						}
-					}
-				}else {
-					if(s.getPassword().equals(password)) {
-
-						request.getSession().setAttribute("utenteSessione", utente.getStudente(studente));
-						request.getSession().setAttribute("tipoUtente", "studente");
-
-						RequestDispatcher view = request.getRequestDispatcher("home.jsp");
-						view.forward(request, response);
-					}else {
-						response.setContentType("text/html;charset=ISO-8859-1");
-						response.getWriter().write("password no5");
-					}
+				for(StudenteBean s : studenti) {
+					System.out.println(s);
 				}
 
 
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
+
 		}
 
-*/
+
+
+
 		if(azioneUtente.equals("logout")) {
 			request.getSession().invalidate();
 			response.sendRedirect("index.jsp");
