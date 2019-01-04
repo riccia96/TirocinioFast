@@ -66,26 +66,24 @@ public class QuestionarioAziendaDAO extends AbstractDAO<QuestionarioAziendaBean>
 		PreparedStatement preparedStatement = null;
 		ResultSet result = null;
 		
-		String querySQL = "INSERT INTO " + QuestionarioAziendaDAO.TABLE_NAME + " (studente, azienda, tutorAccademico, impiegato, periodoTirocinio, titoloTirocinio, posizioneRicoperta, convalida, url, id)" +
+		String querySQL = "INSERT INTO " + QuestionarioAziendaDAO.TABLE_NAME + " (id, studente, azienda, tutorAccademico, impiegato, "
+				+ "periodoTirocinio, titoloTirocinio, posizioneRicoperta, convalida, url)" +
 				"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		try{
 			
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(querySQL, Statement.RETURN_GENERATED_KEYS);
 			
-			preparedStatement.setString(1, questionarioAzienda.getStudente());
-			preparedStatement.setString(2, questionarioAzienda.getAzienda());
-			preparedStatement.setString(3, questionarioAzienda.getTutorAccademico());
-			preparedStatement.setString(4, questionarioAzienda.getImpiegato());
-			preparedStatement.setString(5, questionarioAzienda.getPeriodoTirocinio());
-			preparedStatement.setString(6, questionarioAzienda.getTitoloTirocinio());
-			preparedStatement.setString(4, questionarioAzienda.getImpiegato());
-			preparedStatement.setString(5, questionarioAzienda.getPeriodoTirocinio());
-			preparedStatement.setString(6, questionarioAzienda.getTitoloTirocinio());
-			preparedStatement.setString(7, questionarioAzienda.getPosizioneRicoperta());
-			preparedStatement.setBoolean(8, questionarioAzienda.isConvalida());
-			preparedStatement.setString(9, questionarioAzienda.getUrl());
-			preparedStatement.setInt(10, generaCodice());
+			preparedStatement.setInt(1, generaCodice());
+			preparedStatement.setString(2, questionarioAzienda.getStudente());
+			preparedStatement.setString(3, questionarioAzienda.getAzienda());
+			preparedStatement.setString(4, questionarioAzienda.getTutorAccademico());
+			preparedStatement.setString(5, questionarioAzienda.getImpiegato());
+			preparedStatement.setString(6, questionarioAzienda.getPeriodoTirocinio());
+			preparedStatement.setString(7, questionarioAzienda.getTitoloTirocinio());
+			preparedStatement.setString(8, questionarioAzienda.getPosizioneRicoperta());
+			preparedStatement.setBoolean(9, questionarioAzienda.isConvalida());
+			preparedStatement.setString(10, questionarioAzienda.getUrl());
 			
 			preparedStatement.execute();
 			result = preparedStatement.getResultSet();
@@ -140,6 +138,7 @@ public class QuestionarioAziendaDAO extends AbstractDAO<QuestionarioAziendaBean>
 			
 			while(result.next()){
 				
+				qa.setId(result.getInt("id"));
 				qa.setStudente(result.getString("studente"));
 				qa.setAzienda(result.getString("azienda"));
 				qa.setTutorAccademico(result.getString("tutorAccademico"));
@@ -149,7 +148,6 @@ public class QuestionarioAziendaDAO extends AbstractDAO<QuestionarioAziendaBean>
 				qa.setPosizioneRicoperta(result.getString("posizioneRicoperta"));
 				qa.setConvalida(result.getBoolean("convalida"));
 				qa.setUrl(result.getString("url"));
-				qa.setId(result.getInt("id"));
 				
 			}
 		} catch (SQLException e) {
@@ -191,6 +189,7 @@ public class QuestionarioAziendaDAO extends AbstractDAO<QuestionarioAziendaBean>
 				
 				QuestionarioAziendaBean qa = new QuestionarioAziendaBean();
 				
+				qa.setId(result.getInt("id"));
 				qa.setStudente(result.getString("studente"));
 				qa.setAzienda(result.getString("azienda"));
 				qa.setTutorAccademico(result.getString("tutorAccademico"));
@@ -200,8 +199,7 @@ public class QuestionarioAziendaDAO extends AbstractDAO<QuestionarioAziendaBean>
 				qa.setPosizioneRicoperta(result.getString("posizioneRicoperta"));
 				qa.setConvalida(result.getBoolean("convalida"));
 				qa.setUrl(result.getString("url"));
-				qa.setId(result.getInt("id"));
-				
+								
 				questionariAzienda.add(qa);
 			}			
 		} catch (SQLException e) {
@@ -228,7 +226,7 @@ public class QuestionarioAziendaDAO extends AbstractDAO<QuestionarioAziendaBean>
 		PreparedStatement preparedStatement = null;
 		
 		String querySQL = "UPDATE " + QuestionarioAziendaDAO.TABLE_NAME + " SET studente = ?, azienda = ?, tutorAccademico = ?,"
-				+ " impiegato = ?, periodoTirocinio = ?, titoloTirocinio = ?, posizioneRicoperta = ?, convalida = ?, url = ?, id = ? WHERE id = ? ";
+				+ " impiegato = ?, periodoTirocinio = ?, titoloTirocinio = ?, posizioneRicoperta = ?, convalida = ?, url = ? WHERE id = ? ";
 		
 		try{
 			
