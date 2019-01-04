@@ -42,21 +42,18 @@ TutorBean tutor;
 	  	for (int s = 0; s < studenti.size(); s++){
 	  		studente = studenti.get(s);
 	  		if(tirocinio.getStudente().equals(studente.getUsername())){
-	  			studente = studenti.get(s);
 	  			break;
 	  		}
 	  	}
 	  	for (int t = 0; t< tutors.size();t++){
 	  		tutor = tutors.get(t);
 	  		if(tirocinio.getTutorAccademico().equals(tutor.getUsername())){
-	  			tutor = tutors.get(t);
 	  			break;
 	  		}
 	  	}
 	  	for (int b = 0; b<aziende.size(); b++){
 	  		azienda = aziende.get(b);
 	  		if(tirocinio.getAzienda().equals(azienda.getUsername())){
-	  			azienda = aziende.get(b);
 	  			break;
 	  		}
 	  	}
