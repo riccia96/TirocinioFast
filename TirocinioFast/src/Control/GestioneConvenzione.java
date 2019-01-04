@@ -22,8 +22,8 @@ import Bean.ConvenzioneBean;
 public class GestioneConvenzione extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	ManagerUtente utente = new ManagerUtente();
-	ManagerDocumento documento = new ManagerDocumento();
+	static ManagerUtente utente = new ManagerUtente();
+	static ManagerDocumento documento = new ManagerDocumento();
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
