@@ -41,7 +41,7 @@
 			if (tipoUm.equals("azienda")) {
 		%>
 		<li><a href="Gestioneutente?azioneUtente=areaPersonale">Area Personale</a></li>
-		<li><a href="#">Convenzione</a></li>
+		<li><a href="convenzione.jsp">Convenzione</a></li>
 		<li><a href="GestioneTirocinio?azioneTirocinio=elencoRichiesteTirocinio">Richieste tirocinio</a></li>
 		<li><a href="GestioneUtente?azioneUtente=logout">Logout</a></li>
 		<%
