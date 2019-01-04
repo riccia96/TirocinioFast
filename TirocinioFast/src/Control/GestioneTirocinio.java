@@ -113,7 +113,7 @@ public class GestioneTirocinio extends HttpServlet {
 								if(t.isConvalidaAzienda() && t.isConvalidaTutor() && t.isConvalidaStudente()) {
 									richieste.add(t);
 								}
-							}
+							} 
 
 							request.getSession().setAttribute("richiesteTirocinio", richieste);
 
