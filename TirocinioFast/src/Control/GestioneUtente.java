@@ -150,10 +150,17 @@ public class GestioneUtente extends HttpServlet {
 				impiegato.setUsername(username);
 				tutor.setUsername(username);
 
-				if(utente.getStudente(studente).equals(null)){
-					if(utente.getAzienda(azienda).equals(null)){
-						if(utente.getImpiegato(impiegato).equals(null)){
-							if(utente.getTutor(tutor).equals(null)){
+				StudenteBean s = utente.getStudente(studente);
+				AziendaBean a = utente.getAzienda(azienda);
+				TutorBean t = utente.getTutor(tutor);
+				ImpiegatoBean i = utente.getImpiegato(impiegato);
+
+
+
+				if(s.getUsername().equals("")){
+					if(a.getUsername().equals("")) {
+						if(t.getUsername().equals("")) {
+							if(i.getUsername().equals("")) {
 								response.getWriter().write("username no");
 							}else {
 								if(utente.getTutor(tutor).getDomanda().equals(risposta)){

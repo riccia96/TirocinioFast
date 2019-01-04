@@ -15,6 +15,7 @@ import javax.sql.DataSource;
 
 import Bean.ImpiegatoBean;
 
+
 public class ImpiegatoDAO extends AbstractDAO<ImpiegatoBean>{
 	
 	private static DataSource ds;
