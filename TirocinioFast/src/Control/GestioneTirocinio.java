@@ -38,9 +38,9 @@ public class GestioneTirocinio extends HttpServlet {
 	List<TirocinioBean> tirocini = new ArrayList<TirocinioBean>();
 	List<ConvenzioneBean> convenzioni = new ArrayList<ConvenzioneBean>();
 
-	ManagerUtente utente = new ManagerUtente();
-	ManagerTirocinio richiesta = new ManagerTirocinio();
-	ManagerDocumento documento = new ManagerDocumento();
+	static ManagerUtente utente = new ManagerUtente();
+	static ManagerTirocinio richiesta = new ManagerTirocinio();
+	static ManagerDocumento documento = new ManagerDocumento();
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -262,17 +262,18 @@ public class GestioneTirocinio extends HttpServlet {
 
 		if(azioneTirocinio.equals("elencoAziende")) {
 			try {
+				request.getSession().removeAttribute("listaAziende");
 				aziende.addAll(utente.getAziende());
 				convenzioni.addAll(documento.convenzioni());
 				List<AziendaBean> aziendeConv = new ArrayList<AziendaBean>();
 				for(AziendaBean a : aziende) {
 					for(ConvenzioneBean c : convenzioni) {
-						if(a.getPartitaIva().equals(c.getAzienda()) && c.isConvalida()) {
+						if(a.getUsername().equals(c.getAzienda()) && c.isConvalida()) {
 							aziendeConv.add(a);
 						}
 					}
 				}
-
+				
 				if(aziendeConv.equals(null)) {
 					response.setContentType("text/html;charset=ISO-8859-1");
 					response.getWriter().write("nessuna azienda convenzionata");
@@ -281,6 +282,7 @@ public class GestioneTirocinio extends HttpServlet {
 					//view.forward(request, response);
 				}
 				else {
+					
 					request.getSession().setAttribute("listaAziende", aziendeConv);
 					
 					RequestDispatcher view = request.getRequestDispatcher("elencoAziendeConvenzionate.jsp");

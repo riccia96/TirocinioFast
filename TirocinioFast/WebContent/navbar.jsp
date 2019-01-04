@@ -4,7 +4,7 @@
  <html>
  <head>
  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
- <title>Footer</title>
+ <title>Navbar</title>
  <link rel="stylesheet" href="css/navbar.css">
  <link rel="stylesheet" href="css/bootstrap.min.css">
  </head>

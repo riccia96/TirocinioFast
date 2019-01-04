@@ -1,0 +1,245 @@
+@CHARSET "ISO-8859-1";
+@import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,500,700);
+
+body{
+  background-color: #212121;
+}
+
+@media all and (max-width: 999999999px) and (min-width: 1340px) {
+
+.azienda-figure {
+  font-family: 'Raleway', Arial, sans-serif;
+  position: relative;
+  float: left;
+  overflow: hidden;
+  margin: 10px 1%;
+  height: 420px;
+  width: 300px;
+  background: #ffffff;
+  text-align: left;
+  color: #000000;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  font-size: 16px;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-perspective: 20em;
+  perspective: 20em;
+  display: inline-grid;
+}
+.azienda-figure * {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+}
+
+
+  .images{
+    width: 250px;
+    height: 230px;
+    margin-left: 6%;
+  }
+  
+  
+.images img {
+  width: 100%;
+  height: 100%;
+  vertical-align: top;
+  position: relative;
+}
+
+
+.azienda-figure figcaption {
+  padding: 20px;
+}
+.azienda-figure h3,
+.azienda-figure p {
+  margin: 0;
+}
+.azienda-figure #riempimento{
+  color: white;
+}
+
+.azienda-figure h3 {
+  font-size: 1.3em;
+  font-weight: 700;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+.azienda-figure p {
+  font-size: 0.9em;
+  letter-spacing: 1px;
+  font-weight: 400;
+}
+.azienda-figure .sede {
+  font-weight: 500;
+  font-size: 1.4em;
+  line-height: 48px;
+  letter-spacing: 1.1px;
+}
+
+
+.azienda-figure a.c {
+ text-decoration: none;
+  color: black;
+}
+
+
+
+}
+
+@media all and (max-width: 1339px) and (min-width: 1000px) {
+
+  .azienda-figure {
+  font-family: 'Raleway', Arial, sans-serif;
+  position: relative;
+  float: left;
+  overflow: hidden;
+  margin: 10px 1%;
+  height: 430px;
+  width: 290px;
+  background: #ffffff;
+  text-align: left;
+  color: #000000;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  font-size: 16px;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-perspective: 20em;
+  perspective: 20em;
+  display: inline-grid;
+}
+.azienda-figure * {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+}
+.images{
+    width: 240px;
+    height: 220px;
+    margin-left: 8%;
+  }
+  
+.images img {
+  width: 100%;
+  height: 100%;
+  vertical-align: top;
+  position: relative;
+}
+
+.azienda-figure figcaption {
+  padding: 20px;
+}
+.azienda-figure h3,
+.azienda-figure p {
+  margin: 0;
+}
+.azienda-figure #riempimento{
+  color: white;
+}
+
+.azienda-figure h3 {
+  font-size: 1.5em;
+  font-weight: 700;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+.azienda-figure p {
+  font-size: 0.9em;
+  letter-spacing: 1px;
+  font-weight: 400;
+}
+.azienda-figure .sede {
+  font-weight: 500;
+  font-size: 1.5em;
+  line-height: 48px;
+  letter-spacing: 1px;
+}
+
+
+.azienda-figure a.c {
+ text-decoration: none;
+  color: black;
+}
+
+}
+
+@media all and (max-width: 999px) and (min-width: 300px) {
+
+  .azienda-figure {
+  font-family: 'Raleway', Arial, sans-serif;
+  position: relative;
+  float: left;
+  overflow: hidden;
+  margin: 10px 1%;
+  height: 400px;
+  width: 260px;
+  background: #ffffff;
+  text-align: left;
+  color: #000000;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  font-size: 16px;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-perspective: 20em;
+  perspective: 20em;
+  display: inline-grid;
+}
+.azienda-figure * {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+}
+.images{
+    width: 220px;
+    height: 200px;
+    margin-left: 8%;
+  }
+  
+.images img {
+  width: 100%;
+  height: 100%;
+  vertical-align: top;
+  position: relative;
+}
+
+.azienda-figure figcaption {
+  padding: 20px;
+}
+.azienda-figure h3,
+.azienda-figure p {
+  margin: 0;
+}
+.azienda-figure #riempimento{
+  color: white;
+}
+
+.azienda-figure h3 {
+  font-size: 1.5em;
+  font-weight: 700;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+.azienda-figure p {
+  font-size: 0.8em;
+  letter-spacing: 1px;
+  font-weight: 400;
+}
+.azienda-figure .sede {
+  font-weight: 500;
+  font-size: 1.4em;
+  line-height: 48px;
+  letter-spacing: 1px;
+}
+
+
+.azienda-figure a.c {
+ text-decoration: none;
+  color: black;
+}
+
+
+}

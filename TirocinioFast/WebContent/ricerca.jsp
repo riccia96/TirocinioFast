@@ -4,16 +4,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Ricerca</title>
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 <body>
 
 <form name="ricerca" method="post" action="/search" style="border: 1px solid orange; margin-left: 25%;">
-<label>Cerca azienda per nome e/o geolocalizzazione <br>
-<input type="search" autocomplete="on" placeholder="Nome" name="nome">
-<input type="search" autocomplete="on" placeholder="Geolocalizzazione" name="geolocalizzazione">
+<label>Cerca azienda per nome e/o sede <br>
+<input type="search" autocomplete="on" placeholder="Nome" name="nomeAzienda">
+<input type="search" autocomplete="on" placeholder="Sede Azienda" name="sedeAzienda">
 <input type="image" name="submit" src="img\icona-ricerca-dati.png" height="40px" width="40px">
 </label>
 </form>
