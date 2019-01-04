@@ -6,7 +6,20 @@ public class ConvenzioneBean implements java.io.Serializable {
 	
 	/**Costruttore*/
 	
-	public ConvenzioneBean() {}	
+	public ConvenzioneBean() {
+		this.azienda = "";
+		this.tutorAccademico = "";
+		this.impiegato = "";
+		this.luogoNascitaCeo = "";
+		this.dataNascitaCeo = "";
+		this.numeroDipendenti = 0;
+		this.referente = "";
+		this.telefonoReferente = "";
+		this.emailReferente = "";
+		this.attivita = "";
+		this.convalida = false;
+		this.url = "";
+	}	
 	
 	/**Getter e Setter*/
 	

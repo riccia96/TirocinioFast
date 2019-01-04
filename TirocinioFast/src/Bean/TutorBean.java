@@ -9,6 +9,11 @@ public class TutorBean implements java.io.Serializable {
 	public TutorBean() {
 		this.username = "";
 		this.password = "";
+		this.matricola = "";
+		this.email = "";
+		this.username = "";
+		this.password = "";
+		this.domanda = "";
 	}
 
 	/**Getter e Setter*/

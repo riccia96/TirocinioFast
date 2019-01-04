@@ -7,8 +7,13 @@ public class ImpiegatoBean implements java.io.Serializable {
 	/**Costruttore*/
 
 	public ImpiegatoBean() {
+		this.nome = "";
+		this.cognome = "";
+		this.matricola = "";
+		this.email = "";
 		this.username = "";
 		this.password = "";
+		this.domanda = "";
 	}
 
 	/**Getter e Setter*/

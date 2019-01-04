@@ -8,7 +8,18 @@ public class QuestionarioAziendaBean implements java.io.Serializable {
 	
 	/**Costruttore*/
 
-	public QuestionarioAziendaBean() {}
+	public QuestionarioAziendaBean() {
+		this.studente = "";
+		this.azienda = "";
+		this.tutorAccademico = "";
+		this.impiegato = "";
+		this.periodoTirocinio = "";
+		this.titoloTirocinio = "";
+		this.posizioneRicoperta = "";
+		this.convalida = false;
+		this.url = "";
+
+	}
 
 	/**Getter e Setter*/
  

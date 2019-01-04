@@ -9,6 +9,19 @@ public class StudenteBean implements Serializable{
 	/**Costruttore*/
 	
 	public StudenteBean() {
+		this.nome = "";
+		this.cognome = "";
+		this.luogoNascita = "";
+		this.dataNascita = "";
+		this.indirizzo = "";
+		this.citta = "";
+		this.codiceFiscale = "";
+		this.matricola = "";
+		this.email = "";
+		this.telefono = "";
+		this.username = "";
+		this.password = "";
+		this.domanda = "";
 		this.username = "";
 		this.password = "";
 	}

@@ -6,7 +6,16 @@ public class QuestionarioStudenteBean implements java.io.Serializable {
 	
 	/**Costruttore*/
 
-	public QuestionarioStudenteBean() {}
+	public QuestionarioStudenteBean() {
+		this.studente = "";
+		this.azienda = "";
+		this.tutorAccademico = "";
+		this.impiegato = "";
+		this.periodo = "";
+		this.titolo = "";
+		this.convalida = false;
+		this.url = "";
+	}
 
 	/**Getter e Setter*/
 

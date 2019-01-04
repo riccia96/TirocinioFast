@@ -6,7 +6,29 @@ public class TirocinioBean implements java.io.Serializable {
 	
 	/**Costruttore*/
 
-	public TirocinioBean() {}
+	public TirocinioBean() {
+		this.studente = "";
+		this.azienda = "";
+		this.tutorAccademico = "";
+		this.impiegato = "";
+		this.annoAccademico = "";
+		this.cfu = 0;
+		this.handicap = false;
+		this.sedeTirocinio = "";
+		this.accessoLocali = "";
+		this.periodoTirocinio = "";
+		this.obiettivoTirocinio = "";
+		this.facilitazioni = "";
+		this.convalidaAzienda = false;
+		this.convalidaTutor = false;
+		this.convalidaStudente = false;
+		this.convalidaRichiesta = false;
+		this.convalidaAttivita = false;
+		this.registroOre = "";
+		this.questionarioStudente = 0;
+		this.questionarioAzienda = 0;
+		this.url = "";
+	}
 
 	/**Getter e Setter*/
 
