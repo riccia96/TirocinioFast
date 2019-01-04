@@ -150,7 +150,6 @@ public class AziendaDAO extends AbstractDAO<AziendaBean>{
 		PreparedStatement preparedStatement = null;
 		ResultSet result = null;
 		List<AziendaBean> aziende = new ArrayList<AziendaBean>();
-		AziendaBean a = new AziendaBean();
 		
 		String querySQL = "SELECT * FROM " + AziendaDAO.TABLE_NAME;
 		
@@ -163,6 +162,8 @@ public class AziendaDAO extends AbstractDAO<AziendaBean>{
 			result = preparedStatement.getResultSet();
 
 			while (result.next()) {
+				
+				AziendaBean a = new AziendaBean();
 				
 				a.setNome(result.getString("nome"));
 				a.setPartitaIva(result.getString("partitaIva"));

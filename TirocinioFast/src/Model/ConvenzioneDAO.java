@@ -154,7 +154,6 @@ private static DataSource ds;
 		PreparedStatement preparedStatement = null;
 		ResultSet result = null;
 		List<ConvenzioneBean> convenzioni = new ArrayList<ConvenzioneBean>();
-		ConvenzioneBean c = new ConvenzioneBean();
 		
 		String querySQL = "SELECT * FROM " + ConvenzioneDAO.TABLE_NAME;
 		
@@ -167,6 +166,8 @@ private static DataSource ds;
 			result = preparedStatement.getResultSet();
 			
 			while(result.next()){
+				
+				ConvenzioneBean c = new ConvenzioneBean();
 				
 				c.setAzienda(result.getString("azienda"));
 				c.setTutorAccademico(result.getString("tutorAccademico"));

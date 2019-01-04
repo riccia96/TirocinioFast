@@ -141,7 +141,6 @@ public class TutorDAO extends AbstractDAO<TutorBean>{
 		PreparedStatement preparedStatement = null;
 		ResultSet result = null;
 		List<TutorBean> tutor = new ArrayList<TutorBean>();
-		TutorBean t = new TutorBean();
 		
 		String querySQL = "SELECT * FROM " + TutorDAO.TABLE_NAME;
 		
@@ -154,6 +153,8 @@ public class TutorDAO extends AbstractDAO<TutorBean>{
 			result = preparedStatement.getResultSet();
 			
 			while(result.next()){
+				
+				TutorBean t = new TutorBean();
 				
 				t.setNome(result.getString("nome"));
 				t.setCognome(result.getString("cognome"));

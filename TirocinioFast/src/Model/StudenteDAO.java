@@ -161,7 +161,7 @@ public class StudenteDAO extends AbstractDAO<StudenteBean>{
 		PreparedStatement preparedStatement = null;
 		ResultSet result = null;
 		List<StudenteBean> studenti = new ArrayList<StudenteBean>();
-		StudenteBean s = new StudenteBean();
+		
 
 		String querySQL = "SELECT * FROM " + StudenteDAO.TABLE_NAME; 
 
@@ -175,6 +175,8 @@ public class StudenteDAO extends AbstractDAO<StudenteBean>{
 
 			while (result.next()) {
 
+				StudenteBean s = new StudenteBean();
+				
 				s.setNome(result.getString("nome"));
 				s.setCognome(result.getString("cognome"));
 				s.setLuogoNascita(result.getString("luogoNascita"));
@@ -188,9 +190,7 @@ public class StudenteDAO extends AbstractDAO<StudenteBean>{
 				s.setUsername(result.getString("username"));
 				s.setPassword(result.getString("password"));
 				s.setDomanda(result.getString("domanda"));
-				
-					System.out.println("while"+s);
-				
+
 				studenti.add(s);
 
 			}
@@ -209,9 +209,7 @@ public class StudenteDAO extends AbstractDAO<StudenteBean>{
 				cse.printStackTrace();
 			}
 		}
-		for(StudenteBean se : studenti) {
-			System.out.println("finedao"+se);
-		}
+
 		return studenti;
 	}
 

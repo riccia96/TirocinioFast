@@ -176,7 +176,6 @@ public class TirocinioDAO extends AbstractDAO<TirocinioBean>{
 		PreparedStatement preparedStatement = null;
 		ResultSet result = null;
 		List<TirocinioBean> tirocini = new ArrayList<TirocinioBean>();
-		TirocinioBean t = new TirocinioBean();
 
 		String querySQL = "SELECT * FROM " + TirocinioDAO.TABLE_NAME; 
 
@@ -189,7 +188,9 @@ public class TirocinioDAO extends AbstractDAO<TirocinioBean>{
 			result = preparedStatement.getResultSet();
 
 			while (result.next()) {
-
+				
+				TirocinioBean t = new TirocinioBean();
+				
 				t.setStudente(result.getString("studente"));
 				t.setAzienda(result.getString("azienda"));
 				t.setTutorAccademico(result.getString("tutorAccademico"));

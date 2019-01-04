@@ -145,7 +145,6 @@ public class QuestionarioStudenteDAO extends AbstractDAO<QuestionarioStudenteBea
 		PreparedStatement preparedStatement = null;
 		ResultSet result = null;
 		List<QuestionarioStudenteBean> questionariStudente = new ArrayList<QuestionarioStudenteBean>();
-		QuestionarioStudenteBean qs = new QuestionarioStudenteBean();
 		
 		String querySQL = "SELECT * FROM " + QuestionarioStudenteDAO.TABLE_NAME;
 		
@@ -158,6 +157,8 @@ public class QuestionarioStudenteDAO extends AbstractDAO<QuestionarioStudenteBea
 			result = preparedStatement.getResultSet();
 			
 			while(result.next()){
+				
+				QuestionarioStudenteBean qs = new QuestionarioStudenteBean();
 				
 				qs.setStudente(result.getString("studente"));
 				qs.setAzienda(result.getString("azienda"));

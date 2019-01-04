@@ -140,7 +140,6 @@ public class ImpiegatoDAO extends AbstractDAO<ImpiegatoBean>{
 		PreparedStatement preparedStatement = null;
 		ResultSet result = null;
 		List<ImpiegatoBean> impiegati = new ArrayList<ImpiegatoBean>();
-		ImpiegatoBean i = new ImpiegatoBean();
 		
 		String querySQL = "SELECT * FROM " + ImpiegatoDAO.TABLE_NAME;
 		
@@ -153,6 +152,8 @@ public class ImpiegatoDAO extends AbstractDAO<ImpiegatoBean>{
 			result = preparedStatement.getResultSet();
 			
 			while(result.next()){
+				
+				ImpiegatoBean i = new ImpiegatoBean();
 				
 				i.setNome(result.getString("nome"));
 				i.setCognome(result.getString("cognome"));
