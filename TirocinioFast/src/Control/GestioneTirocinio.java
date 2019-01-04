@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import Bean.AziendaBean;
 import Bean.ConvenzioneBean;
-import Bean.ImpiegatoBean;
 import Bean.StudenteBean;
 import Bean.TirocinioBean;
 import Bean.TutorBean;
@@ -25,18 +24,6 @@ import Bean.TutorBean;
 @WebServlet("/GestioneTirocinio")
 public class GestioneTirocinio extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	StudenteBean studente = new StudenteBean();
-	List<StudenteBean> studenti = new ArrayList<StudenteBean>();
-	AziendaBean azienda = new AziendaBean();
-	List<AziendaBean> aziende = new ArrayList<AziendaBean>();
-	TutorBean tutor = new TutorBean();
-	List<TutorBean> tutors = new ArrayList<TutorBean>();
-	ImpiegatoBean impiegato = new ImpiegatoBean();
-
-	TirocinioBean tirocinio = new TirocinioBean();
-	List<TirocinioBean> tirocini = new ArrayList<TirocinioBean>();
-	List<ConvenzioneBean> convenzioni = new ArrayList<ConvenzioneBean>();
 
 	static ManagerUtente utente = new ManagerUtente();
 	static ManagerTirocinio richiesta = new ManagerTirocinio();
@@ -67,6 +54,9 @@ public class GestioneTirocinio extends HttpServlet {
 
 		if(azioneTirocinio.equals("tirocinioDatiStudente")) {
 			try {
+				StudenteBean studente = new StudenteBean();
+				TirocinioBean tirocinio = new TirocinioBean();
+				
 				studente = (StudenteBean) request.getSession().getAttribute("utenteSessione");
 				String aziendaTirocinio = (String) request.getSession().getAttribute("aziendaTirocinio");
 				String tutorAccademico = request.getParameter("tutor"); 
@@ -102,8 +92,14 @@ public class GestioneTirocinio extends HttpServlet {
 
 		if(azioneTirocinio.equals("elencoRichiesteTirocinio")) {
 			try {
-				tirocini.addAll(documento.richiesteTirocinio());
+				StudenteBean studente = new StudenteBean();
+				TutorBean tutor = new TutorBean();
+				AziendaBean azienda = new AziendaBean();
+
+				List<TirocinioBean> tirocini = new ArrayList<TirocinioBean>();
 				List<TirocinioBean> richieste = new ArrayList<TirocinioBean>();
+
+				tirocini.addAll(documento.richiesteTirocinio());
 
 				if(!(request.getSession().getAttribute("tipoUtente") == "studente")) {
 					if(!(request.getSession().getAttribute("tipoUtente") == "azienda")) {
@@ -124,7 +120,7 @@ public class GestioneTirocinio extends HttpServlet {
 
 							RequestDispatcher view = request.getRequestDispatcher("elencoRichiesteTirocinio.jsp");
 							view.forward(request, response);
-						} else {
+						} else {							
 							tutor = (TutorBean) request.getSession().getAttribute("utenteSessione");
 
 							for(TirocinioBean t : tirocini) {
@@ -144,6 +140,7 @@ public class GestioneTirocinio extends HttpServlet {
 							view.forward(request, response);
 						}
 					} else {
+						
 						azienda = (AziendaBean) request.getSession().getAttribute("utenteSessione");
 
 						for(TirocinioBean t : tirocini) {
@@ -163,6 +160,7 @@ public class GestioneTirocinio extends HttpServlet {
 						view.forward(request, response);
 					}
 				} else {
+					
 					studente = (StudenteBean) request.getSession().getAttribute("utenteSessione");
 
 					for(TirocinioBean t : tirocini) {
@@ -197,6 +195,9 @@ public class GestioneTirocinio extends HttpServlet {
 			//nome attributo sessione sarà richiestaSelezionata
 			//dispatcher a mostra pdf , da chiedere a mario
 			try {
+				TirocinioBean tirocinio = new TirocinioBean();
+				List<TirocinioBean> tirocini = new ArrayList<TirocinioBean>();
+				
 				String url = request.getParameter("richiesta");
 				tirocini.addAll(documento.richiesteTirocinio());
 
@@ -223,6 +224,9 @@ public class GestioneTirocinio extends HttpServlet {
 
 		if(azioneTirocinio.equals("tirocinioDatiAzienda")) {
 			try {
+				AziendaBean azienda = new AziendaBean();
+				TirocinioBean tirocinio = new TirocinioBean();
+				
 				azienda = (AziendaBean) request.getSession().getAttribute("utenteSessione");
 
 				String sede = request.getParameter("sede");
@@ -237,7 +241,8 @@ public class GestioneTirocinio extends HttpServlet {
 				tirocinio.setFacilitazioni(facilitazioni);
 
 				richiesta.salvaTirocinio(tirocinio);
-
+				
+				request.getSession().setAttribute("aziendaTirocinio", azienda);
 				//portarsi avanti il nome della jsp da cui proviene il documento
 				RequestDispatcher view = request.getRequestDispatcher("mostraPDF.jsp");
 				view.forward(request, response);
@@ -262,6 +267,9 @@ public class GestioneTirocinio extends HttpServlet {
 
 		if(azioneTirocinio.equals("elencoAziende")) {
 			try {
+				List<AziendaBean> aziende = new ArrayList<AziendaBean>();
+				List<ConvenzioneBean> convenzioni = new ArrayList<ConvenzioneBean>();
+				
 				request.getSession().removeAttribute("listaAziende");
 				aziende.addAll(utente.getAziende());
 				convenzioni.addAll(documento.convenzioni());
@@ -295,6 +303,8 @@ public class GestioneTirocinio extends HttpServlet {
 
 		if(azioneTirocinio.equals("schedaAzienda")) {
 			try {
+				AziendaBean azienda = new AziendaBean();
+				
 				azienda = (AziendaBean) request.getSession().getAttribute("scheda");
 
 				AziendaBean a = utente.getAzienda(azienda);
@@ -309,6 +319,8 @@ public class GestioneTirocinio extends HttpServlet {
 
 		if(azioneTirocinio.equals("ricercaAzienda")) {
 			try {
+				List<AziendaBean> aziende = new ArrayList<AziendaBean>();
+				
 				String nome = request.getParameter("nomeAzienda").toLowerCase();
 				String sede = request.getParameter("sedeAzienda").toLowerCase();
 
@@ -343,8 +355,17 @@ public class GestioneTirocinio extends HttpServlet {
 		
 		if(azioneTirocinio.equals("tirociniConclusi")){
 			try{
-				tirocini = richiesta.richiesteTirocinio();
+				StudenteBean studente = new StudenteBean();
+				AziendaBean azienda = new AziendaBean();
+				TutorBean tutor = new TutorBean();
+				
+				List<TirocinioBean> tirocini = new ArrayList<TirocinioBean>();
 				List<TirocinioBean> conclusi = new ArrayList<TirocinioBean>();
+				List<StudenteBean> studenti = new ArrayList<StudenteBean>();
+				List<AziendaBean> aziende = new ArrayList<AziendaBean>();
+				List<TutorBean> tutors = new ArrayList<TutorBean>();
+				
+				tirocini = richiesta.richiesteTirocinio();
 				for(TirocinioBean t: tirocini){
 					if(t.isConvalidaAzienda() && t.isConvalidaTutor() && 
 							t.isConvalidaStudente() && t.isConvalidaRichiesta() && t.isConvalidaStudente()){

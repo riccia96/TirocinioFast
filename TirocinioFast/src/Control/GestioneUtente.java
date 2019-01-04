@@ -25,14 +25,6 @@ import Bean.TutorBean;
 public class GestioneUtente extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	StudenteBean studente = new StudenteBean();
-	List<StudenteBean> studenti = new ArrayList<StudenteBean>();
-	AziendaBean azienda = new AziendaBean();
-	List<AziendaBean> aziende = new ArrayList<AziendaBean>();
-	TutorBean tutor = new TutorBean();
-
-	ImpiegatoBean impiegato = new ImpiegatoBean();
-
 	static ManagerUtente utente = new ManagerUtente();
 
 
@@ -56,7 +48,11 @@ public class GestioneUtente extends HttpServlet {
 
 				String username = request.getParameter("username");
 				String password = request.getParameter("password");
-
+				
+				StudenteBean studente = new StudenteBean();
+				AziendaBean azienda = new AziendaBean();
+				TutorBean tutor = new TutorBean();
+				ImpiegatoBean impiegato = new ImpiegatoBean();
 				
 				studente.setUsername(username);
 				azienda.setUsername(username);
@@ -145,6 +141,11 @@ public class GestioneUtente extends HttpServlet {
 				String username = request.getParameter("username");
 				String risposta = request.getParameter("risposta");
 
+				StudenteBean studente = new StudenteBean();
+				AziendaBean azienda = new AziendaBean();
+				TutorBean tutor = new TutorBean();
+				ImpiegatoBean impiegato = new ImpiegatoBean();
+				
 				studente.setUsername(username);
 				azienda.setUsername(username);
 				impiegato.setUsername(username);
@@ -220,6 +221,11 @@ public class GestioneUtente extends HttpServlet {
 			String password = request.getParameter("password");
 			String conferma = request.getParameter("conferma");
 
+			StudenteBean studente = new StudenteBean();
+			AziendaBean azienda = new AziendaBean();
+			TutorBean tutor = new TutorBean();
+			ImpiegatoBean impiegato = new ImpiegatoBean();
+			
 			try {
 				if(password.equals(conferma)) {
 					if(!(request.getSession().getAttribute("tipoUtente") == "studente")) {
@@ -292,6 +298,9 @@ public class GestioneUtente extends HttpServlet {
 				String conferma = request.getParameter("conferma");
 				String risposta = request.getParameter("domanda");
 
+				StudenteBean studente = new StudenteBean();
+				List<StudenteBean> studenti = new ArrayList<StudenteBean>();
+				
 				studente.setNome(nome);
 				studente.setCognome(cognome);
 				studente.setLuogoNascita(luogoNascita);
@@ -361,6 +370,9 @@ public class GestioneUtente extends HttpServlet {
 				String conferma = request.getParameter("conferma");
 				String risposta = request.getParameter("domanda");
 
+				AziendaBean azienda = new AziendaBean();
+				List<AziendaBean> aziende = new ArrayList<AziendaBean>();
+
 				azienda.setNome(nome);
 				azienda.setPartitaIva(partitaIva);
 				azienda.setCeo(ceo);
@@ -410,6 +422,12 @@ public class GestioneUtente extends HttpServlet {
 		}
 
 		if(azioneUtente.equals("areaPersonale")) {
+			
+			StudenteBean studente = new StudenteBean();
+			AziendaBean azienda = new AziendaBean();
+			TutorBean tutor = new TutorBean();
+			ImpiegatoBean impiegato = new ImpiegatoBean();
+			
 			//imposta password vedere se funziona l'equals invece che == di imposta
 			if(!(request.getSession().getAttribute("tipoUtente").equals(studente))){
 				if(!(request.getSession().getAttribute("tipoUtente").equals(azienda))){
@@ -439,7 +457,9 @@ public class GestioneUtente extends HttpServlet {
 		if(azioneUtente.equals("salvaScheda")) {
 			String descrizione = request.getParameter("descrizione");
 			String logo = request.getParameter("logo");
-
+			
+			AziendaBean azienda = new AziendaBean();
+			
 			azienda = (AziendaBean) request.getSession().getAttribute("utenteSessione");
 			//controllare path immagine 
 			String pathLogo = "/img/logo" + azienda.getNome();

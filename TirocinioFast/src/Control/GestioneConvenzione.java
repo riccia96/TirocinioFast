@@ -22,10 +22,6 @@ import Bean.ConvenzioneBean;
 public class GestioneConvenzione extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	AziendaBean azienda = new AziendaBean();
-	ConvenzioneBean convenzione = new ConvenzioneBean();
-	List<ConvenzioneBean> convenzioni = new ArrayList<ConvenzioneBean>();
-
 	ManagerUtente utente = new ManagerUtente();
 	ManagerDocumento documento = new ManagerDocumento();
 
@@ -40,6 +36,8 @@ public class GestioneConvenzione extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		List<ConvenzioneBean> convenzioni = new ArrayList<ConvenzioneBean>();
+
 		String azioneConvenzione = request.getParameter("azioneConvenzione");
 
 		if(azioneConvenzione.equals("elencoRichiesteConvenzione")) {
@@ -76,6 +74,9 @@ public class GestioneConvenzione extends HttpServlet {
 
 		if(azioneConvenzione.equals("richiestaConvenzione")) {
 			try {
+				AziendaBean azienda = new AziendaBean();
+				ConvenzioneBean convenzione = new ConvenzioneBean();
+				
 				azienda = (AziendaBean) request.getSession().getAttribute("utenteSessione");
 
 				String luogoNascitaR = request.getParameter("luogoNascitaR");
