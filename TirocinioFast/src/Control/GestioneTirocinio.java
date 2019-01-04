@@ -262,13 +262,17 @@ public class GestioneTirocinio extends HttpServlet {
 
 		if(azioneTirocinio.equals("elencoAziende")) {
 			try {
+				System.out.println("entro nel metodo");
 				request.getSession().removeAttribute("listaAziende");
-				aziende.addAll(utente.getAziende());
-				convenzioni.addAll(documento.convenzioni());
+				List<AziendaBean> az = utente.getAziende();
+				List<ConvenzioneBean> conv = documento.convenzioni();
 				List<AziendaBean> aziendeConv = new ArrayList<AziendaBean>();
-				for(AziendaBean a : aziende) {
-					for(ConvenzioneBean c : convenzioni) {
+				for(AziendaBean a : az) {
+					
+					for(ConvenzioneBean c : conv) {
+						
 						if(a.getUsername().equals(c.getAzienda()) && c.isConvalida()) {
+							
 							aziendeConv.add(a);
 						}
 					}
@@ -277,9 +281,7 @@ public class GestioneTirocinio extends HttpServlet {
 				if(aziendeConv.equals(null)) {
 					response.setContentType("text/html;charset=ISO-8859-1");
 					response.getWriter().write("nessuna azienda convenzionata");
-					//BOH
-					//RequestDispatcher view = request.getRequestDispatcher("aziendeConvenzionate.jsp");
-					//view.forward(request, response);
+					
 				}
 				else {
 					

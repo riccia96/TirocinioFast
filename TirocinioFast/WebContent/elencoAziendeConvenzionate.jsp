@@ -26,10 +26,18 @@
 
 <div id = "contenitore">
 <table>
+<<<<<<< HEAD
 
 <% for(AziendaBean a: convenzioni){ %>
 
 <th>
+=======
+<th></th>
+<th></th>
+<th></th>
+<% for(AziendaBean a: convenzioni){ %>
+<td>
+>>>>>>> branch 'master' of https://github.com/riccia96/TirocinioFast.git
 <figure class="azienda-figure"><div class="images"><img src="<%=a.getLogo()%>" alt="images-azienda"/></div>
  
   <figcaption>
@@ -40,7 +48,7 @@
     </div>
   </figcaption>
 </figure>
-</th>
+</td>
 <%} %>
 </div>
 </table>
