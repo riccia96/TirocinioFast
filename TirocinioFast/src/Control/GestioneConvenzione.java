@@ -46,7 +46,8 @@ public class GestioneConvenzione extends HttpServlet {
 			try {
 				convenzioni = documento.convenzioni();
 				List<ConvenzioneBean> richieste = new ArrayList<ConvenzioneBean>();
-
+				List<AziendaBean> aziende = new ArrayList<AziendaBean>();
+				aziende.addAll(utente.getAziende());
 				for(ConvenzioneBean c : convenzioni) {
 					if(!(c.isConvalida())) {
 						richieste.add(c);
@@ -54,7 +55,8 @@ public class GestioneConvenzione extends HttpServlet {
 				}
 
 				request.getSession().setAttribute("richiesteConvenzioni", richieste);
-
+				request.getSession().setAttribute("listaAziende", aziende);
+				
 				if(richieste.equals(null)) {
 					response.setContentType("text/html;charset=ISO-8859-1");
 					response.getWriter().write("nessuna richiesta");

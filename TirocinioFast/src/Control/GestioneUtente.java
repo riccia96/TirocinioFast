@@ -57,7 +57,63 @@ public class GestioneUtente extends HttpServlet {
 				String username = request.getParameter("username");
 				System.out.println(username);
 				String password = request.getParameter("password");
+<<<<<<< HEAD
 				System.out.println(password);
+=======
+
+				studenti = utente.getStudenti();
+				aziende = utente.getAziende();
+				
+				boolean trovato = false;
+				
+				if (studenti.size()>0){
+					for (int i = 0; i<studenti.size(); i++){
+						StudenteBean s = studenti.get(i);
+						if (s.getUsername().equals(username)){
+							if (s.getPassword().equals(password)){
+								trovato = true;
+								System.out.println("ok");
+								break;
+							}
+						}
+						else {
+							trovato = false;
+							System.out.println("non trovato");
+						}
+					}
+				}
+				
+				if (aziende.size()>0 && trovato == false){
+					for (int s = 0; s<aziende.size(); s++){
+						AziendaBean a = aziende.get(s);
+						if (a.getUsername().equals(username)){
+							if (a.getPassword().equals(password)){
+								trovato = true;
+								System.out.println("ok");
+								break;
+							}
+						}
+						else {
+							trovato = false;
+							System.out.println("non trovato");
+						}
+					}
+				}
+				}
+			catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+				
+				
+				
+				
+				
+				
+				
+	/*			
+				
+>>>>>>> branch 'master' of https://github.com/riccia96/TirocinioFast.git
 				studente.setUsername(username);
 				azienda.setUsername(username);
 				impiegato.setUsername(username);
@@ -132,6 +188,7 @@ public class GestioneUtente extends HttpServlet {
 			}
 		}
 
+*/
 		if(azioneUtente.equals("logout")) {
 			request.getSession().invalidate();
 			response.sendRedirect("index.jsp");

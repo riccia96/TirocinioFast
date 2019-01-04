@@ -16,7 +16,20 @@
 
 <%@include file = "menu.jsp" %>
 
-<%ArrayList<ConvenzioneBean> convenzioniInviate = (ArrayList<ConvenzioneBean>) request.getSession().getAttribute(""); %>
+<%ArrayList<ConvenzioneBean> convenzioniInviate = (ArrayList<ConvenzioneBean>) request.getSession().getAttribute("richiesteConvenzioni"); %>
+<%ArrayList<AziendaBean> aziende = (ArrayList<AziendaBean>) request.getSession().getAttribute("listaAziende"); %>
+<%ArrayList<ConvenzioneBean> mostrare = new ArrayList<ConvenzioneBean>(); %>
+
+<%for(int i = 0; i< convenzioniInviate.size(); i++){
+  			ConvenzioneBean c = convenzioniInviate.get(i);
+  			for (int s = 0; s<aziende.size(); s++){
+  				if (c.getAzienda().equals(aziende.get(s).getUsername())){
+  					mostrare.add(c);
+  					break;
+  				}
+  			}
+}
+  			%>
 
 <h3 class="intestazione">Gestione della richiesta di convenzione effettuata</h3>
 
@@ -27,18 +40,18 @@
     <th style="text-align: center">Status</th>
     <th></th>
   </tr>
-  <%for(int i = 0; i< convenzioniInviate.size(); i++){
-  			ConvenzioneBean c = convenzioniInviate.get(i);
+  <%for(int z = 0; z< mostrare.size(); z++){
+  			ConvenzioneBean mostra = mostrare.get(z);
   			%>
   <tr>
     <td><a href="mostraPDF.jsp">Richiesta N.<%= c.get() %></a></td>
-    <%if (c.isConvalida()==true) { %>
+    <%if (mostra.isConvalida()==true) { %>
     <td><img alt="verde" src="img/verde.png"> </td>
     <% }
     else { %>
      <td><img alt="giallo" src="img/giallo.png"> </td>   
      <% } %>
-    <%if (c.isConvalida()==false){ %>
+    <%if (mostra.isConvalida()==false){ %>
     <td>
     	<form>
   			Seleziona PDF convenzione firmato con gli allegati richiesti<br>
