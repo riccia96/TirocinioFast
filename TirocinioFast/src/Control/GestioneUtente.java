@@ -228,9 +228,9 @@ public class GestioneUtente extends HttpServlet {
 			
 			try {
 				if(password.equals(conferma)) {
-					if(!(request.getSession().getAttribute("tipoUtente") == "studente")) {
-						if(!(request.getSession().getAttribute("tipoUtente") == "azienda")) {
-							if(!(request.getSession().getAttribute("tipoUtente") == "tutor")) {
+					if(!(request.getSession().getAttribute("tipoUtente").equals("studente"))) {
+						if(!(request.getSession().getAttribute("tipoUtente").equals("azienda"))) {
+							if(!(request.getSession().getAttribute("tipoUtente").equals("tutor"))) {
 								impiegato = (ImpiegatoBean) request.getSession().getAttribute("utenteSessione");
 								impiegato.setPassword(password);
 								utente.impostaPasswordImpiegato(impiegato);
@@ -421,15 +421,9 @@ public class GestioneUtente extends HttpServlet {
 
 		if(azioneUtente.equals("areaPersonale")) {
 			
-			StudenteBean studente = new StudenteBean();
-			AziendaBean azienda = new AziendaBean();
-			TutorBean tutor = new TutorBean();
-			ImpiegatoBean impiegato = new ImpiegatoBean();
-			
-			//imposta password vedere se funziona l'equals invece che == di imposta
-			if(!(request.getSession().getAttribute("tipoUtente").equals(studente))){
-				if(!(request.getSession().getAttribute("tipoUtente").equals(azienda))){
-					if(!(request.getSession().getAttribute("tipoUtente").equals(tutor))){
+			if(!(request.getSession().getAttribute("tipoUtente").equals("studente"))){
+				if(!(request.getSession().getAttribute("tipoUtente").equals("azienda"))){
+					if(!(request.getSession().getAttribute("tipoUtente").equals("tutor"))){
 						
 						RequestDispatcher view = request.getRequestDispatcher("home.jsp");
 						view.forward(request, response);
@@ -439,12 +433,12 @@ public class GestioneUtente extends HttpServlet {
 						view.forward(request, response);
 					}
 				} else {
-
+					
 					RequestDispatcher view = request.getRequestDispatcher("home.jsp");
 					view.forward(request, response);
 				}
 			} else {
-
+				
 				RequestDispatcher view = request.getRequestDispatcher("home.jsp");
 				view.forward(request, response);
 			}

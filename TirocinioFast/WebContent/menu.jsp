@@ -30,7 +30,7 @@
 		<%
 			if (tipoUm.equals("studente")) {
 		%>
-		<li><a href="Gestioneutente?azioneUtente=areaPersonale">Area Personale</a></li>
+		<li><a href="GestioneUtente?azioneUtente=areaPersonale">Area Personale</a></li>
 		<li><a href="GestioneTirocinio?azioneTirocinio=elencoAziende">Ricerca azienda</a></li>
 		<li><a href="GestioneTirocinio?azioneTirocinio=elencoRichiesteTirocinio">Richiesta tirocinio</a></li>
 		<li><a href="#">Registro ore</a></li>
@@ -40,7 +40,7 @@
 			}
 			if (tipoUm.equals("azienda")) {
 		%>
-		<li><a href="Gestioneutente?azioneUtente=areaPersonale">Area Personale</a></li>
+		<li><a href="GestioneUtente?azioneUtente=areaPersonale">Area Personale</a></li>
 		<li><a href="convenzione.jsp">Convenzione</a></li>
 		<li><a href="GestioneTirocinio?azioneTirocinio=elencoRichiesteTirocinio">Richieste tirocinio</a></li>
 		<li><a href="GestioneUtente?azioneUtente=logout">Logout</a></li>
@@ -48,14 +48,14 @@
 			}
 			if (tipoUm.equals("tutor")) {
 		%>
-		<li><a href="Gestioneutente?azioneUtente=areaPersonale">Area Personale</a></li>
+		<li><a href="GestioneUtente?azioneUtente=areaPersonale">Area Personale</a></li>
 		<li><a href="GestioneTirocinio?azioneTirocinio=elencoRichiesteTirocinio">Richieste tirocinio</a></li>
 		<li><a href="GestioneUtente?azioneUtente=logout">Logout</a></li>
 		<%
 			}
 			if (tipoUm.equals("impiegato")) {
 		%>
-		<li><a href="Gestioneutente?azioneUtente=areaPersonale">Area Personale</a>
+		<li><a href="GestioneUtente?azioneUtente=areaPersonale">Area Personale</a>
 		<li><a href="GestioneTirocinio?azioneTirocinio=elencoRichiesteTirocinio">Richieste tirocinio</a>
 		<li><a href="GestioneTirocinio?azioneTirocinio=tirociniConclusi">Attività tirocinio</a>
 		<li><a href="GestioneConvenzione?azioneConvenzione=elencoRichiesteConvenzione">Convenzioni aziende</a>

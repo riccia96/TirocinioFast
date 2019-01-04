@@ -1,10 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%><%@ page
-	import="java.util.ArrayList, Bean.*, Model.*"%>
+	pageEncoding="ISO-8859-1" import="java.util.ArrayList, Bean.*"%>
 <%
 	ArrayList<AziendaBean> convenzioni = (ArrayList<AziendaBean>) request.getSession().getAttribute("listaAziende");
-
-
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -26,18 +23,13 @@
 
 <div id = "contenitore">
 <table>
-<<<<<<< HEAD
 
-<% for(AziendaBean a: convenzioni){ %>
-
-<th>
-=======
 <th></th>
 <th></th>
 <th></th>
 <% for(AziendaBean a: convenzioni){ %>
 <td>
->>>>>>> branch 'master' of https://github.com/riccia96/TirocinioFast.git
+
 <figure class="azienda-figure"><div class="images"><img src="<%=a.getLogo()%>" alt="images-azienda"/></div>
  
   <figcaption>
