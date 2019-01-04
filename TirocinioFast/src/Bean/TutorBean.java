@@ -33,6 +33,14 @@ public class TutorBean implements java.io.Serializable {
 	public void setMatricola(String matricola) {
 		this.matricola = matricola;
 	}
+	
+	public String getEmail(){
+		return email;
+	}
+	
+	public void setEmail(String email){
+		this.email = email;
+	}
 
 	public String getUsername() {
 		return username;
@@ -65,6 +73,7 @@ public class TutorBean implements java.io.Serializable {
 		return "Tutor [Nome: " + this.getNome() +
 				"][Cognome: " + this.getCognome() +
 				"][Matricola: " + this.getMatricola() +
+				"][E-mail: " + this.getEmail() +
 				"][Username: " + this.getUsername() +
 				"][Password: " + this.getPassword() +
 				"][Risposta: " + this.getDomanda() + "]";
@@ -75,6 +84,7 @@ public class TutorBean implements java.io.Serializable {
 	private String nome;
 	private String cognome;
 	private String matricola;
+	private String email;
 	private String username;
 	private String password;
 	private String domanda;
