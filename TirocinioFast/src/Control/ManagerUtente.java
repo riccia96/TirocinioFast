@@ -75,6 +75,9 @@ public class ManagerUtente {
 		List<StudenteBean> studenti = new ArrayList<StudenteBean>();
 		
 		studenti = sDAO.doRetrieveAll();
+		for(StudenteBean s : studenti) {
+			System.out.println("manager"+s);
+		}
 		return studenti;
 	}
 	

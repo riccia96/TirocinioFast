@@ -32,7 +32,7 @@
 
 	<%@include file="navbar.jsp"%>
 
-	<%@include file="menu.jsp"%>
+	
 
 	<%
 		if (tipoU.equals("studente")) {

@@ -33,7 +33,7 @@ public class GestioneUtente extends HttpServlet {
 
 	ImpiegatoBean impiegato = new ImpiegatoBean();
 
-	static ManagerUtente utente = new ManagerUtente();
+	ManagerUtente utente = new ManagerUtente();
 
 
 	/**
