@@ -55,17 +55,76 @@ public class GestioneUtente extends HttpServlet {
 			try {
 
 				String username = request.getParameter("username");
-				System.out.println(username);
 				String password = request.getParameter("password");
 
-				System.out.println(password);
+				
+				studente.setUsername(username);
+				azienda.setUsername(username);
+				impiegato.setUsername(username);
+				tutor.setUsername(username);
 
-				studenti = utente.getStudenti();
-				for(StudenteBean s : studenti) {
-					System.out.println(s);
+				StudenteBean s = utente.getStudente(studente);
+				AziendaBean a = utente.getAzienda(azienda);
+				TutorBean t = utente.getTutor(tutor);
+				ImpiegatoBean i = utente.getImpiegato(impiegato);
+
+
+
+				if(s.getUsername().equals("")){
+					if(a.getUsername().equals("")) {
+						if(t.getUsername().equals("")) {
+							if(i.getUsername().equals("")) {
+								response.setContentType("text/html;charset=ISO-8859-1");
+								response.getWriter().write("username no1");
+							}else {
+								if(i.getPassword().equals(password)) {
+									request.getSession().setAttribute("utenteSessione", utente.getImpiegato(impiegato));
+									request.getSession().setAttribute("tipoUtente", "impiegato");
+
+									RequestDispatcher view = request.getRequestDispatcher("home.jsp");
+									view.forward(request, response);
+								}else {
+									response.setContentType("text/html;charset=ISO-8859-1");
+									response.getWriter().write("password no2");
+								}
+							}
+						}else {
+							if(t.getPassword().equals(password)) {
+								request.getSession().setAttribute("utenteSessione", utente.getTutor(tutor));
+								request.getSession().setAttribute("tipoUtente", "tutor");
+
+								RequestDispatcher view = request.getRequestDispatcher("home.jsp");
+								view.forward(request, response);
+							}else {
+								response.setContentType("text/html;charset=ISO-8859-1");
+								response.getWriter().write("password no3");
+							}
+						}
+					}else {
+						if(a.getPassword().equals(password)) {
+							request.getSession().setAttribute("utenteSessione", utente.getAzienda(azienda));
+							request.getSession().setAttribute("tipoUtente", "azienda");
+
+							RequestDispatcher view = request.getRequestDispatcher("home.jsp");
+							view.forward(request, response);
+						}else {
+							response.setContentType("text/html;charset=ISO-8859-1");
+							response.getWriter().write("password no4");
+						}
+					}
+				}else {
+					if(s.getPassword().equals(password)) {
+
+						request.getSession().setAttribute("utenteSessione", utente.getStudente(studente));
+						request.getSession().setAttribute("tipoUtente", "studente");
+
+						RequestDispatcher view = request.getRequestDispatcher("home.jsp");
+						view.forward(request, response);
+					}else {
+						response.setContentType("text/html;charset=ISO-8859-1");
+						response.getWriter().write("password no5");
+					}
 				}
-
-
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

@@ -24,9 +24,9 @@ pageEncoding="ISO-8859-1"%>
     <img src="img\avatar-default-icon.png" alt="Avatar" class="avatar">
   </div>
 
-    <input type="text" placeholder="Username" name="username" >
+    <input type="text" placeholder="Username" name="username" required>
 	<br>
-    <input type="password" placeholder="Password" name="password" >
+    <input type="password" placeholder="Password" name="password" required>
     <br>
     <div class ="new">
     <button name ="azioneUtente" value="login" id="loginButton" class="button" type="submit">Login</button> 

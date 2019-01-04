@@ -6,7 +6,19 @@ public class AziendaBean implements java.io.Serializable {
 	
 	/**Costruttore*/
 
-	public AziendaBean() {}
+	public AziendaBean() {
+		this.nome = "";
+		this.partitaIva = "";
+		this.ceo = "";
+		this.indirizzo = "";
+		this.email = "";
+		this.telefono = "";
+		this.username = "";
+		this.password = "";
+		this.domanda = "";
+		this.descrizione = "";
+		this.logo = "";
+	}
 
 	/**Getter e Setter*/
 

@@ -6,7 +6,10 @@ public class TutorBean implements java.io.Serializable {
 	
 	/**Costruttore*/
 
-	public TutorBean() {}
+	public TutorBean() {
+		this.username = "";
+		this.password = "";
+	}
 
 	/**Getter e Setter*/
 
