@@ -282,7 +282,9 @@ public class GestioneUtente extends HttpServlet {
 
 		if(azioneUtente.equals("registraStudente")) {
 			try{
-
+				StudenteBean studente = new StudenteBean();
+				List<StudenteBean> studenti = new ArrayList<StudenteBean>();
+				
 				String nome = request.getParameter("nome");
 				String cognome = request.getParameter("cognome");
 				String luogoNascita = request.getParameter("luogo");
@@ -297,9 +299,6 @@ public class GestioneUtente extends HttpServlet {
 				String password = request.getParameter("password");
 				String conferma = request.getParameter("conferma");
 				String risposta = request.getParameter("domanda");
-
-				StudenteBean studente = new StudenteBean();
-				List<StudenteBean> studenti = new ArrayList<StudenteBean>();
 				
 				studente.setNome(nome);
 				studente.setCognome(cognome);
@@ -358,7 +357,9 @@ public class GestioneUtente extends HttpServlet {
 		if(azioneUtente.equals("registraAzienda")) {
 
 			try{
-
+				AziendaBean azienda = new AziendaBean();
+				List<AziendaBean> aziende = new ArrayList<AziendaBean>();
+				
 				String nome = request.getParameter("nome");
 				String partitaIva = request.getParameter("iva");
 				String ceo = request.getParameter("ceo");
@@ -369,9 +370,6 @@ public class GestioneUtente extends HttpServlet {
 				String password = request.getParameter("password");
 				String conferma = request.getParameter("conferma");
 				String risposta = request.getParameter("domanda");
-
-				AziendaBean azienda = new AziendaBean();
-				List<AziendaBean> aziende = new ArrayList<AziendaBean>();
 
 				azienda.setNome(nome);
 				azienda.setPartitaIva(partitaIva);
@@ -432,7 +430,7 @@ public class GestioneUtente extends HttpServlet {
 			if(!(request.getSession().getAttribute("tipoUtente").equals(studente))){
 				if(!(request.getSession().getAttribute("tipoUtente").equals(azienda))){
 					if(!(request.getSession().getAttribute("tipoUtente").equals(tutor))){
-
+						
 						RequestDispatcher view = request.getRequestDispatcher("home.jsp");
 						view.forward(request, response);
 					} else {

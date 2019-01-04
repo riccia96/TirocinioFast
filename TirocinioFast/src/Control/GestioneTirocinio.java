@@ -267,9 +267,9 @@ public class GestioneTirocinio extends HttpServlet {
 
 		if(azioneTirocinio.equals("elencoAziende")) {
 			try {
+				List<AziendaBean> aziendeConv = new ArrayList<AziendaBean>();
 				List<AziendaBean> az = utente.getAziende();
 				List<ConvenzioneBean> conv = documento.convenzioni();
-				List<AziendaBean> aziendeConv = new ArrayList<AziendaBean>();
 				
 				request.getSession().removeAttribute("listaAziende");
 				
