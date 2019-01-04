@@ -52,9 +52,10 @@ public class ImpiegatoDAO extends AbstractDAO<ImpiegatoBean>{
 			preparedStatement.setString(1, impiegato.getNome());
 			preparedStatement.setString(2, impiegato.getCognome());
 			preparedStatement.setString(3, impiegato.getMatricola());
-			preparedStatement.setString(4, impiegato.getUsername());
-			preparedStatement.setString(5, impiegato.getPassword());
-			preparedStatement.setString(6, impiegato.getDomanda());
+			preparedStatement.setString(4, impiegato.getEmail());
+			preparedStatement.setString(5, impiegato.getUsername());
+			preparedStatement.setString(6, impiegato.getPassword());
+			preparedStatement.setString(7, impiegato.getDomanda());
 			
 			preparedStatement.execute();
 			result = preparedStatement.getResultSet();
