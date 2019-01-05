@@ -256,6 +256,8 @@ public class GestioneTirocinio extends HttpServlet {
 
 		if(azioneTirocinio.equals("inoltroAT")) {
 			//settare la convalida
+			AziendaBean azienda = (AziendaBean) request.getSession().getAttribute("utenteSessione");
+			
 			
 		}
 

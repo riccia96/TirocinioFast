@@ -453,18 +453,26 @@ public class GestioneUtente extends HttpServlet {
 
 
 		if(azioneUtente.equals("salvaScheda")) {
-			String descrizione = request.getParameter("descrizione");
-			String logo = request.getParameter("logo");
-			
-			AziendaBean azienda = new AziendaBean();
-			
-			azienda = (AziendaBean) request.getSession().getAttribute("utenteSessione");
-			//controllare path immagine 
-			String pathLogo = "/img/logo" + azienda.getNome();
-			//aggiungere questi due campi alle cose di sopra :D 
-			azienda.setDescrizione(descrizione);
-			azienda.setLogo(logo);
+			try {
+				String descrizione = request.getParameter("descrizione");
+				String logo = request.getParameter("logo");
 
+				AziendaBean azienda = new AziendaBean();
+
+				azienda = (AziendaBean) request.getSession().getAttribute("utenteSessione");
+				//controllare path immagine 
+				String pathLogo = "img/"+ logo;
+				//aggiungere questi due campi alle cose di sopra :D 
+				azienda.setDescrizione(descrizione);
+				azienda.setLogo(pathLogo);
+
+				utente.completaSchedaAzienda(azienda);
+
+				RequestDispatcher view = request.getRequestDispatcher("home.jsp");
+				view.forward(request, response);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 
