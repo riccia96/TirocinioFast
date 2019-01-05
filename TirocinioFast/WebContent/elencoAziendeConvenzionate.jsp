@@ -22,11 +22,11 @@
 	<%@include file="ricerca.jsp"%>
 
 <div id = "contenitore">
-<table>
+<table style="margin-left: 30%">
 
-<th></th>
-<th></th>
-<th></th>
+<tr></tr>
+<tr></tr>
+<tr></tr>
 <% for(AziendaBean a: convenzioni){ %>
 <td>
 
