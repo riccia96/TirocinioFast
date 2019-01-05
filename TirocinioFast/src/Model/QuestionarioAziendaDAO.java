@@ -67,8 +67,8 @@ public class QuestionarioAziendaDAO extends AbstractDAO<QuestionarioAziendaBean>
 		ResultSet result = null;
 		
 		String querySQL = "INSERT INTO " + QuestionarioAziendaDAO.TABLE_NAME + " (id, studente, azienda, tutorAccademico, impiegato, "
-				+ "periodoTirocinio, titoloTirocinio, posizioneRicoperta, convalida, url)" +
-				"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ "periodoTirocinio, titoloTirocinio, posizioneRicoperta, scelte, convalida, url)" +
+				"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		try{
 			
 			connection = ds.getConnection();
@@ -82,8 +82,9 @@ public class QuestionarioAziendaDAO extends AbstractDAO<QuestionarioAziendaBean>
 			preparedStatement.setString(6, questionarioAzienda.getPeriodoTirocinio());
 			preparedStatement.setString(7, questionarioAzienda.getTitoloTirocinio());
 			preparedStatement.setString(8, questionarioAzienda.getPosizioneRicoperta());
-			preparedStatement.setBoolean(9, questionarioAzienda.isConvalida());
-			preparedStatement.setString(10, questionarioAzienda.getUrl());
+			preparedStatement.setBoolean(9, questionarioAzienda.getScelte());
+			preparedStatement.setBoolean(10, questionarioAzienda.isConvalida());
+			preparedStatement.setString(11, questionarioAzienda.getUrl());
 			
 			preparedStatement.execute();
 			result = preparedStatement.getResultSet();
@@ -146,6 +147,7 @@ public class QuestionarioAziendaDAO extends AbstractDAO<QuestionarioAziendaBean>
 				qa.setPeriodoTirocinio(result.getString("periodoTirocinio"));
 				qa.setTitoloTirocinio(result.getString("titoloTirocinio"));
 				qa.setPosizioneRicoperta(result.getString("posizioneRicoperta"));
+				qa.setScelte(result.getString("scelte"));
 				qa.setConvalida(result.getBoolean("convalida"));
 				qa.setUrl(result.getString("url"));
 				
@@ -197,6 +199,7 @@ public class QuestionarioAziendaDAO extends AbstractDAO<QuestionarioAziendaBean>
 				qa.setPeriodoTirocinio(result.getString("periodoTirocinio"));
 				qa.setTitoloTirocinio(result.getString("titoloTirocinio"));
 				qa.setPosizioneRicoperta(result.getString("posizioneRicoperta"));
+				qa.setScelte(result.getString("scelte"));
 				qa.setConvalida(result.getBoolean("convalida"));
 				qa.setUrl(result.getString("url"));
 								
@@ -243,8 +246,9 @@ public class QuestionarioAziendaDAO extends AbstractDAO<QuestionarioAziendaBean>
 			preparedStatement.setString(5, questionarioAzienda.getPeriodoTirocinio());
 			preparedStatement.setString(6, questionarioAzienda.getTitoloTirocinio());
 			preparedStatement.setString(7, questionarioAzienda.getPosizioneRicoperta());
-			preparedStatement.setBoolean(8, questionarioAzienda.isConvalida());
-			preparedStatement.setString(9, questionarioAzienda.getUrl());
+			preparedStatement.setString(8, questionarioAzienda.getScelte());
+			preparedStatement.setBoolean(9, questionarioAzienda.isConvalida());
+			preparedStatement.setString(10, questionarioAzienda.getUrl());
 			
 			preparedStatement.setInt(10, questionarioAzienda.getId());
 			

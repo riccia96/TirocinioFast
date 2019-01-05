@@ -42,23 +42,29 @@ public class GestioneQuestionario extends HttpServlet {
 
 			if(azioneQuestionario.equals("QuestionarioStudente")) {
 				try{
-					ArrayList<String> scelte = new ArrayList<String>();
+					ArrayList<String> risposte = new ArrayList<String>();
 					String titolo = request.getParameter("titolo");
 					String periodo = request.getParameter("periodo");
-					scelte.add(request.getParameter("prima"));
-					scelte.add(request.getParameter("seconda"));
-					scelte.add(request.getParameter("terza"));
-					scelte.add(request.getParameter("quarta"));
-					scelte.add(request.getParameter("quinta"));
-					scelte.add(request.getParameter("sesta"));
-					scelte.add(request.getParameter("settima"));
-					scelte.add(request.getParameter("ottava"));
-					scelte.add(request.getParameter("nona"));
-					scelte.add(request.getParameter("decima"));
-					scelte.add(request.getParameter("undici"));
-					scelte.add(request.getParameter("dodici"));
-					scelte.add(request.getParameter("tredici"));
-					scelte.add(request.getParameter("quattordici"));
+					risposte.add(request.getParameter("prima"));
+					risposte.add(request.getParameter("seconda"));
+					risposte.add(request.getParameter("terza"));
+					risposte.add(request.getParameter("quarta"));
+					risposte.add(request.getParameter("quinta"));
+					risposte.add(request.getParameter("sesta"));
+					risposte.add(request.getParameter("settima"));
+					risposte.add(request.getParameter("ottava"));
+					risposte.add(request.getParameter("nona"));
+					risposte.add(request.getParameter("decima"));
+					risposte.add(request.getParameter("undici"));
+					risposte.add(request.getParameter("dodici"));
+					risposte.add(request.getParameter("tredici"));
+					risposte.add(request.getParameter("quattordici"));
+					
+					String scelte = "";
+					for(String r: risposte) {
+						scelte += r + "*";
+					}
+					
 					
 					int id = Integer.parseInt((String) request.getSession().getAttribute("id"));
 					QuestionarioStudenteBean questionarioStudente = new QuestionarioStudenteBean();
@@ -78,7 +84,7 @@ public class GestioneQuestionario extends HttpServlet {
 					request.getSession().setAttribute("studente", studente);
 					request.getSession().setAttribute("azienda", azienda);
 					request.getSession().setAttribute("tutor", tutor);
-					request.getSession().setAttribute("scelte", scelte);
+					request.getSession().setAttribute("risposte", risposte);
 					
 					RequestDispatcher view = request.getRequestDispatcher("documentoQuestionarioStudente");
 					view.forward(request, response);
@@ -91,21 +97,21 @@ public class GestioneQuestionario extends HttpServlet {
 			
 			if(azioneQuestionario.equals("QuestionarioAzienda")) {
 				try {
-					ArrayList<String> scelte = new ArrayList<String>();
+					ArrayList<String> risposte = new ArrayList<String>();
 
 					String titolo = request.getParameter("titolo");
 					String posizione = request.getParameter("posizione");
-					scelte.add(request.getParameter("prima"));
-					scelte.add(request.getParameter("seconda"));
-					scelte.add(request.getParameter("terza"));
-					scelte.add(request.getParameter("quarta"));
-					scelte.add(request.getParameter("quinta"));
-					scelte.add(request.getParameter("sesta"));
-					scelte.add(request.getParameter("settima"));
-					scelte.add(request.getParameter("ottava"));
-					scelte.add(request.getParameter("nona"));
-					scelte.add(request.getParameter("decima"));
-					scelte.add(request.getParameter("undici"));
+					risposte.add(request.getParameter("prima"));
+					risposte.add(request.getParameter("seconda"));
+					risposte.add(request.getParameter("terza"));
+					risposte.add(request.getParameter("quarta"));
+					risposte.add(request.getParameter("quinta"));
+					risposte.add(request.getParameter("sesta"));
+					risposte.add(request.getParameter("settima"));
+					risposte.add(request.getParameter("ottava"));
+					risposte.add(request.getParameter("nona"));
+					risposte.add(request.getParameter("decima"));
+					risposte.add(request.getParameter("undici"));
 
 					int id = Integer.parseInt((String) request.getSession().getAttribute("id"));
 					QuestionarioAziendaBean questionarioAzienda = new QuestionarioAziendaBean();
@@ -127,7 +133,7 @@ public class GestioneQuestionario extends HttpServlet {
 					request.getSession().setAttribute("studente", studente);
 					request.getSession().setAttribute("azienda", azienda);
 					request.getSession().setAttribute("tutor", tutor);
-					request.getSession().setAttribute("scelte", scelte);
+					request.getSession().setAttribute("risposte", risposte);
 					
 					RequestDispatcher view = request.getRequestDispatcher("documentoQuestionarioAzienda");
 					view.forward(request, response);

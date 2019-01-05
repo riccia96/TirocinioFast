@@ -67,8 +67,8 @@ public class QuestionarioStudenteDAO extends AbstractDAO<QuestionarioStudenteBea
 		ResultSet result = null;
 		
 		String querySQL = "INSERT INTO " + QuestionarioStudenteDAO.TABLE_NAME + " (id, studente, azienda, tutorAccademico, impiegato, periodoTirocinio, "
-				+ "titoloTirocinio, convalida, url)" +
-				"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ "titoloTirocinio, scelte, convalida, url)" +
+				"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		try{
 			
 			connection = ds.getConnection();
@@ -81,8 +81,9 @@ public class QuestionarioStudenteDAO extends AbstractDAO<QuestionarioStudenteBea
 			preparedStatement.setString(5, questionarioStudente.getImpiegato());
 			preparedStatement.setString(6, questionarioStudente.getPeriodo());
 			preparedStatement.setString(7, questionarioStudente.getTitolo());
-			preparedStatement.setBoolean(8, questionarioStudente.isConvalida());
-			preparedStatement.setString(9, questionarioStudente.getUrl());
+			preparedStatement.setBoolean(8, questionarioStudente.getScelte());
+			preparedStatement.setBoolean(9, questionarioStudente.isConvalida());
+			preparedStatement.setString(10, questionarioStudente.getUrl());
 			
 			preparedStatement.execute();
 			result = preparedStatement.getResultSet();
@@ -144,6 +145,7 @@ public class QuestionarioStudenteDAO extends AbstractDAO<QuestionarioStudenteBea
 				qs.setImpiegato(result.getString("impiegato"));
 				qs.setPeriodo(result.getString("periodoTirocinio"));
 				qs.setTitolo(result.getString("titoloTirocinio"));
+				qs.setScelte(result.getString("scelte"));
 				qs.setConvalida(result.getBoolean("convalida"));
 				qs.setUrl(result.getString("url"));
 				
@@ -194,6 +196,7 @@ public class QuestionarioStudenteDAO extends AbstractDAO<QuestionarioStudenteBea
 				qs.setImpiegato(result.getString("impiegato"));
 				qs.setPeriodo(result.getString("periodoTirocinio"));
 				qs.setTitolo(result.getString("titoloTirocinio"));
+				qs.setScelte(result.getString("scelte"));
 				qs.setConvalida(result.getBoolean("convalida"));
 				qs.setUrl(result.getString("url"));
 				
@@ -236,8 +239,9 @@ public class QuestionarioStudenteDAO extends AbstractDAO<QuestionarioStudenteBea
 			preparedStatement.setString(4, questionarioStudente.getImpiegato());
 			preparedStatement.setString(5, questionarioStudente.getPeriodo());
 			preparedStatement.setString(6, questionarioStudente.getTitolo());
-			preparedStatement.setBoolean(7, questionarioStudente.isConvalida());
-			preparedStatement.setString(8, questionarioStudente.getUrl());
+			preparedStatement.setString(7, questionarioStudente.getScelte());
+			preparedStatement.setBoolean(8, questionarioStudente.isConvalida());
+			preparedStatement.setString(9, questionarioStudente.getUrl());
 			
 			preparedStatement.setInt(9, questionarioStudente.getId());
 			
