@@ -82,7 +82,7 @@ public class QuestionarioAziendaDAO extends AbstractDAO<QuestionarioAziendaBean>
 			preparedStatement.setString(6, questionarioAzienda.getPeriodoTirocinio());
 			preparedStatement.setString(7, questionarioAzienda.getTitoloTirocinio());
 			preparedStatement.setString(8, questionarioAzienda.getPosizioneRicoperta());
-			preparedStatement.setBoolean(9, questionarioAzienda.getScelte());
+			preparedStatement.setString(9, questionarioAzienda.getScelte());
 			preparedStatement.setBoolean(10, questionarioAzienda.isConvalida());
 			preparedStatement.setString(11, questionarioAzienda.getUrl());
 			
