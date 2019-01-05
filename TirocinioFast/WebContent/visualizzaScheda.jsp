@@ -17,14 +17,24 @@
 
 <%@include file = "menu.jsp" %>
 
+<%
+	AziendaBean azienda = (AziendaBean) request.getSession().getAttribute("aziendaSelezionata");
+%>
+
 <h3 class="intestazione">Informazioni sull'azienda</h3>
 
 <div style="margin-left:25%;width: 700px;" class="dialogo">
-    <img src="img/due.jpeg" alt="logo" >
+    <img src="<%=azienda.getLogo() %>" alt="logo" >
 
-	<label>Tutte le info</label>
+	<h3><%= azienda.getNome() %></h3>
+	<br>
+	<p><%= azienda.getDescrizione() %></p>
+	<p><%= azienda.getIndirizzo() %></p>
+	<p><%= azienda.getEmail() %></p>
+	<p><%= azienda.getPassword()%></p>
     <div class ="new">
-    <button name = "#" value="inviaRichiestaTirocinio" id="inviaRichiestaTirocinioButton" class=" button" type="submit">Invia richiesta di tirocinio</button> 
+    <input type="hidden" name="aziendaSelezionata" value="<%=a.getUsername()%>">
+    <button name = "azioneTirocinio" value="inoltraRichiesta" id="inoltraRichiestaTirocinioButton" class=" button" type="submit">Invia richiesta di tirocinio</button> 
     </div>
   
 </div>
