@@ -104,6 +104,9 @@ public class GestioneConvenzione extends HttpServlet {
 
 				documento.compilaConvenzione(convenzione);
 				
+				request.getSession().setAttribute("azienda", azienda);
+				request.getSession().setAttribute("convenzione", convenzione);
+				
 				RequestDispatcher view = request.getRequestDispatcher("convenzioneEsistente.jsp");
 				view.forward(request, response);
 				
