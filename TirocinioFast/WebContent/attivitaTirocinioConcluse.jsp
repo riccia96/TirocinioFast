@@ -3,6 +3,15 @@
 <%@page import="Bean.*" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%ArrayList<TirocinioBean> conclusi = (ArrayList<TirocinioBean>) request.getSession().getAttribute("listaTirociniConclusi");
+ArrayList<StudenteBean> studenti = (ArrayList<StudenteBean>) request.getSession().getAttribute("listaStudenti");
+ArrayList<TutorBean> tutors = (ArrayList<TutorBean>) request.getSession().getAttribute("listaTutors");
+ArrayList<AziendaBean> aziende = (ArrayList<AziendaBean>) request.getSession().getAttribute("listaAziende");
+StudenteBean studente = new StudenteBean();
+AziendaBean azienda = new AziendaBean();
+TutorBean tutor = new TutorBean();
+TirocinioBean tirocinio = new TirocinioBean();
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,16 +25,6 @@
 <%@include file = "navbar.jsp" %>
 
 <%@include file = "menu.jsp" %>
-
-<%ArrayList<TirocinioBean> conclusi = (ArrayList<TirocinioBean>) request.getSession().getAttribute("listaTirociniConclusi");
-ArrayList<StudenteBean> studenti = (ArrayList<StudenteBean>) request.getSession().getAttribute("listaStudenti");
-ArrayList<TutorBean> tutors = (ArrayList<TutorBean>) request.getSession().getAttribute("listaTutors");
-ArrayList<AziendaBean> aziende = (ArrayList<AziendaBean>) request.getSession().getAttribute("listaAziende");
-StudenteBean studente;
-AziendaBean azienda;
-TutorBean tutor;
-TirocinioBean tirocinio;
-%>
 
 
 <h3 class="intestazione"> Gestione dei tirocini conclusi</h3>
@@ -61,8 +60,8 @@ TirocinioBean tirocinio;
 	  %>
   <tr>
     <td><a href="mostraPDFConferma.jsp"> RichiestaN.<%= tirocinio.getId()%></a></td>
-    <td><%= studente.getCognome() + studente.getNome() %></td>
-    <td><%= tutor.getCognome() + tutor.getNome() %> </td>
+    <td><%= studente.getCognome() + " " + studente.getNome() %></td>
+    <td>Prof/Prof.ssa <%= tutor.getCognome() + " " + tutor.getNome() %> </td>
     <td><%= azienda.getNome() %></td>
   </tr>
   <%} %>

@@ -1,6 +1,13 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<% 	ArrayList<TirocinioBean> disponibiliRegistro = (ArrayList<TirocinioBean>)request.getSession().getAttribute("registroDisponibili");
+	ArrayList<AziendaBean> aziende = (ArrayList<AziendaBean>)request.getSession().getAttribute("listaAziende");
+	ArrayList<TutorBean> tutors = (ArrayList<TutorBean>)request.getSession().getAttribute("listaTutor");
+	TirocinioBean tirocinio = new TirocinioBean();
+	AziendaBean azienda = new AziendaBean();
+	TutorBean tutor = new TutorBean();
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -15,7 +22,7 @@
 
 <%@include file = "menu.jsp" %>
 
-<%ArrayList<TirocinioBean> disponibiliRegistro = (ArrayList<TirocinioBean>)request.getSession().getAttribute(""); %>
+<% %>
 
 <h3 class="intestazione">Gestione del registro</h3>
 <% if (disponibiliRegistro.size()>0){ %>
@@ -27,14 +34,26 @@
     <th></th>
   </tr>
   		<%for (int i = 0; i < disponibiliRegistro.size(); i++){
-  			TirocinioBean t = disponibiliRegistro.get(i);
-  			AziendaBean a = ();
-  			TutorBean tu = ();  		
+  			 	tirocinio = disponibiliRegistro.get(i);
+  					
+  			 	for (int a = 0; a < aziende.size(); a++){
+  					azienda = aziende.get(a);
+  					if (tirocinio.getAzienda().equals(azienda.getUsername())){
+  						break;
+  						}
+  					}
+  			 	
+  			 	for (int t = 0; t < tutors.size(); t++){
+  			 		tutor = tutors.get(t);
+  			 		if (tirocinio.getTutorAccademico().equals(tutor.getUsername())){
+  			 			break;
+  			 		}
+  			 	}
 	  %>
   <tr>
-    <td><a href="documentoRegistroOre.jsp">Attivit&agrave; di Tirocinio N.<%= t.() %></a></td>
-    <td><%= a.getNome() %></td>
-    <td><%= t.getCognome() + t.getNome() %></td>
+    <td><a href="documentoRegistroOre.jsp">Attivit&agrave; di Tirocinio N.<%=tirocinio.getId() %></a></td>
+    <td><%= azienda.getNome() %></td>
+    <td>Prof/Prof.ssa<%= tutor.getCognome() + " " + tutor.getNome() %></td>
     <td>
     	<form>
   			Seleziona PDF del registro ore completato<br>

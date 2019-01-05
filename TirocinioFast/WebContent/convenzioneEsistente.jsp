@@ -44,7 +44,7 @@
   			ConvenzioneBean mostra = mostrare.get(z);
   			%>
   <tr>
-    <td><a href="mostraPDF.jsp">Richiesta N.<%= c.get() %></a></td>
+    <td><a href="mostraPDF.jsp">Richiesta N.<%= mostra.getId() %></a></td>
     <%if (mostra.isConvalida()==true) { %>
     <td><img alt="verde" src="img/verde.png"> </td>
     <% }

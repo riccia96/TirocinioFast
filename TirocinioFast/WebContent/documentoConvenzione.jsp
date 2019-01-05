@@ -45,7 +45,7 @@
 <br>
 <br>
 
-<p>Docente del Dipartimento di Informatica con cui eventualmente si è già in contatto per questa attività: <%= convenzione.getTutorAccademico() %> </p>
+<p>Docente del Dipartimento di Informatica con cui eventualmente si è già in contatto per questa attività: Prof/Prof.ssa <%= convenzione.getTutorAccademico() %> </p>
 <br>
 <br>
 <br>

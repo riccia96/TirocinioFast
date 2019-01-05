@@ -3,7 +3,7 @@
 <%
 	ArrayList<ConvenzioneBean> convenzioni = (ArrayList<ConvenzioneBean>) request.getSession().getAttribute("richiesteConvenzioni");
 	ArrayList<AziendaBean> listaAziende = (ArrayList<AziendaBean>) request.getSession().getAttribute("listaAziende");
-
+	AziendaBean a = new AziendaBean();
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -30,11 +30,19 @@
   </tr>
  <%for (int i = 0; i < convenzioni.size(); i++){
   			ConvenzioneBean c = convenzioni.get(i);
-  			AziendaBean a = listaAziende.get(i); 		
+  			for (int s = 0; s < listaAziende.size(); s++){
+  				a = listaAziende.get(s); 
+  				
+  				if (c.getAzienda().equals(a.getUsername())){
+  					break;
+  				}
+  			}
+  					
 	  %>
   <tr>
     <td><a href="mostraPDF.jsp">RichiestaN<%= c.getId() %></a></td>
-    <td><%= a.getNome() %></td>
+    <td><%=a.getNome()  %></td>
+    <%if(c.getUrl().equals(" ")){ %>
     <td>
     	<form>
   			Seleziona PDF richista di convenzione firmata<br>
@@ -42,6 +50,9 @@
   			<input type="submit">
 		</form>
 </td>
+<%} else {%>
+<td>Convenzione gi&agrave; caricata! </td>
+<%} %>
   </tr>
   <% } %>
   </table>

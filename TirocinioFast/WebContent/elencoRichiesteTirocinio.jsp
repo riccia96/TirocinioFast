@@ -64,11 +64,11 @@ TirocinioBean tirocinio = new TirocinioBean();
 	  }
 	  %>
   <tr>
-    <td><a href="mostraPDF.jsp">RichiestaN. <%=tirocinio.getId() %></a></td>
-    <td><%=studente.getCognome() + studente.getNome() %></td>
-    <td><%=tutor.getCognome() + tutor.getNome() %> </td>
+    <td><a href="mostraPDF.jsp">RichiestaN.<%=tirocinio.getId() %></a></td>
+    <td><%=studente.getCognome() + " " + studente.getNome() %></td>
+    <td>Prof/Prof.ssa <%=tutor.getCognome() + tutor.getNome() %> </td>
     <td><%=azienda.getNome() %></td>
-    <% if(tirocinio.isConvalidaAzienda()==true && tirocinio.isConvalidaTutor()==true && tirocinio.isConvalidaStudente()==true) { %>
+    <% if(tirocinio.isConvalidaAzienda()==true && tirocinio.isConvalidaTutor()==true && tirocinio.isConvalidaStudente()==true && tirocinio.getUrl().equals(" ")) { %>
     <td>
     	<form>
   			Seleziona PDF richista inizio attivit&agrave; di tirocinio firmata<br>
@@ -77,7 +77,7 @@ TirocinioBean tirocinio = new TirocinioBean();
 		</form>
 </td>
 <%} else { %>
-<td> Appena sar&agrave; possibile potrai effettuare l'upload</td>
+<td> Appena sar&agrave; possibile potrai effettuare l'upload o richiesta gi&agrave; caricata</td>
 <%} %>
   </tr>
   <%} %>
@@ -110,9 +110,9 @@ TirocinioBean tirocinio = new TirocinioBean();
 	  }
 	  %>
   <tr>
-    <td><a href="compilazioneCampiAzienda.jsp">RichiestaN. <%=tirocinio.getId() %></a></td>
-    <td><%=studente.getCognome() + studente.getNome() %></td>
-    <td><%=tutor.getCognome() + tutor.getNome() %></td>
+    <td><a href="compilazioneCampiAzienda.jsp">RichiestaN.<%=tirocinio.getId() %></a></td>
+    <td><%=studente.getCognome() +  " " + studente.getNome() %></td>
+    <td>Prof/Prof.ssa <%=tutor.getCognome() + " " + tutor.getNome() %></td>
     <td>
     	<form action="GestioneTirocinio" method="POST">
   			Seleziona PDF richista inizio attivit&agrave; di tirocinio firmata<br>
@@ -151,8 +151,8 @@ TirocinioBean tirocinio = new TirocinioBean();
 		  }
 	  } %>
   <tr>
-    <td><a href="mostraPDF.jsp">RichiestaN. <%=tirocinio.getId() %></a></td>
-    <td><%=studente.getCognome() + studente.getNome() %></td>
+    <td><a href="mostraPDF.jsp">RichiestaN.<%=tirocinio.getId() %></a></td>
+    <td><%=studente.getCognome() + " " + studente.getNome() %></td>
     <td><%=azienda.getNome() %></td>
     <% if(tirocinio.isConvalidaAzienda()==true) { %>
     <td>
