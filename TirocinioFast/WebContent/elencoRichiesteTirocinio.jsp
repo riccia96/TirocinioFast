@@ -92,11 +92,11 @@ TirocinioBean tirocinio = new TirocinioBean();
     <th style="text-align: center;">Tutor</th>
   </tr>
   <% for (int i = 0; i < tirocini.size(); i++){
-	  tirocinio = tirocini.get(i);
+	  
 	  for (int s=0; s<studenti.size(); s++){
 		  studente = studenti.get(s);
 		  
-		  if (tirocinio.getStudente().equals(studente.getUsername())){
+		  if (tirocini.get(i).getStudente().equals(studente.getUsername())){
 			  break;
 		  }
 	  }
@@ -104,7 +104,7 @@ TirocinioBean tirocinio = new TirocinioBean();
 	  for (int t = 0; t < tutors.size(); t++){
 		  tutor = tutors.get(t);
 		  
-		  if(tirocinio.getTutorAccademico().equals(tutor.getUsername())){
+		  if(tirocini.get(i).getTutorAccademico().equals(tutor.getUsername())){
 			  break;
 		  }
 	  }

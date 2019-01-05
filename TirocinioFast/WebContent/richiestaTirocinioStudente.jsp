@@ -25,7 +25,7 @@
     <img src="img\convenzione.png" alt="Convenzione" class="avatar">
   </div>
 
-    <input type="text" placeholder="Anno accademico" name="anno" required>
+    <input type="text" placeholder="Anno accademico" name="annoAccademico" required>
 	<br>
     <input style="width: 80%; padding: 12px 20px; margin: 8px 0; margin-left: 10%; display: inline-block; border: 1px solid #ccc; box-sizing: border-box;" type="number" placeholder="CFU tirocinio" name="cfu" required>
     <br>

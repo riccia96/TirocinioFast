@@ -108,6 +108,10 @@ public class GestioneTirocinio extends HttpServlet {
 				List<TirocinioBean> tirocini = new ArrayList<TirocinioBean>();
 				List<TirocinioBean> richieste = new ArrayList<TirocinioBean>();
 
+				studenti = utente.getStudenti();
+				aziende = utente.getAziende();
+				tutors = utente.getTutorAccademici();
+				
 				tirocini.addAll(documento.richiesteTirocinio());
 
 				if(!(request.getSession().getAttribute("tipoUtente").equals("studente"))) {
