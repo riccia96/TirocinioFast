@@ -40,7 +40,7 @@
     <input type="text" placeholder="Eventuale docente di riferimento" name="docente">
     <br>
     <div class ="new">
-    <button name = "azioneUtente" value="richiestaConvenzione" id="convenzioneButton" class=" button" type="submit">Richiedi convenzione</button> 
+    <button name = "azioneConvenzione" value="richiestaConvenzione" id="convenzioneButton" class=" button" type="submit">Richiedi convenzione</button> 
     </div>
 </form>
   
