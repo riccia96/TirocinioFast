@@ -496,6 +496,10 @@ public class GestioneTirocinio extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		
+		if(azioneTirocinio.equals("accettaAttivita")){
+			
+		}
 
 	}
 
