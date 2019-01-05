@@ -72,7 +72,7 @@ public class GestioneConvenzione extends HttpServlet {
 
 		}
 
-		if(azioneConvenzione.equals("")){
+		if(azioneConvenzione.equals("convenzioniConvalidate")){
 			try{
 				List<ConvenzioneBean> convenzioni = documento.convenzioni();
 				List<ConvenzioneBean> richieste = new ArrayList<ConvenzioneBean>();
