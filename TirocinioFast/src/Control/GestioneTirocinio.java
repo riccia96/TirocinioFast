@@ -45,7 +45,7 @@ public class GestioneTirocinio extends HttpServlet {
 		if(azioneTirocinio.equals("inoltraRichiesta")){
 			try {
 				String aziendaTirocinio = request.getParameter("aziendaSelezionata");
-				
+
 				List<TutorBean> tutorAccademici = utente.getTutorAccademici();
 
 				request.getSession().setAttribute("aziendaTirocinio", aziendaTirocinio);
@@ -101,7 +101,7 @@ public class GestioneTirocinio extends HttpServlet {
 				StudenteBean studente = new StudenteBean();
 				TutorBean tutor = new TutorBean();
 				AziendaBean azienda = new AziendaBean();
-				
+
 				List<StudenteBean> studenti = new ArrayList<StudenteBean>();
 				List<AziendaBean> aziende = new ArrayList<AziendaBean>();
 				List<TutorBean> tutors = new ArrayList<TutorBean>();
@@ -111,7 +111,7 @@ public class GestioneTirocinio extends HttpServlet {
 				studenti = utente.getStudenti();
 				aziende = utente.getAziende();
 				tutors = utente.getTutorAccademici();
-				
+
 				tirocini.addAll(documento.richiesteTirocinio());
 
 				if(!(request.getSession().getAttribute("tipoUtente").equals("studente"))) {
@@ -123,7 +123,7 @@ public class GestioneTirocinio extends HttpServlet {
 									richieste.add(t);
 								}
 							} 
-							
+
 							request.getSession().setAttribute("listaStudenti", studenti);
 							request.getSession().setAttribute("listaAziende", aziende);
 							request.getSession().setAttribute("listaTutor", tutors);
@@ -289,7 +289,7 @@ public class GestioneTirocinio extends HttpServlet {
 
 				tirocinio.setConvalidaAzienda(true);
 				richiesta.inoltraRichiesta(tirocinio);
-				
+
 				RequestDispatcher view = request.getRequestDispatcher("richiesteTirocinio.jsp");
 				view.forward(request, response);
 			} catch (SQLException e) {
@@ -313,13 +313,13 @@ public class GestioneTirocinio extends HttpServlet {
 
 		if(azioneTirocinio.equals("inoltroSI")) {
 			try{
-			TirocinioBean tirocinio = new TirocinioBean();
-			int id = Integer.parseInt((String) request.getSession().getAttribute("idTirocinio"));
-			tirocinio.setId(id);
-			tirocinio = richiesta.richiestaTirocinio(tirocinio);
-			
-			tirocinio.setConvalidaStudente(true);
-			richiesta.inoltraRichiesta(tirocinio);
+				TirocinioBean tirocinio = new TirocinioBean();
+				int id = Integer.parseInt((String) request.getSession().getAttribute("idTirocinio"));
+				tirocinio.setId(id);
+				tirocinio = richiesta.richiestaTirocinio(tirocinio);
+
+				tirocinio.setConvalidaStudente(true);
+				richiesta.inoltraRichiesta(tirocinio);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -428,13 +428,13 @@ public class GestioneTirocinio extends HttpServlet {
 				List<TutorBean> tutors = new ArrayList<TutorBean>();
 
 				tirocini = richiesta.richiesteTirocinio();
-				
+
 				for(TirocinioBean t: tirocini){
 					if(t.isConvalidaAttivita()){
 						conclusi.add(t);
 					}
 				}
-				
+
 				for(TirocinioBean t: conclusi){
 					studente.setUsername(t.getStudente());
 					azienda.setUsername(t.getAzienda());
@@ -455,6 +455,7 @@ public class GestioneTirocinio extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+
 		if(azioneTirocinio.equals("tirociniConclusi")){
 			try{
 				StudenteBean studente = new StudenteBean();
@@ -468,14 +469,14 @@ public class GestioneTirocinio extends HttpServlet {
 				List<TutorBean> tutors = new ArrayList<TutorBean>();
 
 				tirocini = richiesta.richiesteTirocinio();
-				
+
 				for(TirocinioBean t: tirocini){
 					if(t.isConvalidaAzienda() && t.isConvalidaTutor() && 
 							t.isConvalidaStudente() && t.isConvalidaRichiesta() && !(t.isConvalidaAttivita())){
 						conclusi.add(t);
 					}
 				}
-				
+
 				for(TirocinioBean t: conclusi){
 					studente.setUsername(t.getStudente());
 					azienda.setUsername(t.getAzienda());
@@ -496,9 +497,27 @@ public class GestioneTirocinio extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		
+
 		if(azioneTirocinio.equals("accettaAttivita")){
-			
+			try {
+
+				int idTirocinio = Integer.parseInt((String) request.getParameter("idTirocinio"));
+
+				TirocinioBean tirocinio = new TirocinioBean();
+				tirocinio.setId(idTirocinio);
+
+
+				tirocinio = richiesta.richiestaTirocinio(tirocinio);
+				
+				
+				
+				
+				
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
 		}
 
 	}
