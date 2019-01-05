@@ -1,6 +1,10 @@
-<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1" import="java.util.ArrayList, Bean.*"%>  
+<%
+	ArrayList<ConvenzioneBean> convenzioni = (ArrayList<ConvenzioneBean>) request.getSession().getAttribute("richiesteConvenzioni");
+	ArrayList<AziendaBean> listaAziende = (ArrayList<AziendaBean>) request.getSession().getAttribute("listaAziende");
+
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -15,22 +19,21 @@
 
 <%@include file = "menu.jsp" %>
 
-<%ArrayList<ConvenzioneBean> convenzioniDaConvalidare = (ArrayList<ConvenzioneBean>) request.getSession().getAttribute(""); %>
 
 <h3 class="intestazione">Gestione delle richieste di convenzione</h3>
- <% if (convenzioniDaConvalidare.size()>0){%>
+ <% if (convenzioni.size()>0){%>
 <table style="margin-left: 25%; width: 1000px;">
   <tr>
     <th style="text-align: center;">Richieste di Convenzione</th>
     <th style="text-align: center;">Azienda</th>
     <th></th>
   </tr>
- <%for (int i = 0; i < convenzioniDaConvalidare.size(); i++){
-  			ConvenzioneBean c = convenzioniDaConvalidare.get(i);
-  			AziendaBean a = (); 		
+ <%for (int i = 0; i < convenzioni.size(); i++){
+  			ConvenzioneBean c = convenzioni.get(i);
+  			AziendaBean a = listaAziende.get(i); 		
 	  %>
   <tr>
-    <td><a href="mostraPDF.jsp">RichiestaN<%=xxx %></a></td>
+    <td><a href="mostraPDF.jsp">RichiestaN<%= c.getId() %></a></td>
     <td><%= a.getNome() %></td>
     <td>
     	<form>

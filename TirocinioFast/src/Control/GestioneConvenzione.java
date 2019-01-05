@@ -36,18 +36,21 @@ public class GestioneConvenzione extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<ConvenzioneBean> convenzioni = new ArrayList<ConvenzioneBean>();
+		
 
 		String azioneConvenzione = request.getParameter("azioneConvenzione");
 
-		if(azioneConvenzione.equals("elencoRichiesteConvenzione")) {
+		if(azioneConvenzione.equals("elencoRichiesteConvenzioni")) {
 			try {
-				convenzioni = documento.convenzioni();
+				List<ConvenzioneBean> convenzioni = documento.convenzioni();
 				List<ConvenzioneBean> richieste = new ArrayList<ConvenzioneBean>();
 				List<AziendaBean> aziende = new ArrayList<AziendaBean>();
-				aziende.addAll(utente.getAziende());
+				
 				for(ConvenzioneBean c : convenzioni) {
 					if(!(c.isConvalida())) {
+						AziendaBean a = new AziendaBean();
+						a.setUsername(c.getAzienda());
+						aziende.add(utente.getAzienda(a));
 						richieste.add(c);
 					}
 				}

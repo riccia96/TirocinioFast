@@ -24,7 +24,7 @@
 <h3 class="perForm">Informazioni sull'azienda</h3>
 
 <div style="margin-left:25%;width: 700px;" class="dialogo">
-    <img src="<%=azienda.getLogo() %>" alt="logo" >
+    <img style="margin-left:25%" src="<%=azienda.getLogo() %>" alt="logo" >
 
 	<h3 style="text-align: center;"><%= azienda.getNome() %></h3>
 	<br>
@@ -33,9 +33,10 @@
 	<p style="text-align: center;"><%= azienda.getEmail() %></p>
 	<p style="text-align: center;"><%= azienda.getTelefono()%></p>
     <div class ="new">
+    <form action="GestioneTirocinio" method="POST">
     <input type="hidden" name="aziendaSelezionata" value="<%=a.getUsername()%>">
     <button name = "azioneTirocinio" value="inoltraRichiesta" id="inoltraRichiestaTirocinioButton" class=" button" type="submit">Invia richiesta di tirocinio</button> 
-    </div>
+    </form></div>
   
 </div>
 
