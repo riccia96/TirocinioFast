@@ -33,6 +33,7 @@
 		<li><a href="GestioneUtente?azioneUtente=areaPersonale">Area Personale</a></li>
 		<li><a href="GestioneTirocinio?azioneTirocinio=elencoAziende">Ricerca azienda</a></li>
 		<li><a href="GestioneTirocinio?azioneTirocinio=elencoRichiesteTirocinio">Richiesta tirocinio</a></li>
+		<li><a href="#">Tirocini conclusi</a></li>
 		<li><a href="#">Registro ore</a></li>
 		<li><a href="#">Questionario</a></li>
 		<li><a href="GestioneUtente?azioneUtente=logout">Logout</a></li>
@@ -43,6 +44,7 @@
 		<li><a href="GestioneUtente?azioneUtente=areaPersonale">Area Personale</a></li>
 		<li><a href="convenzione.jsp">Convenzione</a></li>
 		<li><a href="GestioneTirocinio?azioneTirocinio=elencoRichiesteTirocinio">Richieste tirocinio</a></li>
+		<li><a href="#">Tirocini conclusi</a></li>
 		<li><a href="GestioneUtente?azioneUtente=logout">Logout</a></li>
 		<%
 			}
@@ -50,6 +52,7 @@
 		%>
 		<li><a href="GestioneUtente?azioneUtente=areaPersonale">Area Personale</a></li>
 		<li><a href="GestioneTirocinio?azioneTirocinio=elencoRichiesteTirocinio">Richieste tirocinio</a></li>
+		<li><a href="#">Tirocini conclusi</a></li>
 		<li><a href="GestioneUtente?azioneUtente=logout">Logout</a></li>
 		<%
 			}
@@ -58,7 +61,9 @@
 		<li><a href="GestioneUtente?azioneUtente=areaPersonale">Area Personale</a>
 		<li><a href="GestioneTirocinio?azioneTirocinio=elencoRichiesteTirocinio">Richieste tirocinio</a>
 		<li><a href="GestioneTirocinio?azioneTirocinio=tirociniConclusi">Attività tirocinio</a>
+		<li><a href="#">Tirocini conclusi</a></li>
 		<li><a href="GestioneConvenzione?azioneConvenzione=elencoRichiesteConvenzioni">Convenzioni aziende</a>
+		<li><a href="#">Convenzioni accettate</a></li>
 		<li><a href="GestioneTirocinio?azioneTirocinio=elencoAziende">Elenco aziende convenzionate</a>
 		<li><a href="GestioneUtente?azioneUtente=logout">Logout</a> <%
  	} %>
