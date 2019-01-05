@@ -4,6 +4,8 @@
  	AziendaBean azienda = (AziendaBean) request.getSession().getAttribute("azienda");
 	StudenteBean studente = (StudenteBean) request.getSession().getAttribute("studente");
 	TutorBean tutor = (TutorBean) request.getSession().getAttribute("tutor");
+	TirocinioBean tirocinio = (TirocinioBean) request.getSession().getAttribute("tirocinio");
+	ConvenzioneBean convenzione = (ConvenzioneBean) request.getSession().getAttribute("convenzione");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -29,7 +31,7 @@
 <h2 align="center">INFORMATICA</h2>
 <h2 align="center">A.A 2018 - 19</h2>
 
-<h4 align="center">Cognome Nome matricola XXXXXXXXX</h4>
+<h4 align="center"> <%=studente.getCognome() + " " + studente.getNome() + " " + studente.getMatricola()%></h4>
 
 <h3 align="center">REGISTRO ORE DI TIROCINIO</h3>
 <h3 align="center">LAUREA Triennale</h3>
@@ -38,14 +40,14 @@
 <br>
 <h3 align="center">A.A 2018 - 19</h3>
 <br>
-<p>Studente: XXXXXXX </p> 
-<p>Matricola: XXXXXX</p> 
-<p>Luogo di nascita: XXXXXX </p> 
-<p>Data di nascita: XXXXXX </p> 
-<p>Ore di Stage: XXX </p>
-<p>Struttura ospitante: XXXXXX </p> 
-<p>Tutor interno: XXXXXX </p> 
-<p>Tutor esterno: XXXXX </p> 
+<p>Studente: <%= studente.getCognome() + " " + studente.getNome() %> </p> 
+<p>Matricola: <%= studente.getMatricola() %></p> 
+<p>Luogo di nascita: <%= studente.getLuogoNascita() %> </p> 
+<p>Data di nascita: <%= studente.getDataNascita() %> </p> 
+<p>Ore di Stage: <%= tirocinio.getCfu()*25 %> </p>
+<p>Struttura ospitante: <%=azienda.getNome() %> </p> 
+<p>Tutor interno: Prof/Prof.ssa<%=tutor.getCognome() + " " + tutor.getCognome() %> </p> 
+<p>Tutor esterno: <%= convenzione.getReferente() %> </p> 
 <p align="right">Tutor Interno (Firma)</p>
 <br>
 <p align="right">Il responsabile dell'Ente ospitante e/o Presidente del C.A.D </p>

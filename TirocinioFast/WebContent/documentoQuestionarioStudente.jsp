@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="Bean.*"%>
 <%
@@ -6,6 +7,7 @@ StudenteBean studente = (StudenteBean) request.getSession().getAttribute("studen
 TutorBean tutor = (TutorBean) request.getSession().getAttribute("tutor");
 ConvenzioneBean convenzione = (ConvenzioneBean) request.getSession().getAttribute("convenzione");
 QuestionarioStudenteBean questionarioStudente = (QuestionarioStudenteBean) request.getSession().getAttribute("questionarioStudente");
+ArrayList<String> scelte = (ArrayList<String>) request.getSession().getAttribute("scelte");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -27,50 +29,50 @@ QuestionarioStudenteBean questionarioStudente = (QuestionarioStudenteBean) reque
 </table>
 <br>
 <br>
-<h4>Tirocinante: XXXXXXX, Periodo di svolgimento del tirocinio:XXXXXXXX, Titolo del tirocinio:XXXXXXXXXX</h4>
+<h4>Tirocinante: <%=studente.getCognome() + " " + studente.getNome() %>, Periodo di svolgimento del tirocinio: <%=questionarioStudente.getPeriodo() %>, Titolo del tirocinio: <%= questionarioStudente.getTitolo() %></h4>
 <br>
 <br>
-<h4>Ente Ospitante: XXXXXX, Sede del Tirocinio: XXXXXX, Citt&agrave;: XXXX, Tutor Ente Ospitante: XXXXXXXX, E-mail tutor: XXXXXXXX</h4>
+<h4>Ente Ospitante: <%=azienda.getNome() %>, Sede del Tirocinio: <%= azienda.getIndirizzo() %>, Tutor Ente Ospitante: <%=convenzione.getReferente() %>, E-mail tutor: <%= convenzione.getEmailReferente() %></h4>
 <br>
 <br>
-<h4>Tutor Accademico: XXXXXXXXX</h4> 
+<h4>Tutor Accademico: Prof/Prof.ssa <%= tutor.getCognome() + " " + tutor.getNome() %></h4> 
 <br>
 <br>
 <h4>Relativamente al progetto di Tirocinio e all'Esperienza:</h4>
 <br>
-<h4>Le attivit&agrave; svolte sono state coerenti con le conoscenze possedute: X</h4>
+<h4>Le attivit&agrave; svolte sono state coerenti con le conoscenze possedute: <%=scelte.get(0) %></h4>
 <br>
-<h4>Il tirocinio ha migliorato la formazione tecnica: X</h4>
+<h4>Il tirocinio ha migliorato la formazione tecnica: <%=scelte.get(1) %></h4>
 <br>
-<h4>Il tirocinio ha migliorato le soft skill (capacit&agrave; di relazionarsi, di lavorare in team, organizzarsi...): X</h4>
+<h4>Il tirocinio ha migliorato le soft skill (capacit&agrave; di relazionarsi, di lavorare in team, organizzarsi...): <%=scelte.get(2) %></h4>
 <br>
-<h4>La durata del tirocinio &egrave; stata adeguata agli obiettivi del progetto: X</h4>
+<h4>La durata del tirocinio &egrave; stata adeguata agli obiettivi del progetto: <%=scelte.get(3) %></h4>
 <br>
-<h4>Valutazione complessiva dell'esperienza: X</h4>
+<h4>Valutazione complessiva dell'esperienza: <%=scelte.get(4) %></h4>
 <br>
 <br>
 <h4>Relativamente all'Ente Ospitante:</h4>
 <br>
-<h4>Mansioni assegnate: X</h4>
+<h4>Mansioni assegnate: <%=scelte.get(5) %></h4>
 <br>
-<h4>Ambiete di lavoro: X</h4>
+<h4>Ambiete di lavoro: <%=scelte.get(6) %></h4>
 <br>
-<h4>Competenze tecniche presenti: X</h4>
+<h4>Competenze tecniche presenti: <%=scelte.get(7) %></h4>
 <br>
-<h4>Logistica e supporto strumentale: X</h4>
+<h4>Logistica e supporto strumentale: <%=scelte.get(8) %></h4>
 <br>
-<h4>Assistenza del tutor Ente Ospitante: X</h4>
+<h4>Assistenza del tutor Ente Ospitante: <%=scelte.get(9) %></h4>
 <br>
 <br>
 <h4>Relativamente alle strutture universitarie addette alla gestione dei Tirocini</h4>
 <br>
-<h4>Hanno fornito informazioni chiare ed esaustive: X</h4>
+<h4>Hanno fornito informazioni chiare ed esaustive: <%=scelte.get(10) %></h4>
 <br>
-<h4>Hanno fornito assistenza e disponibilità: X</h4>
+<h4>Hanno fornito assistenza e disponibilità: <%=scelte.get(11) %></h4>
 <br>
-<h4>I servizi/informazioni fornite via Web sono esaustivi: X</h4>
+<h4>I servizi/informazioni fornite via Web sono esaustivi: <%=scelte.get(12) %></h4>
 <br>
-<h4>Eventuali osservazioni: X</h4>
+<h4>Eventuali osservazioni: <%=scelte.get(13) %></h4>
 <br>
 <br>
 <h4 align="center">Firma del Tirocinante</h4>

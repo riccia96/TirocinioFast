@@ -37,33 +37,33 @@
 <br>
 <h4>Relativamente al progetto di tirocinio:</h4>
 <br>
-<h4>La durata del tirocinio &egrave; stata adeguata agli obiettivi formativi: X</h4>
+<h4>La durata del tirocinio &egrave; stata adeguata agli obiettivi formativi: <%= scelte.get(0) %></h4>
 <br>
-<h4>Gli obiettivi formativi previsti sono stati raggiunti: X</h4>
+<h4>Gli obiettivi formativi previsti sono stati raggiunti: <%= scelte.get(1) %></h4>
 <br>
-<h4>Il tirocinio formativo &egrave; utile all'Ente Ospitante: X</h4>
+<h4>Il tirocinio formativo &egrave; utile all'Ente Ospitante: <%= scelte.get(2) %></h4>
 <br>
 <br>
 <h4>Relativamente al tirocinante:</h4>
 <br>
-<h4>Competenze informatiche possedute in ingresso: X</h4>
+<h4>Competenze informatiche possedute in ingresso: <%= scelte.get(3) %></h4>
 <br>
-<h4>Competenze acquisite al termine del tirocinio nella specifica disciplina: X</h4>
+<h4>Competenze acquisite al termine del tirocinio nella specifica disciplina: <%= scelte.get(4) %></h4>
 <br>
-<h4>Motivazione e interesse: X</h4>
+<h4>Motivazione e interesse: <%= scelte.get(5) %></h4>
 <br>
-<h4>Soft skill (capacit&agrave; di relazionarsi, di comunicare, di lavorare in team ...): X</h4>
+<h4>Soft skill (capacit&agrave; di relazionarsi, di comunicare, di lavorare in team ...): <%= scelte.get(6) %></h4>
 <br>
 <br>
 <h4>Relativamente alle strutture universitarie addette alla gestione dei Tirocini</h4>
 <br>
-<h4>Hanno fornito informazioni chiare ed esaustive: X</h4>
+<h4>Hanno fornito informazioni chiare ed esaustive: <%= scelte.get(7) %></h4>
 <br>
-<h4>Hanno fornito assistenza e disponibilità: X</h4>
+<h4>Hanno fornito assistenza e disponibilità: <%= scelte.get(8) %></h4>
 <br>
-<h4>I servizi/informazioni fornite via Web sono esaustivi: X</h4>
+<h4>I servizi/informazioni fornite via Web sono esaustivi: <%= scelte.get(9) %></h4>
 <br>
-<h4>Eventuali osservazioni: X</h4>
+<h4>Eventuali osservazioni: <%= scelte.get(10) %></h4>
 <br>
 <br>
 <h4 align="center">Firma del Tutor dell'Ente Ospitante e Timbro dell'Ente Ospitante</h4>

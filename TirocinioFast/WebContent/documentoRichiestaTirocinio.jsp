@@ -1,9 +1,12 @@
+<%@page import="com.sun.xml.internal.ws.api.ha.StickyFeature"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="Bean.*"%>
 <%
  	AziendaBean azienda = (AziendaBean) request.getSession().getAttribute("azienda");
 	StudenteBean studente = (StudenteBean) request.getSession().getAttribute("studente");
 	TutorBean tutor = (TutorBean) request.getSession().getAttribute("tutor");
+	TirocinioBean tirocinio = (TirocinioBean) request.getSession().getAttribute("tirocinio");
+	ConvenzioneBean convenzione = (ConvenzioneBean) request.getSession().getAttribute("convenzione");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -20,27 +23,31 @@
 <br>
 <br>
 
-<p>Tirocinante XXXXXXXX, Nato a XXXXXXXX, il XXXXXXXXXX, Residente in XXXXXXXXXX, Via XXXXXXXXXXX, Cod. Fiscale XXXXXXXXX, Recapito telefonico XXXXXXXXXXXX, E-mail XXXXXXXXXX </p>
+<p>Tirocinante <%=studente.getCognome() + " " + studente.getNome() %>, Nato a <%=studente.getLuogoNascita() %>, il <%= studente.getDataNascita() %>, Residente in <%=studente.getCitta() %>, Via <%= studente.getIndirizzo() %>, Cod. Fiscale <%= studente.getCodiceFiscale() %>, Recapito telefonico <%=studente.getTelefono() %>, E-mail <%= studente.getEmail() %> </p>
 <br>
 
 <h3>Attuale condizione</h3>
 <br>
-<p>Studente universitario iscritto al X anno del Corso di Laurea Triennale in Informatica, matr. XXXXXX presso l'Università degli Studi di Salerno per l'anno accademico XXXX/XXXX con tirocinio curriculare pari a X CFU</p>
+<p>Studente universitario iscritto al Corso di Laurea Triennale in Informatica, matr. <%=studente.getMatricola() %> presso l'Università degli Studi di Salerno per l'anno accademico <%= tirocinio.getAnnoAccademico() %> con tirocinio curriculare pari a <%=tirocinio.getCfu() %> CFU</p>
 <br>
-<p>Portatore di Handicap: XX
+<% if (tirocinio.isHandicap() == true){ %>
+<p>Portatore di Handicap: SI
+<%} else{ %>
+<p>Portatore di Handicap: SI
+<%} %>
 <br>
 <br>
-<p>Azienda/Ente ospitante: XXXXXXXXX
+<p>Azienda/Ente ospitante: <%=azienda.getNome() %>
 <br>
-<p>Sede del Tirocinio (stabilimento/reparto/ufficio): XXXXXXXXX
+<p>Sede del Tirocinio (stabilimento/reparto/ufficio): <%= tirocinio.getSedeTirocinio() %>
 <br>
-<p>Tempi di accesso ai locali aziendali: XXXXXXXXXX
+<p>Tempi di accesso ai locali aziendali: <%= tirocinio.getAccessoLocali() %>
 <br>
-<p>Periodo di tirocinio (max 12 mesi): X mesi, dal XXX al XXX per totale ore: XXX</p>
+<p>Periodo di tirocinio (max 12 mesi): <%= tirocinio.getPeriodoTirocinio() %> per totale ore: <%= tirocinio.getCfu()*25 %></p>
 <br>
-<p>Tutor accademico: XXXXXXX</p>
+<p>Tutor accademico: Prof/Prof.ssa <%= tutor.getCognome() + " " + tutor.getNome() %></p>
 <br>
-<p>Tutor azienda/ente: XXXXX, tel. XXXXXXX, e-mail XXXXXXXXXX</p>
+<p>Tutor azienda/ente: <%= convenzione.getReferente() %>, tel. <%= convenzione.getTelefonoReferente() %>, e-mail <%= convenzione.getEmailReferente() %></p>
 <br>
 <p>Polizze assicurative: <b>INAL Gestione per conto dello Stato prevista dal combinato disposto dagli artt. 127 e 190 del <u>T.U. INAL (DPR N. 1124/65)</u> e regolamentato dal D.M. 10.10.85:</b>
 <br>
@@ -49,9 +56,9 @@
 <b>Responsabilit&agrave; Civile Terzi Compagnia Generali 261044624</b></p>
 <br>
 <br>
-<p>Obiettivi e modalità del tirocinio: XXXXXXXXXXXXXXXXXXXXXXX</p>
+<p>Obiettivi e modalità del tirocinio: <%= azienda.getDescrizione() + tirocinio.getObiettivoTirocinio()%></p>
 <br>
-<p>Eventuali facilitazioni previste: XXXXXXXXXXXXXXXXXXXXXX</p>
+<p>Eventuali facilitazioni previste: <%= tirocinio.getFacilitazioni() %></p>
 <br>
 <h4>Obblighi per il tirocinante:</h4>
 <br>
