@@ -31,4 +31,14 @@ public class ManagerTirocinio {
 		return lTirocinio;
 	}
 	
+	public TirocinioBean richiestaTirocinio(TirocinioBean tirocinio) throws SQLException{
+		TirocinioDAO tDAO = new TirocinioDAO();
+		return tDAO.doRetrieveByKey(tirocinio);
+	}
+	
+	public boolean inoltraRichiesta(TirocinioBean tirocinio)throws SQLException{
+		TirocinioDAO tDAO = new TirocinioDAO();
+		return tDAO.doUpdate(tirocinio);
+	}
+	
 }
