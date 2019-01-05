@@ -51,7 +51,7 @@
     else { %>
      <td><img alt="giallo" src="img/giallo.png"> </td>   
      <% } %>
-    <%if (mostra.getUrl().equals(" ")){ %>
+    <%if (mostra.getUrl().equals("")){ %>
     <td>
     	<form>
   			Seleziona PDF convenzione firmato con gli allegati richiesti<br>

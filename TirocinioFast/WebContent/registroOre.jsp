@@ -54,7 +54,7 @@
     <td><a href="documentoRegistroOre.jsp">Attivit&agrave; di Tirocinio N.<%=tirocinio.getId() %></a></td>
     <td><%= azienda.getNome() %></td>
     <td>Prof/Prof.ssa<%= tutor.getCognome() + " " + tutor.getNome() %></td>
-    <%if (tirocinio.getRegistroOre().equals(" ")){ %>
+    <%if (tirocinio.getRegistroOre().equals("")){ %>
     <td>
     	<form>
   			Seleziona PDF del registro ore completato<br>
