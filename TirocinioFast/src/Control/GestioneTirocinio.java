@@ -262,7 +262,24 @@ public class GestioneTirocinio extends HttpServlet {
 
 		if(azioneTirocinio.equals("inoltroAT")) {
 			//settare la convalida
-
+			try {
+			AziendaBean azienda = new AziendaBean();
+			TutorBean tutor = new TutorBean();
+			List<TirocinioBean> tirocini = new ArrayList<TirocinioBean>();
+			
+			azienda = (AziendaBean) request.getSession().getAttribute("utenteSessione");
+			tirocini = richiesta.richiesteTirocinio();
+			
+			for(TirocinioBean t : tirocini){
+				if(t.getAzienda().equals(azienda.getUsername())){
+					
+				}
+			}
+			
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		if(azioneTirocinio.equals("inoltroTS")) {

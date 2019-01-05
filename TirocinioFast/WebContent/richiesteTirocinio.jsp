@@ -72,10 +72,10 @@
     <td><%=s.getCognome() + s.getNome() %></td>
     <td><%=tu.getCognome() + tu.getNome() %></td>
     <td>
-    	<form>
+    	<form action="GestioneTirocinio" method="POST">
   			Seleziona PDF richista inizio attivit&agrave; di tirocinio firmata<br>
   			<input type="file" name="attivitaTirocinioFirmata" accept=".pdf"><br>
-  			<input type="submit">
+  			<input type="submit" name="inoltroAT">
 		</form>
 </td>
   </tr>
