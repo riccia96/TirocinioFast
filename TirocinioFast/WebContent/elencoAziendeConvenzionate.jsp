@@ -24,11 +24,11 @@
 <div id = "contenitore">
 <table style="margin-left: 30%">
 
-<tr></tr>
-<tr></tr>
-<tr></tr>
+<td></td>
+<td></td>
+<td></td>
 <% for(AziendaBean a: convenzioni){ %>
-<td>
+<tr>
 
 <figure class="azienda-figure"><div class="images"><img src="<%=a.getLogo()%>" alt="images-azienda"/></div>
  
@@ -40,7 +40,7 @@
     </div>
   </figcaption>
 </figure>
-</td>
+</tr>
 <%} %>
 </div>
 </table>
