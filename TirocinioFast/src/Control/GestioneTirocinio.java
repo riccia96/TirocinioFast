@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import Bean.AziendaBean;
 import Bean.ConvenzioneBean;
+import Bean.QuestionarioAziendaBean;
+import Bean.QuestionarioStudenteBean;
 import Bean.StudenteBean;
 import Bean.TirocinioBean;
 import Bean.TutorBean;
@@ -498,7 +500,7 @@ public class GestioneTirocinio extends HttpServlet {
 			}
 		}
 
-		if(azioneTirocinio.equals("accettaAttivita")){
+		if(azioneTirocinio.equals("selezionaAttivita")){
 			try {
 
 				int idTirocinio = Integer.parseInt((String) request.getParameter("idTirocinio"));
@@ -506,20 +508,62 @@ public class GestioneTirocinio extends HttpServlet {
 				TirocinioBean tirocinio = new TirocinioBean();
 				tirocinio.setId(idTirocinio);
 
-
 				tirocinio = richiesta.richiestaTirocinio(tirocinio);
-				
-				
-				
-				
-				
-				
+
+				QuestionarioStudenteBean questionarioStudente = new QuestionarioStudenteBean();
+				QuestionarioAziendaBean questionarioAzienda = new QuestionarioAziendaBean();
+
+				questionarioStudente.setId(tirocinio.getQuestionarioStudente());
+				questionarioAzienda.setId(tirocinio.getQuestionarioAzienda());
+
+				questionarioStudente = documento.QuestionarioStudente(questionarioStudente);
+				questionarioAzienda = documento.questionarioAzienda(questionarioAzienda);
+
+				request.getSession().setAttribute("tirocinio", tirocinio);
+				request.getSession().setAttribute("questionarioStudente", questionarioStudente);
+				request.getSession().setAttribute("questionarioAzienda", questionarioAzienda);
+
+				RequestDispatcher view = request.getRequestDispatcher("mostraPDFConferma.jsp");
+				view.forward(request, response);
+
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 
 		}
 
+		if(azioneTirocinio.equals("accettaAttivita")){
+			try {
+				int idTirocinio = Integer.parseInt((String) request.getParameter("idTirocinio"));
+
+				TirocinioBean tirocinio = new TirocinioBean();
+				tirocinio.setId(idTirocinio);
+
+				tirocinio = richiesta.richiestaTirocinio(tirocinio);
+
+				QuestionarioStudenteBean questionarioStudente = new QuestionarioStudenteBean();
+				QuestionarioAziendaBean questionarioAzienda = new QuestionarioAziendaBean();
+
+				questionarioStudente.setId(tirocinio.getQuestionarioStudente());
+				questionarioAzienda.setId(tirocinio.getQuestionarioAzienda());
+
+				questionarioStudente = documento.QuestionarioStudente(questionarioStudente);
+				questionarioAzienda = documento.questionarioAzienda(questionarioAzienda);
+				
+				tirocinio.setConvalidaAttivita(true);
+				questionarioStudente.setConvalida(true);
+				questionarioAzienda.setConvalida(true);
+				
+				documento.UploadQuestionarioStudente(questionarioStudente);
+				documento.UploadQuestionarioAzienda(questionarioAzienda);
+				documento.convalidaTirocinio(tirocinio);
+				
+				RequestDispatcher view = request.getRequestDispatcher("attivitaTirocinioConcluse.jsp");
+				view.forward(request, response);
+			}  catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 }

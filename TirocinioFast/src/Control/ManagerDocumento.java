@@ -36,24 +36,24 @@ public class ManagerDocumento {
 		return convenzione.doUpdate(pathDoc);
 	}
 	
-	public QuestionarioStudenteBean DownloadQuestionarioStudente(QuestionarioStudenteBean pathDoc) throws SQLException {
-		QuestionarioStudenteDAO questionario = new QuestionarioStudenteDAO();
-		return questionario.doRetrieveByKey(pathDoc);
+	public QuestionarioStudenteBean QuestionarioStudente(QuestionarioStudenteBean questionario) throws SQLException {
+		QuestionarioStudenteDAO questionarioDAO = new QuestionarioStudenteDAO();
+		return questionarioDAO.doRetrieveByKey(questionario);
 	}
 
-	public boolean UploadQuestionarioStudente(QuestionarioStudenteBean pathDoc) throws SQLException {
-		QuestionarioStudenteDAO questionario = new QuestionarioStudenteDAO();
-		return questionario.doUpdate(pathDoc);
+	public boolean UploadQuestionarioStudente(QuestionarioStudenteBean questionario) throws SQLException {
+		QuestionarioStudenteDAO questionarioDAO = new QuestionarioStudenteDAO();
+		return questionarioDAO.doUpdate(questionario);
 	}
 	
-	public QuestionarioAziendaBean DownloadQuestionarioAzienda(QuestionarioAziendaBean pathDoc) throws SQLException {
-		QuestionarioAziendaDAO questionario = new QuestionarioAziendaDAO();
-		return questionario.doRetrieveByKey(pathDoc);
+	public QuestionarioAziendaBean QuestionarioAzienda(QuestionarioAziendaBean questionario) throws SQLException {
+		QuestionarioAziendaDAO questionarioDAO = new QuestionarioAziendaDAO();
+		return questionarioDAO.doRetrieveByKey(questionario);
 	}
 
-	public boolean UploadQuestionarioAienda(QuestionarioAziendaBean pathDoc) throws SQLException {
-		QuestionarioAziendaDAO questionario = new QuestionarioAziendaDAO();
-		return questionario.doUpdate(pathDoc);
+	public boolean UploadQuestionarioAzienda(QuestionarioAziendaBean questionario) throws SQLException {
+		QuestionarioAziendaDAO questionarioDAO = new QuestionarioAziendaDAO();
+		return questionarioDAO.doUpdate(questionario);
 	}
 	
 	public List<TirocinioBean> richiesteTirocinio() throws SQLException {
