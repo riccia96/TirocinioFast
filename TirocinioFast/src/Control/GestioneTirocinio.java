@@ -294,10 +294,31 @@ public class GestioneTirocinio extends HttpServlet {
 		}
 
 		if(azioneTirocinio.equals("inoltroTS")) {
-			TirocinioBean tirocinio = new TirocinioBean();
+			try {
+				TirocinioBean tirocinio = new TirocinioBean();
+				int id = Integer.parseInt((String) request.getSession().getAttribute("idTirocinio"));
+				tirocinio.setId(id);
+				tirocinio = richiesta.richiestaTirocinio(tirocinio);
+
+				tirocinio.setConvalidaTutor(true);
+				richiesta.inoltraRichiesta(tirocinio);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		if(azioneTirocinio.equals("inoltroSI")) {
+			try{
+			TirocinioBean tirocinio = new TirocinioBean();
+			int id = Integer.parseInt((String) request.getSession().getAttribute("idTirocinio"));
+			tirocinio.setId(id);
+			tirocinio = richiesta.richiestaTirocinio(tirocinio);
+			
+			tirocinio.setConvalidaStudente(true);
+			richiesta.inoltraRichiesta(tirocinio);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		if(azioneTirocinio.equals("elencoAziende")) {
