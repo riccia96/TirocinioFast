@@ -40,7 +40,7 @@
   					
 	  %>
   <tr>
-    <td><a href="mostraPDF.jsp">RichiestaN<%= c.getId() %></a></td>
+    <td><a href="#">RichiestaN<%= c.getId() %></a></td>
     <td><%=a.getNome()  %></td>
     <%if(c.getUrl().equals(" ")){ %>
     <td>

@@ -59,7 +59,7 @@ TirocinioBean tirocinio = new TirocinioBean();
 	  	}
 	  %>
   <tr>
-    <td><a href="mostraPDFConferma.jsp"> RichiestaN.<%= tirocinio.getId()%></a></td>
+    <td><a href="#"> RichiestaN.<%= tirocinio.getId()%></a></td>
     <td><%= studente.getCognome() + " " + studente.getNome() %></td>
     <td>Prof/Prof.ssa <%= tutor.getCognome() + " " + tutor.getNome() %> </td>
     <td><%= azienda.getNome() %></td>

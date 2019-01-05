@@ -64,11 +64,11 @@ TirocinioBean tirocinio = new TirocinioBean();
 	  }
 	  %>
   <tr>
-    <td><a href="mostraPDF.jsp">RichiestaN.<%=tirocinio.getId() %></a></td>
+    <td><a href="#">RichiestaN.<%=tirocinio.getId() %></a></td>
     <td><%=studente.getCognome() + " " + studente.getNome() %></td>
     <td>Prof/Prof.ssa <%=tutor.getCognome() + tutor.getNome() %> </td>
     <td><%=azienda.getNome() %></td>
-    <% if(tirocinio.isConvalidaAzienda()==true && tirocinio.isConvalidaTutor()==true && tirocinio.isConvalidaStudente()==true && tirocinio.getUrl().equals(" ")) { %>
+    <% if(tirocinio.isConvalidaAzienda()==true && tirocinio.isConvalidaTutor()==true && tirocinio.isConvalidaStudente()==true && tirocinio.isConvalidaTutor()==false) { %>
     <td>
     	<form>
   			Seleziona PDF richista inizio attivit&agrave; di tirocinio firmata<br>
@@ -110,9 +110,10 @@ TirocinioBean tirocinio = new TirocinioBean();
 	  }
 	  %>
   <tr>
-    <td><a href="compilazioneCampiAzienda.jsp">RichiestaN.<%=tirocinio.getId() %></a></td>
+    <td><a href="#">RichiestaN.<%=tirocinio.getId() %></a></td>
     <td><%=studente.getCognome() +  " " + studente.getNome() %></td>
     <td>Prof/Prof.ssa <%=tutor.getCognome() + " " + tutor.getNome() %></td>
+    <%if (tirocinio.isConvalidaAzienda()==false){ %>
     <td>
     	<form action="GestioneTirocinio" method="POST">
   			Seleziona PDF richista inizio attivit&agrave; di tirocinio firmata<br>
@@ -120,6 +121,9 @@ TirocinioBean tirocinio = new TirocinioBean();
   			<input type="submit" name="inoltroAT">
 		</form>
 </td>
+<%} else { %>
+  <td> Campi gi&agrave; compilati </td>
+  <%} %>
   </tr>
   <%} %>
 </table>
@@ -151,10 +155,10 @@ TirocinioBean tirocinio = new TirocinioBean();
 		  }
 	  } %>
   <tr>
-    <td><a href="mostraPDF.jsp">RichiestaN.<%=tirocinio.getId() %></a></td>
+    <td><a href="#">RichiestaN.<%=tirocinio.getId() %></a></td>
     <td><%=studente.getCognome() + " " + studente.getNome() %></td>
     <td><%=azienda.getNome() %></td>
-    <% if(tirocinio.isConvalidaAzienda()==true) { %>
+    <% if(tirocinio.isConvalidaAzienda()==true && tirocinio.isConvalidaTutor()==false) { %>
     <td>
     	<form>
   			Seleziona PDF richista inizio attivit&agrave; di tirocinio firmata<br>
@@ -163,7 +167,7 @@ TirocinioBean tirocinio = new TirocinioBean();
 		</form>
 </td>
 <%} else { %>
-<td> Appena sar&agrave; possibile potrai effettuare l'upload</td>
+<td> Appena sar&agrave; possibile potrai effettuare l'upload  o richiesta gi&agrave; caricata</td>
 <%} %>
   </tr>
   <%} %>
@@ -198,7 +202,7 @@ TirocinioBean tirocinio = new TirocinioBean();
 		  }
 	  } %>
   <tr>
-    <td><a href="mostraPDF.jsp">RichiestaN.<%=tirocinio.getId() %></a></td>
+    <td><a href="#">RichiestaN.<%=tirocinio.getId() %></a></td>
     <%if (tirocinio.isConvalidaAzienda()==true){ %>
     <td><img alt="verde" src="img/verde.png"></td>
     <%} else { %>
@@ -211,7 +215,7 @@ TirocinioBean tirocinio = new TirocinioBean();
     <td><img alt="verde" src="img/verde.png"></td>
     <%} else { %>
     <td><img alt="giallo" src="img/giallo.png"></td>
-    <%} if (tirocinio.isConvalidaAzienda()==true && tirocinio.isConvalidaTutor()==true) { %>
+    <%} if (tirocinio.isConvalidaAzienda()==true && tirocinio.isConvalidaTutor()==true && tirocinio.isConvalidaStudente()==false) { %>
         <td>
     	<form>
   			Seleziona PDF richista inizio attivit&agrave; di tirocinio firmata<br>
@@ -220,7 +224,7 @@ TirocinioBean tirocinio = new TirocinioBean();
 		</form>
 </td>
 <%} else { %>
-<td> Appena sar&agrave; possibile potrai effettuare l'upload</td>
+<td> Appena sar&agrave; possibile potrai effettuare l'upload  o richiesta gi&agrave; caricata</td>
 <%} %>
   </tr>
   <%} %>

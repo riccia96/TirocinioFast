@@ -44,14 +44,14 @@
   			ConvenzioneBean mostra = mostrare.get(z);
   			%>
   <tr>
-    <td><a href="mostraPDF.jsp">Richiesta N.<%= mostra.getId() %></a></td>
+    <td><a href="#">Richiesta N.<%= mostra.getId() %></a></td>
     <%if (mostra.isConvalida()==true) { %>
     <td><img alt="verde" src="img/verde.png"> </td>
     <% }
     else { %>
      <td><img alt="giallo" src="img/giallo.png"> </td>   
      <% } %>
-    <%if (mostra.isConvalida()==false){ %>
+    <%if (mostra.getUrl().equals(" ")){ %>
     <td>
     	<form>
   			Seleziona PDF convenzione firmato con gli allegati richiesti<br>
