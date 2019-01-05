@@ -62,7 +62,7 @@
     <textarea name ="undici" style="margin-left: 10%" rows="4" cols="50"></textarea>
     <br>
     <div class ="new">
-    <button name = "azioneUtente" value="questionarioAzienda" id="questionarioAziendaButton" class=" button" type="submit">Invia questionario</button> 
+    <button name = "azioneUtente" value="compilaQuestionarioAzienda" id="questionarioAziendaButton" class=" button" type="submit">Invia questionario</button> 
     </div>
 </form>
   
