@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1" import="java.util.ArrayList, Bean.*"%>
+ <%
+ 	ArrayList<TutorBean> tutors = (ArrayList<TutorBean>) request.getSession().getAttribute("elencoTutor");
+ %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Compilazione Richiesta Tirocinio Studente</title>
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
@@ -27,14 +30,17 @@
     <input style="width: 80%; padding: 12px 20px; margin: 8px 0; margin-left: 10%; display: inline-block; border: 1px solid #ccc; box-sizing: border-box;" type="number" placeholder="CFU tirocinio" name="cfu" required>
     <br>
     <p class="question" style="margin-top: 2%">Tutor accademico</p>
-    <select class ="scelte" name="tutor"><option value="nomeTutor">Prof.ssa Ferrucci Filomena</option></select></label>
+    
+    <select class ="scelte" name="tutor">
+    <% for(TutorBean t : tutors){ %><option value="<%=t.getUsername()%>"><%=t.getNome()+" "+t.getCognome()%></option>
+    <%} %></select></label>
     <br>
     <p class="question" style="margin-top: 2%">Handicap?</p>
-    <input style="margin-left: 10%" type="radio" name="tutor" value="si">SI
-    <input type="radio" name="tutor" value="no" checked>NO
+    <input style="margin-left: 10%" type="radio" name="handicap" value="si">SI
+    <input type="radio" name="handicap" value="no" checked>NO
     <br>
     <div class ="new">
-    <button name = "azioneUtente" value="tirocinioDatiStudente" id="richiestaTirocinioButton" class=" button" type="submit">Richiedi inizio attivit&agrave; tirocinio</button> 
+    <button name = "azioneTirocinio" value="tirocinioDatiStudente" id="richiestaTirocinioButton" class=" button" type="submit">Richiedi inizio attivit&agrave; tirocinio</button> 
     </div>
 </form>
   
