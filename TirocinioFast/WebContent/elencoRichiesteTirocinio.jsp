@@ -5,10 +5,10 @@
 <%ArrayList<AziendaBean> aziende = (ArrayList<AziendaBean>) request.getSession().getAttribute("listaAziende"); %>
 <%ArrayList<StudenteBean> studenti = (ArrayList<StudenteBean>) request.getSession().getAttribute("listaStudenti"); %>
 <%ArrayList<TutorBean> tutors = (ArrayList<TutorBean>) request.getSession().getAttribute("listaTutor");
-StudenteBean studente;
-AziendaBean azienda;
-TutorBean tutor;
-TirocinioBean tirocinio;
+StudenteBean studente = new StudenteBean();
+AziendaBean azienda = new AziendaBean();
+TutorBean tutor = new TutorBean();
+TirocinioBean tirocinio = new TirocinioBean();
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
