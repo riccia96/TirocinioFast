@@ -116,13 +116,14 @@
 			<td><%= ah.getPartitaIva() %></td>
 		</tr>
 	</table>
-
+<% if(ah.getLogo().equals("")){ %>
 	<div class="new"><form action="GestioneUtente" method="POST">
 	
 		<button name="azioneUtente" value="completaScheda"
 			id="visualizzaSchedaButton" class=" button" type="submit">Scheda
 			azienda</button></form>
 	</div>
+	<%} %>
 	<%
 		}
 		if (tipoUh.equals("tutor")) {

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import Bean.AziendaBean;
 import Bean.ConvenzioneBean;
+import Bean.TutorBean;
 
 /**
  * Servlet implementation class GestioneConvenzione
@@ -141,6 +142,39 @@ public class GestioneConvenzione extends HttpServlet {
 				
 			} catch (SQLException e) {
 
+				e.printStackTrace();
+			}
+		}
+		
+		if(azioneConvenzione.equals("selezionaConvenzione")){
+			try {
+				int id = Integer.parseInt((String) request.getParameter("id"));
+				ConvenzioneBean convenzione = new ConvenzioneBean();
+				convenzione.setId(id);
+				convenzione = documento.convenzione(convenzione);
+
+				if(convenzione.getUrl().equals("")){
+					System.out.println("nu puo fa ny cazz");
+				}else{
+					request.getSession().setAttribute("convenzione", convenzione);
+					RequestDispatcher view = request.getRequestDispatcher("mostraPDF.jsp");
+					view.forward(request, response);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		if(azioneConvenzione.equals("apriForm")){
+			try {
+			List<TutorBean> tutors = new ArrayList<TutorBean>();
+				tutors = utente.getTutorAccademici();
+				
+				request.getSession().setAttribute("tutors", tutors);
+				
+				RequestDispatcher view = request.getRequestDispatcher("convenzione.jsp");
+				view.forward(request, response);
+			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}

@@ -31,12 +31,12 @@
   </tr>
   
   <tr>
-    <td><a href="#">Richiesta N.<%= convenzione.getId() %></a></td>
+    <td><a href="GestioneConvenzione?azioneConvenzione=selezionaConvenzione?id=<%= convenzione.getId()%>">Richiesta N.<%= convenzione.getId() %></a></td>
     <%if (convenzione.isConvalida()==true) { %>
-    <td><img alt="verde" src="img/verde.png"> </td>
+    <td><img alt="verde" src="img/verde.png" width="50px" height="50px"> </td>
     <% }
     else { %>
-     <td><img alt="giallo" src="img/giallo.png"> </td>   
+     <td><img alt="giallo" src="img/giallo.png" width="50px" height="50px"> </td>   
      <% } %>
     <%if (convenzione.getUrl().equals("")){ %>
     <td>

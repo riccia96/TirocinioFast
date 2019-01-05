@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1" import="java.util.ArrayList, Bean.*"%>
+    <%
+    	ArrayList<TutorBean> tutors = (ArrayList<TutorBean>) request.getSession().getAttribute("tutors");
+    %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -37,7 +40,10 @@
 	<label>Descrizione delle attivit&agrave; svolte</label>
     <textarea style= "margin-left: 10%" rows="4" cols="50" name="descrizioneAttivita"></textarea>
     <br>
-    <input type="text" placeholder="Eventuale docente di riferimento" name="docente">
+    <p>Eventuale docente di riferimento</p>
+    <select class ="scelte" name="tutor">
+    <% for(TutorBean t : tutors){ %><option value="<%=t.getUsername()%>"><%=t.getNome()+" "+t.getCognome()%></option>
+    <%} %></select></label>
     <br>
     <div class ="new">
     <button name = "azioneConvenzione" value="richiestaConvenzione" id="convenzioneButton" class=" button" type="submit">Richiedi convenzione</button> 

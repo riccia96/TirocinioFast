@@ -204,17 +204,17 @@ TirocinioBean tirocinio = new TirocinioBean();
   <tr>
     <td><a href="#">RichiestaN.<%=tirocinio.getId() %></a></td>
     <%if (tirocinio.isConvalidaAzienda()==true){ %>
-    <td><img alt="verde" src="img/verde.png"></td>
+    <td><img alt="verde" src="img/verde.png" width="50px" height="50px"></td>
     <%} else { %>
-    <td><img alt="giallo" src="img/giallo.png"></td>
+    <td><img alt="giallo" src="img/giallo.png" width="50px" height="50px"></td>
 	<%} if (tirocinio.isConvalidaTutor()==true){ %>
-	<td><img alt="verde" src="img/verde.png"></td>
+	<td><img alt="verde" src="img/verde.png" width="50px" height="50px"></td>
      <%} else { %>
-    <td><img alt="giallo" src="img/giallo.png"></td>
+    <td><img alt="giallo" src="img/giallo.png" width="50px" height="50px"></td>
     <%} if (tirocinio.isConvalidaRichiesta()==true){ %>
-    <td><img alt="verde" src="img/verde.png"></td>
+    <td><img alt="verde" src="img/verde.png" width="50px" height="50px"></td>
     <%} else { %>
-    <td><img alt="giallo" src="img/giallo.png"></td>
+    <td><img alt="giallo" src="img/giallo.png" width="50px" height="50px"></td>
     <%} if (tirocinio.isConvalidaAzienda()==true && tirocinio.isConvalidaTutor()==true && tirocinio.isConvalidaStudente()==false) { %>
         <td>
     	<form>
