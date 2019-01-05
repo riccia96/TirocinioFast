@@ -428,11 +428,13 @@ public class GestioneTirocinio extends HttpServlet {
 				List<TutorBean> tutors = new ArrayList<TutorBean>();
 
 				tirocini = richiesta.richiesteTirocinio();
+				
 				for(TirocinioBean t: tirocini){
 					if(t.isConvalidaAttivita()){
 						conclusi.add(t);
 					}
 				}
+				
 				for(TirocinioBean t: conclusi){
 					studente.setUsername(t.getStudente());
 					azienda.setUsername(t.getAzienda());
@@ -466,12 +468,14 @@ public class GestioneTirocinio extends HttpServlet {
 				List<TutorBean> tutors = new ArrayList<TutorBean>();
 
 				tirocini = richiesta.richiesteTirocinio();
+				
 				for(TirocinioBean t: tirocini){
 					if(t.isConvalidaAzienda() && t.isConvalidaTutor() && 
 							t.isConvalidaStudente() && t.isConvalidaRichiesta() && !(t.isConvalidaAttivita())){
 						conclusi.add(t);
 					}
 				}
+				
 				for(TirocinioBean t: conclusi){
 					studente.setUsername(t.getStudente());
 					azienda.setUsername(t.getAzienda());
