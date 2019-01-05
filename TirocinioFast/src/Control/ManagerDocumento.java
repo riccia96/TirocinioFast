@@ -118,4 +118,14 @@ public class ManagerDocumento {
 		ConvenzioneDAO convenzione = new ConvenzioneDAO();
 		return convenzione.doRetrieveByKey(convenzioneA);
 	}
+	
+	public QuestionarioStudenteBean questionarioStudente(QuestionarioStudenteBean questionarioStudente) throws SQLException{
+		QuestionarioStudenteDAO questionario = new QuestionarioStudenteDAO();
+		return questionario.doRetrieveByKey(questionarioStudente);
+	}
+	
+	public QuestionarioAziendaBean questionarioAzienda(QuestionarioAziendaBean questionarioAzienda) throws SQLException{
+		QuestionarioAziendaDAO questionario = new QuestionarioAziendaDAO();
+		return questionario.doRetrieveByKey(questionarioAzienda);
+	}
 }
