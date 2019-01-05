@@ -2,8 +2,7 @@
     pageEncoding="ISO-8859-1" import="Bean.*"%>
 <%
  	AziendaBean azienda = (AziendaBean) request.getSession().getAttribute("azienda");
-	StudenteBean studente = (StudenteBean) request.getSession().getAttribute("studente");
-	TutorBean tutor = (TutorBean) request.getSession().getAttribute("tutor");
+	ConvenzioneBean convenzione = (ConvenzioneBean) request.getSession().getAttribute("convenzione");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -24,7 +23,7 @@
 <br>
 <br>
 
-<p>L'azienda XXXX con sede in XXXX rappresentata dal dott./sig. XXXX nato a XXXX il XXXX, con N. dipendenti XXXX, referente tirocini XXXX tel. XXXX e-mail. XXXX</p>
+<p>L'azienda <%= azienda.getNome() %> con sede in <%= azienda.getIndirizzo() %> rappresentata dal dott./sig. <%= azienda.getCeo() %> nato a <%= convenzione.getLuogoNascitaCeo() %> il <%= convenzione.getDataNascitaCeo() %>, con N. dipendenti <%= convenzione.getNumeroDipendenti() %>, referente tirocini <%= convenzione.getReferente() %> tel. <%= convenzione.getTelefonoReferente() %> e-mail. <%= convenzione.getEmailReferente() %></p>
 <br>
 <br>
 
@@ -40,12 +39,13 @@
 <h3>Segue una breve desrizione delle attività sulle quali potrenno essere impiegati i tirocinanti</h3>
 <br>
 
-<p>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx</p>
+<p>L'azienda si occupa di: <%=azienda.getDescrizione() %></p>
 <br>
+<p>I tirocinanti saranno impiegati sull'attività di: <%= convenzione.getAttivita() %> </p>
 <br>
 <br>
 
-<p>Docente del Dipartimento di Informatica con cui eventualmente si è già in contatto per questa attività: XXXXXXX </p>
+<p>Docente del Dipartimento di Informatica con cui eventualmente si è già in contatto per questa attività: <%= convenzione.getTutorAccademico() %> </p>
 <br>
 <br>
 <br>

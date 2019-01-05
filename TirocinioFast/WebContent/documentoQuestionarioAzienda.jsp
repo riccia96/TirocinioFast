@@ -1,9 +1,13 @@
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="Bean.*"%>
 <%
  	AziendaBean azienda = (AziendaBean) request.getSession().getAttribute("azienda");
 	StudenteBean studente = (StudenteBean) request.getSession().getAttribute("studente");
 	TutorBean tutor = (TutorBean) request.getSession().getAttribute("tutor");
+	ConvenzioneBean convenzione = (ConvenzioneBean) request.getSession().getAttribute("convenzione");
+	QuestionarioAziendaBean questionarioAzienda = (QuestionarioAziendaBean) request.getSession().getAttribute("questionarioAzineda");
+	ArrayList<String> scelte = (ArrayList<String>) request.getSession().getAttribute("scelte");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -17,7 +21,7 @@
   <tr>
     <th style="border: 1px solid black;"><img alt="Logo" src="img\logo2.png" width="300px" height="70px"></th>
     <th style="border: 1px solid black;"><img alt="Logo" src="img\logo.png" width="300px" height="70px"></th>
-    <th style="border: 1px solid black;"><label>Data compilazione xx/xx/xx</label></th>
+    <th style="border: 1px solid black;"><label>Data compilazione </label></th>
   </tr>
   <tr>
     <td colspan="3" align="center"><b>QUESTIONARIO RILEVAZIONE GRADO DI SODDISFAZIONE DELL'ENTE OSPITANTE <br> ATTIVIT&Agrave; DI TIROCINIO - CORSO DI LAUREA IN INFORMATICA</b></td>
@@ -25,10 +29,10 @@
 </table>
 <br>
 <br>
-<h4>Ente Ospitante: XXXXXX, Sede Tirocinio: XXXXXX, Citt&agrave;: XXXX, Tutor Ente Ospitante: XXXXXXXX, Posizione ricoperta: XXXXXXX, E-mail tutor: XXXXXXXX</h4>
+<h4>Ente Ospitante: <%= azienda.getNome() %>, Sede Tirocinio: <%= azienda.getIndirizzo() %>, Tutor Ente Ospitante: <%= convenzione.getReferente() %>, Posizione ricoperta: <%= questionarioAzienda.getPosizioneRicoperta() %>, E-mail tutor: <%=convenzione.getEmailReferente()%> </h4>
 <br>
 <br>
-<h4>Tutor Accademico: XXXXXXXXX, Tirocinante: XXXXXXX, Periodo di svolgimento del tirocinio: XXXXXXXXX, Titolo del tirocinio: XXXXXXXXX</h4> 
+<h4>Tutor Accademico: Prof/Prof.ssa <%= tutor.getCognome() + " " + tutor.getNome() %>, Tirocinante: <%= studente.getCognome() + " " + studente.getNome() %>, Periodo di svolgimento del tirocinio: <%= questionarioAzienda.getPeriodoTirocinio() %>, Titolo del tirocinio: <%= questionarioAzienda.getTitoloTirocinio() %></h4> 
 <br>
 <br>
 <h4>Relativamente al progetto di tirocinio:</h4>

@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="Bean.*"%>
 <%
- 	AziendaBean azienda = (AziendaBean) request.getSession().getAttribute("azienda");
-	StudenteBean studente = (StudenteBean) request.getSession().getAttribute("studente");
-	TutorBean tutor = (TutorBean) request.getSession().getAttribute("tutor");
-%>9-1"%>
+AziendaBean azienda = (AziendaBean) request.getSession().getAttribute("azienda");
+StudenteBean studente = (StudenteBean) request.getSession().getAttribute("studente");
+TutorBean tutor = (TutorBean) request.getSession().getAttribute("tutor");
+ConvenzioneBean convenzione = (ConvenzioneBean) request.getSession().getAttribute("convenzione");
+QuestionarioStudenteBean questionarioStudente = (QuestionarioStudenteBean) request.getSession().getAttribute("questionarioStudente");
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,7 +19,7 @@
   <tr>
     <th style="border: 1px solid black;"><img alt="Logo" src="img\logo2.png" width="300px" height="70px"></th>
     <th style="border: 1px solid black;"><img alt="Logo" src="img\logo.png" width="300px" height="70px"></th>
-    <th style="border: 1px solid black;"><label>Data compilazione xx/xx/xx</label></th>
+    <th style="border: 1px solid black;"><label>Data compilazione </label></th>
   </tr>
   <tr>
     <td colspan="3" align="center"><b>QUESTIONARIO PER IL TIROCINANTE <br> CORSO DI LAUREA IN INFORMATICA</b></td>

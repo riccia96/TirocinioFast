@@ -24,6 +24,7 @@ ArrayList<AziendaBean> aziende = (ArrayList<AziendaBean>) request.getSession().g
 StudenteBean studente;
 AziendaBean azienda;
 TutorBean tutor;
+TirocinioBean tirocinio;
 %>
 
 
@@ -38,7 +39,7 @@ TutorBean tutor;
     <th style="text-align: center">Azienda</th>
   </tr>
   <%  for (int i = 0; i< conclusi.size(); i++){ 
-	  TirocinioBean tirocinio = conclusi.get(i);
+	  tirocinio = conclusi.get(i);
 	  	for (int s = 0; s < studenti.size(); s++){
 	  		studente = studenti.get(s);
 	  		if(tirocinio.getStudente().equals(studente.getUsername())){
@@ -59,7 +60,7 @@ TutorBean tutor;
 	  	}
 	  %>
   <tr>
-    <td><a href="mostraPDFConferma.jsp">Richiesta N.<%= tirocinio.get()%></a></td>
+    <td><a href="mostraPDFConferma.jsp"> RichiestaN.<%= tirocinio.getId()%></a></td>
     <td><%= studente.getCognome() + studente.getNome() %></td>
     <td><%= tutor.getCognome() + tutor.getNome() %> </td>
     <td><%= azienda.getNome() %></td>

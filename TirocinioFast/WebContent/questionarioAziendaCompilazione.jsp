@@ -59,7 +59,7 @@
     <br>
     <label>Eventuali osservazioni:</label>
     <br>
-    <textarea style="margin-left: 10%" rows="4" cols="50"></textarea>
+    <textarea name ="undici" style="margin-left: 10%" rows="4" cols="50"></textarea>
     <br>
     <div class ="new">
     <button name = "azioneUtente" value="questionarioAzienda" id="questionarioAziendaButton" class=" button" type="submit">Invia questionario</button> 
