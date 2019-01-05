@@ -121,6 +121,8 @@ public class GestioneConvenzione extends HttpServlet {
 				String attivita = request.getParameter("descrizioneAttivita");
 				String docente = request.getParameter("docente");
 
+				convenzione.setId(documento.generaCodice());
+				System.out.println(convenzione.getId());
 				convenzione.setAzienda(azienda.getUsername());
 
 				convenzione.setLuogoNascitaCeo(luogoNascitaR);

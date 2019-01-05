@@ -43,6 +43,7 @@ private static DataSource ds;
 		ResultSet rs = preparedStatement.executeQuery();
 		int rowCount = 0;
 		try{
+			
 			while(rs.next()){
 				rowCount = rs.getInt("total");
 			}
@@ -55,7 +56,7 @@ private static DataSource ds;
 					connection.close();
 			}
 		}
-
+        System.out.println(rowCount);
 		return rowCount;
 	}
 
@@ -67,14 +68,14 @@ private static DataSource ds;
 		
 		String querySQL = "INSERT INTO " + ConvenzioneDAO.TABLE_NAME + " (id, azienda, tutorAccademico, impiegato,"
 				+ " luogoNascitaCeo, dataNascitaCeo, numeroDipendenti, referente, telefonoReferente, emailReferente,"
-				+ " convalida, url)" + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ " attivita, convalida, url)" + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		try{
 			
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(querySQL, Statement.RETURN_GENERATED_KEYS);
 			
-			preparedStatement.setInt(1, generaCodice());
+			preparedStatement.setInt(1, convenzione.getId());
 			preparedStatement.setString(2, convenzione.getAzienda());
 			preparedStatement.setString(3, convenzione.getTutorAccademico());
 			preparedStatement.setString(4, convenzione.getImpiegato());

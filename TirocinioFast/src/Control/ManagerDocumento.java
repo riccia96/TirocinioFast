@@ -15,6 +15,11 @@ import Model.TirocinioDAO;
 
 
 public class ManagerDocumento {
+	
+	public int generaCodice() throws SQLException {
+		ConvenzioneDAO convenzione = new ConvenzioneDAO();
+		return convenzione.generaCodice();
+	}
 
 	public TirocinioBean DownloadTirocinio(TirocinioBean pathDoc) throws SQLException {
 		TirocinioDAO tirocinio = new TirocinioDAO();
