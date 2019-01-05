@@ -62,15 +62,13 @@ public class GestioneQuestionario extends HttpServlet {
 					
 					int id = Integer.parseInt((String) request.getSession().getAttribute("id"));
 					QuestionarioStudenteBean questionarioStudente = new QuestionarioStudenteBean();
-					StudenteBean studente = new StudenteBean();
+					StudenteBean studente = (StudenteBean) request.getSession().getAttribute("utenteSessione");
 					AziendaBean azienda = new AziendaBean();
 					TutorBean tutor = new TutorBean();
 					questionarioStudente.setId(id);
 					questionarioStudente = documento.questionarioStudente(questionarioStudente);
 					questionarioStudente.setTitolo(titolo);
 					questionarioStudente.setPeriodo(periodo);
-					studente.setUsername(questionarioStudente.getStudente());
-					studente = utente.getStudente(studente);
 					azienda.setUsername(questionarioStudente.getAzienda());
 					azienda = utente.getAzienda(azienda);
 					tutor.setUsername(questionarioStudente.getTutorAccademico());
@@ -112,7 +110,7 @@ public class GestioneQuestionario extends HttpServlet {
 					int id = Integer.parseInt((String) request.getSession().getAttribute("id"));
 					QuestionarioAziendaBean questionarioAzienda = new QuestionarioAziendaBean();
 					StudenteBean studente = new StudenteBean();
-					AziendaBean azienda = new AziendaBean();
+					AziendaBean azienda = (AziendaBean) request.getSession().getAttribute("utenteSessione");
 					TutorBean tutor = new TutorBean();
 					questionarioAzienda.setId(id);
 					questionarioAzienda = documento.questionarioAzienda(questionarioAzienda);
@@ -122,8 +120,6 @@ public class GestioneQuestionario extends HttpServlet {
 					
 					studente.setUsername(questionarioAzienda.getStudente());
 					studente = utente.getStudente(studente);
-					azienda.setUsername(questionarioAzienda.getAzienda());
-					azienda = utente.getAzienda(azienda);
 					tutor.setUsername(questionarioAzienda.getTutorAccademico());
 					tutor = utente.getTutor(tutor);
 					
