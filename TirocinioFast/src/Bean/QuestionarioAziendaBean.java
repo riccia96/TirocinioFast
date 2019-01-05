@@ -16,6 +16,7 @@ public class QuestionarioAziendaBean implements java.io.Serializable {
 		this.periodoTirocinio = "";
 		this.titoloTirocinio = "";
 		this.posizioneRicoperta = "";
+		this.scelte="";
 		this.convalida = false;
 		this.url = "";
 
@@ -87,6 +88,14 @@ public class QuestionarioAziendaBean implements java.io.Serializable {
 		this.posizioneRicoperta = posizioneRicoperta;
 	}
 
+	public String getScelte() {
+		return scelte;
+	}
+
+	public void setScelte(String scelte) {
+		this.scelte = scelte;
+	}
+
 	public boolean isConvalida() {
 		return convalida;
 	}
@@ -128,6 +137,7 @@ public class QuestionarioAziendaBean implements java.io.Serializable {
 	private String periodoTirocinio;
 	private String titoloTirocinio;
 	private String posizioneRicoperta;
+	private String scelte;
 	private boolean convalida;
 	private String url;
 	private int id;

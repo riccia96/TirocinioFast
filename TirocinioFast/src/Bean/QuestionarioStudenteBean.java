@@ -13,6 +13,7 @@ public class QuestionarioStudenteBean implements java.io.Serializable {
 		this.impiegato = "";
 		this.periodo = "";
 		this.titolo = "";
+		this.scelte = "";
 		this.convalida = false;
 		this.url = "";
 	}
@@ -75,6 +76,14 @@ public class QuestionarioStudenteBean implements java.io.Serializable {
 		this.titolo = titolo;
 	}
 	
+	public String getScelte() {
+		return scelte;
+	}
+
+	public void setScelte(String scelte) {
+		this.scelte = scelte;
+	}
+
 	public boolean isConvalida() {
 		return convalida;
 	}
@@ -117,6 +126,7 @@ public class QuestionarioStudenteBean implements java.io.Serializable {
 	private String impiegato;
 	private String periodo;
 	private String titolo;
+	private String scelte;
 	private boolean	convalida;
 	private String url;
 	private int id;
