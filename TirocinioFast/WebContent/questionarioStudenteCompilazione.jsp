@@ -66,7 +66,7 @@
     <textarea name="quattordici" style="margin-left: 10%" rows="4" cols="50"></textarea>
     <br>
     <div class ="new">
-    <button name = "azioneUtente" value="questionarioStudente" id="questionarioStudenteButton" class=" button" type="submit">Invia questionario</button> 
+    <button name = "azioneUtente" value="compilaQuestionarioStudente" id="questionarioStudenteButton" class=" button" type="submit">Invia questionario</button> 
     </div>
 </form>
   
