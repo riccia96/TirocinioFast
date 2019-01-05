@@ -72,6 +72,35 @@ public class GestioneConvenzione extends HttpServlet {
 
 		}
 
+		if(azioneConvenzione.equals("")){
+			try{
+				List<ConvenzioneBean> convenzioni = documento.convenzioni();
+				List<ConvenzioneBean> richieste = new ArrayList<ConvenzioneBean>();
+				List<AziendaBean> aziende = new ArrayList<AziendaBean>();
+
+				for(ConvenzioneBean c : convenzioni) {
+					if((c.isConvalida())) {
+						AziendaBean a = new AziendaBean();
+						a.setUsername(c.getAzienda());
+						aziende.add(utente.getAzienda(a));
+						richieste.add(c);
+					}
+				}
+				
+				request.getSession().setAttribute("listaConvenzioni", richieste);
+				request.getSession().setAttribute("listaAziende", aziende);
+				
+				if(richieste.equals(null)) {
+					response.setContentType("text/html;charset=ISO-8859-1");
+					response.getWriter().write("nessuna richiesta");
+				}
+				
+				RequestDispatcher view = request.getRequestDispatcher("elencoConvenzioniAccettate.jsp");
+				view.forward(request, response);
+			} catch (SQLException e){
+				e.printStackTrace();
+			}
+		}
 
 		//nelle jsp prendersi cmq gli altri attributi a mostrare ? 
 
