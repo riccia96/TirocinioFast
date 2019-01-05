@@ -21,17 +21,17 @@
 	AziendaBean azienda = (AziendaBean) request.getSession().getAttribute("aziendaSelezionata");
 %>
 
-<h3 class="intestazione">Informazioni sull'azienda</h3>
+<h3 class="perForm">Informazioni sull'azienda</h3>
 
 <div style="margin-left:25%;width: 700px;" class="dialogo">
     <img src="<%=azienda.getLogo() %>" alt="logo" >
 
-	<h3><%= azienda.getNome() %></h3>
+	<h3 style="text-align: center;"><%= azienda.getNome() %></h3>
 	<br>
-	<p><%= azienda.getDescrizione() %></p>
-	<p><%= azienda.getIndirizzo() %></p>
-	<p><%= azienda.getEmail() %></p>
-	<p><%= azienda.getTelefono()%></p>
+	<p style="text-align: center;"><%= azienda.getDescrizione() %></p>
+	<p style="text-align: center;"><%= azienda.getIndirizzo() %></p>
+	<p style="text-align: center;"><%= azienda.getEmail() %></p>
+	<p style="text-align: center;"><%= azienda.getTelefono()%></p>
     <div class ="new">
     <input type="hidden" name="aziendaSelezionata" value="<%=a.getUsername()%>">
     <button name = "azioneTirocinio" value="inoltraRichiesta" id="inoltraRichiestaTirocinioButton" class=" button" type="submit">Invia richiesta di tirocinio</button> 
