@@ -67,7 +67,7 @@
   </tr>
   <%} %>
   </table>
-<%} %>
+<%} }%>
 
 <%@include file = "footer.jsp" %>
 

@@ -40,7 +40,7 @@ public class GestioneQuestionario extends HttpServlet {
 		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			String azioneQuestionario = request.getParameter("azioneQuestionario");
 
-			if(azioneQuestionario.equals("QuestionarioStudente")) {
+			if(azioneQuestionario.equals("questionarioStudente")) {
 				try{
 					ArrayList<String> risposte = new ArrayList<String>();
 					String titolo = request.getParameter("titolo");
@@ -71,10 +71,14 @@ public class GestioneQuestionario extends HttpServlet {
 					StudenteBean studente = (StudenteBean) request.getSession().getAttribute("utenteSessione");
 					AziendaBean azienda = new AziendaBean();
 					TutorBean tutor = new TutorBean();
+					
 					questionarioStudente.setId(id);
+					
 					questionarioStudente = documento.questionarioStudente(questionarioStudente);
 					questionarioStudente.setTitolo(titolo);
 					questionarioStudente.setPeriodo(periodo);
+					questionarioStudente.setScelte(scelte);
+					
 					azienda.setUsername(questionarioStudente.getAzienda());
 					azienda = utente.getAzienda(azienda);
 					tutor.setUsername(questionarioStudente.getTutorAccademico());
@@ -95,7 +99,7 @@ public class GestioneQuestionario extends HttpServlet {
 				
 			}
 			
-			if(azioneQuestionario.equals("QuestionarioAzienda")) {
+			if(azioneQuestionario.equals("questionarioAzienda")) {
 				try {
 					ArrayList<String> risposte = new ArrayList<String>();
 
@@ -112,7 +116,12 @@ public class GestioneQuestionario extends HttpServlet {
 					risposte.add(request.getParameter("nona"));
 					risposte.add(request.getParameter("decima"));
 					risposte.add(request.getParameter("undici"));
-
+					
+					String scelte = "";
+					for(String r: risposte) {
+						scelte += r + "*";
+					}
+					
 					int id = Integer.parseInt((String) request.getSession().getAttribute("id"));
 					QuestionarioAziendaBean questionarioAzienda = new QuestionarioAziendaBean();
 					StudenteBean studente = new StudenteBean();
@@ -120,9 +129,10 @@ public class GestioneQuestionario extends HttpServlet {
 					TutorBean tutor = new TutorBean();
 					questionarioAzienda.setId(id);
 					questionarioAzienda = documento.questionarioAzienda(questionarioAzienda);
+					
 					questionarioAzienda.setTitoloTirocinio(titolo);
 					questionarioAzienda.setPosizioneRicoperta(posizione);
-					questionarioAzienda.setUrl("");
+					questionarioAzienda.setScelte(scelte);
 					
 					studente.setUsername(questionarioAzienda.getStudente());
 					studente = utente.getStudente(studente);
