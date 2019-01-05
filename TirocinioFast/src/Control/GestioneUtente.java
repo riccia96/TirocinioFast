@@ -445,6 +445,11 @@ public class GestioneUtente extends HttpServlet {
 
 		}
 
+		if(azioneUtente.equals("completaScheda")) {
+			
+			RequestDispatcher view = request.getRequestDispatcher("completaScheda.jsp");
+			view.forward(request, response);
+		}
 
 		if(azioneUtente.equals("salvaScheda")) {
 			try {
@@ -454,9 +459,9 @@ public class GestioneUtente extends HttpServlet {
 				AziendaBean azienda = new AziendaBean();
 
 				azienda = (AziendaBean) request.getSession().getAttribute("utenteSessione");
-				//controllare path immagine 
-				String pathLogo = "img/"+ logo;
-				//aggiungere questi due campi alle cose di sopra :D 
+				
+				String pathLogo = "img/" + logo;
+				
 				azienda.setDescrizione(descrizione);
 				azienda.setLogo(pathLogo);
 

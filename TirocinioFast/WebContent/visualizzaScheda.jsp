@@ -31,7 +31,7 @@
 	<p><%= azienda.getDescrizione() %></p>
 	<p><%= azienda.getIndirizzo() %></p>
 	<p><%= azienda.getEmail() %></p>
-	<p><%= azienda.getPassword()%></p>
+	<p><%= azienda.getTelefono()%></p>
     <div class ="new">
     <input type="hidden" name="aziendaSelezionata" value="<%=a.getUsername()%>">
     <button name = "azioneTirocinio" value="inoltraRichiesta" id="inoltraRichiestaTirocinioButton" class=" button" type="submit">Invia richiesta di tirocinio</button> 

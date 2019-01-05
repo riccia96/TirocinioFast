@@ -86,9 +86,10 @@
 		}
 		if (tipoUh.equals("azienda")) {
 	%>
-	<a href="index.jsp" style="margin-left: 35%"><img alt="Logo"
-		src="img\timthumb.png" width="500px" height="300px"></a>
-
+	 <%if(!(ah.getLogo().equals(""))){%>
+ 	<a href="index.jsp" style="margin-left: 35%"><img alt="Logo"
+		src="<%=ah.getLogo()%>" width="500px" height="300px"></a>
+ <%} %>
 	<table style="margin-left: 30%; width: 700px;">
 		<tr>
 			<td>Nome azienda</td>
@@ -116,10 +117,11 @@
 		</tr>
 	</table>
 
-	<div class="new">
-		<button name="azioneUtente" value="visualizzaScheda"
+	<div class="new"><form action="GestioneUtente" method="POST">
+	
+		<button name="azioneUtente" value="completaScheda"
 			id="visualizzaSchedaButton" class=" button" type="submit">Scheda
-			aziendale</button>
+			azienda</button></form>
 	</div>
 	<%
 		}
