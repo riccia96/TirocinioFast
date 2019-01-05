@@ -1,6 +1,15 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%ArrayList<TirocinioBean> tirocini = (ArrayList<TirocinioBean>) request.getSession().getAttribute("richiesteTirocinio"); %>
+<%ArrayList<AziendaBean> aziende = (ArrayList<AziendaBean>) request.getSession().getAttribute("listaAziende"); %>
+<%ArrayList<StudenteBean> studenti = (ArrayList<StudenteBean>) request.getSession().getAttribute("listaStudenti"); %>
+<%ArrayList<TutorBean> tutors = (ArrayList<TutorBean>) request.getSession().getAttribute("listaTutor");
+StudenteBean studente;
+AziendaBean azienda;
+TutorBean tutor;
+TirocinioBean tirocinio;
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -15,12 +24,10 @@
 
 <%@include file = "menu.jsp" %>
 
-<%ArrayList<TirocinioBean> tirocini = (ArrayList<TirocinioBean>) request.getSession().getAttribute(""); %>
-
 <h3 class="intestazione">Gestione delle richieste di tirocinio</h3>
 
 <% if (tirocini.size()>0){
-	if (tipo.equals("impiegato")) {
+	if (tipoUm.equals("impiegato")) {
 	%>
 <table style="margin-left: 25%; width: 1000px;">
   <tr>
@@ -31,16 +38,37 @@
     <th></th>
   </tr>
   <% for (int i = 0; i < tirocini.size(); i++){
-	  TirocinioBean t = tirocini.get(i);
-	  StudenteBean s = ();
-	  TutorBean tu = ();
-	  AziendaBean a = ();%>
+	  tirocinio = tirocini.get(i);
+	  for (int s=0; s<studenti.size(); s++){
+		  studente = studenti.get(s);
+		  
+		  if (tirocinio.getStudente().equals(studente.getUsername())){
+			  break;
+		  }
+	  }
+	  
+	  for (int t = 0; t < tutors.size(); t++){
+		  tutor = tutors.get(t);
+		  
+		  if(tirocinio.getTutorAccademico().equals(tutor.getUsername())){
+			  break;
+		  }
+	  }
+	  
+	  for (int a = 0; a < aziende.size(); a++){
+		  azienda = aziende.get(a);
+		  
+		  if (tirocinio.getAzienda().equals(azienda.getUsername())){
+			  break;
+		  }
+	  }
+	  %>
   <tr>
-    <td><a href="mostraPDF.jsp">RichiestaN. <%=xxx %></a></td>
-    <td><%=s.getCognome() + s.getNome() %></td>
-    <td><%=t.getCognome() + t.getNome() %> </td>
-    <td><%=a.getNome() %></td>
-    <% if(t.isConvalidaAzienda()==true && t.isConvalidaTutor()==true && t.isConvalidaStudente()==true) { %>
+    <td><a href="mostraPDF.jsp">RichiestaN. <%=tirocinio.getId() %></a></td>
+    <td><%=studente.getCognome() + studente.getNome() %></td>
+    <td><%=tutor.getCognome() + tutor.getNome() %> </td>
+    <td><%=azienda.getNome() %></td>
+    <% if(tirocinio.isConvalidaAzienda()==true && tirocinio.isConvalidaTutor()==true && tirocinio.isConvalidaStudente()==true) { %>
     <td>
     	<form>
   			Seleziona PDF richista inizio attivit&agrave; di tirocinio firmata<br>
@@ -56,7 +84,7 @@
   </table>
   <%}
  
- if (tipo.equals("azienda")){ %>
+ if (tipoUm.equals("azienda")){ %>
 <table style="margin-left: 25%; width: 1000px;">
   <tr>
     <th style="text-align: center;">Richiesta di inizio Attivit&agrave; di Tirocinio</th>
@@ -64,13 +92,27 @@
     <th style="text-align: center;">Tutor</th>
   </tr>
   <% for (int i = 0; i < tirocini.size(); i++){
-	  TirocinioBean t = tirocini.get(i);
-	  StudenteBean s = ();
-	  TutorBean tu = ();%>
+	  tirocinio = tirocini.get(i);
+	  for (int s=0; s<studenti.size(); s++){
+		  studente = studenti.get(s);
+		  
+		  if (tirocinio.getStudente().equals(studente.getUsername())){
+			  break;
+		  }
+	  }
+	  
+	  for (int t = 0; t < tutors.size(); t++){
+		  tutor = tutors.get(t);
+		  
+		  if(tirocinio.getTutorAccademico().equals(tutor.getUsername())){
+			  break;
+		  }
+	  }
+	  %>
   <tr>
-    <td><a href="compilazioneCampiAzienda.jsp">RichiestaN. <%=xxx %></a></td>
-    <td><%=s.getCognome() + s.getNome() %></td>
-    <td><%=tu.getCognome() + tu.getNome() %></td>
+    <td><a href="compilazioneCampiAzienda.jsp">RichiestaN. <%=tirocinio.getId() %></a></td>
+    <td><%=studente.getCognome() + studente.getNome() %></td>
+    <td><%=tutor.getCognome() + tutor.getNome() %></td>
     <td>
     	<form>
   			Seleziona PDF richista inizio attivit&agrave; di tirocinio firmata<br>
@@ -83,7 +125,7 @@
 </table>
 <%} 
  
- if (tipo.equals("tutor")) { %>
+ if (tipoUm.equals("tutor")) { %>
 <table style="margin-left: 25%; width: 1000px;">
   <tr>
     <th style="text-align: center;">Richiesta di inizio Attivit&agrave; di Tirocinio</th>
@@ -92,14 +134,27 @@
     <th></th>
   </tr>
   <% for (int i = 0; i < tirocini.size(); i++){
-	  TirocinioBean t = tirocini.get(i);
-	  StudenteBean s = ();
-	  AziendaBean a = ();%>
+	  tirocinio = tirocini.get(i);
+	  for (int s=0; s<studenti.size(); s++){
+		  studente = studenti.get(s);
+		  
+		  if (tirocinio.getStudente().equals(studente.getUsername())){
+			  break;
+		  }
+	  }
+	  
+	  for (int a = 0; a < aziende.size(); a++){
+		  azienda = aziende.get(a);
+		  
+		  if (tirocinio.getAzienda().equals(azienda.getUsername())){
+			  break;
+		  }
+	  } %>
   <tr>
-    <td><a href="mostraPDF.jsp">RichiestaN. <%=xxx %></a></td>
-    <td><%=s.getCognome() + s.getNome() %></td>
-    <td><%=a.getNome() %></td>
-    <% if(t.isConvalidaAzienda()==true) { %>
+    <td><a href="mostraPDF.jsp">RichiestaN. <%=tirocinio.getId() %></a></td>
+    <td><%=studente.getCognome() + studente.getNome() %></td>
+    <td><%=azienda.getNome() %></td>
+    <% if(tirocinio.isConvalidaAzienda()==true) { %>
     <td>
     	<form>
   			Seleziona PDF richista inizio attivit&agrave; di tirocinio firmata<br>
@@ -115,7 +170,7 @@
   </table>
   <%}
  
- if (tipo.equals("studente")){ %>
+ if (tipoUm.equals("studente")){ %>
  <table style="margin-left: 25%; width: 1000px;">
   <tr>
     <th style="text-align: center;">Richiesta di Inizio Attivit&agrave; di Tirocinio</th>
@@ -125,22 +180,38 @@
     <th></th>
   </tr>
   <% for (int i = 0; i < tirocini.size(); i++){
-	  TirocinioBean t = tirocini.get(i);%>
+	  tirocinio = tirocini.get(i);
+	  
+	  for (int t = 0; t < tutors.size(); t++){
+		  tutor = tutors.get(t);
+		  
+		  if(tirocinio.getTutorAccademico().equals(tutor.getUsername())){
+			  break;
+		  }
+	  }
+	  
+	  for (int a = 0; a < aziende.size(); a++){
+		  azienda = aziende.get(a);
+		  
+		  if (tirocinio.getAzienda().equals(azienda.getUsername())){
+			  break;
+		  }
+	  } %>
   <tr>
-    <td><a href="mostraPDF.jsp"><%=xxx %></a></td>
-    <%if (t.isConvalidaAzienda()==true){ %>
+    <td><a href="mostraPDF.jsp">RichiestaN.<%=tirocinio.getId() %></a></td>
+    <%if (tirocinio.isConvalidaAzienda()==true){ %>
     <td><img alt="verde" src="img/verde.png"></td>
     <%} else { %>
     <td><img alt="giallo" src="img/giallo.png"></td>
-	<%} if (t.isConvalidaTutor()==true){ %>
+	<%} if (tirocinio.isConvalidaTutor()==true){ %>
 	<td><img alt="verde" src="img/verde.png"></td>
      <%} else { %>
     <td><img alt="giallo" src="img/giallo.png"></td>
-    <%} if (t.isConvalidaRichiesta()==true){ %>
+    <%} if (tirocinio.isConvalidaRichiesta()==true){ %>
     <td><img alt="verde" src="img/verde.png"></td>
     <%} else { %>
     <td><img alt="giallo" src="img/giallo.png"></td>
-    <%} if (t.isConvalidaAzienda()==true && t.isConvalidaTutor()==true) { %>
+    <%} if (tirocinio.isConvalidaAzienda()==true && tirocinio.isConvalidaTutor()==true) { %>
         <td>
     	<form>
   			Seleziona PDF richista inizio attivit&agrave; di tirocinio firmata<br>
