@@ -68,7 +68,7 @@ TirocinioBean tirocinio = new TirocinioBean();
     <td><%=studente.getCognome() + " " + studente.getNome() %></td>
     <td>Prof/Prof.ssa <%=tutor.getCognome() + tutor.getNome() %> </td>
     <td><%=azienda.getNome() %></td>
-    <% if(tirocinio.isConvalidaAzienda()==true && tirocinio.isConvalidaTutor()==true && tirocinio.isConvalidaStudente()==true && tirocinio.isConvalidaTutor()==false) { %>
+    <% if(tirocinio.isConvalidaAzienda()==true && tirocinio.isConvalidaTutor()==true && tirocinio.isConvalidaStudente()==true && tirocinio.isConvalidaRichiesta()==false) { %>
     <td>
     	<form>
   			Seleziona PDF richista inizio attivit&agrave; di tirocinio firmata<br>
