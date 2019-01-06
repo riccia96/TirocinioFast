@@ -3,6 +3,7 @@ package Control;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,16 +37,24 @@ public class GestioneDocumento extends HttpServlet {
 
 		if(azioneDocumento.equals("uploadConvenzione")) {
 			try {
+				String utente = (String) request.getSession().getAttribute("utenteSessione");
+				
 				String nomeFile = (String) request.getParameter("nomeFileConvenzione");
 				if(!nomeFile.equals(null)) {
 					ConvenzioneBean convenzione = (ConvenzioneBean) request.getSession().getAttribute("convenzione");
 					convenzione.setUrl("pdf/" + nomeFile);
 					System.out.println(convenzione.getUrl());
 					documento.UploadConvenzione(convenzione);
-
-					RequestDispatcher view = request.getRequestDispatcher("convenzioneEsistente.jsp");
-					view.forward(request, response);
-
+					
+					if(utente.equals("azienda")){
+						RequestDispatcher view = request.getRequestDispatcher("convenzioneEsistente.jsp");
+						view.forward(request, response);
+					} else if(utente.equals("impiegato")){
+						convenzione.setConvalida(true);
+						documento.UploadConvenzione(convenzione);
+						RequestDispatcher view = request.getRequestDispatcher("elencoRichiesteConvenzione.jsp");
+						view.forward(request, response);
+					}
 				} else {
 					response.setContentType("text/html;charset=ISO-8859-1");
 					response.getWriter().write("carica il file");

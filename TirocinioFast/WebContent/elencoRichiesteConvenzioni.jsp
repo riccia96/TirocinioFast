@@ -44,10 +44,10 @@
     <td><%=a.getNome() %></td>
     <%if(!c.isConvalida()){ %>
     <td>
-    	<form>
+    	<form action="GestioneConvenzione" method="POST">
   			Seleziona PDF richista di convenzione firmata<br>
   			<input type="file" name="convalidaConvenzione" accept=".pdf"><br>
-  			<input type="submit">
+  			<input type="submit" name="convalidaConv">
 		</form>
 </td>
 <%} else {%>
