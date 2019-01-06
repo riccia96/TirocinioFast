@@ -58,7 +58,7 @@ public class ImpiegatoDAO extends AbstractDAO<ImpiegatoBean>{
 			preparedStatement.setString(7, impiegato.getDomanda());
 			
 			preparedStatement.execute();
-			result = preparedStatement.getResultSet();
+			result = preparedStatement.getGeneratedKeys();
 			
 			if(result.next() && result != null){
 				return result.getInt(1);

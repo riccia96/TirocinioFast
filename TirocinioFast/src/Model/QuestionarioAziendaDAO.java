@@ -87,7 +87,7 @@ public class QuestionarioAziendaDAO extends AbstractDAO<QuestionarioAziendaBean>
 			preparedStatement.setString(11, questionarioAzienda.getUrl());
 			
 			preparedStatement.execute();
-			result = preparedStatement.getResultSet();
+			result = preparedStatement.getGeneratedKeys();
 			
 			if(result.next() && result != null){
 				return result.getInt(1);

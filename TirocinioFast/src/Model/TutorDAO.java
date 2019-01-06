@@ -59,7 +59,7 @@ public class TutorDAO extends AbstractDAO<TutorBean>{
 			preparedStatement.setString(7, tutor.getDomanda());
 			
 			preparedStatement.execute();
-			result = preparedStatement.getResultSet();
+			result = preparedStatement.getGeneratedKeys();
 			
 			if(result.next() && result != null){
 				return result.getInt(1);
