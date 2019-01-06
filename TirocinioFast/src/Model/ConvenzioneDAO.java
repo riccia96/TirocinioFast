@@ -68,7 +68,7 @@ private static DataSource ds;
 		
 		String querySQL = "INSERT INTO " + ConvenzioneDAO.TABLE_NAME + " (id, azienda, tutorAccademico, impiegato,"
 				+ " luogoNascitaCeo, dataNascitaCeo, numeroDipendenti, referente, telefonoReferente, emailReferente,"
-				+ " attivita, convalida, url)" + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ " attivita, convalida, url)" + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		try{
 			
@@ -90,8 +90,8 @@ private static DataSource ds;
 			preparedStatement.setString(13, convenzione.getUrl());
 			
 			preparedStatement.execute();
-			result = preparedStatement.getResultSet();
-			
+			result = preparedStatement.getGeneratedKeys();
+			System.out.println(result);
 			if(result.next() && result != null){
 				return result.getInt(1);
 			}else{

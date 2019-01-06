@@ -119,7 +119,7 @@ public class GestioneConvenzione extends HttpServlet {
 				String telefono = request.getParameter("telefono");
 				String email = request.getParameter("email");
 				String attivita = request.getParameter("descrizioneAttivita");
-				String docente = request.getParameter("docente");
+				String docente = request.getParameter("tutor");
 
 				convenzione.setId(documento.generaCodice());
 				System.out.println(convenzione.getId());
@@ -134,8 +134,8 @@ public class GestioneConvenzione extends HttpServlet {
 				convenzione.setAttivita(attivita);
 				convenzione.setTutorAccademico(docente);
 
-				documento.compilaConvenzione(convenzione);
-				
+				int val = documento.compilaConvenzione(convenzione);
+				System.out.print("valore di ritorno dosave:"+val);
 				request.getSession().setAttribute("azienda", azienda);
 				request.getSession().setAttribute("convenzione", convenzione);
 				
