@@ -215,12 +215,6 @@ public class GestioneTirocinio extends HttpServlet {
 		}
 
 		if(azioneTirocinio.equals("richiestaSelezionata")) {
-
-			//parametro selezione l'url della richiesta selezionata
-			//la ricerca all'interno del database per trovare corrispondenza che di sicuro ci sta 
-			//la metti in un bean e lo imposti in sessione 
-			//nome attributo sessione sarà richiestaSelezionata
-			//dispatcher a mostra pdf , da chiedere a mario
 			try {
 				TirocinioBean tirocinio = new TirocinioBean();
 				List<TirocinioBean> tirocini = new ArrayList<TirocinioBean>();
@@ -279,7 +273,6 @@ public class GestioneTirocinio extends HttpServlet {
 				request.getSession().setAttribute("aziendaTirocinio", azienda);
 				request.getSession().setAttribute("tipoDocumento", "tirocinio");
 
-				//portarsi avanti il nome della jsp da cui proviene il documento
 				RequestDispatcher view = request.getRequestDispatcher("GestioneTirocinio?azioneTirocinio=elencoRichiesteTirocinio");
 				view.forward(request, response);
 
@@ -314,7 +307,6 @@ public class GestioneTirocinio extends HttpServlet {
 				TirocinioBean tirocinio = new TirocinioBean();
 				
 				int id = Integer.parseInt((String) request.getParameter("idTiro"));
-				System.out.println("Compilazienda"+ id);
 				
 				tirocinio.setId(id);
 				tirocinio = richiesta.richiestaTirocinio(tirocinio);
@@ -342,7 +334,6 @@ public class GestioneTirocinio extends HttpServlet {
 
 
 				int id = Integer.parseInt((String) request.getParameter("idTiro"));
-				System.out.println("Compilato"+ id);
 				tirocinio.setId(id);
 				tirocinio = richiesta.richiestaTirocinio(tirocinio);
 

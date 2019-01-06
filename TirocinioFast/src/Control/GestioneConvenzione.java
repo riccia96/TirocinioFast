@@ -103,8 +103,6 @@ public class GestioneConvenzione extends HttpServlet {
 			}
 		}
 
-		//nelle jsp prendersi cmq gli altri attributi a mostrare ? 
-
 		if(azioneConvenzione.equals("richiestaConvenzione")) {
 			try {
 				AziendaBean azienda = new AziendaBean();
@@ -122,7 +120,6 @@ public class GestioneConvenzione extends HttpServlet {
 				String docente = request.getParameter("tutor");
 
 				convenzione.setId(documento.generaCodice());
-				System.out.println(convenzione.getId());
 				convenzione.setAzienda(azienda.getUsername());
 
 				convenzione.setLuogoNascitaCeo(luogoNascitaR);
