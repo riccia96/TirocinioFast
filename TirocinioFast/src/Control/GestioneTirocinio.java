@@ -298,6 +298,8 @@ public class GestioneTirocinio extends HttpServlet {
 				TutorBean tutor = new TutorBean();
 				AziendaBean azienda = new AziendaBean();
 				StudenteBean studente = new StudenteBean();
+				ConvenzioneBean convenzione = new ConvenzioneBean();
+				List<ConvenzioneBean> listaConv = documento.convenzioni();
 				
 				int id = Integer.parseInt((String) request.getParameter("idTiro"));
 				
@@ -307,6 +309,13 @@ public class GestioneTirocinio extends HttpServlet {
 				String tuto = tirocinio.getTutorAccademico();
 				String azie = tirocinio.getAzienda();
 				String stud = tirocinio.getStudente();
+				
+				for(ConvenzioneBean c : listaConv) {
+					if(c.getAzienda().equals(azie)) {
+						convenzione = c;
+						break;
+					}
+				}
 				
 				tutor.setUsername(tuto);
 				tutor = utente.getTutor(tutor);
@@ -325,6 +334,7 @@ public class GestioneTirocinio extends HttpServlet {
 						request.getSession().setAttribute("tutor", tutor);
 						request.getSession().setAttribute("azienda", azienda);
 						request.getSession().setAttribute("studente", studente);
+						request.getSession().setAttribute("convenzione", convenzione);
 						RequestDispatcher view = request.getRequestDispatcher("documentoRichiestaTirocinio.jsp");
 						view.forward(request, response);
 					}else{
