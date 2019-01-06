@@ -21,8 +21,8 @@
 
 	<%@include file="ricerca.jsp"%>
 
-<div id = "contenitore">
-<table style="margin-left: 30%">
+<div id = "contenitore" style="margin-left: 25%;" >
+<table>
 
 <td></td>
 <td></td>

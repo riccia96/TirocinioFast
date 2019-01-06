@@ -212,7 +212,7 @@ TirocinioBean tirocinio = new TirocinioBean();
 		  }
 	  } %>
   <tr>
-    <td><a href="#">RichiestaN.<%=tirocinio.getId() %></a></td>
+    <td><a href="GestioneTirocinio?azioneTirocinio=mostraDocumento&idT=<%=tirocinio.getId() %>">RichiestaN.<%=tirocinio.getId() %></a></td>
     <%if (tirocinio.isConvalidaAzienda()==true){ %>
     <td><img alt="verde" src="img/verde.png" width="50px" height="50px"></td>
     <%} else { %>
@@ -227,10 +227,11 @@ TirocinioBean tirocinio = new TirocinioBean();
     <td><img alt="giallo" src="img/giallo.png" width="50px" height="50px"></td>
     <%} if (tirocinio.isConvalidaAzienda()==true && tirocinio.isConvalidaTutor()==true && tirocinio.isConvalidaStudente()==false) { %>
         <td>
-    	<form>
+    <form action="GestioneDocumento" method="POST">
   			Seleziona PDF richista inizio attivit&agrave; di tirocinio firmata<br>
-  			<input type="file" name="attivitaTirocinioTutor" accept=".pdf"><br>
-  			<input type="submit">
+  			<input type="file" name="attivitaTirocinioFirmata" accept=".pdf"><br>
+  			<input type="hidden" name="id" value="<%=tirocinio.getId() %>">
+  			<input type="submit" name="azioneDocumento" value="uploadTirocinio">
 		</form>
 </td>
 <%} else { %>
