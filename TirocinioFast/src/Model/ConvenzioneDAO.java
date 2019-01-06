@@ -128,14 +128,14 @@ private static DataSource ds;
 		ResultSet result = null;
 		ConvenzioneBean c = new ConvenzioneBean();
 		
-		String querySQL = "SELECT * FROM " + ConvenzioneDAO.TABLE_NAME + " WHERE azienda = ?";
+		String querySQL = "SELECT * FROM " + ConvenzioneDAO.TABLE_NAME + " WHERE id = ?";
 		
 		try {
 
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(querySQL);
 
-			preparedStatement.setString(1, convenzione.getAzienda());
+			preparedStatement.setInt(1, convenzione.getId());
 
 			preparedStatement.execute();
 			result = preparedStatement.getResultSet();

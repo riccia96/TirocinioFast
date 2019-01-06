@@ -37,7 +37,7 @@ public class GestioneConvenzione extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 
 		String azioneConvenzione = request.getParameter("azioneConvenzione");
 
@@ -46,7 +46,7 @@ public class GestioneConvenzione extends HttpServlet {
 				List<ConvenzioneBean> convenzioni = documento.convenzioni();
 				List<ConvenzioneBean> richieste = new ArrayList<ConvenzioneBean>();
 				List<AziendaBean> aziende = new ArrayList<AziendaBean>();
-				
+
 				for(ConvenzioneBean c : convenzioni) {
 					if(!(c.isConvalida())) {
 						AziendaBean a = new AziendaBean();
@@ -58,7 +58,7 @@ public class GestioneConvenzione extends HttpServlet {
 
 				request.getSession().setAttribute("richiesteConvenzioni", richieste);
 				request.getSession().setAttribute("listaAziende", aziende);
-				
+
 				if(richieste.equals(null)) {
 					response.setContentType("text/html;charset=ISO-8859-1");
 					response.getWriter().write("nessuna richiesta");
@@ -87,15 +87,15 @@ public class GestioneConvenzione extends HttpServlet {
 						richieste.add(c);
 					}
 				}
-				
+
 				request.getSession().setAttribute("listaConvenzioni", richieste);
 				request.getSession().setAttribute("listaAziende", aziende);
-				
+
 				if(richieste.equals(null)) {
 					response.setContentType("text/html;charset=ISO-8859-1");
 					response.getWriter().write("nessuna richiesta");
 				}
-				
+
 				RequestDispatcher view = request.getRequestDispatcher("elencoConvenzioniAccettate.jsp");
 				view.forward(request, response);
 			} catch (SQLException e){
@@ -109,7 +109,7 @@ public class GestioneConvenzione extends HttpServlet {
 			try {
 				AziendaBean azienda = new AziendaBean();
 				ConvenzioneBean convenzione = new ConvenzioneBean();
-				
+
 				azienda = (AziendaBean) request.getSession().getAttribute("utenteSessione");
 
 				String luogoNascitaR = request.getParameter("luogoNascitaR");
@@ -138,16 +138,16 @@ public class GestioneConvenzione extends HttpServlet {
 				System.out.print("valore di ritorno dosave:"+val);
 				request.getSession().setAttribute("azienda", azienda);
 				request.getSession().setAttribute("convenzione", convenzione);
-				
+
 				RequestDispatcher view = request.getRequestDispatcher("convenzioneEsistente.jsp");
 				view.forward(request, response);
-				
+
 			} catch (SQLException e) {
 
 				e.printStackTrace();
 			}
 		}
-		
+
 		if(azioneConvenzione.equals("selezionaConvenzione")){
 			try {
 				int id = Integer.parseInt((String) request.getParameter("id"));
@@ -155,25 +155,35 @@ public class GestioneConvenzione extends HttpServlet {
 				convenzione.setId(id);
 				convenzione = documento.convenzione(convenzione);
 
-				if(convenzione.getUrl().equals("")){
-					System.out.println("nu puo fa ny cazz");
-				}else{
+				
 					request.getSession().setAttribute("convenzione", convenzione);
 					RequestDispatcher view = request.getRequestDispatcher("mostraPDF.jsp");
 					view.forward(request, response);
-				}
+				
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
-		
+
 		if(azioneConvenzione.equals("apriForm")){
 			try {
-			List<TutorBean> tutors = new ArrayList<TutorBean>();
+				List<TutorBean> tutors = new ArrayList<TutorBean>();
 				tutors = utente.getTutorAccademici();
+
+				AziendaBean azienda = (AziendaBean) request.getSession().getAttribute("utenteSessione");
+				List<ConvenzioneBean> convenzioni = documento.convenzioni();
 				
+				for(ConvenzioneBean c: convenzioni) {
+					if(c.getAzienda().equals(azienda.getUsername())) {
+						
+						request.getSession().setAttribute("convenzione", c);
+						RequestDispatcher view = request.getRequestDispatcher("convenzioneEsistente.jsp");
+						view.forward(request, response);
+					}
+				}
+
 				request.getSession().setAttribute("tutors", tutors);
-				
+
 				RequestDispatcher view = request.getRequestDispatcher("convenzione.jsp");
 				view.forward(request, response);
 			} catch (SQLException e) {
