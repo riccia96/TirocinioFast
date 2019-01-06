@@ -31,7 +31,7 @@
   </tr>
   
   <tr>
-    <td><a href="GestioneConvenzione?azioneConvenzione=selezionaConvenzione?idConv=<%=convenzione.getId()%>">Richiesta N.<%= convenzione.getId() %></a></td>
+    <td><a href="GestioneConvenzione?azioneConvenzione=selezionaConvenzione&idConv=<%=convenzione.getId()%>">Richiesta N.<%= convenzione.getId() %></a></td>
     <%if (convenzione.isConvalida()==true) { %>
     <td><img alt="verde" src="img/verde.png" width="50px" height="50px"> </td>
     <% }

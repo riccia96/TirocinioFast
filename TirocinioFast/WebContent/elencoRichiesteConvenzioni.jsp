@@ -40,9 +40,9 @@
   					
 	  %>
   <tr>
-    <td><a href="#">RichiestaN<%= c.getId() %></a></td>
-    <td><%=a.getNome()  %></td>
-    <%if(c.getUrl().equals("")){ %>
+    <td><a href="GestioneConvenzione?azioneConvenzione=selezionaConvenzione&idConv=<%=c.getId()%>">RichiestaN<%= c.getId() %></a></td>
+    <td><%=a.getNome() %></td>
+    <%if(!c.isConvalida()){ %>
     <td>
     	<form>
   			Seleziona PDF richista di convenzione firmata<br>

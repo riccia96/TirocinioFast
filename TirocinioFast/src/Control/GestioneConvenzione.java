@@ -150,13 +150,13 @@ public class GestioneConvenzione extends HttpServlet {
 
 		if(azioneConvenzione.equals("selezionaConvenzione")){
 			try {
-				System.out.println("sono qui");
+				
 				int id = Integer.parseInt((String) request.getParameter("idConv"));
 				ConvenzioneBean convenzione = new ConvenzioneBean();
 				convenzione.setId(id);
 				convenzione = documento.convenzione(convenzione);
-				System.out.println(convenzione.getUrl());
-				request.getSession().setAttribute("convenzione", convenzione);
+				
+				request.getSession().setAttribute("pdfConv", convenzione);
 				RequestDispatcher view = request.getRequestDispatcher("mostraPDF.jsp");
 				view.forward(request, response);
 
