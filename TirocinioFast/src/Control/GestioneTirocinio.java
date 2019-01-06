@@ -419,17 +419,23 @@ public class GestioneTirocinio extends HttpServlet {
 
 		if(azioneTirocinio.equals("attivitaConvalidate")){
 			try{
+				List<TirocinioBean> tirocini = new ArrayList<TirocinioBean>();
+				
+				tirocini = richiesta.richiesteTirocinio();
+				
+				if(!(tirocini.size() == 0)) {
+				
 				StudenteBean studente = new StudenteBean();
 				AziendaBean azienda = new AziendaBean();
 				TutorBean tutor = new TutorBean();
 
-				List<TirocinioBean> tirocini = new ArrayList<TirocinioBean>();
+				
 				List<TirocinioBean> conclusi = new ArrayList<TirocinioBean>();
 				List<StudenteBean> studenti = new ArrayList<StudenteBean>();
 				List<AziendaBean> aziende = new ArrayList<AziendaBean>();
 				List<TutorBean> tutors = new ArrayList<TutorBean>();
 
-				tirocini = richiesta.richiesteTirocinio();
+				
 
 				for(TirocinioBean t: tirocini){
 					if(t.isConvalidaAttivita()){
@@ -453,6 +459,10 @@ public class GestioneTirocinio extends HttpServlet {
 
 				RequestDispatcher view = request.getRequestDispatcher("elencoTirociniConclusi.jsp");
 				view.forward(request, response);
+				} else {
+					response.setContentType("text/html;charset=ISO-8859-1");
+					response.getWriter().write("nessuna attività conclusa");
+				}
 			} catch (SQLException e){
 				e.printStackTrace();
 			}
