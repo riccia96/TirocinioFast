@@ -96,9 +96,9 @@ public class GestioneDocumento extends HttpServlet {
 						tirocinio.setConvalidaAzienda(true);
 						documento.UploadTirocinio(tirocinio);
 						
-						request.getSession().setAttribute("idTiro", tirocinio.getId());
+						request.getSession().setAttribute("tirocinio", tirocinio);
 						
-						RequestDispatcher view = request.getRequestDispatcher("GestioneTirocinio?azioneTirocinio=compilaAzienda");
+						RequestDispatcher view = request.getRequestDispatcher("GestioneTirocinio?azioneTirocinio=elencoRichiesteTirocinio");
 						view.forward(request, response);
 
 					}
