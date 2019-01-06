@@ -300,7 +300,7 @@ public class GestioneTirocinio extends HttpServlet {
 				
 				tirocinio.setId(id);
 				tirocinio = richiesta.richiestaTirocinio(tirocinio);
-						
+				
 				request.getSession().setAttribute("richiestaTiro", tirocinio);
 				RequestDispatcher view = request.getRequestDispatcher("compilazioneCampiAzienda.jsp");
 				view.forward(request, response);
