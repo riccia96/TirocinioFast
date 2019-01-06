@@ -254,8 +254,13 @@ public class GestioneTirocinio extends HttpServlet {
 		if(azioneTirocinio.equals("tirocinioDatiAzienda")) {
 			try {
 				AziendaBean azienda = new AziendaBean();
+				
+			    int idT = Integer.parseInt((String) request.getParameter("idTiroci"));
+			    
 				TirocinioBean tirocinio = new TirocinioBean();
-
+				tirocinio.setId(idT);
+				tirocinio = richiesta.richiestaTirocinio(tirocinio);
+				
 				azienda = (AziendaBean) request.getSession().getAttribute("utenteSessione");
 
 				String sede = request.getParameter("sede");
@@ -269,7 +274,7 @@ public class GestioneTirocinio extends HttpServlet {
 				tirocinio.setObiettivoTirocinio(obiettivi);
 				tirocinio.setFacilitazioni(facilitazioni);
 
-				richiesta.salvaTirocinio(tirocinio);
+				richiesta.inoltraRichiesta(tirocinio);
 
 				request.getSession().setAttribute("aziendaTirocinio", azienda);
 				request.getSession().setAttribute("tipoDocumento", "tirocinio");

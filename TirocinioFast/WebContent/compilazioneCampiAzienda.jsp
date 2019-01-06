@@ -35,6 +35,7 @@
     <input type="text" placeholder="Eventuali facilitazioni" name="facilitazioni" >
     <br>
     <div class ="new">
+    <input type="hidden" name="idTiroci" value="<%=tiro.getId() %>">
     <button name = "azioneTirocinio" value="tirocinioDatiAzienda" id="compilazioneAziendaButton" class=" button" type="submit">Invia</button> 
     </div>
 </form>
