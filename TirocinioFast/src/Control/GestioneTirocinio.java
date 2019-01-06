@@ -240,6 +240,8 @@ public class GestioneTirocinio extends HttpServlet {
 					response.setContentType("text/html;charset=ISO-8859-1");
 					response.getWriter().write("nessuna richiesta");
 				}
+				
+				request.getSession().setAttribute("tipoDocumento", "tirocinio");
 
 				RequestDispatcher view = request.getRequestDispatcher("mostraPDF.jsp");
 				view.forward(request, response);
@@ -270,7 +272,8 @@ public class GestioneTirocinio extends HttpServlet {
 				richiesta.salvaTirocinio(tirocinio);
 
 				request.getSession().setAttribute("aziendaTirocinio", azienda);
-				
+				request.getSession().setAttribute("tipoDocumento", "tirocinio");
+
 				//portarsi avanti il nome della jsp da cui proviene il documento
 				RequestDispatcher view = request.getRequestDispatcher("mostraPDF.jsp");
 				view.forward(request, response);
@@ -287,13 +290,40 @@ public class GestioneTirocinio extends HttpServlet {
 
 			try {
 				TirocinioBean tirocinio = new TirocinioBean();
+				TutorBean tutor = new TutorBean();
+				AziendaBean azienda = new AziendaBean();
+				StudenteBean studente = new StudenteBean();
 				int id = Integer.parseInt((String) request.getParameter("idTiro"));
 				tirocinio.setId(id);
 				tirocinio = richiesta.richiestaTirocinio(tirocinio);
-				request.getSession().setAttribute("richiestaTiro", tirocinio);
-				RequestDispatcher view = request.getRequestDispatcher("compilazioneCampiAzienda.jsp");
-				view.forward(request, response);
-				
+				String tuto = tirocinio.getTutorAccademico();
+				String azie = tirocinio.getAzienda();
+				String stud = tirocinio.getStudente();
+				tutor.setUsername(tuto);
+				tutor = utente.getTutor(tutor);
+				azienda.setUsername(azie);
+				azienda = utente.getAzienda(azienda);
+				studente.setUsername(stud);
+				studente = utente.getStudente(studente);
+				if(tirocinio.getPeriodoTirocinio().equals("")){
+					request.getSession().setAttribute("richiestaTiro", tirocinio);
+					RequestDispatcher view = request.getRequestDispatcher("compilazioneCampiAzienda.jsp");
+					view.forward(request, response);
+				}else{
+					if(tirocinio.getUrl().equals("")){
+						request.getSession().setAttribute("richiesta", tirocinio);
+						request.getSession().setAttribute("tutor", tutor);
+						request.getSession().setAttribute("azienda", azienda);
+						request.getSession().setAttribute("studente", studente);
+						RequestDispatcher view = request.getRequestDispatcher("documentoRichiestaTirocinio.jsp");
+						view.forward(request, response);
+					}else{
+						request.getSession().setAttribute("richiesta", tirocinio);
+						request.getSession().setAttribute("tipoDocumento", "tirocinio");
+						RequestDispatcher view = request.getRequestDispatcher("mostraPDF.jsp");
+						view.forward(request, response);
+					}
+				}
 			} catch (SQLException e) {
 
 				e.printStackTrace();

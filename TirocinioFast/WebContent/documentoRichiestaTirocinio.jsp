@@ -4,7 +4,7 @@
  	AziendaBean azienda = (AziendaBean) request.getSession().getAttribute("azienda");
 	StudenteBean studente = (StudenteBean) request.getSession().getAttribute("studente");
 	TutorBean tutor = (TutorBean) request.getSession().getAttribute("tutor");
-	TirocinioBean tirocinio = (TirocinioBean) request.getSession().getAttribute("tirocinio");
+	TirocinioBean tirocinio = (TirocinioBean) request.getSession().getAttribute("richiesta");
 	ConvenzioneBean convenzione = (ConvenzioneBean) request.getSession().getAttribute("convenzione");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">

@@ -158,6 +158,7 @@ public class GestioneConvenzione extends HttpServlet {
 				
 				if(!convenzione.getUrl().equals("")) {
 					request.getSession().setAttribute("pdfConv", convenzione);
+					request.getSession().setAttribute("tipoDocumento", "convenzione");
 					RequestDispatcher view = request.getRequestDispatcher("mostraPDF.jsp");
 					view.forward(request, response);
 
