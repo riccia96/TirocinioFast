@@ -7,6 +7,7 @@ public class TirocinioBean implements java.io.Serializable {
 	/**Costruttore*/
 
 	public TirocinioBean() {
+		this.id = 0;
 		this.studente = "";
 		this.azienda = "";
 		this.tutorAccademico = "";
