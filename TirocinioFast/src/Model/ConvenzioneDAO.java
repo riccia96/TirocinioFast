@@ -56,7 +56,7 @@ private static DataSource ds;
 					connection.close();
 			}
 		}
-        System.out.println(rowCount);
+        
 		return rowCount;
 	}
 
@@ -91,7 +91,7 @@ private static DataSource ds;
 			
 			preparedStatement.execute();
 			result = preparedStatement.getGeneratedKeys();
-			System.out.println(result);
+			
 			if(result.next() && result != null){
 				return result.getInt(1);
 			}else{

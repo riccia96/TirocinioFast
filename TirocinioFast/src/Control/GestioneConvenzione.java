@@ -134,8 +134,8 @@ public class GestioneConvenzione extends HttpServlet {
 				convenzione.setAttivita(attivita);
 				convenzione.setTutorAccademico(docente);
 
-				int val = documento.compilaConvenzione(convenzione);
-				System.out.print("valore di ritorno dosave:"+val);
+				documento.compilaConvenzione(convenzione);
+
 				request.getSession().setAttribute("azienda", azienda);
 				request.getSession().setAttribute("convenzione", convenzione);
 
@@ -156,10 +156,19 @@ public class GestioneConvenzione extends HttpServlet {
 				convenzione.setId(id);
 				convenzione = documento.convenzione(convenzione);
 				
-				request.getSession().setAttribute("pdfConv", convenzione);
-				RequestDispatcher view = request.getRequestDispatcher("mostraPDF.jsp");
-				view.forward(request, response);
+				if(!convenzione.getUrl().equals("")) {
+					request.getSession().setAttribute("pdfConv", convenzione);
+					RequestDispatcher view = request.getRequestDispatcher("mostraPDF.jsp");
+					view.forward(request, response);
 
+				} else {
+					request.getSession().setAttribute("doc", convenzione);
+					RequestDispatcher view = request.getRequestDispatcher("documentoConvenzione.jsp");
+					view.forward(request, response);
+
+				}
+
+				
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -181,7 +190,7 @@ public class GestioneConvenzione extends HttpServlet {
 					}
 				}
 				if(flag) {
-					
+
 					RequestDispatcher view = request.getRequestDispatcher("convenzioneEsistente.jsp");
 					view.forward(request, response);
 				} else {
@@ -194,8 +203,8 @@ public class GestioneConvenzione extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		
-		
+
+
 	}
 
 }

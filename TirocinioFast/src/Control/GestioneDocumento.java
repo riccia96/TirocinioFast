@@ -37,7 +37,7 @@ public class GestioneDocumento extends HttpServlet {
 
 		if(azioneDocumento.equals("uploadConvenzione")) {
 			try {
-				String utente = (String) request.getSession().getAttribute("utenteSessione");
+				String utente = (String) request.getSession().getAttribute("tipoUtente");
 				
 				String nomeFile = (String) request.getParameter("nomeFileConvenzione");
 				if(!nomeFile.equals(null)) {
