@@ -40,7 +40,7 @@
      <% } %>
     <%if (convenzione.getUrl().equals("")){ %>
     <td>
-    	<form>
+    	<form >
   			Seleziona PDF convenzione firmato con gli allegati richiesti<br>
   			(Convenzione + visura camerale + documento di riconoscimento del rappresentante legale)<br>
   			<input type="file" name="" accept=".pdf" requider><br>
