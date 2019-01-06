@@ -10,10 +10,10 @@
 <title>Documento convenzione</title>
 </head>
 <body>
-<% if(!(convenzione.getUrl().equals(""))){%>
+
 <embed width="100%" height="550px" src="<%= convenzione.getUrl()%>">
 <div style="text-align: center; margin-bottom: 10px; margin-left: 10%; margin-top: 40px;"> 
 </div>
-<%} %>
+
 </body>
 </html>

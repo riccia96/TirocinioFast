@@ -150,20 +150,22 @@ public class GestioneConvenzione extends HttpServlet {
 
 		if(azioneConvenzione.equals("selezionaConvenzione")){
 			try {
-				int id = Integer.parseInt((String) request.getParameter("id"));
+				System.out.println("sono qui");
+				int id = Integer.parseInt((String) request.getParameter("idConv"));
 				ConvenzioneBean convenzione = new ConvenzioneBean();
 				convenzione.setId(id);
 				convenzione = documento.convenzione(convenzione);
+				System.out.println(convenzione.getUrl());
+				request.getSession().setAttribute("convenzione", convenzione);
+				RequestDispatcher view = request.getRequestDispatcher("mostraPDF.jsp");
+				view.forward(request, response);
 
-				
-					request.getSession().setAttribute("convenzione", convenzione);
-					RequestDispatcher view = request.getRequestDispatcher("mostraPDF.jsp");
-					view.forward(request, response);
-				
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
+
+
 
 		if(azioneConvenzione.equals("apriForm")){
 			try {
@@ -172,20 +174,23 @@ public class GestioneConvenzione extends HttpServlet {
 
 				AziendaBean azienda = (AziendaBean) request.getSession().getAttribute("utenteSessione");
 				List<ConvenzioneBean> convenzioni = documento.convenzioni();
-				
+				boolean flag = false;
 				for(ConvenzioneBean c: convenzioni) {
 					if(c.getAzienda().equals(azienda.getUsername())) {
-						
-						request.getSession().setAttribute("convenzione", c);
-						RequestDispatcher view = request.getRequestDispatcher("convenzioneEsistente.jsp");
-						view.forward(request, response);
+						request.getSession().setAttribute("convenzioneA", c);
+						flag = true;
 					}
 				}
+				if(flag) {
+					
+					RequestDispatcher view = request.getRequestDispatcher("convenzioneEsistente.jsp");
+					view.forward(request, response);
+				} else {
+					request.getSession().setAttribute("tutors", tutors);
 
-				request.getSession().setAttribute("tutors", tutors);
-
-				RequestDispatcher view = request.getRequestDispatcher("convenzione.jsp");
-				view.forward(request, response);
+					RequestDispatcher view = request.getRequestDispatcher("convenzione.jsp");
+					view.forward(request, response);
+				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

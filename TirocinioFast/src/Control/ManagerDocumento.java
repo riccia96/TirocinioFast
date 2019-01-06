@@ -36,9 +36,9 @@ public class ManagerDocumento {
 		return convenzione.doRetrieveByKey(pathDoc);
 	}
 
-	public boolean UploadConvenzione(ConvenzioneBean pathDoc) throws SQLException {
-		ConvenzioneDAO convenzione = new ConvenzioneDAO();
-		return convenzione.doUpdate(pathDoc);
+	public boolean UploadConvenzione(ConvenzioneBean convenzione) throws SQLException {
+		ConvenzioneDAO convenzioneDAO = new ConvenzioneDAO();
+		return convenzioneDAO.doUpdate(convenzione);
 	}
 	
 	public QuestionarioStudenteBean QuestionarioStudente(QuestionarioStudenteBean questionario) throws SQLException {

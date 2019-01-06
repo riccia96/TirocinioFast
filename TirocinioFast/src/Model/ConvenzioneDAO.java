@@ -238,8 +238,8 @@ private static DataSource ds;
 		PreparedStatement preparedStatement = null;
 		
 		String querySQL = "UPDATE " + ConvenzioneDAO.TABLE_NAME + 
-				" SET tutorAccademico = ?, impiegato = ?" +
-				"luogoNascitaCeo = ?, dataNascitaCeo = ?, numeroDipendenti = ?, referente = ?, "
+				" SET tutorAccademico = ?, impiegato = ?," +
+				" luogoNascitaCeo = ?, dataNascitaCeo = ?, numeroDipendenti = ?, referente = ?, "
 				+ "telefonoReferente = ?, emailReferente = ?, attivita = ?, convalida = ?, url = ? WHERE id = ?";
 		
 		try{

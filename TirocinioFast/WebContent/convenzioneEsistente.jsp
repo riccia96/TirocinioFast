@@ -16,7 +16,7 @@
 
 <%@include file = "menu.jsp" %>
 
-<%ConvenzioneBean convenzione = (ConvenzioneBean) request.getSession().getAttribute("convenzione"); %>
+<%ConvenzioneBean convenzione = (ConvenzioneBean) request.getSession().getAttribute("convenzioneA"); %>
 <%AziendaBean aziende = (AziendaBean) request.getSession().getAttribute("azienda"); %>
 
 
@@ -31,7 +31,7 @@
   </tr>
   
   <tr>
-    <td><a href="GestioneConvenzione?azioneConvenzione=selezionaConvenzione?id=<%= convenzione.getId()%>">Richiesta N.<%= convenzione.getId() %></a></td>
+    <td><a href="GestioneConvenzione?azioneConvenzione=selezionaConvenzione?idConv=<%=convenzione.getId()%>">Richiesta N.<%= convenzione.getId() %></a></td>
     <%if (convenzione.isConvalida()==true) { %>
     <td><img alt="verde" src="img/verde.png" width="50px" height="50px"> </td>
     <% }
@@ -40,11 +40,11 @@
      <% } %>
     <%if (convenzione.getUrl().equals("")){ %>
     <td>
-    	<form action="GestioneConvenzione" method="POST">
+    	<form action="GestioneDocumento" method="POST">
   			Seleziona PDF convenzione firmato con gli allegati richiesti<br>
   			(Convenzione + visura camerale + documento di riconoscimento del rappresentante legale)<br>
   			<input type="file" name="nomeFileConvenzione" accept=".pdf" requider><br>
-  			<input type="submit">
+  			<input type="submit" name = "azioneDocumento" value= "uploadConvenzione">
 		</form>
 </td>
 <% } else { %>
