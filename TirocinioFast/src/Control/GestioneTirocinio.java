@@ -290,6 +290,23 @@ public class GestioneTirocinio extends HttpServlet {
 
 		}
 
+		if(azioneTirocinio.equals("mostraDocumento")){
+			try {
+				int id = Integer.parseInt((String) request.getParameter("idT"));
+				TirocinioBean tirocinio = new TirocinioBean();
+				
+				tirocinio.setId(id);
+				tirocinio = richiesta.richiestaTirocinio(tirocinio);
+				
+				request.getSession().setAttribute("richiesta", tirocinio);
+				request.getSession().setAttribute("tipoDocumento", "tirocinio");
+				
+				RequestDispatcher view = request.getRequestDispatcher("mostraPDF.jsp");
+				view.forward(request, response);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 
 		if(azioneTirocinio.equals("compilaAzienda")) {
 
