@@ -275,7 +275,7 @@ public class GestioneTirocinio extends HttpServlet {
 				request.getSession().setAttribute("tipoDocumento", "tirocinio");
 
 				//portarsi avanti il nome della jsp da cui proviene il documento
-				RequestDispatcher view = request.getRequestDispatcher("mostraPDF.jsp");
+				RequestDispatcher view = request.getRequestDispatcher("GestioneTirocinio?azioneTirocinio=elencoRichiesteTirocinio");
 				view.forward(request, response);
 
 			} catch (SQLException e) {
@@ -293,23 +293,28 @@ public class GestioneTirocinio extends HttpServlet {
 				TutorBean tutor = new TutorBean();
 				AziendaBean azienda = new AziendaBean();
 				StudenteBean studente = new StudenteBean();
+				
 				int id = Integer.parseInt((String) request.getParameter("idTiro"));
+				
 				tirocinio.setId(id);
 				tirocinio = richiesta.richiestaTirocinio(tirocinio);
+				
 				String tuto = tirocinio.getTutorAccademico();
 				String azie = tirocinio.getAzienda();
 				String stud = tirocinio.getStudente();
+				
 				tutor.setUsername(tuto);
 				tutor = utente.getTutor(tutor);
 				azienda.setUsername(azie);
 				azienda = utente.getAzienda(azienda);
 				studente.setUsername(stud);
 				studente = utente.getStudente(studente);
+				
 				if(tirocinio.getPeriodoTirocinio().equals("")){
 					request.getSession().setAttribute("richiestaTiro", tirocinio);
 					RequestDispatcher view = request.getRequestDispatcher("compilazioneCampiAzienda.jsp");
 					view.forward(request, response);
-				}else{
+				}else{					
 					if(tirocinio.getUrl().equals("")){
 						request.getSession().setAttribute("richiesta", tirocinio);
 						request.getSession().setAttribute("tutor", tutor);
