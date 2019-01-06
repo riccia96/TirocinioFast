@@ -118,7 +118,8 @@ TirocinioBean tirocinio = new TirocinioBean();
     	<form action="GestioneTirocinio" method="POST">
   			Seleziona PDF richista inizio attivit&agrave; di tirocinio firmata<br>
   			<input type="file" name="attivitaTirocinioFirmata" accept=".pdf"><br>
-  			<input type="submit" name="inoltroAT">
+  			<input type="hidden" name="idTirocinio" value="<%=tirocinio.getId() %>">
+  			<input type="submit" name="GestioneDocumento" value="uploadTirocinio">
 		</form>
 </td>
 <%} else { %>
