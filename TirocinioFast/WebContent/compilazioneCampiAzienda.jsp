@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    
+<% TirocinioBean tiro = (TirocinioBean) request.getSession().getAttribute("richiestaTiro"); %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -33,7 +35,7 @@
     <input type="text" placeholder="Eventuali facilitazioni" name="facilitazioni" >
     <br>
     <div class ="new">
-    <button name = "azioneUtente" value="tirocinioDatiAzienda" id="compilazioneAziendaButton" class=" button" type="submit">Invia</button> 
+    <button name = "azioneTirocinio" value="tirocinioDatiAzienda" id="compilazioneAziendaButton" class=" button" type="submit">Invia</button> 
     </div>
 </form>
   
