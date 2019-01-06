@@ -166,7 +166,6 @@ public class GestioneConvenzione extends HttpServlet {
 		}
 
 
-
 		if(azioneConvenzione.equals("apriForm")){
 			try {
 				List<TutorBean> tutors = new ArrayList<TutorBean>();
@@ -195,6 +194,8 @@ public class GestioneConvenzione extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		
+		
 	}
 
 }

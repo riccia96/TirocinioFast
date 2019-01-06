@@ -47,7 +47,7 @@
     	<form action="GestioneConvenzione" method="POST">
   			Seleziona PDF richista di convenzione firmata<br>
   			<input type="file" name="convalidaConvenzione" accept=".pdf"><br>
-  			<input type="submit" name="convalidaConv">
+  			<input type="submit" name="azioneDocumento" value="uploadConvenzione">
 		</form>
 </td>
 <%} else {%>
