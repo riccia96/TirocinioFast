@@ -38,24 +38,36 @@ public class GestioneDocumento extends HttpServlet {
 		if(azioneDocumento.equals("uploadConvenzione")) {
 			try {
 				String utente = (String) request.getSession().getAttribute("tipoUtente");
-				
+			
+
 				String nomeFile = (String) request.getParameter("nomeFileConvenzione");
-				if(!nomeFile.equals(null)) {
-					ConvenzioneBean convenzione = (ConvenzioneBean) request.getSession().getAttribute("convenzione");
-					convenzione.setUrl("pdf/" + nomeFile);
-					System.out.println(convenzione.getUrl());
-					documento.UploadConvenzione(convenzione);
+				if(utente.equals("azienda")){
 					
-					if(utente.equals("azienda")){
-						RequestDispatcher view = request.getRequestDispatcher("convenzioneEsistente.jsp");
-						view.forward(request, response);
-					} else if(utente.equals("impiegato")){
-						convenzione.setConvalida(true);
+					if(!nomeFile.equals(null)) {
+						ConvenzioneBean convenzione = (ConvenzioneBean) request.getSession().getAttribute("convenzione");
+						convenzione.setUrl("pdf/" + nomeFile);
+
 						documento.UploadConvenzione(convenzione);
-						RequestDispatcher view = request.getRequestDispatcher("elencoRichiesteConvenzione.jsp");
+						RequestDispatcher view = request.getRequestDispatcher("GestioneConvenzione?azioneConvenzione=apriForm");
+						view.forward(request, response);
+
+					}} else if(utente.equals("impiegato")){
+
+						int idConv = Integer.parseInt((String) request.getParameter("idConvenzione"));
+						
+						ConvenzioneBean conv = new ConvenzioneBean();
+						conv.setId(idConv);
+						conv = documento.convenzione(conv);
+						
+						conv.setUrl("pdf/" + nomeFile);
+						conv.setConvalida(true);
+						
+						documento.UploadConvenzione(conv);
+						
+						RequestDispatcher view = request.getRequestDispatcher("GestioneConvenzione?azioneConvenzione=elencoRichiesteConvenzioni");
 						view.forward(request, response);
 					}
-				} else {
+				 else {
 					response.setContentType("text/html;charset=ISO-8859-1");
 					response.getWriter().write("carica il file");
 				}

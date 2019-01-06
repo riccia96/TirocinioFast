@@ -44,9 +44,10 @@
     <td><%=a.getNome() %></td>
     <%if(!c.isConvalida()){ %>
     <td>
-    	<form action="GestioneConvenzione" method="POST">
+    	<form action="GestioneDocumento" method="POST">
   			Seleziona PDF richista di convenzione firmata<br>
-  			<input type="file" name="convalidaConvenzione" accept=".pdf"><br>
+  			<input type="file" name="nomeFileConvenzione" accept=".pdf"><br>
+  			<input type="hidden" name = "idConvenzione" value="<%=c.getId()%>">
   			<input type="submit" name="azioneDocumento" value="uploadConvenzione">
 		</form>
 </td>
