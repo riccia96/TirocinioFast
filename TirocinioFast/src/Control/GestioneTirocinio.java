@@ -297,6 +297,7 @@ public class GestioneTirocinio extends HttpServlet {
 				TirocinioBean tirocinio = new TirocinioBean();
 				
 				int id = Integer.parseInt((String) request.getParameter("idTiro"));
+				System.out.println("Compilazienda"+ id);
 				
 				tirocinio.setId(id);
 				tirocinio = richiesta.richiestaTirocinio(tirocinio);
@@ -324,7 +325,7 @@ public class GestioneTirocinio extends HttpServlet {
 
 
 				int id = Integer.parseInt((String) request.getParameter("idTiro"));
-
+				System.out.println("Compilato"+ id);
 				tirocinio.setId(id);
 				tirocinio = richiesta.richiestaTirocinio(tirocinio);
 
