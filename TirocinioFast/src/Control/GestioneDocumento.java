@@ -102,21 +102,50 @@ public class GestioneDocumento extends HttpServlet {
 						view.forward(request, response);
 
 					}
-				} else if(utente.equals("impiegato")){
+				} else if(utente.equals("tutor")){
 
-					int idConv = Integer.parseInt((String) request.getParameter("idConvenzione"));
-
-					ConvenzioneBean conv = new ConvenzioneBean();
-					conv.setId(idConv);
-					conv = documento.convenzione(conv);
-
-					conv.setUrl("pdf/" + nomeFile);
-					conv.setConvalida(true);
-
-					documento.UploadConvenzione(conv);
-
-					RequestDispatcher view = request.getRequestDispatcher("GestioneConvenzione?azioneConvenzione=elencoRichiesteConvenzioni");
+					int id = Integer.parseInt((String) request.getParameter("id"));
+					TirocinioBean tirocinio = new TirocinioBean();
+					tirocinio.setId(id);
+					tirocinio = richiesta.richiestaTirocinio(tirocinio);
+					tirocinio.setUrl("pdf/" + nomeFile);
+					tirocinio.setConvalidaTutor(true);
+					documento.UploadTirocinio(tirocinio);
+					
+					request.getSession().setAttribute("tirocinio", tirocinio);
+					
+					RequestDispatcher view = request.getRequestDispatcher("GestioneTirocinio?azioneTirocinio=elencoRichiesteTirocinio");
 					view.forward(request, response);
+				} else if(utente.equals("studente")){
+					int id = Integer.parseInt((String) request.getParameter("id"));
+					TirocinioBean tirocinio = new TirocinioBean();
+					tirocinio.setId(id);
+					tirocinio = richiesta.richiestaTirocinio(tirocinio);
+					tirocinio.setUrl("pdf/" + nomeFile);
+					tirocinio.setConvalidaStudente(true);
+					documento.UploadTirocinio(tirocinio);
+					
+					request.getSession().setAttribute("tirocinio", tirocinio);
+					
+					RequestDispatcher view = request.getRequestDispatcher("GestioneTirocinio?azioneTirocinio=elencoRichiesteTirocinio");
+					view.forward(request, response);
+
+
+				} else if(utente.equals("impiegato")){
+					int id = Integer.parseInt((String) request.getParameter("id"));
+					TirocinioBean tirocinio = new TirocinioBean();
+					tirocinio.setId(id);
+					tirocinio = richiesta.richiestaTirocinio(tirocinio);
+					tirocinio.setUrl("pdf/" + nomeFile);
+					tirocinio.setConvalidaRichiesta(true);
+					documento.UploadTirocinio(tirocinio);
+					
+					request.getSession().setAttribute("tirocinio", tirocinio);
+					
+					RequestDispatcher view = request.getRequestDispatcher("GestioneTirocinio?azioneTirocinio=elencoRichiesteTirocinio");
+					view.forward(request, response);
+
+
 				}
 				else {
 					response.setContentType("text/html;charset=ISO-8859-1");
