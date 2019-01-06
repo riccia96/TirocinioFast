@@ -110,7 +110,12 @@ TirocinioBean tirocinio = new TirocinioBean();
 	  }
 	  %>
   <tr>
-    <td><a href="GestioneTirocinio?azioneTirocinio=compilaAzienda&idTiro=<%=tirocinio.getId() %>&jsp=elenco">RichiestaN.<%=tirocinio.getId() %></a></td>
+  <% if(tirocinio.getPeriodoTirocinio().equals("")){ %>
+    <td><a href="GestioneTirocinio?azioneTirocinio=compilaAzienda&idTiro=<%=tirocinio.getId() %>">RichiestaN.<%=tirocinio.getId() %></a></td>
+    <% }
+    else { %>
+    <td><a href="GestioneTirocinio?azioneTirocinio=compilato&idTiro=<%=tirocinio.getId() %>">RichiestaN.<%=tirocinio.getId() %></a></td>
+    <% } %>
     <td><%=studente.getCognome() +  " " + studente.getNome() %></td>
     <td>Prof/Prof.ssa <%=tutor.getCognome() + " " + tutor.getNome() %></td>
     <%if (tirocinio.isConvalidaAzienda()==false){ %>
