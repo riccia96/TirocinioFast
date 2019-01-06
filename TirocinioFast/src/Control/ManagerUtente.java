@@ -84,6 +84,14 @@ public class ManagerUtente {
 		return aziende;
 	}
 	
+	public List<TutorBean> getTutorAccademici() throws SQLException{
+		TutorDAO tDAO = new TutorDAO();
+		List<TutorBean> tutorAccademici = new ArrayList<TutorBean>();
+		tutorAccademici.addAll(tDAO.doRetrieveAll());
+		
+		return tutorAccademici;
+	}
+	
 	public List<ImpiegatoBean> getImpiegati() throws SQLException{
 		ImpiegatoDAO iDAO = new ImpiegatoDAO();
 		List<ImpiegatoBean> impiegati = new ArrayList<ImpiegatoBean>();
@@ -92,11 +100,4 @@ public class ManagerUtente {
 		return impiegati;
 	}
 	
-	public List<TutorBean> getTutorAccademici() throws SQLException{
-		TutorDAO tDAO = new TutorDAO();
-		List<TutorBean> tutorAccademici = new ArrayList<TutorBean>();
-		tutorAccademici.addAll(tDAO.doRetrieveAll());
-		
-		return tutorAccademici;
-	}
 }

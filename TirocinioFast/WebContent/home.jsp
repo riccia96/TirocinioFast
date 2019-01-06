@@ -28,7 +28,7 @@
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
-<body>
+<body> 
 
 	<%@include file="navbar.jsp"%>
 

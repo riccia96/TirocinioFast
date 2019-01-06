@@ -1,9 +1,6 @@
-<%@page import="Bean.ImpiegatoBean"%>
-<%@page import="Bean.TutorBean"%>
-<%@page import="Bean.AziendaBean"%>
-<%@page import="Bean.StudenteBean"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-pageEncoding="ISO-8859-1"%>
+pageEncoding="ISO-8859-1" import = "Bean.*"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -18,8 +15,8 @@ pageEncoding="ISO-8859-1"%>
 
 <ul id="menu">
 <li><a href="index.jsp">Home</a></li>
-<li><a href="registraAzienda.jsp">Registra azienda</a></li>
 <li><a href="registraStudente.jsp">Registra studente</a></li>
+<li><a href="registraAzienda.jsp">Registra azienda</a></li>
 </ul>
 
 <div style="margin-left:25%;width: 700px;">

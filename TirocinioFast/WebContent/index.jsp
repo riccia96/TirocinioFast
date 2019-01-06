@@ -14,8 +14,8 @@ pageEncoding="ISO-8859-1"%>
 
 <ul id="menu">
 <li><a href="index.jsp">Home</a></li>
-<li><a href="registraAzienda.jsp">Registra azienda</a></li>
 <li><a href="registraStudente.jsp">Registra studente</a></li>
+<li><a href="registraAzienda.jsp">Registra azienda</a></li>
 </ul>
 
 <div style="margin-left:25%;width: 700px;">

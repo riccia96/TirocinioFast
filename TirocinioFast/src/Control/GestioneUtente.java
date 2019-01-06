@@ -419,6 +419,7 @@ public class GestioneUtente extends HttpServlet {
 			}
 		}
 
+		
 		if(azioneUtente.equals("areaPersonale")) {
 			
 			if(!(request.getSession().getAttribute("tipoUtente").equals("studente"))){

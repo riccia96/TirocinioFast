@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 <body>
-
+ 
 <%@include file = "navbar.jsp" %>
 
 <%@include file = "menu.jsp" %>

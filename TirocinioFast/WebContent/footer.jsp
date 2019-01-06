@@ -6,13 +6,13 @@ pageEncoding="ISO-8859-1"%>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Footer</title>
 <link rel="stylesheet" href="css/footer.css">
-<link rel="stylesheet" href="css/bootstrap.min.css">
+
 </head>
 <body>
 
 <footer class="footer">
-	<a href="#"><img src="img/logo2.png" alt="unisa" width="400px" height="100px" ></a>
+	<a href="#"><img src="img/logo2.png" alt="unisa" width="380px" height="98px" ></a>
 </footer>
-
+ 
 </body>
 </html>
