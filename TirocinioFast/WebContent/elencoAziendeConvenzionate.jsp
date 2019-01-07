@@ -20,6 +20,8 @@
 	<%@include file="menu.jsp"%>
 
 	<%@include file="ricerca.jsp"%>
+	
+	<%if (convenzioni.size() > 0){ %>
 
 <div id = "contenitore" style="margin-left: 25%;" >
 <table>
@@ -44,6 +46,12 @@
 <%} %>
 </div>
 </table>
+<%} else { %>
+ <script type="text/javascript">
+ var r=alert("Non sono ancora presenti aziende convenzionate");
+ window.location.href = 'home.jsp';
+ </script>
+ <% } %>
 <%@include file="footer.jsp"%>
 
 	<script

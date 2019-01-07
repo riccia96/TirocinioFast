@@ -185,8 +185,12 @@ TirocinioBean tirocinio = new TirocinioBean();
   </table>
  <%} 
   } 
- }%>
-  
+ } else {%>
+  <script type="text/javascript">
+ var r=alert("Non sono presenti tirocini conclusi");
+ window.location.href = 'home.jsp';
+ </script>
+  <% } %>
 
 <%@include file = "footer.jsp" %>
 

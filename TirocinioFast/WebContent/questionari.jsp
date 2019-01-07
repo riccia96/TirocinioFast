@@ -78,7 +78,12 @@ QuestionarioAziendaBean qa = new QuestionarioAziendaBean();%>
   </tr>
   <% } %>
 </table>
-<% 	}
+<% 	} else { %>
+	 <script type="text/javascript">
+  		var r=alert("Non sono presenti questionari da compilare");
+ 		window.location.href = 'home.jsp';
+ 	 </script>
+<%}
 } 
 
 if (tipoUm.equals("azienda")){ 
@@ -128,7 +133,12 @@ if (tipoUm.equals("azienda")){
   </tr>
   <% } %>
 </table>
-<% 	} 
+<% 	}  else { %>
+<script type="text/javascript">
+	var r=alert("Non sono presenti questionari da compilare");
+	window.location.href = 'home.jsp';
+</script>
+<%} 
 } %>
 
 <%@include file = "footer.jsp" %>

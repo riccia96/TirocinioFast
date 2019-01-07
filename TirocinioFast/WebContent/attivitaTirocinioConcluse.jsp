@@ -66,7 +66,13 @@ TirocinioBean tirocinio = new TirocinioBean();
   </tr>
   <%} %>
   </table>
-<% } %>
+<% } 
+else { %>
+ <script type="text/javascript">
+  var r=alert("Non sono presenti attività di tirocinio concluse da visualizzare");
+ window.location.href = 'home.jsp';
+ </script> 
+ <% } %>
 <%@include file = "footer.jsp" %>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

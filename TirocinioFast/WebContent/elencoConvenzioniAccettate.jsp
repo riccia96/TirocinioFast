@@ -45,6 +45,11 @@
   </tr>
   <% } %>
   </table>
+<% } else {%>
+ <script type="text/javascript">
+ var r=alert("Non sono presenti convenzioni accettate da visualizzare");
+ window.location.href = 'home.jsp';
+ </script>
 <% } %>
 
 <%@include file = "footer.jsp" %>
