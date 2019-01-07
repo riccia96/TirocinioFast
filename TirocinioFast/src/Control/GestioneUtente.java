@@ -319,8 +319,8 @@ public class GestioneUtente extends HttpServlet {
 				if(!(studenti.equals(null))) {
 					for(StudenteBean s : studenti) {
 						if(s.getEmail().equals(email)) {
-							response.setContentType("text/html;charset=ISO-8859-1");
-							response.getWriter().write("e-mail gia' esistente");
+							RequestDispatcher view = request.getRequestDispatcher("emailEsistente.jsp");
+							view.forward(request, response);
 						}
 						if(s.getMatricola().equals(matricola)) {
 							response.setContentType("text/html;charset=ISO-8859-1");
