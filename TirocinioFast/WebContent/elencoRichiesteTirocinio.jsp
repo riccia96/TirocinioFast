@@ -241,8 +241,12 @@ TirocinioBean tirocinio = new TirocinioBean();
   <%} %>
   </table>
  <%}
- }%>
-  
+ } else { %>
+  <script type="text/javascript">
+  var r=alert("Non sono presenti richieste di tirocinio");
+  window.location.href = 'home.jsp';
+ </script>
+ <% } %> 
 
 <%@include file = "footer.jsp" %>
 

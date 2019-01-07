@@ -233,7 +233,7 @@ public class GestioneUtente extends HttpServlet {
 							if(!(request.getSession().getAttribute("tipoUtente").equals("tutor"))) {
 								impiegato = (ImpiegatoBean) request.getSession().getAttribute("utenteSessione");
 								impiegato.setPassword(password);
-								utente.impostaPasswordImpiegato(impiegato);
+								utente.aggiornaImpiegato(impiegato);
 
 								request.getSession().removeAttribute("tipoUtente");
 								request.getSession().removeAttribute("utenteSessione");
@@ -243,7 +243,7 @@ public class GestioneUtente extends HttpServlet {
 							} else {
 								tutor = (TutorBean) request.getSession().getAttribute("utenteSessione");
 								tutor.setPassword(password);
-								utente.impostaPasswordTutor(tutor);
+								utente.aggiornaTutor(tutor);
 
 								request.getSession().removeAttribute("tipoUtente");
 								request.getSession().removeAttribute("utenteSessione");
@@ -254,7 +254,7 @@ public class GestioneUtente extends HttpServlet {
 						} else {
 							azienda = (AziendaBean) request.getSession().getAttribute("utenteSessione");
 							azienda.setPassword(password);
-							utente.impostaPasswordAzienda(azienda);
+							utente.aggiornaAzienda(azienda);
 
 							request.getSession().removeAttribute("tipoUtente");
 							request.getSession().removeAttribute("utenteSessione");
@@ -265,7 +265,7 @@ public class GestioneUtente extends HttpServlet {
 					} else {
 						studente = (StudenteBean) request.getSession().getAttribute("utenteSessione");
 						studente.setPassword(password);
-						utente.impostaPasswordStudente(studente);
+						utente.aggiornaStudente(studente);
 
 						request.getSession().removeAttribute("tipoUtente");
 						request.getSession().removeAttribute("utenteSessione");
@@ -319,8 +319,8 @@ public class GestioneUtente extends HttpServlet {
 				if(!(studenti.equals(null))) {
 					for(StudenteBean s : studenti) {
 						if(s.getEmail().equals(email)) {
-							RequestDispatcher view = request.getRequestDispatcher("emailEsistente.jsp");
-							view.forward(request, response);
+							response.setContentType("text/html;charset=ISO-8859-1");
+							response.getWriter().write("email gia' esistente");
 						}
 						if(s.getMatricola().equals(matricola)) {
 							response.setContentType("text/html;charset=ISO-8859-1");
@@ -340,7 +340,7 @@ public class GestioneUtente extends HttpServlet {
 					response.setContentType("text/html;charset=ISO-8859-1");
 					response.getWriter().write("password non corrispondenti");
 				} else {
-					utente.registraStudente(studente);
+					utente.salvaStudente(studente);
 
 					request.getSession().setAttribute("utenteSessione", studente);
 					request.getSession().setAttribute("tipoUtente", "studente");
@@ -406,7 +406,7 @@ public class GestioneUtente extends HttpServlet {
 					response.setContentType("text/html;charset=ISO-8859-1");
 					response.getWriter().write("password non corrispondenti");
 				} else {
-					utente.registraAzienda(azienda);
+					utente.salvaAzienda(azienda);
 
 					request.getSession().setAttribute("utenteSessione", azienda);
 					request.getSession().setAttribute("tipoUtente", "azienda");
@@ -461,7 +461,7 @@ public class GestioneUtente extends HttpServlet {
 				azienda.setDescrizione(descrizione);
 				azienda.setLogo(pathLogo);
 
-				utente.completaSchedaAzienda(azienda);
+				utente.aggiornaAzienda(azienda);
 
 				RequestDispatcher view = request.getRequestDispatcher("home.jsp");
 				view.forward(request, response);

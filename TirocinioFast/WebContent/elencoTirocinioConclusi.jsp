@@ -72,74 +72,7 @@ TirocinioBean tirocinio = new TirocinioBean();
   </table>
   <%}
  
- if (tipoUm.equals("azienda")){ %>
-<table style="margin-left: 25%; width: 1000px;">
-  <tr>
-    <th style="text-align: center;">Attivit&agrave; di Tirocinio</th>
-    <th style="text-align: center;">Studente</th>
-    <th style="text-align: center;">Tutor</th>
-  </tr>
-  <% for (int i = 0; i < tirocini.size(); i++){
-	  
-	  for (int s=0; s<studenti.size(); s++){
-		  studente = studenti.get(s);
-		  
-		  if (tirocini.get(i).getStudente().equals(studente.getUsername())){
-			  break;
-		  }
-	  }
-	  
-	  for (int t = 0; t < tutors.size(); t++){
-		  tutor = tutors.get(t);
-		  
-		  if(tirocini.get(i).getTutorAccademico().equals(tutor.getUsername())){
-			  break;
-		  }
-	  }
-	  %>
-  <tr>
-    <td><a href="#">RichiestaN.<%=tirocinio.getId() %></a></td>
-    <td><%=studente.getCognome() +  " " + studente.getNome() %></td>
-    <td>Prof/Prof.ssa <%=tutor.getCognome() + " " + tutor.getNome() %></td>
-  </tr>
-  <%} %>
-</table>
-<%} 
- 
- if (tipoUm.equals("tutor")) { %>
-<table style="margin-left: 25%; width: 1000px;">
-  <tr>
-    <th style="text-align: center;">Attivit&agrave; di Tirocinio</th>
-    <th style="text-align: center;">Studente</th>
-    <th style="text-align: center;">Azienda</th>
-  </tr>
-  <% for (int i = 0; i < tirocini.size(); i++){
-	  tirocinio = tirocini.get(i);
-	  for (int s=0; s<studenti.size(); s++){
-		  studente = studenti.get(s);
-		  
-		  if (tirocinio.getStudente().equals(studente.getUsername())){
-			  break;
-		  }
-	  }
-	  
-	  for (int a = 0; a < aziende.size(); a++){
-		  azienda = aziende.get(a);
-		  
-		  if (tirocinio.getAzienda().equals(azienda.getUsername())){
-			  break;
-		  }
-	  } %>
-  <tr>
-    <td><a href="#">RichiestaN.<%=tirocinio.getId() %></a></td>
-    <td><%=studente.getCognome() + " " + studente.getNome() %></td>
-    <td><%=azienda.getNome() %></td>
-  </tr>
-  <%} %>
-  </table>
-  <%}
- 
- if (tipoUm.equals("studente")){ %>
+  if (tipoUm.equals("studente")){ %>
  <table style="margin-left: 25%; width: 1000px;">
   <tr>
     <th style="text-align: center;">Richiesta di Inizio Attivit&agrave; di Tirocinio</th>
@@ -185,8 +118,12 @@ TirocinioBean tirocinio = new TirocinioBean();
   </table>
  <%} 
   } 
- }%>
-  
+ } else {%>
+  <script type="text/javascript">
+ var r=alert("Non sono presenti tirocini conclusi");
+ window.location.href = 'home.jsp';
+ </script>
+  <% } %>
 
 <%@include file = "footer.jsp" %>
 

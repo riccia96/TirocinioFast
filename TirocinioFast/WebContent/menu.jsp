@@ -44,7 +44,7 @@
 		<li><a href="GestioneUtente?azioneUtente=areaPersonale">Area Personale</a></li>
 		<li><a href="GestioneConvenzione?azioneConvenzione=apriForm">Convenzione</a></li>
 		<li><a href="GestioneTirocinio?azioneTirocinio=elencoRichiesteTirocinio">Richieste tirocinio</a></li>
-		<li><a href="GestioneTirocinio?azioneTirocinio=attivitaConvalidate">Tirocini conclusi</a></li>
+		<li><a href="#">Questionari</a>
 		<li><a href="GestioneUtente?azioneUtente=logout">Logout</a></li>
 		<%
 			}
@@ -52,7 +52,6 @@
 		%>
 		<li><a href="GestioneUtente?azioneUtente=areaPersonale">Area Personale</a></li>
 		<li><a href="GestioneTirocinio?azioneTirocinio=elencoRichiesteTirocinio">Richieste tirocinio</a></li>
-		<li><a href="GestioneTirocinio?azioneTirocinio=attivitaConvalidate">Tirocini conclusi</a></li>
 		<li><a href="GestioneUtente?azioneUtente=logout">Logout</a></li>
 		<%
 			}
