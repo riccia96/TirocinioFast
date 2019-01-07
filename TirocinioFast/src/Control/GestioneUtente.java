@@ -71,7 +71,7 @@ public class GestioneUtente extends HttpServlet {
 						if(t.getUsername().equals("")) {
 							if(i.getUsername().equals("")) {
 								response.setContentType("text/html;charset=ISO-8859-1");
-								response.getWriter().write("username no1");
+								response.getWriter().write("username no");
 							}else {
 								if(i.getPassword().equals(password)) {
 									request.getSession().setAttribute("utenteSessione", utente.getImpiegato(impiegato));
@@ -81,7 +81,7 @@ public class GestioneUtente extends HttpServlet {
 									view.forward(request, response);
 								}else {
 									response.setContentType("text/html;charset=ISO-8859-1");
-									response.getWriter().write("password no2");
+									response.getWriter().write("password no");
 								}
 							}
 						}else {
@@ -93,7 +93,7 @@ public class GestioneUtente extends HttpServlet {
 								view.forward(request, response);
 							}else {
 								response.setContentType("text/html;charset=ISO-8859-1");
-								response.getWriter().write("password no3");
+								response.getWriter().write("password no");
 							}
 						}
 					}else {
@@ -105,7 +105,7 @@ public class GestioneUtente extends HttpServlet {
 							view.forward(request, response);
 						}else {
 							response.setContentType("text/html;charset=ISO-8859-1");
-							response.getWriter().write("password no4");
+							response.getWriter().write("password no");
 						}
 					}
 				}else {
@@ -118,7 +118,7 @@ public class GestioneUtente extends HttpServlet {
 						view.forward(request, response);
 					}else {
 						response.setContentType("text/html;charset=ISO-8859-1");
-						response.getWriter().write("password no5");
+						response.getWriter().write("password no");
 					}
 				}
 			} catch (SQLException e) {
@@ -446,12 +446,7 @@ public class GestioneUtente extends HttpServlet {
 
 		}
 
-		if(azioneUtente.equals("completaScheda")) {
-			
-			RequestDispatcher view = request.getRequestDispatcher("completaScheda.jsp");
-			view.forward(request, response);
-		}
-
+		
 		if(azioneUtente.equals("salvaScheda")) {
 			try {
 				String descrizione = request.getParameter("descrizione");

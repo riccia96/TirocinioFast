@@ -10,11 +10,12 @@
 </head>
 <body>
 
-<form name="ricerca" method="post" action="/search" style="border: 1px solid orange; margin-left: 25%;">
+<form name="ricerca" method="post" action="GestioneTirocinio" style="border: 1px solid orange; margin-left: 25%;">
 <label>Cerca azienda per nome e/o sede <br>
 <input type="search" autocomplete="on" placeholder="Nome" name="nomeAzienda">
 <input type="search" autocomplete="on" placeholder="Sede Azienda" name="sedeAzienda">
 <input type="image" name="submit" src="img\icona-ricerca-dati.png" height="40px" width="40px">
+<input type="hidden" name="azioneTirocinio" value="ricercaAzienda">
 </label>
 </form>
 

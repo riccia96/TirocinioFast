@@ -37,8 +37,8 @@
 	<%
 		if (tipoUh.equals("studente")) {
 	%>
-	<a href="index.jsp" style="margin-left: 50%"><img alt="Logo"
-		src="img\avatar-default-icon.png" width="150px" height="150px"></a>
+	<img style="margin-left: 50%" alt="Logo"
+		src="img\avatar-default-icon.png" width="150px" height="150px">
 
 	<table style="margin-left: 30%; width: 700px;">
 		<tr>
@@ -87,8 +87,8 @@
 		if (tipoUh.equals("azienda")) {
 	%>
 	 <%if(!(ah.getLogo().equals(""))){%>
- 	<a href="index.jsp" style="margin-left: 35%"><img alt="Logo"
-		src="<%=ah.getLogo()%>" width="500px" height="300px"></a>
+ 	<img style="margin-left: 35%" alt="Logo"
+		src="<%=ah.getLogo()%>" width="500px" height="300px">
  <%} %>
 	<table style="margin-left: 30%; width: 700px;">
 		<tr>
@@ -117,19 +117,18 @@
 		</tr>
 	</table>
 <% if(ah.getLogo().equals("")){ %>
-	<div class="new"><form action="GestioneUtente" method="POST">
+	<div class="new">
 	
-		<button name="azioneUtente" value="completaScheda"
-			id="visualizzaSchedaButton" class=" button" type="submit">Scheda
-			azienda</button></form>
+		<a href="completaScheda.jsp">
+		<button id="visualizzaSchedaButton" class=" button" type="submit">Scheda azienda</button></a>
 	</div>
 	<%} %>
 	<%
 		}
 		if (tipoUh.equals("tutor")) {
 	%>
-	<a href="index.jsp" style="margin-left: 50%"><img alt="Logo"
-		src="img\avatar-default-icon.png" width="150px" height="150px"></a>
+	<img style="margin-left: 50%" alt="Logo"
+		src="img\avatar-default-icon.png" width="150px" height="150px">
 
 	<table style="margin-left: 30%; width: 700px;">
 		<tr>
@@ -151,8 +150,8 @@
 		if (tipoUh.equals("impiegato")) {
 	%>
 
-	<a href="index.jsp" style="margin-left: 50%"><img alt="Logo"
-		src="img\avatar-default-icon.png" width="150px" height="150px"></a>
+	<img style="margin-left: 50%" alt="Logo"
+		src="img\avatar-default-icon.png" width="150px" height="150px">
 
 	<table style="margin-left: 30%; width: 700px;">
 		<tr>

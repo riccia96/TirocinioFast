@@ -420,6 +420,13 @@ public class GestioneTirocinio extends HttpServlet {
 			}
 		}
 
+		
+		
+		
+		
+		//ok
+		
+		
 		if(azioneTirocinio.equals("elencoAziende")) {
 			try {
 				List<AziendaBean> aziendeConv = new ArrayList<AziendaBean>();
@@ -456,6 +463,12 @@ public class GestioneTirocinio extends HttpServlet {
 			}
 		}
 
+		
+		
+		
+		
+		
+		
 		if(azioneTirocinio.equals("schedaAzienda")) {
 			try {
 
@@ -474,6 +487,9 @@ public class GestioneTirocinio extends HttpServlet {
 			}
 		}
 
+		
+		
+		//ok
 		if(azioneTirocinio.equals("ricercaAzienda")) {
 			try {
 				List<AziendaBean> aziende = new ArrayList<AziendaBean>();
@@ -502,7 +518,7 @@ public class GestioneTirocinio extends HttpServlet {
 
 				request.getSession().setAttribute("listaAziende", listaAziende);
 
-				RequestDispatcher view = request.getRequestDispatcher("aziendeConvenzionate.jsp");
+				RequestDispatcher view = request.getRequestDispatcher("elencoAziendeConvenzionate.jsp");
 				view.forward(request, response);
 
 			} catch (SQLException e) {
@@ -510,6 +526,8 @@ public class GestioneTirocinio extends HttpServlet {
 			}
 		}
 
+		
+		
 		if(azioneTirocinio.equals("attivitaConvalidate")){
 			try{
 				List<TirocinioBean> tirocini = new ArrayList<TirocinioBean>();
