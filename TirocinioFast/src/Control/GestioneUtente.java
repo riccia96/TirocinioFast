@@ -215,7 +215,8 @@ public class GestioneUtente extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-
+//<script src="js/bootstrap.min.js"></script>
+//<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 		if(azioneUtente.equals("impostaPassword")) {
 
 			String password = request.getParameter("password");
