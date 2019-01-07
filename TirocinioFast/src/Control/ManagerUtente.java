@@ -35,39 +35,64 @@ public class ManagerUtente {
 		return iDAO.doRetrieveByKey(impiegato);
 	}
 	
-	public int registraStudente(StudenteBean studente) throws SQLException{
+	public int salvaStudente(StudenteBean studente) throws SQLException{
 		StudenteDAO sDAO = new StudenteDAO();
 		return sDAO.doSave(studente);
 	}
 	
-	public int registraAzienda(AziendaBean azienda) throws SQLException{
+	public int salvaAzienda(AziendaBean azienda) throws SQLException{
 		AziendaDAO aDAO = new AziendaDAO();
 		return aDAO.doSave(azienda);
 	}
 	
-	public boolean impostaPasswordStudente(StudenteBean studente) throws SQLException{
+	public int salvaTutor(TutorBean tutor) throws SQLException{
+		TutorDAO tDAO = new TutorDAO();
+		return tDAO.doSave(tutor);
+	}
+	
+	public int salvaImpiegato(ImpiegatoBean impiegato) throws SQLException{
+		ImpiegatoDAO iDAO = new ImpiegatoDAO();
+		return iDAO.doSave(impiegato);
+	}
+	
+	public boolean eliminaStudente(StudenteBean studente) throws SQLException{
+		StudenteDAO sDAO = new StudenteDAO();
+		return sDAO.doDelete(studente);
+	}
+	
+	public boolean eliminaAzienda(AziendaBean azienda) throws SQLException{
+		AziendaDAO aDAO = new AziendaDAO();
+		return aDAO.doDelete(azienda);
+	}
+	
+	public boolean eliminaTutor(TutorBean tutor) throws SQLException{
+		TutorDAO tDAO = new TutorDAO();
+		return tDAO.doDelete(tutor);
+	}
+	
+	public boolean eliminaImpiegato(ImpiegatoBean impiegato) throws SQLException{
+		ImpiegatoDAO iDAO = new ImpiegatoDAO();
+		return iDAO.doDelete(impiegato);
+	}
+	
+	public boolean aggiornaStudente(StudenteBean studente) throws SQLException{
 		StudenteDAO sDAO = new StudenteDAO();
 		return sDAO.doUpdate(studente);
 	}
 	
-	public boolean impostaPasswordAzienda(AziendaBean azienda) throws SQLException{
+	public boolean aggiornaAzienda(AziendaBean azienda) throws SQLException{
 		AziendaDAO aDAO = new AziendaDAO();
 		return aDAO.doUpdate(azienda);
 	}
 
-	public boolean impostaPasswordTutor(TutorBean tutor) throws SQLException{
+	public boolean aggiornaTutor(TutorBean tutor) throws SQLException{
 		TutorDAO tDAO = new TutorDAO();
 		return tDAO.doUpdate(tutor);
 	}
 	
-	public boolean impostaPasswordImpiegato(ImpiegatoBean impiegato) throws SQLException{
+	public boolean aggiornaImpiegato(ImpiegatoBean impiegato) throws SQLException{
 		ImpiegatoDAO iDAO = new ImpiegatoDAO();
 		return iDAO.doUpdate(impiegato);
-	}
-	
-	public boolean completaSchedaAzienda(AziendaBean azienda) throws SQLException{
-		AziendaDAO aDAO = new AziendaDAO();
-		return aDAO.doUpdate(azienda);
 	}
 	
 	public List<StudenteBean> getStudenti() throws SQLException{
