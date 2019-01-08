@@ -171,8 +171,9 @@ public class GestioneUtente extends HttpServlet {
 					if(a.getUsername().equals("")) {
 						if(t.getUsername().equals("")) {
 							if(i.getUsername().equals("")) {
-								response.getWriter().write("username no");
-							}else {
+								RequestDispatcher view = request.getRequestDispatcher("utenteNonTrovato.jsp");
+								view.forward(request, response);
+								}else {
 								if(utente.getTutor(tutor).getDomanda().equals(risposta)){
 									request.getSession().setAttribute("utenteSessione", utente.getTutor(tutor));
 									request.getSession().setAttribute("tipoUtente", "tutor");
@@ -180,8 +181,8 @@ public class GestioneUtente extends HttpServlet {
 									RequestDispatcher view = request.getRequestDispatcher("impostaPassword.jsp");
 									view.forward(request, response);
 								}else {
-									response.setContentType("text/html;charset=ISO-8859-1");
-									response.getWriter().write("risposta errata");
+									RequestDispatcher view = request.getRequestDispatcher("rispostaSbagliata.jsp");
+									view.forward(request, response);
 								}
 							}
 						}else {
@@ -192,8 +193,8 @@ public class GestioneUtente extends HttpServlet {
 								RequestDispatcher view = request.getRequestDispatcher("impostaPassword.jsp");
 								view.forward(request, response);
 							}else {
-								response.setContentType("text/html;charset=ISO-8859-1");
-								response.getWriter().write("risposta errata");
+								RequestDispatcher view = request.getRequestDispatcher("rispostaSbagliata.jsp");
+								view.forward(request, response);
 							}
 						}
 					}else {
@@ -204,8 +205,8 @@ public class GestioneUtente extends HttpServlet {
 							RequestDispatcher view = request.getRequestDispatcher("impostaPassword.jsp");
 							view.forward(request, response);
 						}else {
-							response.setContentType("text/html;charset=ISO-8859-1");
-							response.getWriter().write("risposta errata");
+							RequestDispatcher view = request.getRequestDispatcher("rispostaSbagliata.jsp");
+							view.forward(request, response);
 						}
 					}
 				}else {
@@ -216,7 +217,7 @@ public class GestioneUtente extends HttpServlet {
 						RequestDispatcher view = request.getRequestDispatcher("impostaPassword.jsp");
 						view.forward(request, response);
 					}else {
-						RequestDispatcher view = request.getRequestDispatcher("rispostaErrata.jsp");
+						RequestDispatcher view = request.getRequestDispatcher("rispostaSbagliata.jsp");
 						view.forward(request, response);
 					}
 				}
@@ -286,12 +287,12 @@ public class GestioneUtente extends HttpServlet {
 						}
 					}
 					else {
-						RequestDispatcher view = request.getRequestDispatcher("PasswordNonCorrispondenti.jsp");
+						RequestDispatcher view = request.getRequestDispatcher("passwordNonCorrispondenti.jsp");
 						view.forward(request, response);;
 					}
 				}
 				else {
-					RequestDispatcher view = request.getRequestDispatcher("parametriSbagliati.jsp");
+					RequestDispatcher view = request.getRequestDispatcher("formatoSbagliatoI.jsp");
 					view.forward(request, response);
 				}
 			}
@@ -360,7 +361,7 @@ public class GestioneUtente extends HttpServlet {
 							}
 						}
 						if(!(password.equals(conferma))){
-							RequestDispatcher view = request.getRequestDispatcher("PasswordNonCorrispondenti.jsp");
+							RequestDispatcher view = request.getRequestDispatcher("passwordNonCorrispondenti.jsp");
 							view.forward(request, response);
 								} 
 						
@@ -371,7 +372,7 @@ public class GestioneUtente extends HttpServlet {
 						view.forward(request, response);
 						
 					} else {
-							RequestDispatcher view = request.getRequestDispatcher("formatoSbagliato.jsp");
+							RequestDispatcher view = request.getRequestDispatcher("formatoSbagliatoI.jsp");
 							view.forward(request, response);
 					}
 			}
@@ -446,7 +447,7 @@ public class GestioneUtente extends HttpServlet {
 												}
 
 												else{
-													RequestDispatcher view = request.getRequestDispatcher("formatoSbagliato.jsp");
+													RequestDispatcher view = request.getRequestDispatcher("formatoSbagliatoI.jsp");
 													view.forward(request, response);
 												}
 			}

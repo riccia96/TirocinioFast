@@ -10,7 +10,7 @@
 
 <body>
 <div class="cover">
-        <h1>Nessun elemento da visualizzare! </h1>
+        <h1>Il formato dei campi inseriti non è corretto </h1>
         <p><a href="home.jsp">Torna alla home.</a></p>
     </div>
 </body>
