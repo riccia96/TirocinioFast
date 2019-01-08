@@ -77,7 +77,9 @@ public class GestioneTirocinio extends HttpServlet {
 				} else {
 					handicap = false;
 				}
-
+				
+				if(annoAccademico.length()>4 && annoAccademico.length()<11){
+										
 				tirocinio.setStudente(studente.getUsername());
 				tirocinio.setAzienda(aziendaTirocinio);
 				tirocinio.setTutorAccademico(tutorAccademico);
@@ -90,7 +92,13 @@ public class GestioneTirocinio extends HttpServlet {
 				RequestDispatcher view = request.getRequestDispatcher("home.jsp");
 				view.forward(request, response);
 
-			} catch (SQLException e) {
+			}
+				else{
+					response.setContentType("text/html;charset=ISO-8859-1");
+					response.getWriter().write("formato aa sbagliato");
+				}
+			}
+			catch (SQLException e) {
 
 				e.printStackTrace();
 			}
@@ -267,7 +275,13 @@ public class GestioneTirocinio extends HttpServlet {
 				tirocinio.setPeriodoTirocinio(periodo);
 				tirocinio.setObiettivoTirocinio(obiettivi);
 				tirocinio.setFacilitazioni(facilitazioni);
-
+				
+				if(sede.length()>4 && sede.length()<101){
+					if(tempi.length()>4 && tempi.length()<51){
+						if (periodo.length()>4 && periodo.length()<21){
+							if(obiettivi.length()>4 && obiettivi.length()<101){
+								if(facilitazioni.length()>4 && facilitazioni.length()<1001){
+									
 				richiesta.inoltraRichiesta(tirocinio);
 
 				request.getSession().setAttribute("aziendaTirocinio", azienda);
@@ -276,7 +290,33 @@ public class GestioneTirocinio extends HttpServlet {
 				RequestDispatcher view = request.getRequestDispatcher("GestioneTirocinio?azioneTirocinio=elencoRichiesteTirocinio");
 				view.forward(request, response);
 
-			} catch (SQLException e) {
+			} 
+				else{
+					response.setContentType("text/html;charset=ISO-8859-1");
+					response.getWriter().write("formato facilitazioni sbagliato");
+				}
+			}
+				else{
+					response.setContentType("text/html;charset=ISO-8859-1");
+					response.getWriter().write("formato obiettivi sbagliato");
+				}
+			}
+				else{
+					response.setContentType("text/html;charset=ISO-8859-1");
+					response.getWriter().write("formato periodo sbagliato");
+				}
+			}
+				else{
+					response.setContentType("text/html;charset=ISO-8859-1");
+					response.getWriter().write("formato tempi sbagliato");
+				}
+			}
+				else{
+					response.setContentType("text/html;charset=ISO-8859-1");
+					response.getWriter().write("formato sede sbagliato");
+				}
+			}
+			catch (SQLException e) {
 
 				e.printStackTrace();
 			}
@@ -419,12 +459,6 @@ public class GestioneTirocinio extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-
-		
-		
-		
-		
-		//ok
 		
 		
 		if(azioneTirocinio.equals("elencoAziende")) {
@@ -464,11 +498,6 @@ public class GestioneTirocinio extends HttpServlet {
 		}
 
 		
-		
-		
-		
-		
-		
 		if(azioneTirocinio.equals("schedaAzienda")) {
 			try {
 
@@ -496,7 +525,9 @@ public class GestioneTirocinio extends HttpServlet {
 
 				String nome = request.getParameter("nomeAzienda").toLowerCase();
 				String sede = request.getParameter("sedeAzienda").toLowerCase();
-
+				
+				if(nome.length()>2 && nome.length()<31){
+					if(sede.length()>3 && sede.length()<31){
 
 				aziende.addAll(utente.getAziende());
 				List<AziendaBean> listaAziende = new ArrayList<AziendaBean>();
@@ -520,8 +551,20 @@ public class GestioneTirocinio extends HttpServlet {
 
 				RequestDispatcher view = request.getRequestDispatcher("elencoAziendeConvenzionate.jsp");
 				view.forward(request, response);
-
-			} catch (SQLException e) {
+	
+			}
+					
+					else{
+						response.setContentType("text/html;charset=ISO-8859-1");
+						response.getWriter().write("formato nome sbagliato");
+					}
+				}
+				
+				else {
+					response.setContentType("text/html;charset=ISO-8859-1");
+					response.getWriter().write("formato geolocalizzazione sbaglato");
+				}
+			}catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}

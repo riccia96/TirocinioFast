@@ -44,6 +44,30 @@
 
 <%@include file = "footer.jsp" %>
 
+<script>
+$(document).ready(function(){
+	$("#compilazioneAziendaButton").click(function(){
+		
+		$.post("/TirocinioFast/GestioneTirocinio",
+				{
+					"azioneTirocinio" : "tirocinioDatiAzienda",
+				},
+				function(responseTxt, statusTxt, xhr){
+					if(responseTxt=="formato facilitazioni sbagliato")
+						alert("Il formato inserito nel campo 'Facilitazioni' non è corretto!");
+					if(responseTxt=="formato obiettivi sbagliato")
+						alert("Il formato inserito nel campo 'Obiettivi' non è corretto!");
+					if(responseTxt=="formato periodo sbagliato")
+						alert("Il formato inserito nel campo 'Periodo' non è corretto!");
+					if(responseTxt=="formato tempi sbagliato")
+						alert("Il formato inserito nel campo 'Tempi di accesso ai locali' non è corretto!");
+					if(responseTxt=="formato sede sbagliato")
+						alert("Il formato inserito nel campo 'Sede' non è corretto!");
+			});
+	});
+});
+</script>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 </body>

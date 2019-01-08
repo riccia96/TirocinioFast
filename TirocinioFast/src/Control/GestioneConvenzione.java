@@ -130,7 +130,14 @@ public class GestioneConvenzione extends HttpServlet {
 				convenzione.setEmailReferente(email);
 				convenzione.setAttivita(attivita);
 				convenzione.setTutorAccademico(docente);
-
+				
+				if(luogoNascitaR.length()>3 && luogoNascitaR.length()<31){
+					if(dataNascitaR.length()>7 && dataNascitaR.length()<15){
+						if (referente.length()>4 && referente.length()<51){
+							if(telefono.length()>6 && telefono.length()<14){
+								if(email.length()>4 && email.length()<31){
+									if(attivita.length()>24 && attivita.length()<1001){					
+					
 				documento.compilaConvenzione(convenzione);
 
 				request.getSession().setAttribute("azienda", azienda);
@@ -139,7 +146,40 @@ public class GestioneConvenzione extends HttpServlet {
 				RequestDispatcher view = request.getRequestDispatcher("convenzioneEsistente.jsp");
 				view.forward(request, response);
 
-			} catch (SQLException e) {
+			} 
+			
+				else {
+					response.setContentType("text/html;charset=ISO-8859-1");
+					response.getWriter().write("formato attivita sbagliato");
+				}
+			}
+				else{
+					response.setContentType("text/html;charset=ISO-8859-1");
+					response.getWriter().write("formato email sbagliato");
+				}
+			}
+				else {
+					response.setContentType("text/html;charset=ISO-8859-1");
+					response.getWriter().write("formato telefono sbagliato");
+				}
+			}
+				else {
+					response.setContentType("text/html;charset=ISO-8859-1");
+					response.getWriter().write("formato referente sbagliato");
+				}
+			}
+				else{
+					response.setContentType("text/html;charset=ISO-8859-1");
+					response.getWriter().write("formato data sbagliato");
+				}
+			}
+				else {
+					response.setContentType("text/html;charset=ISO-8859-1");
+					response.getWriter().write("formato luogo sbagliato");
+				}
+			}
+			
+			catch (SQLException e) {
 
 				e.printStackTrace();
 			}

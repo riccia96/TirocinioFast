@@ -49,7 +49,7 @@ $(document).ready(function(){
 				{
 					"azioneUtente" : "login",
 				},
-				function(responseTxt, statusTxt, xhr)({
+				function(responseTxt, statusTxt, xhr){
 					if(responseTxt=="password no")
 						alert("Password non corretta!");
 					if(responseTxt=="username no")
