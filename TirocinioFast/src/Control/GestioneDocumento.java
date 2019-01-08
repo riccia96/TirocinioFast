@@ -314,15 +314,23 @@ public class GestioneDocumento extends HttpServlet {
 		}
 
 		
-		if(azioneDocumento.equals("dowloadTirocinio")) {
+		if(azioneDocumento.equals("mostraDocumento")){
 			try {
+				int id = Integer.parseInt((String) request.getParameter("idT"));
+				TirocinioBean tirocinio = new TirocinioBean();
 				
+				tirocinio.setId(id);
+				tirocinio = richiesta.richiestaTirocinio(tirocinio);
+				
+				request.getSession().setAttribute("richiesta", tirocinio);
+				request.getSession().setAttribute("tipoDocumento", "tirocinio");
+				
+				RequestDispatcher view = request.getRequestDispatcher("mostraPDF.jsp");
+				view.forward(request, response);
 			} catch (SQLException e) {
-
 				e.printStackTrace();
 			}
 		}
-
 
 		if(azioneDocumento.equals("uploadTirocinio")) {
 			try {
@@ -402,14 +410,7 @@ public class GestioneDocumento extends HttpServlet {
 			}
 		}
 		
-		if(azioneDocumento.equals("dowloadConvenzione")) {
-			try {
-				
-			} catch (SQLException e) {
-
-				e.printStackTrace();
-			}
-		}
+		
 
 		if(azioneDocumento.equals("uploadConvenzione")) {
 			try {
@@ -454,14 +455,7 @@ public class GestioneDocumento extends HttpServlet {
 		}
 
 		
-		if(azioneDocumento.equals("dowloadQuestionarioStudente")) {
-			try {
-				
-			} catch (SQLException e) {
-
-				e.printStackTrace();
-			}
-		}
+	
 		
 		if(azioneDocumento.equals("uploadQuestionarioStudente")) {
 			try {
@@ -473,15 +467,6 @@ public class GestioneDocumento extends HttpServlet {
 		}
 
 
-		if(azioneDocumento.equals("dowloadQuestionarioAzienda")) {
-			try {
-				
-			} catch (SQLException e) {
-
-				e.printStackTrace();
-			}
-		}
-		
 		if(azioneDocumento.equals("uploadQuestionarioAzienda")) {
 			try {
 				
@@ -493,14 +478,7 @@ public class GestioneDocumento extends HttpServlet {
 		
 		
 		
-		if(azioneDocumento.equals("dowloadRegistroOre")) {
-			try {
-				
-			} catch (SQLException e) {
-
-				e.printStackTrace();
-			}
-		}
+		
 		
 		if(azioneDocumento.equals("uploadRegistroOre")) {
 			try {
