@@ -85,7 +85,7 @@
 <h4>Firma per visione e accettazione del tirocinante</h4>
 
 <div class ="new">
-    <button name = "azioneUtente" value="download" id="downloadButton" class=" button" type="submit" onclick="download()">Download</button> 
+    <button id="downloadButton" class=" button" type="submit" onclick="download()">Download</button> 
 </div>
 
 <script> 
