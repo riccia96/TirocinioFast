@@ -21,9 +21,9 @@ public class ManagerDocumento {
 		return convenzione.generaCodice();
 	}
 
-	public TirocinioBean DownloadTirocinio(TirocinioBean pathDoc) throws SQLException {
-		TirocinioDAO tirocinio = new TirocinioDAO();
-		return tirocinio.doRetrieveByKey(pathDoc);
+	public TirocinioBean DownloadTirocinio(TirocinioBean tirocinio) throws SQLException {
+		TirocinioDAO tirocinioDAO = new TirocinioDAO();
+		return tirocinioDAO.doRetrieveByKey(tirocinio);
 	}
 
 	public boolean UploadTirocinio(TirocinioBean pathDoc) throws SQLException {

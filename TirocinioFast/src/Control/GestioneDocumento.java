@@ -313,18 +313,18 @@ public class GestioneDocumento extends HttpServlet {
 			}
 		}
 
-		
+
 		if(azioneDocumento.equals("mostraDocumento")){
 			try {
 				int id = Integer.parseInt((String) request.getParameter("idT"));
 				TirocinioBean tirocinio = new TirocinioBean();
-				
+
 				tirocinio.setId(id);
 				tirocinio = richiesta.richiestaTirocinio(tirocinio);
-				
+
 				request.getSession().setAttribute("richiesta", tirocinio);
 				request.getSession().setAttribute("tipoDocumento", "tirocinio");
-				
+
 				RequestDispatcher view = request.getRequestDispatcher("mostraPDF.jsp");
 				view.forward(request, response);
 			} catch (SQLException e) {
@@ -409,13 +409,13 @@ public class GestioneDocumento extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		
-		
+
+
 
 		if(azioneDocumento.equals("uploadConvenzione")) {
 			try {
-				String utente = (String) request.getSession().getAttribute("tipoUtente");
 
+				String utente = (String) request.getSession().getAttribute("tipoUtente");
 
 				String nomeFile = (String) request.getParameter("nomeFileConvenzione");
 				if(utente.equals("azienda")){
@@ -454,12 +454,12 @@ public class GestioneDocumento extends HttpServlet {
 			}
 		}
 
-		
-	/*
-		
+
+		/*
+
 		if(azioneDocumento.equals("uploadQuestionarioStudente")) {
 			try {
-				
+
 			} catch (SQLException e) {
 
 				e.printStackTrace();
@@ -469,29 +469,65 @@ public class GestioneDocumento extends HttpServlet {
 
 		if(azioneDocumento.equals("uploadQuestionarioAzienda")) {
 			try {
-				
+
 			} catch (SQLException e) {
 
 				e.printStackTrace();
 			}
 		}
-		
-		
-		
-		
-		
+
+
+
+		 */
+
 		if(azioneDocumento.equals("uploadRegistroOre")) {
 			try {
-				
+				StudenteBean studente = (StudenteBean) request.getSession().getAttribute("utenteSessione");
+
+				String nomeFile = (String) request.getParameter("nomeRegistroOre");
+
+				int idTiro = Integer.parseInt((String) request.getParameter("id"));
+
+				TirocinioBean tirocinio = new TirocinioBean();
+				tirocinio.setId(idTiro);
+				tirocinio = documento.DownloadTirocinio(tirocinio);
+
+
+
 			} catch (SQLException e) {
 
 				e.printStackTrace();
 			}
 		}
-*/
-		
-		
-		
+
+
+		if(azioneDocumento.equals("RegistroOre")) {
+			try {
+
+				List<TirocinioBean> tirocini = new ArrayList<TirocinioBean>();
+				documento.richiesteTirocinio();
+
+				StudenteBean studente = (StudenteBean) request.getSession().getAttribute("utenteSessione");
+				for(TirocinioBean t : tirocini) {
+					if(t.getStudente().equals(studente.getUsername())) {
+						if(t.isConvalidaRichiesta()) {
+							if(t.getRegistroOre().equals("")){
+								RequestDispatcher view = request.getRequestDispatcher("registroOre.jsp");
+								view.forward(request, response);
+							} else {
+								
+							}
+						}
+					}
+
+				}
+
+			} catch (SQLException e) {
+
+				e.printStackTrace();
+			}
+		}
+
 		if(azioneDocumento.equals("elencoRichiesteTirocinio")) {
 			try {
 				StudenteBean studente = new StudenteBean();
@@ -607,16 +643,16 @@ public class GestioneDocumento extends HttpServlet {
 			}
 
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
+
+
+
+
+
+
+
+
+
 		if(azioneDocumento.equals("elencoRichiesteConvenzioni")) {
 			try {
 				List<ConvenzioneBean> convenzioni = documento.convenzioni();

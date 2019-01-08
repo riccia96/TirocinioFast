@@ -34,8 +34,8 @@
 		<li><a href="GestioneTirocinio?azioneTirocinio=elencoAziende">Ricerca azienda</a></li>
 		<li><a href="GestioneTirocinio?azioneTirocinio=elencoRichiesteTirocinio">Richiesta tirocinio</a></li>
 		<li><a href="GestioneTirocinio?azioneTirocinio=attivitaConvalidate">Tirocini conclusi</a></li>
-		<li><a href="#">Registro ore</a></li>
-		<li><a href="GestioneQuestionario?azioneQuestionario=questionarioStudente">Questionario</a></li>
+		<li><a href="GestioneDocumento?azioneDocumento=RegistroOre">Registro ore</a></li>
+		<li><a href="GestioneQuestionario?azioneQuestionario=elencoQuestionarioStudente">Questionario</a></li>
 		<li><a href="GestioneUtente?azioneUtente=logout">Logout</a></li>
 		<%
 			}
@@ -44,7 +44,7 @@
 		<li><a href="GestioneUtente?azioneUtente=areaPersonale">Area Personale</a></li>
 		<li><a href="GestioneConvenzione?azioneConvenzione=apriForm">Convenzione</a></li>
 		<li><a href="GestioneTirocinio?azioneTirocinio=elencoRichiesteTirocinio">Richieste tirocinio</a></li>
-		<li><a href="#">Questionari</a>
+		<li><a href="GestioneQuestionario?azioneQuestionario=elencoQuestionariAzienda">Questionari</a>
 		<li><a href="GestioneUtente?azioneUtente=logout">Logout</a></li>
 		<%
 			}

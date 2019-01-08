@@ -58,8 +58,9 @@
     <td>
     	<form>
   			Seleziona PDF del registro ore completato<br>
-  			<input type="file" name="registroOre" accept=".pdf"><br>
-  			<input type="submit">
+  			<input type="file" name="nomeRgistroOre" accept=".pdf"><br>
+  			<input type="hidden" name="id" value="<%=tirocinio.getId() %>">
+  			<input type="submit" name="azioneDocumento" value="uploadRegistroOre">
 		</form>
 	</td>
 	<%} else { %>
