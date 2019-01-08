@@ -4,6 +4,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <title>Registra Azienda</title>
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -46,14 +48,53 @@
     <input type="text" placeholder="Film preferito? (utilizzato per recupero password)" name="domanda" required>
     <br>
     <div class ="new">
-    <button name ="azioneUtente" value="registraAzienda" id="registratiButton" class=" button" type="submit">Registrati</button> 
+    <button name ="azioneUtente" value="registraAzienda" id="registraAziendaButton" class=" button" type="submit">Registrati</button> 
   </div>
 
 </form>
 
-<%@include file = "footer.jsp" %> 
+<%@include file = "footer.jsp" %>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+	$("#registraAziendaButton").click(function(){
+		
+		$.post("/TirocinioFast/GestioneUtente",
+				{
+					"azioneUtente" : "registraAzienda",
+				},
+				function(responseTxt, statusTxt, xhr){
+					if(responseTxt=="email gia' esistente")
+						alert("E-mail inserita già corrisponde ad un account!");
+					if(responseTxt=="nome azienda gia' esistente")
+						alert("Nome azienda inserito già corrisponde ad un account!");
+					if(responseTxt=="username gia' esistente")
+						alert("Matricola inserita già corrisponde ad un account!");
+					if(responseTxt=="password non corrispondenti")
+						alert("Le password inserite non  corrispondono!");
+					if(responseTxt=="formato risposta sbagliato")
+						alert("Il formato inserito nel campo 'Risposta' non è corretto!");
+					if(responseTxt=="formato password sbagliato")
+						alert("Il formato inserito nel campo 'Password' non è corretto!");
+					if(responseTxt=="formato username sbagliato")
+						alert("Il formato inserito nel campo 'Username' non è corretto!");
+					if(responseTxt=="formato telefono sbagliato")
+						alert("Il formato inserito nel campo 'Telefono' non è corretto!");
+					if(responseTxt=="formato email sbagliato")
+						alert("Il formato inserito nel campo 'E-mail' non è corretto!");
+					if(responseTxt=="formato indirizzo sbagliato")
+						alert("Il formato inserito nel campo 'Indirizzo' non è corretto!");
+					if(responseTxt=="formato ceo sbagliato")
+						alert("Il formato inserito nel campo 'CEO' non è corretto!");
+					if(responseTxt=="formato pi sbagliato")
+						alert("Il formato inserito nel campo 'Partita Iva' non è corretto!");
+					if(responseTxt=="formato nome sbagliato")
+						alert("Il formato inserito nel campo 'Nome azienda' non è corretto!");
+			});
+	});
+});
+</script> 
+
 <script src="js/bootstrap.min.js"></script>
 </body>
 </html>

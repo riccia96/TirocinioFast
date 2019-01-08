@@ -4,6 +4,8 @@ pageEncoding="ISO-8859-1" import="Bean.*"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <title>Imposta Password</title>
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -25,7 +27,7 @@ pageEncoding="ISO-8859-1" import="Bean.*"%>
     <input type="password" placeholder="Conferma nuova password" name="conferma" required>
     <br>
     <div class ="new">
-    <button name = "azioneUtente" value="impostaPassword" id="ReimpostaButton" class=" button" type="submit">Avanti</button> 
+    <button name = "azioneUtente" value="impostaPassword" id="reimpostaButton" class=" button" type="submit">Avanti</button> 
     </div>
 </form>
   
@@ -33,7 +35,25 @@ pageEncoding="ISO-8859-1" import="Bean.*"%>
 
 <%@include file = "footer.jsp" %>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+	$("#reimpostaButton").click(function(){
+		
+		$.post("/TirocinioFast/GestioneUtente",
+				{
+					"azioneUtente" : "impostaPassword",
+				},
+				function(responseTxt, statusTxt, xhr){
+					if(responseTxt=="password non corrispondenti")
+						alert("Le password non corrispondono!");
+					if(responseTxt=="password non rispetta parametri")
+						alert("La password inserita non rispetta il formato richiesto!");
+			});
+	});
+});
+</script>
+
+
 <script src="js/bootstrap.min.js"></script>
 </body>
 </html>
