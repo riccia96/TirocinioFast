@@ -19,7 +19,7 @@
 <h3 class="perForm">Completamento di una richiesta di tirocinio</h3>
 
 <div style="margin-left:25%;width: 700px;">
-<form class="dialogo" id="compilazioneAzienda" action="GestioneTirocinio" method="POST">
+<form class="dialogo" id="compilazioneAzienda" action="GestioneDocumento" method="POST">
   <div class="imgcontainer">
     <img src="img\convenzione.png" alt="Richiesta" class="avatar">
   </div>
@@ -36,7 +36,7 @@
     <br>
     <div class ="new">
     <input type="hidden" name="idTiroci" value="<%=tiro.getId() %>">
-    <button name = "azioneTirocinio" value="tirocinioDatiAzienda" id="compilazioneAziendaButton" class=" button" type="submit">Invia</button> 
+    <button name = "azioneDocumento" value="compilaTirocinioAzienda" id="compilazioneAziendaButton" class=" button" type="submit">Invia</button> 
     </div>
 </form>
   

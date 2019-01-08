@@ -48,7 +48,7 @@
     <%} %></select></label>
     <br>
     <div class ="new">
-    <button name = "azioneConvenzione" value="richiestaConvenzione" id="convenzioneButton" class=" button" type="submit">Richiedi convenzione</button> 
+    <button name = "azioneConvenzione" value="compilaConvenzione" id="convenzioneButton" class=" button" type="submit">Richiedi convenzione</button> 
     </div>
 </form>
   
