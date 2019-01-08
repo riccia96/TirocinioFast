@@ -2,7 +2,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="Bean.*" %>
-<%ArrayList<QuestionarioStudenteBean> questionariS = (ArrayList<QuestionarioStudenteBean>) request.getSession().getAttribute("");
+<% String tipoUtente = (String) request.getSession().getAttribute("tipoUtente");
+
+if(tipoUtente.equals("studente")){
+	QuestionarioStudenteBean questionarioStud = (QuestionarioStudenteBean) request.getSession().getAttribute("questionarioStudente");
+}else{
+	ArrayList<QuestionarioStudenteBean> questionariS = (ArrayList<QuestionarioStudenteBean>) request.getSession().getAttribute("");
+}
 ArrayList<QuestionarioAziendaBean> questionariA = (ArrayList<QuestionarioAziendaBean>) request.getSession().getAttribute("");
 ArrayList<TirocinioBean> tirocini = (ArrayList<TirocinioBean>) request.getSession().getAttribute("listaTirocini");
 ArrayList<StudenteBean> studenti = (ArrayList<StudenteBean>) request.getSession().getAttribute("listaStudenti");

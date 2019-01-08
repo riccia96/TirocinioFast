@@ -3,6 +3,7 @@ package Control;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,6 +16,7 @@ import Bean.AziendaBean;
 import Bean.QuestionarioAziendaBean;
 import Bean.QuestionarioStudenteBean;
 import Bean.StudenteBean;
+import Bean.TirocinioBean;
 import Bean.TutorBean;
 
 /**
@@ -44,11 +46,28 @@ public class GestioneQuestionario extends HttpServlet {
 			try {
 
 				StudenteBean studente = (StudenteBean) request.getSession().getAttribute("utenteSessione");
-
+				List<TirocinioBean> tirocini = new ArrayList<TirocinioBean>(); 
+				List<QuestionarioStudenteBean> questionari = new ArrayList<QuestionarioStudenteBean>();
 				QuestionarioStudenteBean questionario = new QuestionarioStudenteBean();
-				questionario.setStudente(studente.getUsername());
-
-				questionario = documento.questionarioStudente(questionario);
+				
+				
+				tirocini = documento.richiesteTirocinio();
+				questionari = documento.questionariStudente();
+				for(TirocinioBean t : tirocini){
+					for(QuestionarioStudenteBean q : questionari){
+						if(t.getStudente().equals(q.getStudente())){
+							questionario = q;
+						}
+					}
+				}
+				
+				if(questionario.getTitolo().equals("")){
+					RequestDispatcher view = request.getRequestDispatcher("questionarioStudenteCompilazione.jsp");
+					view.forward(request, response);
+				} else {
+					request.getSession().setAttribute("questionarioStudente", questionario);
+					RequestDispatcher view = request.getRequestDispatcher("questionari.jsp");
+				}
 				
 				
 			} catch (SQLException e) {
@@ -57,8 +76,22 @@ public class GestioneQuestionario extends HttpServlet {
 		}
 
 		if(azioneQuestionario.equals("questionarioAzienda")) {
-			AziendaBean azienda = (AziendaBean) request.getSession().getAttribute("utenteSessione");
-			
+			try {
+				AziendaBean azienda = (AziendaBean) request.getSession().getAttribute("utenteSessione");
+
+				QuestionarioAziendaBean questionario = new QuestionarioAziendaBean();
+				questionario.setAzienda(azienda.getUsername());
+
+
+				questionario = documento.questionarioAzienda(questionario);
+
+
+				if(questionario.getTitoloTirocinio().equals("")){
+					RequestDispatcher view = request.getRequestDispatcher("questionarioAzienda");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		

@@ -133,4 +133,20 @@ public class ManagerDocumento {
 		QuestionarioAziendaDAO questionario = new QuestionarioAziendaDAO();
 		return questionario.doRetrieveByKey(questionarioAzienda);
 	}
+	
+	public List<QuestionarioStudenteBean> questionariStudente() throws SQLException{
+		QuestionarioStudenteDAO questionarioDAO = new QuestionarioStudenteDAO();
+		List<QuestionarioStudenteBean> questionari = new ArrayList<QuestionarioStudenteBean>();
+		questionari = questionarioDAO.doRetrieveAll();
+		
+		return questionari;
+	}
+	
+	public List<QuestionarioAziendaBean> questionariAzienda() throws SQLException{
+		QuestionarioAziendaDAO questionarioDAO = new QuestionarioAziendaDAO();
+		List<QuestionarioAziendaBean> questionari = new ArrayList<QuestionarioAziendaBean>();
+		questionari = questionarioDAO.doRetrieveAll();
+		
+		return questionari;
+	}
 }
