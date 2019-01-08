@@ -110,7 +110,7 @@ public class GestioneDocumento extends HttpServlet {
 				request.getSession().setAttribute("aziendaTirocinio", azienda);
 				request.getSession().setAttribute("tipoDocumento", "tirocinio");
 
-				RequestDispatcher view = request.getRequestDispatcher("GestioneTirocinio?azioneTirocinio=elencoRichiesteTirocinio");
+				RequestDispatcher view = request.getRequestDispatcher("GestioneDocumento?azioneDocumento=elencoRichiesteTirocinio");
 				view.forward(request, response);
 			} catch (SQLException e) {
 
@@ -261,15 +261,15 @@ public class GestioneDocumento extends HttpServlet {
 
 				if((luogoNascitaR.length()>3 && luogoNascitaR.length()<31) && (dataNascitaR.length()>7 && dataNascitaR.length()<15) && (referente.length()>4 && referente.length()<51) && (telefono.length()>6 && telefono.length()<14) && (email.length()>4 && email.length()<31) && (attivita.length()>24 && attivita.length()<1001)){				
 
-										documento.compilaConvenzione(convenzione);
+					documento.compilaConvenzione(convenzione);
 
-										request.getSession().setAttribute("azienda", azienda);
-										request.getSession().setAttribute("convenzione", convenzione);
+					request.getSession().setAttribute("azienda", azienda);
+					request.getSession().setAttribute("convenzione", convenzione);
 
-										RequestDispatcher view = request.getRequestDispatcher("convenzioneEsistente.jsp");
-										view.forward(request, response);
+					RequestDispatcher view = request.getRequestDispatcher("GestioneConvenzione?azioneConvenzione=apriForm");
+					view.forward(request, response);
 
-									} 
+				} 
 				else {
 					RequestDispatcher view = request.getRequestDispatcher("formatoSbagliato.jsp");
 					view.forward(request, response);
@@ -320,7 +320,7 @@ public class GestioneDocumento extends HttpServlet {
 
 						request.getSession().setAttribute("tirocinio", tirocinio);
 
-						RequestDispatcher view = request.getRequestDispatcher("GestioneTirocinio?azioneTirocinio=elencoRichiesteTirocinio");
+						RequestDispatcher view = request.getRequestDispatcher("GestioneDocumento?azioneDocumento=elencoRichiesteTirocinio");
 						view.forward(request, response);
 
 					}
@@ -336,7 +336,7 @@ public class GestioneDocumento extends HttpServlet {
 
 					request.getSession().setAttribute("tirocinio", tirocinio);
 
-					RequestDispatcher view = request.getRequestDispatcher("GestioneTirocinio?azioneTirocinio=elencoRichiesteTirocinio");
+					RequestDispatcher view = request.getRequestDispatcher("GestioneDocumento?azioneDocumento=elencoRichiesteTirocinio");
 					view.forward(request, response);
 				} else if(utente.equals("studente")){
 					int id = Integer.parseInt((String) request.getParameter("id"));
@@ -349,7 +349,7 @@ public class GestioneDocumento extends HttpServlet {
 
 					request.getSession().setAttribute("tirocinio", tirocinio);
 
-					RequestDispatcher view = request.getRequestDispatcher("GestioneTirocinio?azioneTirocinio=elencoRichiesteTirocinio");
+					RequestDispatcher view = request.getRequestDispatcher("GestioneDocumento?azioneDocumento=elencoRichiesteTirocinio");
 					view.forward(request, response);
 
 
@@ -364,7 +364,7 @@ public class GestioneDocumento extends HttpServlet {
 
 					request.getSession().setAttribute("tirocinio", tirocinio);
 
-					RequestDispatcher view = request.getRequestDispatcher("GestioneTirocinio?azioneTirocinio=elencoRichiesteTirocinio");
+					RequestDispatcher view = request.getRequestDispatcher("GestioneDocumento?azioneDocumento=elencoRichiesteTirocinio");
 					view.forward(request, response);
 
 
@@ -508,11 +508,11 @@ public class GestioneDocumento extends HttpServlet {
 				TirocinioBean tirocinio = new TirocinioBean();
 				tirocinio.setId(idTiro);
 				tirocinio = documento.DownloadTirocinio(tirocinio);
-				
+
 				tirocinio.setRegistroOre("pdf/" + nomeFile);
 
 				documento.UploadTirocinio(tirocinio);
-				
+
 				RequestDispatcher view = request.getRequestDispatcher("GestioneDocumento?azioneDocumento=registroOre");
 				view.forward(request, response);
 			} catch (SQLException e) {

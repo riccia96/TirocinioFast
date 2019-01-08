@@ -22,7 +22,7 @@
 <h3 class="perForm">Compilazione di una richiesta di convenzione</h3>
 
 <div style="margin-left:25%;width: 700px;">
-<form class="dialogo" action="GestioneConvenzione" method="POST">
+<form class="dialogo" action="GestioneDocumento" method="POST">
   <div class="imgcontainer">
     <img src="img\convenzione.png" alt="Convenzione" class="avatar">
   </div>
@@ -48,7 +48,7 @@
     <%} %></select></label>
     <br>
     <div class ="new">
-    <button name = "azioneConvenzione" value="compilaConvenzione" id="convenzioneButton" class=" button" type="submit">Richiedi convenzione</button> 
+    <button name = "azioneDocumento" value="compilaConvenzione" id="convenzioneButton" class=" button" type="submit">Richiedi convenzione</button> 
     </div>
 </form>
   

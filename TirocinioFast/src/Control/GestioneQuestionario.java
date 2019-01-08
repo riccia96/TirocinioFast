@@ -58,6 +58,7 @@ public class GestioneQuestionario extends HttpServlet {
 
 		if(azioneQuestionario.equals("questionarioAzienda")) {
 			AziendaBean azienda = (AziendaBean) request.getSession().getAttribute("utenteSessione");
+			
 		}
 		
 		

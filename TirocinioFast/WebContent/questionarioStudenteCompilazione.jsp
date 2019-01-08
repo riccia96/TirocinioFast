@@ -17,7 +17,7 @@
 <h3 class="perForm">Compilazione questionario valutativo</h3>
 
 <div style="margin-left:25%;width: 700px;">
-<form class="dialogo" id="questionarioStudente" action="GestioneUtente" method="POST">
+<form class="dialogo" id="questionarioStudente" action="GestioneDocumento" method="POST">
   <div class="imgcontainer">
     <img src="img\convenzione.png" alt="questionarioStudente" class="avatar">
   </div>
@@ -66,7 +66,7 @@
     <textarea name="quattordici" style="margin-left: 10%" rows="4" cols="50"></textarea>
     <br>
     <div class ="new">
-    <button name = "azioneUtente" value="compilaQuestionarioStudente" id="questionarioStudenteButton" class=" button" type="submit">Invia questionario</button> 
+    <button name = "azioneDocumento" value="compilaQuestionarioStudente" id="questionarioStudenteButton" class=" button" type="submit">Invia questionario</button> 
     </div>
 </form>
   

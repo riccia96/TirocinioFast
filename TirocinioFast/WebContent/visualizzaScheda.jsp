@@ -35,7 +35,7 @@
     <div class ="new">
     <form action="GestioneTirocinio" method="POST">
     <input type="hidden" name="aziendaSelezionata" value="<%=a.getUsername()%>">
-    <button name = "azioneTirocinio" value="inoltraRichiesta" id="inoltraRichiestaTirocinioButton" class=" button" type="submit">Invia richiesta di tirocinio</button> 
+    <button name = "azioneTirocinio" value="richiediTirocinio" id="inoltraRichiestaTirocinioButton" class=" button" type="submit">Invia richiesta di tirocinio</button> 
     </form></div>
   
 </div>
