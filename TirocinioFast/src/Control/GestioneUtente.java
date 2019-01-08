@@ -70,8 +70,8 @@ public class GestioneUtente extends HttpServlet {
 					if(a.getUsername().equals("")) {
 						if(t.getUsername().equals("")) {
 							if(i.getUsername().equals("")) {
-								response.setContentType("text/html;charset=ISO-8859-1");
-								response.getWriter().write("username no");
+								RequestDispatcher view = request.getRequestDispatcher("utenteNonTrovato.jsp");
+								view.forward(request, response);
 							}else {
 								if(i.getPassword().equals(password)) {
 									request.getSession().setAttribute("utenteSessione", utente.getImpiegato(impiegato));
@@ -80,8 +80,8 @@ public class GestioneUtente extends HttpServlet {
 									RequestDispatcher view = request.getRequestDispatcher("home.jsp");
 									view.forward(request, response);
 								}else {
-									response.setContentType("text/html;charset=ISO-8859-1");
-									response.getWriter().write("password no");
+									RequestDispatcher view = request.getRequestDispatcher("utenteNonTrovato.jsp");
+									view.forward(request, response);
 								}
 							}
 						}else {
@@ -92,8 +92,8 @@ public class GestioneUtente extends HttpServlet {
 								RequestDispatcher view = request.getRequestDispatcher("home.jsp");
 								view.forward(request, response);
 							}else {
-								response.setContentType("text/html;charset=ISO-8859-1");
-								response.getWriter().write("password no");
+								RequestDispatcher view = request.getRequestDispatcher("utenteNonTrovato.jsp");
+								view.forward(request, response);
 							}
 						}
 					}else {
@@ -104,8 +104,8 @@ public class GestioneUtente extends HttpServlet {
 							RequestDispatcher view = request.getRequestDispatcher("home.jsp");
 							view.forward(request, response);
 						}else {
-							response.setContentType("text/html;charset=ISO-8859-1");
-							response.getWriter().write("password no");
+							RequestDispatcher view = request.getRequestDispatcher("utenteNonTrovato.jsp");
+							view.forward(request, response);
 						}
 					}
 				}else {
@@ -117,8 +117,8 @@ public class GestioneUtente extends HttpServlet {
 						RequestDispatcher view = request.getRequestDispatcher("home.jsp");
 						view.forward(request, response);
 					}else {
-						response.setContentType("text/html;charset=ISO-8859-1");
-						response.getWriter().write("password no");
+						RequestDispatcher view = request.getRequestDispatcher("utenteNonTrovato.jsp");
+						view.forward(request, response);
 					}
 				}
 			} catch (SQLException e) {
