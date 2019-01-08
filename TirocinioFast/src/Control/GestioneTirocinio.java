@@ -46,7 +46,7 @@ public class GestioneTirocinio extends HttpServlet {
 
 		//ok
 		
-		if(azioneTirocinio.equals("inoltraRichiesta")){
+		if(azioneTirocinio.equals("richiediTirocinio")){
 			try {
 				String aziendaTirocinio = request.getParameter("aziendaSelezionata");
 
@@ -62,161 +62,12 @@ public class GestioneTirocinio extends HttpServlet {
 			}
 		}
 		
-		//no
 		
-		if(azioneTirocinio.equals("tirocinioDatiStudente")) {
-			try {
-				StudenteBean studente = new StudenteBean();
-				TirocinioBean tirocinio = new TirocinioBean();
-
-				studente = (StudenteBean) request.getSession().getAttribute("utenteSessione");
-				String aziendaTirocinio = (String) request.getSession().getAttribute("aziendaTirocinio");
-				String tutorAccademico = request.getParameter("tutor"); 
-				String annoAccademico = request.getParameter("annoAccademico");
-				int cfu = Integer.parseInt(request.getParameter("cfu"));
-				String h = request.getParameter("handicap");
-				boolean handicap;
-				if(h.equals("si")) {
-					handicap = true;
-				} else {
-					handicap = false;
-				}
-
-				tirocinio.setStudente(studente.getUsername());
-				tirocinio.setAzienda(aziendaTirocinio);
-				tirocinio.setTutorAccademico(tutorAccademico);
-				tirocinio.setAnnoAccademico(annoAccademico);
-				tirocinio.setCfu(cfu);
-				tirocinio.setHandicap(handicap);
-
-				richiesta.salvaTirocinio(tirocinio);
-
-				RequestDispatcher view = request.getRequestDispatcher("home.jsp");
-				view.forward(request, response);
-
-			} catch (SQLException e) {
-
-				e.printStackTrace();
-			}
-		}
+		
 
 		//no
 
-		if(azioneTirocinio.equals("elencoRichiesteTirocinio")) {
-			try {
-				StudenteBean studente = new StudenteBean();
-				TutorBean tutor = new TutorBean();
-				AziendaBean azienda = new AziendaBean();
-
-				List<StudenteBean> studenti = new ArrayList<StudenteBean>();
-				List<AziendaBean> aziende = new ArrayList<AziendaBean>();
-				List<TutorBean> tutors = new ArrayList<TutorBean>();
-				List<TirocinioBean> tirocini = new ArrayList<TirocinioBean>();
-				List<TirocinioBean> richieste = new ArrayList<TirocinioBean>();
-
-				studenti = utente.getStudenti();
-				aziende = utente.getAziende();
-				tutors = utente.getTutorAccademici();
-
-				tirocini.addAll(documento.richiesteTirocinio());
-
-				if(!(request.getSession().getAttribute("tipoUtente").equals("studente"))) {
-					if(!(request.getSession().getAttribute("tipoUtente").equals("azienda"))) {
-						if(!(request.getSession().getAttribute("tipoUtente").equals("tutor"))) {
-
-							for(TirocinioBean t : tirocini) {
-								if(t.isConvalidaAzienda() && t.isConvalidaTutor() && t.isConvalidaStudente()) {
-									richieste.add(t);
-								}
-							} 
-
-							request.getSession().setAttribute("listaStudenti", studenti);
-							request.getSession().setAttribute("listaAziende", aziende);
-							request.getSession().setAttribute("listaTutor", tutors);
-							request.getSession().setAttribute("richiesteTirocinio", richieste);
-
-							if(richieste.equals(null)) {
-								response.setContentType("text/html;charset=ISO-8859-1");
-								response.getWriter().write("nessuna richiesta");
-							}
-
-							RequestDispatcher view = request.getRequestDispatcher("elencoRichiesteTirocinio.jsp");
-							view.forward(request, response);
-						} else {							
-							tutor = (TutorBean) request.getSession().getAttribute("utenteSessione");
-
-							for(TirocinioBean t : tirocini) {
-								if(t.isConvalidaAzienda() && t.getTutorAccademico().equals(tutor.getUsername())) {
-									richieste.add(t);
-								}
-							}
-
-							request.getSession().setAttribute("listaStudenti", studenti);
-							request.getSession().setAttribute("listaAziende", aziende);
-							request.getSession().setAttribute("listaTutor", tutors);
-							request.getSession().setAttribute("richiesteTirocinio", richieste);
-
-							if(richieste.equals(null)) {
-								response.setContentType("text/html;charset=ISO-8859-1");
-								response.getWriter().write("nessuna richiesta");
-							}
-
-							RequestDispatcher view = request.getRequestDispatcher("elencoRichiesteTirocinio.jsp");
-							view.forward(request, response);
-						}
-					} else {
-
-						azienda = (AziendaBean) request.getSession().getAttribute("utenteSessione");
-
-						for(TirocinioBean t : tirocini) {
-							if(t.getAzienda().equals(azienda.getUsername())) {
-								richieste.add(t);
-							}
-						}
-
-						request.getSession().setAttribute("listaStudenti", studenti);
-						request.getSession().setAttribute("listaAziende", aziende);
-						request.getSession().setAttribute("listaTutor", tutors);
-						request.getSession().setAttribute("richiesteTirocinio", richieste);
-
-						if(richieste.equals(null)) {
-							response.setContentType("text/html;charset=ISO-8859-1");
-							response.getWriter().write("nessuna richiesta");
-						}
-
-						RequestDispatcher view = request.getRequestDispatcher("elencoRichiesteTirocinio.jsp");
-						view.forward(request, response);
-					}
-				} else {
-
-					studente = (StudenteBean) request.getSession().getAttribute("utenteSessione");
-
-					for(TirocinioBean t : tirocini) {
-						if(t.getStudente().equals(studente.getUsername())) {
-							richieste.add(t);
-						}
-					}
-
-					request.getSession().setAttribute("listaStudenti", studenti);
-					request.getSession().setAttribute("listaAziende", aziende);
-					request.getSession().setAttribute("listaTutor", tutors);
-					request.getSession().setAttribute("richiesteTirocinio", richieste);
-
-					if(richieste.equals(null)) {
-						response.setContentType("text/html;charset=ISO-8859-1");
-						response.getWriter().write("nessuna richiesta");
-					}
-
-					RequestDispatcher view = request.getRequestDispatcher("elencoRichiesteTirocinio.jsp");
-					view.forward(request, response);
-				}
-
-
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-
-		}
+		
 		
 		//no
 
@@ -251,45 +102,7 @@ public class GestioneTirocinio extends HttpServlet {
 			}
 		}
 		
-		//no
-
-		if(azioneTirocinio.equals("tirocinioDatiAzienda")) {
-			try {
-				AziendaBean azienda = new AziendaBean();
-				
-			    int idT = Integer.parseInt((String) request.getParameter("idTiroci"));
-			    
-				TirocinioBean tirocinio = new TirocinioBean();
-				tirocinio.setId(idT);
-				tirocinio = richiesta.richiestaTirocinio(tirocinio);
-				
-				azienda = (AziendaBean) request.getSession().getAttribute("utenteSessione");
-
-				String sede = request.getParameter("sede");
-				String tempi = request.getParameter("tempi");
-				String periodo = request.getParameter("periodo");
-				String obiettivi = request.getParameter("obiettivi");
-				String facilitazioni = request.getParameter("facilitazioni");
-				tirocinio.setSedeTirocinio(sede);
-				tirocinio.setAccessoLocali(tempi);
-				tirocinio.setPeriodoTirocinio(periodo);
-				tirocinio.setObiettivoTirocinio(obiettivi);
-				tirocinio.setFacilitazioni(facilitazioni);
-
-				richiesta.inoltraRichiesta(tirocinio);
-
-				request.getSession().setAttribute("aziendaTirocinio", azienda);
-				request.getSession().setAttribute("tipoDocumento", "tirocinio");
-
-				RequestDispatcher view = request.getRequestDispatcher("GestioneTirocinio?azioneTirocinio=elencoRichiesteTirocinio");
-				view.forward(request, response);
-
-			} catch (SQLException e) {
-
-				e.printStackTrace();
-			}
-
-		}
+		
 
 		//no
 		if(azioneTirocinio.equals("mostraDocumento")){
@@ -388,7 +201,7 @@ public class GestioneTirocinio extends HttpServlet {
 		
 		//ok
 		
-		if(azioneTirocinio.equals("inoltroAT")) {
+		if(azioneTirocinio.equals("inoltroRichiestaTutor")) {
 
 			try {
 				TirocinioBean tirocinio = new TirocinioBean();
@@ -408,7 +221,7 @@ public class GestioneTirocinio extends HttpServlet {
 		
 		//ok
 
-		if(azioneTirocinio.equals("inoltroTS")) {
+		if(azioneTirocinio.equals("inoltroRichiestaStudente")) {
 			try {
 				TirocinioBean tirocinio = new TirocinioBean();
 				int id = Integer.parseInt((String) request.getSession().getAttribute("idTirocinio"));
@@ -424,7 +237,7 @@ public class GestioneTirocinio extends HttpServlet {
 		
 		//ok
 
-		if(azioneTirocinio.equals("inoltroSI")) {
+		if(azioneTirocinio.equals("inoltroRichiestaImpiegato")) {
 			try{
 				TirocinioBean tirocinio = new TirocinioBean();
 				int id = Integer.parseInt((String) request.getSession().getAttribute("idTirocinio"));

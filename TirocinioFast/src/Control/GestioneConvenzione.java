@@ -41,39 +41,8 @@ public class GestioneConvenzione extends HttpServlet {
 
 		String azioneConvenzione = request.getParameter("azioneConvenzione");
 		
-		//no
 		
-		if(azioneConvenzione.equals("elencoRichiesteConvenzioni")) {
-			try {
-				List<ConvenzioneBean> convenzioni = documento.convenzioni();
-				List<ConvenzioneBean> richieste = new ArrayList<ConvenzioneBean>();
-				List<AziendaBean> aziende = new ArrayList<AziendaBean>();
-
-				for(ConvenzioneBean c : convenzioni) {
-					if(!(c.isConvalida())) {
-						AziendaBean a = new AziendaBean();
-						a.setUsername(c.getAzienda());
-						aziende.add(utente.getAzienda(a));
-						richieste.add(c);
-					}
-				}
-
-				request.getSession().setAttribute("richiesteConvenzioni", richieste);
-				request.getSession().setAttribute("listaAziende", aziende);
-
-				if(richieste.equals(null)) {
-					response.setContentType("text/html;charset=ISO-8859-1");
-					response.getWriter().write("nessuna richiesta");
-				}
-
-				RequestDispatcher view = request.getRequestDispatcher("elencoRichiesteConvenzioni.jsp");
-				view.forward(request, response);
-
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-
-		}
+		
 
 		//no
 		if(azioneConvenzione.equals("convenzioniConvalidate")){
@@ -105,88 +74,8 @@ public class GestioneConvenzione extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		//no
-		if(azioneConvenzione.equals("richiestaConvenzione")) {
-			try {
-				AziendaBean azienda = new AziendaBean();
-				ConvenzioneBean convenzione = new ConvenzioneBean();
-
-				azienda = (AziendaBean) request.getSession().getAttribute("utenteSessione");
-
-				String luogoNascitaR = request.getParameter("luogoNascitaR");
-				String dataNascitaR = request.getParameter("dataNascitaR");
-				int numeroDipendenti = Integer.parseInt(request.getParameter("numeroDipendenti"));
-				String referente = request.getParameter("referente");
-				String telefono = request.getParameter("telefono");
-				String email = request.getParameter("email");
-				String attivita = request.getParameter("descrizioneAttivita");
-				String docente = request.getParameter("tutor");
-
-				convenzione.setId(documento.generaCodice());
-				convenzione.setAzienda(azienda.getUsername());
-
-				convenzione.setLuogoNascitaCeo(luogoNascitaR);
-				convenzione.setDataNascitaCeo(dataNascitaR);
-				convenzione.setNumeroDipendenti(numeroDipendenti);
-				convenzione.setReferente(referente);
-				convenzione.setTelefonoReferente(telefono);
-				convenzione.setEmailReferente(email);
-				convenzione.setAttivita(attivita);
-				convenzione.setTutorAccademico(docente);
-				
-				if(luogoNascitaR.length()>3 && luogoNascitaR.length()<31){
-					if(dataNascitaR.length()>7 && dataNascitaR.length()<15){
-						if (referente.length()>4 && referente.length()<51){
-							if(telefono.length()>6 && telefono.length()<14){
-								if(email.length()>4 && email.length()<31){
-									if(attivita.length()>24 && attivita.length()<1001){					
-					
-				documento.compilaConvenzione(convenzione);
-
-				request.getSession().setAttribute("azienda", azienda);
-				request.getSession().setAttribute("convenzione", convenzione);
-
-				RequestDispatcher view = request.getRequestDispatcher("convenzioneEsistente.jsp");
-				view.forward(request, response);
-
-			} 
-			
-				else {
-					response.setContentType("text/html;charset=ISO-8859-1");
-					response.getWriter().write("formato attivita sbagliato");
-				}
-			}
-				else{
-					response.setContentType("text/html;charset=ISO-8859-1");
-					response.getWriter().write("formato email sbagliato");
-				}
-			}
-				else {
-					response.setContentType("text/html;charset=ISO-8859-1");
-					response.getWriter().write("formato telefono sbagliato");
-				}
-			}
-				else {
-					response.setContentType("text/html;charset=ISO-8859-1");
-					response.getWriter().write("formato referente sbagliato");
-				}
-			}
-				else{
-					response.setContentType("text/html;charset=ISO-8859-1");
-					response.getWriter().write("formato data sbagliato");
-				}
-			}
-				else {
-					response.setContentType("text/html;charset=ISO-8859-1");
-					response.getWriter().write("formato luogo sbagliato");
-				}
-			}
-			
-			catch (SQLException e) {
-
-				e.printStackTrace();
-			}
-		}
+		
+	
 		//no
 		if(azioneConvenzione.equals("selezionaConvenzione")){
 			try {

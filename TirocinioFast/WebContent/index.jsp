@@ -28,10 +28,10 @@ pageEncoding="ISO-8859-1"%>
 
     <input type="text" placeholder="Username" name="username" required>
 	<br>
-    <input type="password" placeholder="Password" name="password" required>
+    <input type="password" placeholder="Password"  name="password" required>
     <br>
     <div class ="new">
-    <button name ="azioneUtente" value="login" id="loginButton" class="button" type="submit">Login</button> 
+    <button name="azioneUtente" value="login" id="loginButton" class="button" type="submit">Login</button> 
     <br>
     <span class="dimenticata"><a href="recuperaPassword.jsp">Password dimenticata?</a></span>
     </div>
@@ -41,6 +41,31 @@ pageEncoding="ISO-8859-1"%>
 
 <%@include file = "footer.jsp" %>
 
+<<<<<<< HEAD
+=======
+<script>
+$(document).ready(function(){
+	setTimeout(function(){
+		$("#loginButton").click(function(){
+			
+			$.post("/TirocinioFast/GestioneUtente",
+					{
+						"azioneUtente" : "login",
+					},
+					function(responseTxt, statusTxt, xhr){
+						if(responseTxt=="passwordNo")
+							alert("Password non corretta!");
+						if(responseTxt=="usernameNo")
+							alert("Username non corretta o inesistente!");
+				});
+		}, 1000);
+	});
+});
+
+
+</script>
+
+>>>>>>> branch 'master' of https://github.com/riccia96/TirocinioFast.git
 <script src="js/bootstrap.min.js"></script>
 
 
