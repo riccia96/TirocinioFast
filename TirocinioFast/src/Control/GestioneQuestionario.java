@@ -161,7 +161,6 @@ public class GestioneQuestionario extends HttpServlet {
 
 				request.getSession().setAttribute("questionarioAzienda", questionarioAzienda);
 				request.getSession().setAttribute("studente", studente);
-				request.getSession().setAttribute("azienda", azienda);
 				request.getSession().setAttribute("tutor", tutor);
 				request.getSession().setAttribute("risposte", risposte);
 
