@@ -4,6 +4,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <title>Ricerca</title>
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -14,12 +16,29 @@
 <label>Cerca azienda per nome e/o sede <br>
 <input type="search" autocomplete="on" placeholder="Nome" name="nomeAzienda">
 <input type="search" autocomplete="on" placeholder="Sede Azienda" name="sedeAzienda">
-<input type="image" name="submit" src="img\icona-ricerca-dati.png" height="40px" width="40px">
+<input type="image" id="ricercaAziendaButton" name="submit" src="img\icona-ricerca-dati.png" height="40px" width="40px">
 <input type="hidden" name="azioneTirocinio" value="ricercaAzienda">
 </label>
 </form>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+	$("#ricercaAziendaButton").click(function(){
+		
+		$.post("/TirocinioFast/GestioneTirocinio",
+				{
+					"azioneTirocinio" : "ricercaAzienda",
+				},
+				function(responseTxt, statusTxt, xhr){
+					if(responseTxt=="formato nome sbagliato")
+						alert("Il formato inserito nel campo di ricerca 'Nome azienda' non è corretto!");
+					if(responseTxt=="formato geolocalizzazione sbagliato")
+						alert("Il formato inserito nel campo 'Sede azienda' non è corretto!");
+			});
+	});
+});
+</script>
+
 <script src="js/bootstrap.min.js"></script>
 </body>
 </html>

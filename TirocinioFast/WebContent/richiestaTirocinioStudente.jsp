@@ -7,6 +7,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <title>Compilazione Richiesta Tirocinio Studente</title>
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -48,7 +50,22 @@
 
 <%@include file = "footer.jsp" %>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+	$("#richiestaTirocinioButton").click(function(){
+		
+		$.post("/TirocinioFast/GestioneTirocinio",
+				{
+					"azioneTirocinio" : "tirocinioDatiStudente",
+				},
+				function(responseTxt, statusTxt, xhr){
+					if(responseTxt=="formato aa sbagliato")
+						alert("Il formato inserito nel campo 'Anno Accademico' non è corretto!");
+			});
+	});
+});
+</script>
+
 <script src="js/bootstrap.min.js"></script>
 
 </body>

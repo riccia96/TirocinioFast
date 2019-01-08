@@ -7,6 +7,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <title>Insert title here</title>
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -54,7 +56,32 @@
 
 <%@include file = "footer.jsp" %>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+	$("#convenzioneButton").click(function(){
+		
+		$.post("/TirocinioFast/GestioneConvenzione",
+				{
+					"azioneConvenzione" : "richiestaConvenzione",
+				},
+				function(responseTxt, statusTxt, xhr){
+					if(responseTxt=="formato luogo sbagliato")
+						alert("Il formato inserito nel campo 'Luogo di nascita' non è corretto!");
+					if(responseTxt=="formato data sbagliato")
+						alert("Il formato inserito nel campo 'Data di nascita' non è corretto!");
+					if(responseTxt=="formato referente sbagliato")
+						alert("Il formato inserito nel campo 'Referente' non è corretto!");
+					if(responseTxt=="formato telefono sbagliato")
+						alert("Il formato inserito nel campo 'Telefono referente' non è corretto!");
+					if(responseTxt=="formato email sbagliato")
+						alert("Il formato inserito nel campo 'E-mail referente' non è corretto!");
+					if(responseTxt=="formato attivita sbagliato")
+						alert("Il formato inserito nel campo 'Attività' non è corretto!");
+			});
+	});
+});
+</script>
+
 <script src="js/bootstrap.min.js"></script>
 
 </body>
