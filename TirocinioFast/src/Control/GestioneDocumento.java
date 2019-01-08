@@ -3,6 +3,7 @@ package Control;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.RequestDispatcher;
@@ -312,8 +313,15 @@ public class GestioneDocumento extends HttpServlet {
 			}
 		}
 
+		
+		if(azioneDocumento.equals("dowloadTirocinio")) {
+			try {
+				
+			} catch (SQLException e) {
 
-
+				e.printStackTrace();
+			}
+		}
 
 
 		if(azioneDocumento.equals("uploadTirocinio")) {
@@ -393,6 +401,15 @@ public class GestioneDocumento extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		
+		if(azioneDocumento.equals("dowloadConvenzione")) {
+			try {
+				
+			} catch (SQLException e) {
+
+				e.printStackTrace();
+			}
+		}
 
 		if(azioneDocumento.equals("uploadConvenzione")) {
 			try {
@@ -436,10 +453,223 @@ public class GestioneDocumento extends HttpServlet {
 			}
 		}
 
+		
+		if(azioneDocumento.equals("dowloadQuestionarioStudente")) {
+			try {
+				
+			} catch (SQLException e) {
+
+				e.printStackTrace();
+			}
+		}
+		
+		if(azioneDocumento.equals("uploadQuestionarioStudente")) {
+			try {
+				
+			} catch (SQLException e) {
+
+				e.printStackTrace();
+			}
+		}
 
 
+		if(azioneDocumento.equals("dowloadQuestionarioAzienda")) {
+			try {
+				
+			} catch (SQLException e) {
+
+				e.printStackTrace();
+			}
+		}
+		
+		if(azioneDocumento.equals("uploadQuestionarioAzienda")) {
+			try {
+				
+			} catch (SQLException e) {
+
+				e.printStackTrace();
+			}
+		}
+		
+		
+		
+		if(azioneDocumento.equals("dowloadRegistroOre")) {
+			try {
+				
+			} catch (SQLException e) {
+
+				e.printStackTrace();
+			}
+		}
+		
+		if(azioneDocumento.equals("uploadRegistroOre")) {
+			try {
+				
+			} catch (SQLException e) {
+
+				e.printStackTrace();
+			}
+		}
+
+		
+		
+		
+		if(azioneDocumento.equals("elencoRichiesteTirocinio")) {
+			try {
+				StudenteBean studente = new StudenteBean();
+				TutorBean tutor = new TutorBean();
+				AziendaBean azienda = new AziendaBean();
+
+				List<StudenteBean> studenti = new ArrayList<StudenteBean>();
+				List<AziendaBean> aziende = new ArrayList<AziendaBean>();
+				List<TutorBean> tutors = new ArrayList<TutorBean>();
+				List<TirocinioBean> tirocini = new ArrayList<TirocinioBean>();
+				List<TirocinioBean> richieste = new ArrayList<TirocinioBean>();
+
+				studenti = utente.getStudenti();
+				aziende = utente.getAziende();
+				tutors = utente.getTutorAccademici();
+
+				tirocini.addAll(documento.richiesteTirocinio());
+
+				if(!(request.getSession().getAttribute("tipoUtente").equals("studente"))) {
+					if(!(request.getSession().getAttribute("tipoUtente").equals("azienda"))) {
+						if(!(request.getSession().getAttribute("tipoUtente").equals("tutor"))) {
+
+							for(TirocinioBean t : tirocini) {
+								if(t.isConvalidaAzienda() && t.isConvalidaTutor() && t.isConvalidaStudente()) {
+									richieste.add(t);
+								}
+							} 
+
+							request.getSession().setAttribute("listaStudenti", studenti);
+							request.getSession().setAttribute("listaAziende", aziende);
+							request.getSession().setAttribute("listaTutor", tutors);
+							request.getSession().setAttribute("richiesteTirocinio", richieste);
+
+							if(richieste.equals(null)) {
+								response.setContentType("text/html;charset=ISO-8859-1");
+								response.getWriter().write("nessuna richiesta");
+							}
+
+							RequestDispatcher view = request.getRequestDispatcher("elencoRichiesteTirocinio.jsp");
+							view.forward(request, response);
+						} else {							
+							tutor = (TutorBean) request.getSession().getAttribute("utenteSessione");
+
+							for(TirocinioBean t : tirocini) {
+								if(t.isConvalidaAzienda() && t.getTutorAccademico().equals(tutor.getUsername())) {
+									richieste.add(t);
+								}
+							}
+
+							request.getSession().setAttribute("listaStudenti", studenti);
+							request.getSession().setAttribute("listaAziende", aziende);
+							request.getSession().setAttribute("listaTutor", tutors);
+							request.getSession().setAttribute("richiesteTirocinio", richieste);
+
+							if(richieste.equals(null)) {
+								response.setContentType("text/html;charset=ISO-8859-1");
+								response.getWriter().write("nessuna richiesta");
+							}
+
+							RequestDispatcher view = request.getRequestDispatcher("elencoRichiesteTirocinio.jsp");
+							view.forward(request, response);
+						}
+					} else {
+
+						azienda = (AziendaBean) request.getSession().getAttribute("utenteSessione");
+
+						for(TirocinioBean t : tirocini) {
+							if(t.getAzienda().equals(azienda.getUsername())) {
+								richieste.add(t);
+							}
+						}
+
+						request.getSession().setAttribute("listaStudenti", studenti);
+						request.getSession().setAttribute("listaAziende", aziende);
+						request.getSession().setAttribute("listaTutor", tutors);
+						request.getSession().setAttribute("richiesteTirocinio", richieste);
+
+						if(richieste.equals(null)) {
+							response.setContentType("text/html;charset=ISO-8859-1");
+							response.getWriter().write("nessuna richiesta");
+						}
+
+						RequestDispatcher view = request.getRequestDispatcher("elencoRichiesteTirocinio.jsp");
+						view.forward(request, response);
+					}
+				} else {
+
+					studente = (StudenteBean) request.getSession().getAttribute("utenteSessione");
+
+					for(TirocinioBean t : tirocini) {
+						if(t.getStudente().equals(studente.getUsername())) {
+							richieste.add(t);
+						}
+					}
+
+					request.getSession().setAttribute("listaStudenti", studenti);
+					request.getSession().setAttribute("listaAziende", aziende);
+					request.getSession().setAttribute("listaTutor", tutors);
+					request.getSession().setAttribute("richiesteTirocinio", richieste);
+
+					if(richieste.equals(null)) {
+						response.setContentType("text/html;charset=ISO-8859-1");
+						response.getWriter().write("nessuna richiesta");
+					}
+
+					RequestDispatcher view = request.getRequestDispatcher("elencoRichiesteTirocinio.jsp");
+					view.forward(request, response);
+				}
 
 
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		if(azioneDocumento.equals("elencoRichiesteConvenzioni")) {
+			try {
+				List<ConvenzioneBean> convenzioni = documento.convenzioni();
+				List<ConvenzioneBean> richieste = new ArrayList<ConvenzioneBean>();
+				List<AziendaBean> aziende = new ArrayList<AziendaBean>();
+
+				for(ConvenzioneBean c : convenzioni) {
+					if(!(c.isConvalida())) {
+						AziendaBean a = new AziendaBean();
+						a.setUsername(c.getAzienda());
+						aziende.add(utente.getAzienda(a));
+						richieste.add(c);
+					}
+				}
+
+				request.getSession().setAttribute("richiesteConvenzioni", richieste);
+				request.getSession().setAttribute("listaAziende", aziende);
+
+				if(richieste.equals(null)) {
+					response.setContentType("text/html;charset=ISO-8859-1");
+					response.getWriter().write("nessuna richiesta");
+				}
+
+				RequestDispatcher view = request.getRequestDispatcher("elencoRichiesteConvenzioni.jsp");
+				view.forward(request, response);
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		}
 
 	}
 }
