@@ -45,10 +45,8 @@ public class GestioneUtente extends HttpServlet {
 		if(azioneUtente.equals("login")) {
 			try {
 				String username = request.getParameter("username");
-				System.out.println(username);
 				boolean user = false;
 				String password = request.getParameter("password");
-				System.out.println(password);
 				boolean pass = false;
 
 				StudenteBean studente = new StudenteBean();
@@ -66,74 +64,19 @@ public class GestioneUtente extends HttpServlet {
 				TutorBean t = utente.getTutor(tutor);
 				ImpiegatoBean i = utente.getImpiegato(impiegato);
 
-<<<<<<< HEAD
-
-
-				if(s.getUsername().equals("")){
-					if(a.getUsername().equals("")) {
-						if(t.getUsername().equals("")) {
-							if(i.getUsername().equals("")) {
-								RequestDispatcher view = request.getRequestDispatcher("utenteNonTrovato.jsp");
-								view.forward(request, response);
-							}else {
-								if(i.getPassword().equals(password)) {
-									request.getSession().setAttribute("utenteSessione", utente.getImpiegato(impiegato));
-									request.getSession().setAttribute("tipoUtente", "impiegato");
-
-									RequestDispatcher view = request.getRequestDispatcher("home.jsp");
-									view.forward(request, response);
-								}else {
-									RequestDispatcher view = request.getRequestDispatcher("utenteNonTrovato.jsp");
-									view.forward(request, response);
-								}
-							}
-						}else {
-							if(t.getPassword().equals(password)) {
-								request.getSession().setAttribute("utenteSessione", utente.getTutor(tutor));
-								request.getSession().setAttribute("tipoUtente", "tutor");
-
-								RequestDispatcher view = request.getRequestDispatcher("home.jsp");
-								view.forward(request, response);
-							}else {
-								RequestDispatcher view = request.getRequestDispatcher("utenteNonTrovato.jsp");
-								view.forward(request, response);
-							}
-						}
-					}else {
-						if(a.getPassword().equals(password)) {
-							request.getSession().setAttribute("utenteSessione", utente.getAzienda(azienda));
-							request.getSession().setAttribute("tipoUtente", "azienda");
-
-							RequestDispatcher view = request.getRequestDispatcher("home.jsp");
-							view.forward(request, response);
-						}else {
-							RequestDispatcher view = request.getRequestDispatcher("utenteNonTrovato.jsp");
-							view.forward(request, response);
-						}
-					}
-				}else {
-=======
-				System.out.println("controllo1"+s.getUsername().equals(username));
 				if(s.getUsername().equals(username)) {
 					user = true;
-					System.out.println("controllo2"+s.getUsername().equals(username));
->>>>>>> branch 'master' of https://github.com/riccia96/TirocinioFast.git
 					if(s.getPassword().equals(password)) {
-						System.out.println("sto in controllo password stud");
 						request.getSession().setAttribute("utenteSessione", s);
 						request.getSession().setAttribute("tipoUtente", "studente");
-						System.out.println("sto prima di dispatcher");
-						response.sendRedirect("home.jsp");
-						//RequestDispatcher view = request.getRequestDispatcher("home.jsp");
-						//view.forward(request, response);
-						System.out.println("studok");
-						pass = true;
-						System.out.println("1"+user);
+						pass=true;
+						RequestDispatcher view = request.getRequestDispatcher("home.jsp");
+						view.forward(request, response);
+												
 						
 					}else {
-						System.out.println("passstudno");
-						response.setContentType("text/html;charset=ISO-8859-1");
-						response.getWriter().write("passwordNo");
+						RequestDispatcher view = request.getRequestDispatcher("utenteNonTrovato.jsp");
+						view.forward(request, response);
 						
 					}
 				} else if(a.getUsername().equals(username)) {
@@ -144,19 +87,12 @@ public class GestioneUtente extends HttpServlet {
 
 						RequestDispatcher view = request.getRequestDispatcher("home.jsp");
 						view.forward(request, response);
-						System.out.println("azieok");
 						pass = true;
 						
 					}else {
-<<<<<<< HEAD
 						RequestDispatcher view = request.getRequestDispatcher("utenteNonTrovato.jsp");
 						view.forward(request, response);
-=======
-						System.out.println("passazienoo");
-						response.setContentType("text/html;charset=ISO-8859-1");
-						response.getWriter().write("passwordNo");
 						
->>>>>>> branch 'master' of https://github.com/riccia96/TirocinioFast.git
 					}
 				}
 				else if(t.getUsername().equals(username)) {
@@ -167,14 +103,12 @@ public class GestioneUtente extends HttpServlet {
 
 						RequestDispatcher view = request.getRequestDispatcher("home.jsp");
 						view.forward(request, response);
-						System.out.println("tutook");
+						
 						pass = true;
 						
 					}else {
-						System.out.println("passtutonooo");
-						response.setContentType("text/html;charset=ISO-8859-1");
-						response.getWriter().write("passwordNo");
-						
+						RequestDispatcher view = request.getRequestDispatcher("utenteNonTrovato.jsp");
+						view.forward(request, response);
 					}
 				}
 				else if(i.getUsername().equals(username)) {
@@ -188,16 +122,13 @@ public class GestioneUtente extends HttpServlet {
 						pass = true;
 						
 					}else {
-						System.out.println("passimpno");
-						response.setContentType("text/html;charset=ISO-8859-1");
-						response.getWriter().write("passwordNo");
+						RequestDispatcher view = request.getRequestDispatcher("utenteNonTrovato.jsp");
+						view.forward(request, response);
 						
 					}
 				} else if(!user) {
-					System.out.println(user);
-					response.setContentType("text/html;charset=ISO-8859-1");
-					response.getWriter().write("usernameNo");
-					System.out.println("usernamenooooooo");
+					RequestDispatcher view = request.getRequestDispatcher("utenteNonTrovato.jsp");
+					view.forward(request, response);
 					
 				}
 			}catch (SQLException e) {

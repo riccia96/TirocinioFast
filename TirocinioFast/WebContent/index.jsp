@@ -41,31 +41,7 @@ pageEncoding="ISO-8859-1"%>
 
 <%@include file = "footer.jsp" %>
 
-<<<<<<< HEAD
-=======
-<script>
-$(document).ready(function(){
-	setTimeout(function(){
-		$("#loginButton").click(function(){
-			
-			$.post("/TirocinioFast/GestioneUtente",
-					{
-						"azioneUtente" : "login",
-					},
-					function(responseTxt, statusTxt, xhr){
-						if(responseTxt=="passwordNo")
-							alert("Password non corretta!");
-						if(responseTxt=="usernameNo")
-							alert("Username non corretta o inesistente!");
-				});
-		}, 1000);
-	});
-});
 
-
-</script>
-
->>>>>>> branch 'master' of https://github.com/riccia96/TirocinioFast.git
 <script src="js/bootstrap.min.js"></script>
 
 
