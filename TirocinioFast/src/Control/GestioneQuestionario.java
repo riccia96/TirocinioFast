@@ -59,7 +59,8 @@ public class GestioneQuestionario extends HttpServlet {
 		if(azioneQuestionario.equals("questionarioAzienda")) {
 			AziendaBean azienda = (AziendaBean) request.getSession().getAttribute("utenteSessione");
 		}
-
+		
+		//no
 		if(azioneQuestionario.equals("compilaQuestionarioStudente")) {
 			try{
 				ArrayList<String> risposte = new ArrayList<String>();
@@ -119,6 +120,7 @@ public class GestioneQuestionario extends HttpServlet {
 
 		}
 
+		//no
 		if(azioneQuestionario.equals("compilaQuestionarioAzienda")) {
 			try {
 				ArrayList<String> risposte = new ArrayList<String>();

@@ -40,7 +40,9 @@ public class GestioneConvenzione extends HttpServlet {
 
 
 		String azioneConvenzione = request.getParameter("azioneConvenzione");
-
+		
+		//no
+		
 		if(azioneConvenzione.equals("elencoRichiesteConvenzioni")) {
 			try {
 				List<ConvenzioneBean> convenzioni = documento.convenzioni();
@@ -73,6 +75,7 @@ public class GestioneConvenzione extends HttpServlet {
 
 		}
 
+		//no
 		if(azioneConvenzione.equals("convenzioniConvalidate")){
 			try{
 				List<ConvenzioneBean> convenzioni = documento.convenzioni();
@@ -102,7 +105,7 @@ public class GestioneConvenzione extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-
+		//no
 		if(azioneConvenzione.equals("richiestaConvenzione")) {
 			try {
 				AziendaBean azienda = new AziendaBean();
@@ -144,7 +147,7 @@ public class GestioneConvenzione extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-
+		//no
 		if(azioneConvenzione.equals("selezionaConvenzione")){
 			try {
 				
@@ -172,7 +175,7 @@ public class GestioneConvenzione extends HttpServlet {
 			}
 		}
 
-
+		//ok
 		if(azioneConvenzione.equals("apriForm")){
 			try {
 				List<TutorBean> tutors = new ArrayList<TutorBean>();

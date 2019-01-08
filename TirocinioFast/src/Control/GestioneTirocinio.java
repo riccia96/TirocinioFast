@@ -44,6 +44,8 @@ public class GestioneTirocinio extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String azioneTirocinio = request.getParameter("azioneTirocinio");
 
+		//ok
+		
 		if(azioneTirocinio.equals("inoltraRichiesta")){
 			try {
 				String aziendaTirocinio = request.getParameter("aziendaSelezionata");
@@ -59,7 +61,9 @@ public class GestioneTirocinio extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-
+		
+		//no
+		
 		if(azioneTirocinio.equals("tirocinioDatiStudente")) {
 			try {
 				StudenteBean studente = new StudenteBean();
@@ -96,7 +100,7 @@ public class GestioneTirocinio extends HttpServlet {
 			}
 		}
 
-
+		//no
 
 		if(azioneTirocinio.equals("elencoRichiesteTirocinio")) {
 			try {
@@ -213,6 +217,8 @@ public class GestioneTirocinio extends HttpServlet {
 			}
 
 		}
+		
+		//no
 
 		if(azioneTirocinio.equals("richiestaSelezionata")) {
 			try {
@@ -244,6 +250,8 @@ public class GestioneTirocinio extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		
+		//no
 
 		if(azioneTirocinio.equals("tirocinioDatiAzienda")) {
 			try {
@@ -283,6 +291,7 @@ public class GestioneTirocinio extends HttpServlet {
 
 		}
 
+		//no
 		if(azioneTirocinio.equals("mostraDocumento")){
 			try {
 				int id = Integer.parseInt((String) request.getParameter("idT"));
@@ -300,7 +309,8 @@ public class GestioneTirocinio extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-
+		//no
+		
 		if(azioneTirocinio.equals("compilaAzienda")) {
 
 			try {
@@ -320,6 +330,8 @@ public class GestioneTirocinio extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		
+		//no
 		
 		if(azioneTirocinio.equals("compilato")){
 			try {
@@ -374,6 +386,8 @@ public class GestioneTirocinio extends HttpServlet {
 			}
 		}
 		
+		//ok
+		
 		if(azioneTirocinio.equals("inoltroAT")) {
 
 			try {
@@ -391,6 +405,8 @@ public class GestioneTirocinio extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		
+		//ok
 
 		if(azioneTirocinio.equals("inoltroTS")) {
 			try {
@@ -405,6 +421,8 @@ public class GestioneTirocinio extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		
+		//ok
 
 		if(azioneTirocinio.equals("inoltroSI")) {
 			try{
@@ -466,7 +484,7 @@ public class GestioneTirocinio extends HttpServlet {
 		
 		
 		
-		
+		//ok
 		
 		
 		if(azioneTirocinio.equals("schedaAzienda")) {
@@ -490,6 +508,7 @@ public class GestioneTirocinio extends HttpServlet {
 		
 		
 		//ok
+		
 		if(azioneTirocinio.equals("ricercaAzienda")) {
 			try {
 				List<AziendaBean> aziende = new ArrayList<AziendaBean>();
@@ -526,7 +545,7 @@ public class GestioneTirocinio extends HttpServlet {
 			}
 		}
 
-		
+		//no
 		
 		if(azioneTirocinio.equals("attivitaConvalidate")){
 			try{
@@ -579,6 +598,7 @@ public class GestioneTirocinio extends HttpServlet {
 			}
 		}
 
+		//no
 		if(azioneTirocinio.equals("tirociniConclusi")){
 			try{
 				StudenteBean studente = new StudenteBean();
@@ -620,6 +640,8 @@ public class GestioneTirocinio extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		
+		//no
 
 		if(azioneTirocinio.equals("selezionaAttivita")){
 			try {
@@ -652,6 +674,8 @@ public class GestioneTirocinio extends HttpServlet {
 			}
 
 		}
+		
+		//no
 
 		if(azioneTirocinio.equals("accettaAttivita")){
 			try {
