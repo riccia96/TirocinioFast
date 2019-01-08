@@ -41,27 +41,6 @@ pageEncoding="ISO-8859-1"%>
 
 <%@include file = "footer.jsp" %>
 
-<script>
-$(document).ready(function(){
-	setTimeout(function(){
-		$("#loginButton").click(function(){
-			
-			$.post("/TirocinioFast/GestioneUtente",
-					{
-						"azioneUtente" : "login",
-					},
-					function(responseTxt, statusTxt, xhr){
-						if(responseTxt=="passwordNo")
-							alert("Password non corretta!");
-						if(responseTxt=="usernameNo")
-							alert("Username non corretta o inesistente!");
-				});
-		}, 1000);
-	});
-});
-
-
-</script>
 
 <script src="js/bootstrap.min.js"></script>
 
