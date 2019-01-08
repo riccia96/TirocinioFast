@@ -4,6 +4,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <title>Completa Scheda Azienda</title>
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -37,7 +39,22 @@
 
 <%@include file = "footer.jsp" %>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+	$("#compilaSchedaButton").click(function(){
+		
+		$.post("/TirocinioFast/GestioneUtente",
+				{
+					"azioneUtente" : "salvaScheda",
+				},
+				function(responseTxt, statusTxt, xhr)({
+					if(responseTxt=="formato descrizione sbagliato")
+						alert("Il formato inserito nel campo 'Descrizione' non è corretto!!");
+			});
+	});
+});
+</script>
+
 <script src="js/bootstrap.min.js"></script>
 
 </body>

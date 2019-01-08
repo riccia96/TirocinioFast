@@ -5,6 +5,8 @@ pageEncoding="ISO-8859-1" import = "Bean.*"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <title>Recupera Password</title>
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -30,7 +32,7 @@ pageEncoding="ISO-8859-1" import = "Bean.*"%>
     <input type="text" placeholder="Film preferito" name="risposta" required>
     <br>
     <div class ="new">
-    <button name = "azioneUtente" value="recuperaPassword" id="RecuperoButton" class=" button" type="submit">Avanti</button> 
+    <button name = "azioneUtente" value="recuperaPassword" id="recuperoButton" class=" button" type="submit">Avanti</button> 
     </div>
 </form>
   
@@ -38,7 +40,24 @@ pageEncoding="ISO-8859-1" import = "Bean.*"%>
 
 <%@include file = "footer.jsp" %>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+	$("#recuperoButton").click(function(){
+		
+		$.post("/TirocinioFast/GestioneUtente",
+				{
+					"azioneUtente" : "recuperaPassword",
+				},
+				function(responseTxt, statusTxt, xhr){
+					if(responseTxt=="risposta errata")
+						alert("Risposta alla domanda segreta non corretta!");
+					if(responseTxt=="username no")
+						alert("Username non corretta o inesistente!");
+			});
+	});
+});
+</script>
+
 <script src="js/bootstrap.min.js"></script>
 </body>
 </html>
