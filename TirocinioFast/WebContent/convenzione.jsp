@@ -20,7 +20,7 @@
 <h3 class="perForm">Compilazione di una richiesta di convenzione</h3>
 
 <div style="margin-left:25%;width: 700px;">
-<form class="dialogo" id="login" action="GestioneConvenzione" method="POST">
+<form class="dialogo" action="GestioneConvenzione" method="POST">
   <div class="imgcontainer">
     <img src="img\convenzione.png" alt="Convenzione" class="avatar">
   </div>
