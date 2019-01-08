@@ -4,11 +4,11 @@
 <%@ page import="Bean.*" %>
 <% String tipoUtente = (String) request.getSession().getAttribute("tipoUtente");
 
-if(tipoUtente.equals("studente")){
+
 	QuestionarioStudenteBean questionarioStud = (QuestionarioStudenteBean) request.getSession().getAttribute("questionarioStudente");
-}else{
+
 	ArrayList<QuestionarioStudenteBean> questionariS = (ArrayList<QuestionarioStudenteBean>) request.getSession().getAttribute("");
-}
+
 ArrayList<QuestionarioAziendaBean> questionariA = (ArrayList<QuestionarioAziendaBean>) request.getSession().getAttribute("");
 ArrayList<TirocinioBean> tirocini = (ArrayList<TirocinioBean>) request.getSession().getAttribute("listaTirocini");
 ArrayList<StudenteBean> studenti = (ArrayList<StudenteBean>) request.getSession().getAttribute("listaStudenti");

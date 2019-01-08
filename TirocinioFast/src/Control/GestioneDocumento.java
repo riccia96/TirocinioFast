@@ -142,7 +142,7 @@ public class GestioneDocumento extends HttpServlet {
 				for(String r: risposte) {
 					scelte += r + "*";
 				}
-
+				System.out.println(scelte);
 
 				int id = Integer.parseInt((String) request.getSession().getAttribute("id"));
 				QuestionarioStudenteBean questionarioStudente = new QuestionarioStudenteBean();
@@ -199,7 +199,7 @@ public class GestioneDocumento extends HttpServlet {
 				for(String r: risposte) {
 					scelte += r + "*";
 				}
-
+				System.out.println(scelte);
 				int id = Integer.parseInt((String) request.getSession().getAttribute("id"));
 				QuestionarioAziendaBean questionarioAzienda = new QuestionarioAziendaBean();
 				StudenteBean studente = new StudenteBean();
