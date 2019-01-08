@@ -1,12 +1,9 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<% 	ArrayList<TirocinioBean> disponibiliRegistro = (ArrayList<TirocinioBean>)request.getSession().getAttribute("registroDisponibili");
-	ArrayList<AziendaBean> aziende = (ArrayList<AziendaBean>)request.getSession().getAttribute("listaAziende");
-	ArrayList<TutorBean> tutors = (ArrayList<TutorBean>)request.getSession().getAttribute("listaTutor");
-	TirocinioBean tirocinio = new TirocinioBean();
-	AziendaBean azienda = new AziendaBean();
-	TutorBean tutor = new TutorBean();
+<% 	TirocinioBean tirocinio = (TirocinioBean)request.getSession().getAttribute("tirocinioOre");
+	AziendaBean azienda = (AziendaBean)request.getSession().getAttribute("aziendaOre");
+	TutorBean tutor = (TutorBean)request.getSession().getAttribute("tutorOre");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -22,10 +19,10 @@
 
 <%@include file = "menu.jsp" %>
 
-<% %>
+
 
 <h3 class="intestazione">Gestione del registro</h3>
-<% if (disponibiliRegistro.size()>0){ %>
+
 <table style="margin-left: 25%; width: 1000px;">
   <tr>
     <th style="text-align: center">Registro ore relativo all'Attivit&agrave; di Tirocinio</th>
@@ -33,23 +30,7 @@
     <th style="text-align: center">Tutor</th>
     <th></th>
   </tr>
-  		<%for (int i = 0; i < disponibiliRegistro.size(); i++){
-  			 	tirocinio = disponibiliRegistro.get(i);
-  					
-  			 	for (int a = 0; a < aziende.size(); a++){
-  					azienda = aziende.get(a);
-  					if (tirocinio.getAzienda().equals(azienda.getUsername())){
-  						break;
-  						}
-  					}
-  			 	
-  			 	for (int t = 0; t < tutors.size(); t++){
-  			 		tutor = tutors.get(t);
-  			 		if (tirocinio.getTutorAccademico().equals(tutor.getUsername())){
-  			 			break;
-  			 		}
-  			 	}
-	  %>
+  		
   <tr>
     <td><a href="documentoRegistroOre.jsp">Attivit&agrave; di Tirocinio N.<%=tirocinio.getId() %></a></td>
     <td><%= azienda.getNome() %></td>
@@ -68,7 +49,7 @@
   </tr>
   <%} %>
   </table>
-<%} }%>
+  
 
 <%@include file = "footer.jsp" %>
 
