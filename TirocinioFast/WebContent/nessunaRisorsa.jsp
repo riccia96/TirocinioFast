@@ -10,8 +10,8 @@
 
 <body>
 <div class="cover">
-        <h1>Username e/o password errati! </h1>
-        <p><a href="index.jsp">Torna alla home.</a></p>
+        <h1>Nessuna risorsa da visualizzare! </h1>
+        <p><a href="home.jsp">Torna alla home.</a></p>
     </div>
 </body>
 

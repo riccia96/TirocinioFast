@@ -48,8 +48,7 @@
 </table>
 <%} else { %>
  <script type="text/javascript">
- var r=alert("Non sono ancora presenti aziende convenzionate");
- window.location.href = 'home.jsp';
+ window.location.href = 'nessunaRisorsa.jsp';
  </script>
  <% } %>
 <%@include file="footer.jsp"%>

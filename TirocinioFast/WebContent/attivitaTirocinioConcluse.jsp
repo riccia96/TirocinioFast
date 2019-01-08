@@ -69,7 +69,6 @@ TirocinioBean tirocinio = new TirocinioBean();
 <% } 
 else { %>
  <script type="text/javascript">
-  var r=alert("Non sono presenti attività di tirocinio concluse da visualizzare");
  window.location.href = 'home.jsp';
  </script> 
  <% } %>

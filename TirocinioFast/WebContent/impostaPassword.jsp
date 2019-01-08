@@ -35,24 +35,6 @@ pageEncoding="ISO-8859-1" import="Bean.*"%>
 
 <%@include file = "footer.jsp" %>
 
-<script>
-$(document).ready(function(){
-	$("#reimpostaButton").click(function(){
-		
-		$.post("/TirocinioFast/GestioneUtente",
-				{
-					"azioneUtente" : "impostaPassword",
-				},
-				function(responseTxt, statusTxt, xhr){
-					if(responseTxt=="password non corrispondenti")
-						alert("Le password non corrispondono!");
-					if(responseTxt=="password non rispetta parametri")
-						alert("La password inserita non rispetta il formato richiesto!");
-			});
-	});
-});
-</script>
-
 
 <script src="js/bootstrap.min.js"></script>
 </body>

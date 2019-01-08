@@ -50,22 +50,6 @@
 
 <%@include file = "footer.jsp" %>
 
-<script>
-$(document).ready(function(){
-	$("#richiestaTirocinioButton").click(function(){
-		
-		$.post("/TirocinioFast/GestioneTirocinio",
-				{
-					"azioneTirocinio" : "tirocinioDatiStudente",
-				},
-				function(responseTxt, statusTxt, xhr){
-					if(responseTxt=="formato aa sbagliato")
-						alert("Il formato inserito nel campo 'Anno Accademico' non è corretto!");
-			});
-	});
-});
-</script>
-
 <script src="js/bootstrap.min.js"></script>
 
 </body>

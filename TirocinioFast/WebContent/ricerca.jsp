@@ -21,24 +21,6 @@
 </label>
 </form>
 
-<script>
-$(document).ready(function(){
-	$("#ricercaAziendaButton").click(function(){
-		
-		$.post("/TirocinioFast/GestioneTirocinio",
-				{
-					"azioneTirocinio" : "ricercaAzienda",
-				},
-				function(responseTxt, statusTxt, xhr){
-					if(responseTxt=="formato nome sbagliato")
-						alert("Il formato inserito nel campo di ricerca 'Nome azienda' non è corretto!");
-					if(responseTxt=="formato geolocalizzazione sbagliato")
-						alert("Il formato inserito nel campo 'Sede azienda' non è corretto!");
-			});
-	});
-});
-</script>
-
 <script src="js/bootstrap.min.js"></script>
 </body>
 </html>

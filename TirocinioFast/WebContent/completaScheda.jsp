@@ -39,22 +39,6 @@
 
 <%@include file = "footer.jsp" %>
 
-<script>
-$(document).ready(function(){
-	$("#compilaSchedaButton").click(function(){
-		
-		$.post("/TirocinioFast/GestioneUtente",
-				{
-					"azioneUtente" : "salvaScheda",
-				},
-				function(responseTxt, statusTxt, xhr)({
-					if(responseTxt=="formato descrizione sbagliato")
-						alert("Il formato inserito nel campo 'Descrizione' non è corretto!!");
-			});
-	});
-});
-</script>
-
 <script src="js/bootstrap.min.js"></script>
 
 </body>

@@ -120,8 +120,7 @@ TirocinioBean tirocinio = new TirocinioBean();
   } 
  } else {%>
   <script type="text/javascript">
- var r=alert("Non sono presenti tirocini conclusi");
- window.location.href = 'home.jsp';
+ window.location.href = 'nessunaRisorsa.jsp';
  </script>
   <% } %>
 

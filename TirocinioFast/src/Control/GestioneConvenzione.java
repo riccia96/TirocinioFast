@@ -64,8 +64,8 @@ public class GestioneConvenzione extends HttpServlet {
 				request.getSession().setAttribute("listaAziende", aziende);
 
 				if(richieste.equals(null)) {
-					response.setContentType("text/html;charset=ISO-8859-1");
-					response.getWriter().write("nessuna richiesta");
+					RequestDispatcher view = request.getRequestDispatcher("nessunaRisorsa.jsp");
+					view.forward(request, response);
 				}
 
 				RequestDispatcher view = request.getRequestDispatcher("elencoConvenzioniAccettate.jsp");

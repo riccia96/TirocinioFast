@@ -54,33 +54,7 @@
   
 </div>
 
-<%@include file = "footer.jsp" %>
-
-<script>
-$(document).ready(function(){
-	$("#convenzioneButton").click(function(){
-		
-		$.post("/TirocinioFast/GestioneConvenzione",
-				{
-					"azioneConvenzione" : "richiestaConvenzione",
-				},
-				function(responseTxt, statusTxt, xhr){
-					if(responseTxt=="formato luogo sbagliato")
-						alert("Il formato inserito nel campo 'Luogo di nascita' non è corretto!");
-					if(responseTxt=="formato data sbagliato")
-						alert("Il formato inserito nel campo 'Data di nascita' non è corretto!");
-					if(responseTxt=="formato referente sbagliato")
-						alert("Il formato inserito nel campo 'Referente' non è corretto!");
-					if(responseTxt=="formato telefono sbagliato")
-						alert("Il formato inserito nel campo 'Telefono referente' non è corretto!");
-					if(responseTxt=="formato email sbagliato")
-						alert("Il formato inserito nel campo 'E-mail referente' non è corretto!");
-					if(responseTxt=="formato attivita sbagliato")
-						alert("Il formato inserito nel campo 'Attività' non è corretto!");
-			});
-	});
-});
-</script>
+<%@include file = "footer.jsp" %> 
 
 <script src="js/bootstrap.min.js"></script>
 

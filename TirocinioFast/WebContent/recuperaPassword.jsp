@@ -40,24 +40,6 @@ pageEncoding="ISO-8859-1" import = "Bean.*"%>
 
 <%@include file = "footer.jsp" %>
 
-<script>
-$(document).ready(function(){
-	$("#recuperoButton").click(function(){
-		
-		$.post("/TirocinioFast/GestioneUtente",
-				{
-					"azioneUtente" : "recuperaPassword",
-				},
-				function(responseTxt, statusTxt, xhr){
-					if(responseTxt=="risposta errata")
-						alert("Risposta alla domanda segreta non corretta!");
-					if(responseTxt=="username no")
-						alert("Username non corretta o inesistente!");
-			});
-	});
-});
-</script>
-
 <script src="js/bootstrap.min.js"></script>
 </body>
 </html>

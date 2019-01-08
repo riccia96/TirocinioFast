@@ -55,46 +55,6 @@
 
 <%@include file = "footer.jsp" %>
 
-<script>
-$(document).ready(function(){
-	$("#registraAziendaButton").click(function(){
-		
-		$.post("/TirocinioFast/GestioneUtente",
-				{
-					"azioneUtente" : "registraAzienda",
-				},
-				function(responseTxt, statusTxt, xhr){
-					if(responseTxt=="email gia' esistente")
-						alert("E-mail inserita già corrisponde ad un account!");
-					if(responseTxt=="nome azienda gia' esistente")
-						alert("Nome azienda inserito già corrisponde ad un account!");
-					if(responseTxt=="username gia' esistente")
-						alert("Matricola inserita già corrisponde ad un account!");
-					if(responseTxt=="password non corrispondenti")
-						alert("Le password inserite non  corrispondono!");
-					if(responseTxt=="formato risposta sbagliato")
-						alert("Il formato inserito nel campo 'Risposta' non è corretto!");
-					if(responseTxt=="formato password sbagliato")
-						alert("Il formato inserito nel campo 'Password' non è corretto!");
-					if(responseTxt=="formato username sbagliato")
-						alert("Il formato inserito nel campo 'Username' non è corretto!");
-					if(responseTxt=="formato telefono sbagliato")
-						alert("Il formato inserito nel campo 'Telefono' non è corretto!");
-					if(responseTxt=="formato email sbagliato")
-						alert("Il formato inserito nel campo 'E-mail' non è corretto!");
-					if(responseTxt=="formato indirizzo sbagliato")
-						alert("Il formato inserito nel campo 'Indirizzo' non è corretto!");
-					if(responseTxt=="formato ceo sbagliato")
-						alert("Il formato inserito nel campo 'CEO' non è corretto!");
-					if(responseTxt=="formato pi sbagliato")
-						alert("Il formato inserito nel campo 'Partita Iva' non è corretto!");
-					if(responseTxt=="formato nome sbagliato")
-						alert("Il formato inserito nel campo 'Nome azienda' non è corretto!");
-			});
-	});
-});
-</script> 
-
 <script src="js/bootstrap.min.js"></script>
 </body>
 </html>

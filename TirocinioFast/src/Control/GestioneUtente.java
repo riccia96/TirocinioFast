@@ -216,8 +216,8 @@ public class GestioneUtente extends HttpServlet {
 						RequestDispatcher view = request.getRequestDispatcher("impostaPassword.jsp");
 						view.forward(request, response);
 					}else {
-						response.setContentType("text/html;charset=ISO-8859-1");
-						response.getWriter().write("risposta errata");
+						RequestDispatcher view = request.getRequestDispatcher("rispostaErrata.jsp");
+						view.forward(request, response);
 					}
 				}
 			}catch (SQLException e) {
@@ -286,13 +286,13 @@ public class GestioneUtente extends HttpServlet {
 						}
 					}
 					else {
-						response.setContentType("text/html;charset=ISO-8859-1");
-						response.getWriter().write("password non corrispondenti");
+						RequestDispatcher view = request.getRequestDispatcher("PasswordNonCorrispondenti.jsp");
+						view.forward(request, response);;
 					}
 				}
 				else {
-					response.setContentType("text/html;charset=ISO-8859-1");
-					response.getWriter().write("password non rispetta parametri");
+					RequestDispatcher view = request.getRequestDispatcher("parametriSbagliati.jsp");
+					view.forward(request, response);
 				}
 			}
 			catch (SQLException e) {
@@ -337,121 +337,48 @@ public class GestioneUtente extends HttpServlet {
 
 				studenti.addAll(utente.getStudenti());
 
-				if(nome.length()>2 && nome.length()<31){
-					if(cognome.length()>2 && cognome.length()<31){
-						if(luogoNascita.length()>2 && luogoNascita.length()<21){
-							if(dataNascita.length()>7 && dataNascita.length()<11){
-								if(indirizzo.length()>4 && indirizzo.length()<31){
-									if(citta.length()>2 && citta.length()<21){
-										if(codiceFiscale.length()== 16){
-											if(matricola.length()== 10){
-												if(email.length()>4 && email.length()<31){
-													if(telefono.length()>6 && telefono.length()<14){
-														if(username.length()>4 && username.length()<21){
-															if(password.length()>7 && password.length()<21){
-																if(risposta.length()>1 && risposta.length()<31){													
-
-																	if(!(studenti.equals(null))) {
-																		for(StudenteBean s : studenti) {
-																			if(s.getEmail().equals(email)) {
-																				response.setContentType("text/html;charset=ISO-8859-1");
-																				response.getWriter().write("email gia' esistente");
-																			}
-																			if(s.getMatricola().equals(matricola)) {
-																				response.setContentType("text/html;charset=ISO-8859-1");
-																				response.getWriter().write("matricola gia' esistente");
-																			}
-																			if(s.getCodiceFiscale().equals(codiceFiscale)) {
-																				response.setContentType("text/html;charset=ISO-8859-1");
-																				response.getWriter().write("codice fiscale gia' esistente");
-																			}
-																			if(s.getUsername().equals(username)) {
-																				response.setContentType("text/html;charset=ISO-8859-1");
-																				response.getWriter().write("username gia' esistente");
-																			}
-																		}
-																	}
-																	if(!(password.equals(conferma))){
-																		response.setContentType("text/html;charset=ISO-8859-1");
-																		response.getWriter().write("password non corrispondenti");
-																	} 
-																	utente.salvaStudente(studente);
-
-																	request.getSession().setAttribute("utenteSessione", studente);
-																	request.getSession().setAttribute("tipoUtente", "studente");
-
-																	RequestDispatcher view = request.getRequestDispatcher("home.jsp");
-																	view.forward(request, response);
-																} else {
-																	response.setContentType("text/html;charset=ISO-8859-1");
-																	response.getWriter().write("formato risposta sbagliato");
-																}								
-															}
-															else{
-																response.setContentType("text/html;charset=ISO-8859-1");
-																response.getWriter().write("formato password sbagliato");	
-															}												
-														}
-														else {
-															response.setContentType("text/html;charset=ISO-8859-1");
-															response.getWriter().write("formato username sbagliato");
-														}
-													}
-													else {
-														response.setContentType("text/html;charset=ISO-8859-1");
-														response.getWriter().write("formato telefono sbagliato");
-													}
-												}
-												else{
-													response.setContentType("text/html;charset=ISO-8859-1");
-													response.getWriter().write("formato email sbagliato");
-												}
-											}
-											else{
-												response.setContentType("text/html;charset=ISO-8859-1");
-												response.getWriter().write("formato matricola sbagliato");
-											}
-										}
-										else{
-											response.setContentType("text/html;charset=ISO-8859-1");
-											response.getWriter().write("formato CF sbagliato");
-										}
-									}
-									else {
-										response.setContentType("text/html;charset=ISO-8859-1");
-										response.getWriter().write("formato citta sbagliato");
-									}
+				if((nome.length()>2 && nome.length()<31) && (cognome.length()>2 && cognome.length()<31) && (luogoNascita.length()>2 && luogoNascita.length()<21) && (dataNascita.length()>7 && dataNascita.length()<11) && (indirizzo.length()>4 && indirizzo.length()<31) && (citta.length()>2 && citta.length()<21) && (codiceFiscale.length()== 16) && (matricola.length()== 10) && (email.length()>4 && email.length()<31) && (telefono.length()>6 && telefono.length()<14) && (username.length()>4 && username.length()<21) && (password.length()>7 && password.length()<21) && (risposta.length()>1 && risposta.length()<31)){
+										
+				if(!(studenti.equals(null))) {
+					for(StudenteBean s : studenti) {
+						if(s.getEmail().equals(email)) {
+							RequestDispatcher view = request.getRequestDispatcher("emailEsistente.jsp");
+							view.forward(request, response);
 								}
-								else {
-									response.setContentType("text/html;charset=ISO-8859-1");
-									response.getWriter().write("formato indirizzo sbagliato");
+						if(s.getMatricola().equals(matricola)) {
+							RequestDispatcher view = request.getRequestDispatcher("matricolaEsistente.jsp");
+							view.forward(request, response);
+								}
+						if(s.getCodiceFiscale().equals(codiceFiscale)) {
+							RequestDispatcher view = request.getRequestDispatcher("codiceFiscaleEsistente.jsp");
+							view.forward(request, response);
+								}
+						if(s.getUsername().equals(username)) {
+							RequestDispatcher view = request.getRequestDispatcher("usernameEsistente.jsp");
+							view.forward(request, response);
 								}
 							}
-							else {
-								response.setContentType("text/html;charset=ISO-8859-1");
-								response.getWriter().write("formato data sbagliato");
+						}
+						if(!(password.equals(conferma))){
+							RequestDispatcher view = request.getRequestDispatcher("PasswordNonCorrispondenti.jsp");
+							view.forward(request, response);
+								} 
+						
+						utente.salvaStudente(studente);
+						request.getSession().setAttribute("utenteSessione", studente);
+						request.getSession().setAttribute("tipoUtente", "studente");
+						RequestDispatcher view = request.getRequestDispatcher("home.jsp");
+						view.forward(request, response);
+						
+					} else {
+							RequestDispatcher view = request.getRequestDispatcher("formatoSbagliato.jsp");
+							view.forward(request, response);
+					}
+			}
+							catch(SQLException e){
+								e.printStackTrace();
 							}
-						}
-						else {
-							response.setContentType("text/html;charset=ISO-8859-1");
-							response.getWriter().write("formato luogo sbagliato");
-						}
 					}
-					else {
-						response.setContentType("text/html;charset=ISO-8859-1");
-						response.getWriter().write("formato cognome sbagliato");
-					}
-				} 
-				else {
-					response.setContentType("text/html;charset=ISO-8859-1");
-					response.getWriter().write("formato nome sbagliato");
-				}
-			}
-
-			catch(SQLException e){
-				e.printStackTrace();
-			}
-		}
 
 
 		if(azioneUtente.equals("registraAzienda")) {
@@ -485,36 +412,28 @@ public class GestioneUtente extends HttpServlet {
 
 				aziende.addAll(utente.getAziende());
 
-				if(nome.length()>2 && nome.length()<31){
-					if(partitaIva.length()==11){
-						if(ceo.length()>4 && ceo.length()<51){
-							if(indirizzo.length()>4 && indirizzo.length()<31){
-								if(email.length()>4 && email.length()<31){
-									if(telefono.length()>6 && telefono.length()<13){
-										if(username.length()>4 && username.length()<21){
-											if(password.length()>7 && password.length()<21){
-												if(risposta.length()>1 && risposta.length()<31){
+				if((nome.length()>2 && nome.length()<31) && (partitaIva.length()==11) && (ceo.length()>4 && ceo.length()<51) && (indirizzo.length()>4 && indirizzo.length()<31) && (email.length()>4 && email.length()<31) && (telefono.length()>6 && telefono.length()<13) && (username.length()>4 && username.length()<21) && (password.length()>7 && password.length()<21) && (risposta.length()>1 && risposta.length()<31)){
 
 													if(!(aziende.equals(null))) {
 														for(AziendaBean a : aziende) {
 															if(a.getEmail().equals(email)) {
-																response.setContentType("text/html;charset=ISO-8859-1");
-																response.getWriter().write("email gia' esistente");
-															}
+																RequestDispatcher view = request.getRequestDispatcher("emailEsistente.jsp");
+																view.forward(request, response);
+																	}
 															if(a.getNome().equals(nome)) {
-																response.setContentType("text/html;charset=ISO-8859-1");
-																response.getWriter().write("nome azienda gia' esistente");
+																RequestDispatcher view = request.getRequestDispatcher("nomeEsistente.jsp");
+																view.forward(request, response);
 															}
 															if(a.getUsername().equals(username)) {
-																response.setContentType("text/html;charset=ISO-8859-1");
-																response.getWriter().write("username gia' esistente");
+																RequestDispatcher view = request.getRequestDispatcher("usernameEsistente.jsp");
+																view.forward(request, response);
 															}
 														}
 													}
 
 													if(!(password.equals(conferma))){
-														response.setContentType("text/html;charset=ISO-8859-1");
-														response.getWriter().write("password non corrispondenti");
+														RequestDispatcher view = request.getRequestDispatcher("passwordNonCorrispondenti.jsp");
+														view.forward(request, response);
 													} else {
 														utente.salvaAzienda(azienda);
 
@@ -527,49 +446,9 @@ public class GestioneUtente extends HttpServlet {
 												}
 
 												else{
-													response.setContentType("text/html;charset=ISO-8859-1");
-													response.getWriter().write("formato risposta sbagliato");
+													RequestDispatcher view = request.getRequestDispatcher("formatoSbagliato.jsp");
+													view.forward(request, response);
 												}
-											}
-											else {
-												response.setContentType("text/html;charset=ISO-8859-1");
-												response.getWriter().write("formato password sbagliato");
-											}
-										}
-										else {
-											response.setContentType("text/html;charset=ISO-8859-1");
-											response.getWriter().write("formato username sbagliato");
-										}
-									}
-									else {
-										response.setContentType("text/html;charset=ISO-8859-1");
-										response.getWriter().write("formato telefono sbagliato");
-									}
-								}
-								else {
-									response.setContentType("text/html;charset=ISO-8859-1");
-									response.getWriter().write("formato email sbagliato");
-								}
-							}
-							else {
-								response.setContentType("text/html;charset=ISO-8859-1");
-								response.getWriter().write("formato indirizzo sbagliato");
-							}
-						} 
-						else {
-							response.setContentType("text/html;charset=ISO-8859-1");
-							response.getWriter().write("formato ceo sbagliato");
-						}
-					}
-					else {
-						response.setContentType("text/html;charset=ISO-8859-1");
-						response.getWriter().write("formato pi sbagliato");
-					}
-				} 
-				else {
-					response.setContentType("text/html;charset=ISO-8859-1");
-					response.getWriter().write("formato nome sbagliato");
-				}
 			}
 			catch(SQLException e){
 				e.printStackTrace();
@@ -625,8 +504,8 @@ public class GestioneUtente extends HttpServlet {
 					view.forward(request, response);
 				} 
 				else{
-					response.setContentType("text/html;charset=ISO-8859-1");
-					response.getWriter().write("formato descrizione sbagliato");
+					RequestDispatcher view = request.getRequestDispatcher("formatoSbagliato.jsp");
+					view.forward(request, response);
 				}
 			}
 			catch (SQLException e) {

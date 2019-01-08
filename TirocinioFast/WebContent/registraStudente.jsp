@@ -70,56 +70,6 @@ pageEncoding="ISO-8859-1"%>
 
 <%@include file = "footer.jsp" %> 
 
-<script>
-$(document).ready(function(){
-	$("#registraStudenteButton").click(function(){
-		
-		$.post("/TirocinioFast/GestioneUtente",
-				{
-					"azioneUtente" : "registraStudente",
-				},
-				function(responseTxt, statusTxt, xhr){
-					if(responseTxt=="email gia' esistente")
-						alert("E-mail inserita già corrisponde ad un account!");
-					if(responseTxt=="matricola gia' esistente")
-						alert("Matricola inserita già corrisponde ad un account!");
-					if(responseTxt=="codice fiscale gia' esistente")
-						alert("Codice Fiscale inserito già corrisponde ad un account!");
-					if(responseTxt=="username gia' esistente")
-						alert("Matricola inserita già corrisponde ad un account!");
-					if(responseTxt=="password non corrispondenti")
-						alert("Le password inserite non  corrispondono!");
-					if(responseTxt=="formato risposta sbagliato")
-						alert("Il formato inserito nel campo 'Risposta' non è corretto!");
-					if(responseTxt=="formato password sbagliato")
-						alert("Il formato inserito nel campo 'Password' non è corretto!");
-					if(responseTxt=="formato username sbagliato")
-						alert("Il formato inserito nel campo 'Username' non è corretto!");
-					if(responseTxt=="formato telefono sbagliato")
-						alert("Il formato inserito nel campo 'Telefono' non è corretto!");
-					if(responseTxt=="formato email sbagliato")
-						alert("Il formato inserito nel campo 'E-mail' non è corretto!");
-					if(responseTxt=="formato matricola sbagliato")
-						alert("Il formato inserito nel campo 'Matricola' non è corretto!");
-					if(responseTxt=="formato CF sbagliato")
-						alert("Il formato inserito nel campo 'Codice Fiscale' non è corretto!");
-					if(responseTxt=="formato citta sbagliato")
-						alert("Il formato inserito nel campo 'Città' non è corretto!");
-					if(responseTxt=="formato indirizzo sbagliato")
-						alert("Il formato inserito nel campo 'Indirizzo' non è corretto!");
-					if(responseTxt=="formato data sbagliato")
-						alert("Il formato inserito nel campo 'Data di Nascita' non è corretto!");
-					if(responseTxt=="formato luogo sbagliato")
-						alert("Il formato inserito nel campo 'Luogo di Nascita' non è corretto!");
-					if(responseTxt=="formato cognome sbagliato")
-						alert("Il formato inserito nel campo 'Cognome' non è corretto!");
-					if(responseTxt=="formato nome sbagliato")
-						alert("Il formato inserito nel campo 'Nome' non è corretto!");
-			});
-	});
-});
-</script>
-
 <script src="js/bootstrap.min.js"></script>
 </body>
 </html>

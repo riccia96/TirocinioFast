@@ -47,8 +47,7 @@
   </table>
 <% } else {%>
  <script type="text/javascript">
- var r=alert("Non sono presenti convenzioni accettate da visualizzare");
- window.location.href = 'home.jsp';
+ window.location.href = 'nessunaRisorsa.jsp';
  </script>
 <% } %>
 

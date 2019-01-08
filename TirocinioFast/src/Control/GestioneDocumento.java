@@ -168,7 +168,7 @@ public class GestioneDocumento extends HttpServlet {
 				request.getSession().setAttribute("tutor", tutor);
 				request.getSession().setAttribute("risposte", risposte);
 
-				RequestDispatcher view = request.getRequestDispatcher("documentoQuestionarioStudente");
+				RequestDispatcher view = request.getRequestDispatcher("documentoQuestionarioStudente.jsp");
 				view.forward(request, response);
 
 			} catch (SQLException e) {
@@ -222,7 +222,7 @@ public class GestioneDocumento extends HttpServlet {
 				request.getSession().setAttribute("tutor", tutor);
 				request.getSession().setAttribute("risposte", risposte);
 
-				RequestDispatcher view = request.getRequestDispatcher("documentoQuestionarioAzienda");
+				RequestDispatcher view = request.getRequestDispatcher("documentoQuestionarioAzienda.jsp");
 				view.forward(request, response);
 			} catch (SQLException e) {
 
@@ -259,12 +259,7 @@ public class GestioneDocumento extends HttpServlet {
 				convenzione.setAttivita(attivita);
 				convenzione.setTutorAccademico(docente);
 
-				if(luogoNascitaR.length()>3 && luogoNascitaR.length()<31){
-					if(dataNascitaR.length()>7 && dataNascitaR.length()<15){
-						if (referente.length()>4 && referente.length()<51){
-							if(telefono.length()>6 && telefono.length()<14){
-								if(email.length()>4 && email.length()<31){
-									if(attivita.length()>24 && attivita.length()<1001){					
+				if((luogoNascitaR.length()>3 && luogoNascitaR.length()<31) && (dataNascitaR.length()>7 && dataNascitaR.length()<15) && (referente.length()>4 && referente.length()<51) && (telefono.length()>6 && telefono.length()<14) && (email.length()>4 && email.length()<31) && (attivita.length()>24 && attivita.length()<1001)){				
 
 										documento.compilaConvenzione(convenzione);
 
@@ -275,35 +270,9 @@ public class GestioneDocumento extends HttpServlet {
 										view.forward(request, response);
 
 									} 
-
-									else {
-										response.setContentType("text/html;charset=ISO-8859-1");
-										response.getWriter().write("formato attivita sbagliato");
-									}
-								}
-								else{
-									response.setContentType("text/html;charset=ISO-8859-1");
-									response.getWriter().write("formato email sbagliato");
-								}
-							}
-							else {
-								response.setContentType("text/html;charset=ISO-8859-1");
-								response.getWriter().write("formato telefono sbagliato");
-							}
-						}
-						else {
-							response.setContentType("text/html;charset=ISO-8859-1");
-							response.getWriter().write("formato referente sbagliato");
-						}
-					}
-					else{
-						response.setContentType("text/html;charset=ISO-8859-1");
-						response.getWriter().write("formato data sbagliato");
-					}
-				}
 				else {
-					response.setContentType("text/html;charset=ISO-8859-1");
-					response.getWriter().write("formato luogo sbagliato");
+					RequestDispatcher view = request.getRequestDispatcher("formatoSbagliato.jsp");
+					view.forward(request, response);
 				}
 
 
