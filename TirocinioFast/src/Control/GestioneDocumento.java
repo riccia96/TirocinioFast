@@ -430,7 +430,6 @@ public class GestioneDocumento extends HttpServlet {
 			try {
 
 			} catch (SQLException e) {
-
 				e.printStackTrace();
 			}
 		}
@@ -440,7 +439,6 @@ public class GestioneDocumento extends HttpServlet {
 			try {
 
 			} catch (SQLException e) {
-
 				e.printStackTrace();
 			}
 		}
@@ -451,8 +449,6 @@ public class GestioneDocumento extends HttpServlet {
 
 		if(azioneDocumento.equals("uploadRegistroOre")) {
 			try {
-				StudenteBean studente = (StudenteBean) request.getSession().getAttribute("utenteSessione");
-
 				String nomeFile = (String) request.getParameter("nomeRegistroOre");
 
 				int idTiro = Integer.parseInt((String) request.getParameter("id"));
@@ -460,9 +456,13 @@ public class GestioneDocumento extends HttpServlet {
 				TirocinioBean tirocinio = new TirocinioBean();
 				tirocinio.setId(idTiro);
 				tirocinio = documento.DownloadTirocinio(tirocinio);
+				
+				tirocinio.setRegistroOre("pdf/" + nomeFile);
 
-
-
+				documento.UploadTirocinio(tirocinio);
+				
+				RequestDispatcher view = request.getRequestDispatcher("GestioneDocumento?azioneDocumento=registroOre");
+				view.forward(request, response);
 			} catch (SQLException e) {
 
 				e.printStackTrace();
@@ -470,22 +470,30 @@ public class GestioneDocumento extends HttpServlet {
 		}
 
 
-		if(azioneDocumento.equals("RegistroOre")) {
+		if(azioneDocumento.equals("registroOre")) {
 			try {
 
 				List<TirocinioBean> tirocini = new ArrayList<TirocinioBean>();
 				documento.richiesteTirocinio();
 
 				StudenteBean studente = (StudenteBean) request.getSession().getAttribute("utenteSessione");
+				TutorBean tutor = new TutorBean();
+				AziendaBean azienda = new AziendaBean();
 				for(TirocinioBean t : tirocini) {
 					if(t.getStudente().equals(studente.getUsername())) {
 						if(t.isConvalidaRichiesta()) {
-							if(t.getRegistroOre().equals("")){
-								RequestDispatcher view = request.getRequestDispatcher("registroOre.jsp");
-								view.forward(request, response);
-							} else {
-								
-							}
+							tutor.setUsername(t.getTutorAccademico());
+							tutor = utente.getTutor(tutor);
+							azienda.setUsername(t.getAzienda());
+							azienda = utente.getAzienda(azienda);
+							request.getSession().setAttribute("tutorOre", tutor);
+							request.getSession().setAttribute("aziendaOre", azienda);
+							request.getSession().setAttribute("tirocinioOre", t);
+							RequestDispatcher view = request.getRequestDispatcher("registroOre.jsp");
+							view.forward(request, response);
+						} else {
+							RequestDispatcher view = request.getRequestDispatcher("nessunaRisorsa.jsp");
+							view.forward(request, response);
 						}
 					}
 
