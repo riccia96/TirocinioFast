@@ -212,55 +212,12 @@ public class GestioneTirocinio extends HttpServlet {
 						e.printStackTrace();
 					}
 				}
-
-				//no
-				if(azioneTirocinio.equals("tirociniConclusi")){
-					try{
-						StudenteBean studente = new StudenteBean();
-						AziendaBean azienda = new AziendaBean();
-						TutorBean tutor = new TutorBean();
-
-						List<TirocinioBean> tirocini = new ArrayList<TirocinioBean>();
-						List<TirocinioBean> conclusi = new ArrayList<TirocinioBean>();
-						List<StudenteBean> studenti = new ArrayList<StudenteBean>();
-						List<AziendaBean> aziende = new ArrayList<AziendaBean>();
-						List<TutorBean> tutors = new ArrayList<TutorBean>();
-
-						tirocini = richiesta.richiesteTirocinio();
-
-						for(TirocinioBean t: tirocini){
-							if(t.isConvalidaAzienda() && t.isConvalidaTutor() && 
-									t.isConvalidaStudente() && t.isConvalidaRichiesta() && !(t.isConvalidaAttivita())){
-								conclusi.add(t);
-							}
-						}
-
-						for(TirocinioBean t: conclusi){
-							studente.setUsername(t.getStudente());
-							azienda.setUsername(t.getAzienda());
-							tutor.setUsername(t.getTutorAccademico());
-							studenti.add(utente.getStudente(studente));
-							aziende.add(utente.getAzienda(azienda));
-							tutors.add(utente.getTutor(tutor));
-						}
-
-						request.getSession().setAttribute("listaTirociniConclusi", conclusi);
-						request.getSession().setAttribute("listaStudenti", studenti);
-						request.getSession().setAttribute("listaAziende", aziende);
-						request.getSession().setAttribute("listaTutors", tutors);
-
-						RequestDispatcher view = request.getRequestDispatcher("attivitaTirocinioConcluse.jsp");
-						view.forward(request, response);
-					}catch(SQLException e){
-						e.printStackTrace();
-					}
-				}
 				
 				//no
 
 				if(azioneTirocinio.equals("selezionaAttivita")){
 					try {
-
+						
 						int idTirocinio = Integer.parseInt((String) request.getParameter("idTirocinio"));
 
 						TirocinioBean tirocinio = new TirocinioBean();

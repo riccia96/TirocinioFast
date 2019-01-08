@@ -58,8 +58,8 @@
 			if (tipoUm.equals("impiegato")) {
 		%>
 		<li><a href="GestioneUtente?azioneUtente=areaPersonale">Area Personale</a>
-		<li><a href="GestioneTirocinio?azioneTirocinio=elencoRichiesteTirocinio">Richieste tirocinio</a>
-		<li><a href="GestioneTirocinio?azioneTirocinio=tirociniConclusi">Attività tirocinio</a>
+		<li><a href="GestioneDocumento?azioneDocumento=elencoRichiesteTirocinio">Richieste tirocinio</a>
+		<li><a href="GestioneDocumento?azioneDocumento=tirociniConclusi">Attività tirocinio</a>
 		<li><a href="GestioneTirocinio?azioneTirocinio=attivitaConvalidate">Tirocini conclusi</a></li>
 		<li><a href="GestioneConvenzione?azioneConvenzione=elencoRichiesteConvenzioni">Convenzioni aziende</a>
 		<li><a href="GestioneConvenzione?azioneConvenzione=convenzioniConvalidate">Convenzioni accettate</a></li>

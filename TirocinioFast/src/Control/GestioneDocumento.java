@@ -379,7 +379,59 @@ public class GestioneDocumento extends HttpServlet {
 			}
 		}
 
+		if(azioneDocumento.equals("tirociniConclusi")){
+			try{
+				String tipoUtente = (String) request.getSession().getAttribute("tipoUtente");
+				StudenteBean studente = new StudenteBean();
+				AziendaBean azienda = new AziendaBean();
+				TutorBean tutor = new TutorBean();
 
+				List<TirocinioBean> tirocini = new ArrayList<TirocinioBean>();
+				List<TirocinioBean> conclusi = new ArrayList<TirocinioBean>();
+				List<StudenteBean> studenti = new ArrayList<StudenteBean>();
+				List<AziendaBean> aziende = new ArrayList<AziendaBean>();
+				List<TutorBean> tutors = new ArrayList<TutorBean>();
+
+				tirocini = richiesta.richiesteTirocinio();
+
+				for(TirocinioBean t: tirocini){
+					if(t.isConvalidaAzienda() && t.isConvalidaTutor() && 
+							t.isConvalidaStudente() && t.isConvalidaRichiesta() && !(t.isConvalidaAttivita())){
+						conclusi.add(t);
+					}
+				}
+				if(tipoUtente.equals("impiegato")){
+					for(TirocinioBean t: conclusi){
+						studente.setUsername(t.getStudente());
+						azienda.setUsername(t.getAzienda());
+						tutor.setUsername(t.getTutorAccademico());
+						studenti.add(utente.getStudente(studente));
+						aziende.add(utente.getAzienda(azienda));
+						tutors.add(utente.getTutor(tutor));
+					}
+				} else {
+					studente = (StudenteBean) request.getSession().getAttribute("utenteSessione");
+					for(TirocinioBean t: conclusi){
+						if(t.getStudente().equals(studente.getUsername())){
+							azienda.setUsername(t.getAzienda());
+							tutor.setUsername(t.getTutorAccademico());
+							studenti.add(utente.getStudente(studente));
+							aziende.add(utente.getAzienda(azienda));
+							tutors.add(utente.getTutor(tutor));
+						}
+					}
+				}
+				request.getSession().setAttribute("listaTirociniConclusi", conclusi);
+				request.getSession().setAttribute("listaStudenti", studenti);
+				request.getSession().setAttribute("listaAziende", aziende);
+				request.getSession().setAttribute("listaTutors", tutors);
+
+				RequestDispatcher view = request.getRequestDispatcher("attivitaTirocinioConcluse.jsp");
+				view.forward(request, response);
+			}catch (SQLException e){
+				e.printStackTrace();
+			}
+		}
 
 		if(azioneDocumento.equals("uploadConvenzione")) {
 			try {
