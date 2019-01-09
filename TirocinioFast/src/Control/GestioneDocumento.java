@@ -328,6 +328,7 @@ public class GestioneDocumento extends HttpServlet {
 					request.getSession().setAttribute("tipoDocumento", "questionarioAzienda");
 					
 					RequestDispatcher view = request.getRequestDispatcher("mostraPDF.jsp");
+					view.forward(request, response);
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
