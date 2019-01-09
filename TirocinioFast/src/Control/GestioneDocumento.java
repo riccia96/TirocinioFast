@@ -163,9 +163,12 @@ public class GestioneDocumento extends HttpServlet {
 				questionarioStudente.setAzienda(azienda.getUsername());
 				questionarioStudente.setTutorAccademico(tutor.getUsername());
 
+
 				azienda = utente.getAzienda(azienda);
+
 				tutor = utente.getTutor(tutor);
 
+				
 				request.getSession().setAttribute("questionarioStudente", questionarioStudente);
 				request.getSession().setAttribute("studente", studente);
 				request.getSession().setAttribute("questSAzienda", azienda);
@@ -350,6 +353,7 @@ public class GestioneDocumento extends HttpServlet {
 							}
 						}
 						
+
 						request.getSession().setAttribute("questionarioSAzienda", azienda);
 						request.getSession().setAttribute("questionarioSTutor", tutor);
 						request.getSession().setAttribute("questionarioSConvenzione", convenzione);
