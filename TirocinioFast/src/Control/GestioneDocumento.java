@@ -315,9 +315,13 @@ public class GestioneDocumento extends HttpServlet {
 					
 					request.getSession().setAttribute("questionarioStudente", questionarioS);
 					request.getSession().setAttribute("tipoDocumento", "questionarioStudente");
-					
-					RequestDispatcher view = request.getRequestDispatcher("mostraPDF.jsp");
-					view.forward(request, response);
+					if(!questionarioS.getUrl().equals("")){
+						RequestDispatcher view = request.getRequestDispatcher("mostraPDF.jsp");
+						view.forward(request, response);
+					} else {
+						RequestDispatcher view = request.getRequestDispatcher("documentoQuestionarioStudente.jsp");
+						view.forward(request, response);
+					}
 				} else if(tipoUtente.equals("azienda")){
 					QuestionarioAziendaBean questionarioA = new QuestionarioAziendaBean();
 
