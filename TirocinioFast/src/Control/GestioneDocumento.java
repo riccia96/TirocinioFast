@@ -332,6 +332,8 @@ public class GestioneDocumento extends HttpServlet {
 							}
 						}
 						
+						
+						
 						request.getSession().setAttribute("azienda", azienda);
 						request.getSession().setAttribute("tutor", tutor);
 						request.getSession().setAttribute("convenzione", convenzione);

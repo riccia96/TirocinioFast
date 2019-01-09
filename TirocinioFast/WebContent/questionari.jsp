@@ -57,7 +57,7 @@ QuestionarioAziendaBean qa = new QuestionarioAziendaBean();%>
   </tr>
   		
   <tr>
-    <td><a href="GestioneDocumento?azioneDocumento=mostraQuestionario&idQ=<%=qs.getId()%>">Questionario N.<%=qs.getId() %></a></td>
+    <td><a href="GestioneDocumento?azioneDocumento=mostraQuestionario&idQ=<%=questionarioS.getId()%>">Questionario N.<%=questionarioS.getId() %></a></td>
     <td><%= azienda.getNome() %></td>
     <td>Prof/Prof.ssa <%= tutor.getCognome() + " " + tutor.getNome() %></td>
     <td><%= questionarioS.getTitolo() %></td>
