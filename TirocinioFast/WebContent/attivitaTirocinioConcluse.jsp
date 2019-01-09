@@ -16,6 +16,7 @@ TirocinioBean tirocinio = new TirocinioBean();
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <title>Insert title here</title>
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -69,12 +70,11 @@ TirocinioBean tirocinio = new TirocinioBean();
 <% } 
 else { %>
  <script type="text/javascript">
- window.location.href = 'home.jsp';
+ window.location.href = 'nessunaRisorsa.jsp';
  </script> 
  <% } %>
 <%@include file = "footer.jsp" %>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 </body>
 </html>
