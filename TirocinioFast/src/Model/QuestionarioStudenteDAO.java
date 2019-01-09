@@ -226,7 +226,7 @@ public class QuestionarioStudenteDAO extends AbstractDAO<QuestionarioStudenteBea
 		PreparedStatement preparedStatement = null;
 		
 		String querySQL = "UPDATE " + QuestionarioStudenteDAO.TABLE_NAME + " SET studente = ?, azienda = ?, tutorAccademico = ?,"
-				+ " impiegato = ?, periodoTirocinio = ?, titoloTirocinio = ?, convalida = ?, url = ? WHERE id = ? ";
+				+ " impiegato = ?, periodoTirocinio = ?, titoloTirocinio = ?, scelte = ?, convalida = ?, url = ? WHERE id = ? ";
 		
 		try{
 			
@@ -243,7 +243,7 @@ public class QuestionarioStudenteDAO extends AbstractDAO<QuestionarioStudenteBea
 			preparedStatement.setBoolean(8, questionarioStudente.isConvalida());
 			preparedStatement.setString(9, questionarioStudente.getUrl());
 			
-			preparedStatement.setInt(9, questionarioStudente.getId());
+			preparedStatement.setInt(10, questionarioStudente.getId());
 			
 			preparedStatement.execute();
 			return true;
