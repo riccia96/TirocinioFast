@@ -49,27 +49,48 @@ public class GestioneQuestionario extends HttpServlet {
 				List<TirocinioBean> tirocini = new ArrayList<TirocinioBean>(); 
 				List<QuestionarioStudenteBean> questionari = new ArrayList<QuestionarioStudenteBean>();
 				QuestionarioStudenteBean questionario = new QuestionarioStudenteBean();
-				
-				
+				TutorBean tutor = new TutorBean();
+				AziendaBean azienda = new AziendaBean();
+				boolean flag = false;
+
 				tirocini = documento.richiesteTirocinio();
 				questionari = documento.questionariStudente();
 				for(TirocinioBean t : tirocini){
-					for(QuestionarioStudenteBean q : questionari){
-						if(t.getStudente().equals(q.getStudente())){
-							questionario = q;
+					if(t.getStudente().equals(studente.getUsername()) && t.isConvalidaRichiesta()){
+						flag = true;
+						for(QuestionarioStudenteBean q : questionari){
+							if(t.getStudente().equals(q.getStudente())){
+								questionario = q;
+								tutor.setUsername(questionario.getTutorAccademico());
+								tutor = utente.getTutor(tutor);
+								azienda.setUsername(questionario.getAzienda());
+								azienda = utente.getAzienda(azienda);
+							}
+
 						}
+					} 
+				}
+				if(flag) {
+					if(questionario.getTitolo().equals("")){
+
+						RequestDispatcher view = request.getRequestDispatcher("questionarioStudenteCompilazione.jsp");
+						view.forward(request, response);
+					} else {
+						
+						request.getSession().setAttribute("questionarioStudente", questionario);
+						request.getSession().setAttribute("questSAzienda", azienda);
+						request.getSession().setAttribute("questSTutor", tutor);
+						RequestDispatcher view = request.getRequestDispatcher("questionari.jsp");
+						view.forward(request, response);
 					}
-				}
-				
-				if(questionario.getTitolo().equals("")){
-					RequestDispatcher view = request.getRequestDispatcher("questionarioStudenteCompilazione.jsp");
-					view.forward(request, response);
 				} else {
-					request.getSession().setAttribute("questionarioStudente", questionario);
-					RequestDispatcher view = request.getRequestDispatcher("questionari.jsp");
+					RequestDispatcher view = request.getRequestDispatcher("nessunaRisorsa.jsp");
+					view.forward(request, response);
 				}
 				
 				
+
+
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -93,10 +114,10 @@ public class GestioneQuestionario extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		
-		
 
-		
+
+
+
 		if(azioneQuestionario.equals("inoltraQuestionarioStudente")) {
 
 		}

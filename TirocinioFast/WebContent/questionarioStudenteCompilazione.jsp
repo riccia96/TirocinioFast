@@ -55,7 +55,7 @@
     <label>Relativamente alle strutture universitarie addette alla gestione dei Tirocini</label>
     <br>
     <br>
-    <p class="question">Hanno fornito informazioni chiare ed esaustive</p><select name="unidici" class="scelte""><option value="uno" >1/per niente</option><option value="due">2</option><option value="tre">3</option><option value="quattro">4</option><option value="cinque">5/molto</option></select>
+    <p class="question">Hanno fornito informazioni chiare ed esaustive</p><select name="undici" class="scelte""><option value="uno" >1/per niente</option><option value="due">2</option><option value="tre">3</option><option value="quattro">4</option><option value="cinque">5/molto</option></select>
 	<br>
     <p class="question">Hanno fornito assistenza e disponibilità</p><select name="dodici" class="scelte""><option value="uno">1/per niente</option><option value="due">2</option><option value="tre">3</option><option value="quattro">4</option><option value="cinque">5/molto</option></select>
     <br>

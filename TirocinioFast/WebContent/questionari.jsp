@@ -3,20 +3,28 @@
     pageEncoding="ISO-8859-1"%>
 <%@ page import="Bean.*" %>
 <% String tipoUtente = (String) request.getSession().getAttribute("tipoUtente");
+	StudenteBean studente = new StudenteBean();
+	AziendaBean azienda = new AziendaBean();
+	TutorBean tutor = new TutorBean();
+	QuestionarioStudenteBean questionarioS = new QuestionarioStudenteBean();
+	if(tipoUtente.equals("studente")){
+		questionarioS = (QuestionarioStudenteBean) request.getSession().getAttribute("questionarioStudente");
+		azienda = (AziendaBean) request.getSession().getAttribute("questSAzienda");
+		tutor = (TutorBean) request.getSession().getAttribute("questSTutor");
+
+	} else if(tipoUtente.equals("azienda")){
+		ArrayList<QuestionarioAziendaBean> questionariA = (ArrayList<QuestionarioAziendaBean>) request.getSession().getAttribute("");
+	}
+	
+	
 
 
-	QuestionarioStudenteBean questionarioStud = (QuestionarioStudenteBean) request.getSession().getAttribute("questionarioStudente");
-
-	ArrayList<QuestionarioStudenteBean> questionariS = (ArrayList<QuestionarioStudenteBean>) request.getSession().getAttribute("");
-
-ArrayList<QuestionarioAziendaBean> questionariA = (ArrayList<QuestionarioAziendaBean>) request.getSession().getAttribute("");
 ArrayList<TirocinioBean> tirocini = (ArrayList<TirocinioBean>) request.getSession().getAttribute("listaTirocini");
 ArrayList<StudenteBean> studenti = (ArrayList<StudenteBean>) request.getSession().getAttribute("listaStudenti");
 ArrayList<TutorBean> tutors = (ArrayList<TutorBean>) request.getSession().getAttribute("listaTutors");
 ArrayList<AziendaBean> aziende = (ArrayList<AziendaBean>) request.getSession().getAttribute("listaAziende");
-StudenteBean studente = new StudenteBean();
-AziendaBean azienda = new AziendaBean();
-TutorBean tutor = new TutorBean();
+
+
 TirocinioBean tirocinio = new TirocinioBean();
 QuestionarioStudenteBean qs = new QuestionarioStudenteBean();
 QuestionarioAziendaBean qa = new QuestionarioAziendaBean();%>
@@ -38,7 +46,7 @@ QuestionarioAziendaBean qa = new QuestionarioAziendaBean();%>
 <h3 class="intestazione">Gestione dei questionari valutativi</h3>
 
 <% if (tipoUm.equals("studente")){ %>
-  <% if (questionariS.size()>0){ %>
+
 <table style="margin-left: 25%; width: 1000px;">
   <tr>
     <th style="text-align: center">Questionario</th>
@@ -47,34 +55,13 @@ QuestionarioAziendaBean qa = new QuestionarioAziendaBean();%>
     <th style="text-align: center">Titolo tirocinio</th>
     <th></th>
   </tr>
-  		<%for (int i = 0; i < questionariS.size(); i++){
-  			qs = questionariS.get(i);
-  			
-  			for (int z = 0; z < aziende.size(); z++) {
-  				azienda = aziende.get(z);
-  				if (qs.getAzienda().equals(azienda.getUsername())){
-  					break;
-  				}
-  			}
-  			
-  			for (int j = 0; j < tutors.size(); j++){
-  				tutor = tutors.get(j);
-  				if(qs.getTutorAccademico().equals(tutor.getUsername())){
-  					break;
-  				}
-  			}
-  			  		
-	  %>
+  		
   <tr>
- <%if(!qa.getAzienda().equals("")) {%>
     <td><a href="GestioneDocumento?azioneDocumento=mostraQuestionario&idQ=<%=qs.getId()%>">Questionario N.<%=qs.getId() %></a></td>
-  <%} else {%>
-   <td><a href="GestioneQuesionario?azioneQuestionario=questionarioStudente&idQ=<%=qs.getId()%>">Questionario N.<%=qs.getId() %></a></td>
-  <%} %>
     <td><%= azienda.getNome() %></td>
     <td>Prof/Prof.ssa <%= tutor.getCognome() + " " + tutor.getNome() %></td>
-    <td><%= qs.getTitolo() %></td>
-    <%if (qs.getUrl().equals("")){ %>
+    <td><%= questionarioS.getTitolo() %></td>
+    <%if (questionarioS.getUrl().equals("")){ %>
         <td>
     	<form>
   			Seleziona PDF del questionario relativo a questo tirocinio firmato<br>
