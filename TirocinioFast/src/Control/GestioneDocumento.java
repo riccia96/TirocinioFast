@@ -354,6 +354,7 @@ public class GestioneDocumento extends HttpServlet {
 						request.getSession().setAttribute("questionarioSTutor", tutor);
 						request.getSession().setAttribute("questionarioSConvenzione", convenzione);
 						request.getSession().setAttribute("questionarioStudente", questionarioS);
+						request.getSession().setAttribute("risposte", risposte);
 						
 						RequestDispatcher view = request.getRequestDispatcher("documentoQuestionarioStudente.jsp");
 						view.forward(request, response);
