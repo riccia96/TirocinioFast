@@ -7,13 +7,14 @@
 	AziendaBean azienda = new AziendaBean();
 	TutorBean tutor = new TutorBean();
 	QuestionarioStudenteBean questionarioS = new QuestionarioStudenteBean();
+	ArrayList<QuestionarioAziendaBean> questionariA = new ArrayList<QuestionarioAziendaBean>();
 	if(tipoUtente.equals("studente")){
 		questionarioS = (QuestionarioStudenteBean) request.getSession().getAttribute("questionarioStudente");
 		azienda = (AziendaBean) request.getSession().getAttribute("questSAzienda");
 		tutor = (TutorBean) request.getSession().getAttribute("questSTutor");
 
 	} else if(tipoUtente.equals("azienda")){
-		ArrayList<QuestionarioAziendaBean> questionariA = (ArrayList<QuestionarioAziendaBean>) request.getSession().getAttribute("");
+		questionariA = (ArrayList<QuestionarioAziendaBean>) request.getSession().getAttribute("");
 	}
 	
 	
@@ -63,27 +64,21 @@ QuestionarioAziendaBean qa = new QuestionarioAziendaBean();%>
     <td><%= questionarioS.getTitolo() %></td>
     <%if (questionarioS.getUrl().equals("")){ %>
         <td>
-    	<form>
+    	<form action="GestioneDocumento" metho="POST">
   			Seleziona PDF del questionario relativo a questo tirocinio firmato<br>
   			<input type="file" name="questionarioFirmatoStudente" accept=".pdf"><br>
-  			<input type="submit">
+  			<input type="hidden" name="id" value="<%= questionarioS.getId() %>">
+  			<input type="submit" name="azioneDocumento" value= "uploadQuestionarioStudente">
 		</form>
 		</td>
 	<% } else { %>
 	<td>Questionario gi&agrave; compilato!</td>
 	<%} %>
   </tr>
-  <% } %>
 </table>
-<% 	} else { %>
-	 <script type="text/javascript">
-  		var r=alert("Non sono presenti questionari da compilare");
- 		window.location.href = 'home.jsp';
- 	 </script>
-<%}
-} 
 
-if (tipoUm.equals("azienda")){ 
+
+<%} if (tipoUm.equals("azienda")){ 
 	 if (questionariA.size()>0){ %>
 	<table style="margin-left: 25%; width: 1000px;">
   <tr>

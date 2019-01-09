@@ -160,6 +160,7 @@ public class GestioneDocumento extends HttpServlet {
 				questionarioStudente.setTitolo(titolo);
 				questionarioStudente.setPeriodo(periodo);
 				questionarioStudente.setScelte(scelte);
+				questionarioStudente.setStudente(studente.getUsername());
 				questionarioStudente.setAzienda(azienda.getUsername());
 				questionarioStudente.setTutorAccademico(tutor.getUsername());
 
@@ -168,6 +169,8 @@ public class GestioneDocumento extends HttpServlet {
 
 				tutor = utente.getTutor(tutor);
 
+				documento.compilaQuestionarioStudente(questionarioStudente);
+				
 				
 				request.getSession().setAttribute("questionarioStudente", questionarioStudente);
 				request.getSession().setAttribute("studente", studente);
@@ -224,6 +227,9 @@ public class GestioneDocumento extends HttpServlet {
 				tutor.setUsername(questionarioAzienda.getTutorAccademico());
 				tutor = utente.getTutor(tutor);
 
+				
+				
+				
 				request.getSession().setAttribute("questionarioAzienda", questionarioAzienda);
 				request.getSession().setAttribute("studente", studente);
 				request.getSession().setAttribute("tutor", tutor);
@@ -555,17 +561,29 @@ public class GestioneDocumento extends HttpServlet {
 		}
 
 
-		/*
+	
 
 		if(azioneDocumento.equals("uploadQuestionarioStudente")) {
 			try {
-
+				String nomeFile = (String) request.getParameter("questionarioFirmatoStudente");
+				int idQ = Integer.parseInt((String) request.getParameter("id"));
+			
+				QuestionarioStudenteBean questionario = new QuestionarioStudenteBean();
+				questionario.setId(idQ);
+				questionario = documento.QuestionarioStudente(questionario);
+				
+				documento.UploadQuestionarioStudente(questionario);
+				
+				RequestDispatcher view = request.getRequestDispatcher("GestioneQuestionario?azioneQuestionario=questionarioStudente");
+				view.forward(request, response);
+				
+				
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
 
-
+/*
 		if(azioneDocumento.equals("uploadQuestionarioAzienda")) {
 			try {
 
