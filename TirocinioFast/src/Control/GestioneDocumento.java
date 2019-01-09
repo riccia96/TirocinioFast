@@ -144,24 +144,21 @@ public class GestioneDocumento extends HttpServlet {
 				}
 				System.out.println(scelte);
 
-				int id = Integer.parseInt((String) request.getSession().getAttribute("id"));
 				QuestionarioStudenteBean questionarioStudente = new QuestionarioStudenteBean();
 				StudenteBean studente = (StudenteBean) request.getSession().getAttribute("utenteSessione");
 				AziendaBean azienda = new AziendaBean();
 				TutorBean tutor = new TutorBean();
 
-				questionarioStudente.setId(id);
-
-				questionarioStudente = documento.questionarioStudente(questionarioStudente);
-				questionarioStudente.setTitolo(titolo);
+       			questionarioStudente.setTitolo(titolo);
 				questionarioStudente.setPeriodo(periodo);
 				questionarioStudente.setScelte(scelte);
 
-				azienda.setUsername(questionarioStudente.getAzienda());
+				
 				azienda = utente.getAzienda(azienda);
-				tutor.setUsername(questionarioStudente.getTutorAccademico());
+				
 				tutor = utente.getTutor(tutor);
 
+				
 				request.getSession().setAttribute("questionarioStudente", questionarioStudente);
 				request.getSession().setAttribute("studente", studente);
 				request.getSession().setAttribute("azienda", azienda);
