@@ -2,12 +2,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="Bean.*"%>
 <%
-AziendaBean azienda = (AziendaBean) request.getSession().getAttribute("azienda");
+AziendaBean azienda = (AziendaBean) request.getSession().getAttribute("questionarioSAzienda");
 StudenteBean studente = (StudenteBean) request.getSession().getAttribute("studente");
-TutorBean tutor = (TutorBean) request.getSession().getAttribute("tutor");
-ConvenzioneBean convenzione = (ConvenzioneBean) request.getSession().getAttribute("convenzione");
+TutorBean tutor = (TutorBean) request.getSession().getAttribute("questionarioSTutor");
+ConvenzioneBean convenzione = (ConvenzioneBean) request.getSession().getAttribute("questionarioSConvenzione");
 QuestionarioStudenteBean questionarioStudente = (QuestionarioStudenteBean) request.getSession().getAttribute("questionarioStudente");
-ArrayList<String> scelte = (ArrayList<String>) request.getSession().getAttribute("risposte");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>

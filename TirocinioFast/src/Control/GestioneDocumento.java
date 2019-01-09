@@ -120,6 +120,7 @@ public class GestioneDocumento extends HttpServlet {
 
 		if(azioneDocumento.equals("compilaQuestionarioStudente")) {
 			try {
+				List<TirocinioBean> tirocini = documento.richiesteTirocinio();
 				ArrayList<String> risposte = new ArrayList<String>();
 				String titolo = request.getParameter("titolo");
 				String periodo = request.getParameter("periodo");
@@ -144,31 +145,34 @@ public class GestioneDocumento extends HttpServlet {
 				}
 				System.out.println(scelte);
 
-				int id = Integer.parseInt((String) request.getSession().getAttribute("id"));
 				QuestionarioStudenteBean questionarioStudente = new QuestionarioStudenteBean();
 				StudenteBean studente = (StudenteBean) request.getSession().getAttribute("utenteSessione");
 				AziendaBean azienda = new AziendaBean();
 				TutorBean tutor = new TutorBean();
 
-				questionarioStudente.setId(id);
+				for(TirocinioBean t : tirocini){
+					if(t.getStudente().equals(studente.getUsername())){
+						azienda.setUsername(t.getAzienda());
+						tutor.setUsername(t.getTutorAccademico());
+					}
+				}
 
-				questionarioStudente = documento.questionarioStudente(questionarioStudente);
 				questionarioStudente.setTitolo(titolo);
 				questionarioStudente.setPeriodo(periodo);
 				questionarioStudente.setScelte(scelte);
+				questionarioStudente.setAzienda(azienda.getUsername());
+				questionarioStudente.setTutorAccademico(tutor.getUsername());
 
-				azienda.setUsername(questionarioStudente.getAzienda());
 				azienda = utente.getAzienda(azienda);
-				tutor.setUsername(questionarioStudente.getTutorAccademico());
 				tutor = utente.getTutor(tutor);
 
 				request.getSession().setAttribute("questionarioStudente", questionarioStudente);
 				request.getSession().setAttribute("studente", studente);
-				request.getSession().setAttribute("azienda", azienda);
-				request.getSession().setAttribute("tutor", tutor);
+				request.getSession().setAttribute("questSAzienda", azienda);
+				request.getSession().setAttribute("questSTutor", tutor);
 				request.getSession().setAttribute("risposte", risposte);
 
-				RequestDispatcher view = request.getRequestDispatcher("documentoQuestionarioStudente.jsp");
+				RequestDispatcher view = request.getRequestDispatcher("GestioneQuestionario?azioneQuestionario=questionarioStudente");
 				view.forward(request, response);
 
 			} catch (SQLException e) {
@@ -327,7 +331,18 @@ public class GestioneDocumento extends HttpServlet {
 						azienda.setUsername(questionarioS.getAzienda());
 						azienda = utente.getAzienda(azienda);
 						tutor.setUsername(questionarioS.getTutorAccademico());
+						String scelte = questionarioS.getScelte();
+						ArrayList<String> risposte = new ArrayList<String>();
 						
+						for(int i = 0; i < 14; i++){
+							int a = scelte.indexOf('*');
+							String risposta = scelte.substring(0, a);
+							scelte = scelte.substring(a+1);
+							System.out.println("scelta n " + i + " " + scelte);
+							System.out.println("risposta n " + i+ " " + risposta);
+							risposte.add(risposta);
+						}
+												
 						for(ConvenzioneBean c : convenzioni){
 							if(c.getAzienda().equals(azienda.getUsername())){
 								convenzione = c;
@@ -335,9 +350,9 @@ public class GestioneDocumento extends HttpServlet {
 							}
 						}
 						
-						request.getSession().setAttribute("azienda", azienda);
-						request.getSession().setAttribute("tutor", tutor);
-						request.getSession().setAttribute("convenzione", convenzione);
+						request.getSession().setAttribute("questionarioSAzienda", azienda);
+						request.getSession().setAttribute("questionarioSTutor", tutor);
+						request.getSession().setAttribute("questionarioSConvenzione", convenzione);
 						request.getSession().setAttribute("questionarioStudente", questionarioS);
 						
 						RequestDispatcher view = request.getRequestDispatcher("documentoQuestionarioStudente.jsp");
