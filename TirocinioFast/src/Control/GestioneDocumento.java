@@ -300,6 +300,39 @@ public class GestioneDocumento extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		
+		if(azioneDocumento.equals("mostraQuestionario")){
+			try {
+				int id = Integer.parseInt((String) request.getParameter("idQ"));
+				String tipoUtente = (String) request.getSession().getAttribute("tipoUtente");
+
+				if(tipoUtente.equals("studente")){
+					QuestionarioStudenteBean questionarioS = new QuestionarioStudenteBean();
+
+					questionarioS.setId(id);
+
+					questionarioS = documento.QuestionarioStudente(questionarioS);
+					
+					request.getSession().setAttribute("questionarioStudente", questionarioS);
+					request.getSession().setAttribute("tipoDocumento", "questionarioStudente");
+					
+					RequestDispatcher view = request.getRequestDispatcher("mostraPDF.jsp");
+					view.forward(request, response);
+				} else if(tipoUtente.equals("azienda")){
+					QuestionarioAziendaBean questionarioA = new QuestionarioAziendaBean();
+
+					questionarioA.setId(id);
+					questionarioA = documento.QuestionarioAzienda(questionarioA);
+					
+					request.getSession().setAttribute("questionarioAzienda", questionarioA);
+					request.getSession().setAttribute("tipoDocumento", "questionarioAzienda");
+					
+					RequestDispatcher view = request.getRequestDispatcher("mostraPDF.jsp");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 
 		if(azioneDocumento.equals("uploadTirocinio")) {
 			try {
