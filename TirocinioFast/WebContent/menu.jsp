@@ -34,7 +34,7 @@
 		<li><a href="GestioneTirocinio?azioneTirocinio=elencoAziende">Ricerca azienda</a></li>
 		<li><a href="GestioneDocumento?azioneDocumento=elencoRichiesteTirocinio">Richiesta tirocinio</a></li>
 		<li><a href="GestioneTirocinio?azioneTirocinio=attivitaConvalidate">Tirocini conclusi</a></li>
-		<li><a href="GestioneDocumento?azioneDocumento=RegistroOre">Registro ore</a></li>
+		<li><a href="GestioneDocumento?azioneDocumento=registroOre">Registro ore</a></li>
 		<li><a href="GestioneQuestionario?azioneQuestionario=questionarioStudente">Questionario</a></li>
 		<li><a href="GestioneUtente?azioneUtente=logout">Logout</a></li>
 		<%

@@ -557,16 +557,19 @@ public class GestioneDocumento extends HttpServlet {
 
 		if(azioneDocumento.equals("registroOre")) {
 			try {
-
+				
 				List<TirocinioBean> tirocini = new ArrayList<TirocinioBean>();
-				documento.richiesteTirocinio();
+				tirocini = documento.richiesteTirocinio();
 
 				StudenteBean studente = (StudenteBean) request.getSession().getAttribute("utenteSessione");
+			
 				TutorBean tutor = new TutorBean();
 				AziendaBean azienda = new AziendaBean();
 				for(TirocinioBean t : tirocini) {
 					if(t.getStudente().equals(studente.getUsername())) {
+						
 						if(t.isConvalidaRichiesta()) {
+						
 							tutor.setUsername(t.getTutorAccademico());
 							tutor = utente.getTutor(tutor);
 							azienda.setUsername(t.getAzienda());
@@ -577,6 +580,7 @@ public class GestioneDocumento extends HttpServlet {
 							RequestDispatcher view = request.getRequestDispatcher("registroOre.jsp");
 							view.forward(request, response);
 						} else {
+						
 							RequestDispatcher view = request.getRequestDispatcher("nessunaRisorsa.jsp");
 							view.forward(request, response);
 						}
