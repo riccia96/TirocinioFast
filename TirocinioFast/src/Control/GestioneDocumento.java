@@ -143,7 +143,6 @@ public class GestioneDocumento extends HttpServlet {
 				for(String r: risposte) {
 					scelte += r + "*";
 				}
-				System.out.println(scelte);
 
 				QuestionarioStudenteBean questionarioStudente = new QuestionarioStudenteBean();
 				StudenteBean studente = (StudenteBean) request.getSession().getAttribute("utenteSessione");
@@ -209,7 +208,6 @@ public class GestioneDocumento extends HttpServlet {
 				for(String r: risposte) {
 					scelte += r + "*";
 				}
-				System.out.println(scelte);
 				int id = Integer.parseInt((String) request.getSession().getAttribute("id"));
 				QuestionarioAziendaBean questionarioAzienda = new QuestionarioAziendaBean();
 				StudenteBean studente = new StudenteBean();
@@ -318,7 +316,6 @@ public class GestioneDocumento extends HttpServlet {
 			try {
 				int id = Integer.parseInt((String) request.getParameter("idQ"));
 				String tipoUtente = (String) request.getSession().getAttribute("tipoUtente");
-				System.out.println("MostraQuest" + tipoUtente);
 
 				if(tipoUtente.equals("studente")){
 					QuestionarioStudenteBean questionarioS = new QuestionarioStudenteBean();
@@ -349,8 +346,7 @@ public class GestioneDocumento extends HttpServlet {
 							int a = scelte.indexOf('*');
 							String risposta = scelte.substring(0, a);
 							scelte = scelte.substring(a+1);
-							System.out.println("scelta n " + i + " " + scelte);
-							System.out.println("risposta n " + i+ " " + risposta);
+
 							risposte.add(risposta);
 						}
 												
@@ -569,15 +565,12 @@ public class GestioneDocumento extends HttpServlet {
 		if(azioneDocumento.equals("uploadQuestionarioStudente")) {
 			try {
 				String nomeFile = (String) request.getParameter("questionarioFirmatoStudente");
-				System.out.println(nomeFile);
 				int idQ = Integer.parseInt((String) request.getParameter("id"));
 			
 				QuestionarioStudenteBean questionario = new QuestionarioStudenteBean();
 				questionario.setId(idQ);
 				questionario = documento.QuestionarioStudente(questionario);
-				questionario.setUrl("pdf/" + nomeFile);
 				documento.UploadQuestionarioStudente(questionario);
-				System.out.println("path" + questionario.getUrl());
 				RequestDispatcher view = request.getRequestDispatcher("GestioneQuestionario?azioneQuestionario=questionarioStudente");
 				view.forward(request, response);
 				
