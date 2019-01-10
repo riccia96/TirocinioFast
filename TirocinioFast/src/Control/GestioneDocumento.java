@@ -630,9 +630,9 @@ public class GestioneDocumento extends HttpServlet {
 				tirocinio = documento.DownloadTirocinio(tirocinio);
 
 				tirocinio.setRegistroOre("pdf/" + nomeFile);
-
+				System.out.print(nomeFile);
 				documento.UploadTirocinio(tirocinio);
-
+				System.out.print(tirocinio.getRegistroOre());
 				RequestDispatcher view = request.getRequestDispatcher("GestioneDocumento?azioneDocumento=registroOre");
 				view.forward(request, response);
 			} catch (SQLException e) {

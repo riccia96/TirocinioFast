@@ -131,17 +131,14 @@ public class GestioneQuestionario extends HttpServlet {
 					} 
 				}
 
-				if(questionariA.size() == 0){
-					RequestDispatcher view = request.getRequestDispatcher("nessunaRisorsa.jsp");
-					view.forward(request, response);
-				} else {
+				
 					request.getSession().setAttribute("questionariA", questionariA);
 					request.getSession().setAttribute("studenti", studenti);
 					request.getSession().setAttribute("tutors", tutors);
 					
 					RequestDispatcher view = request.getRequestDispatcher("questionari.jsp");
 					view.forward(request, response);
-				}
+				
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

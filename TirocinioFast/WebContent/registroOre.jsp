@@ -37,9 +37,9 @@
     <td>Prof/Prof.ssa<%= tutor.getCognome() + " " + tutor.getNome() %></td>
     <%if (tirocinio.getRegistroOre().equals("")){ %>
     <td>
-    	<form>
+    	<form action="GestioneDocumento" method="POST">
   			Seleziona PDF del registro ore completato<br>
-  			<input type="file" name="nomeRgistroOre" accept=".pdf"><br>
+  			<input type="file" name="nomeRegistroOre" accept=".pdf"><br>
   			<input type="hidden" name="id" value="<%=tirocinio.getId() %>">
   			<input type="submit" name="azioneDocumento" value="uploadRegistroOre">
 		</form>

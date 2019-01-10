@@ -74,8 +74,7 @@
 </table>
 
 
-<%} if (tipoUm.equals("azienda")){ 
-	 if (questionariA.size()>0){ %>
+<%} if (tipoUm.equals("azienda")){ %>
 	<table style="margin-left: 25%; width: 1000px;">
   <tr>
     <th style="margin-left: 10%">Questionario</th>
@@ -125,12 +124,9 @@
   </tr>
   <% } %>
 </table>
-<% 	}  else { %>
-<script type="text/javascript">
-	window.location.href = 'nessunaRisorsa.jsp';
-</script>
-<%} 
-} %>
+<% 	}  %>
+
+
 
 <%@include file = "footer.jsp" %>
 
