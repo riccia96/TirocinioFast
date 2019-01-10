@@ -454,7 +454,10 @@ public class GestioneDocumento extends HttpServlet {
 					tirocinio.setId(id);
 					tirocinio = richiesta.richiestaTirocinio(tirocinio);
 					tirocinio.setUrl("pdf/" + nomeFile);
-					tirocinio.setConvalidaStudente(true);
+					if(!tirocinio.isConvalidaRichiesta())
+						tirocinio.setConvalidaStudente(true);
+					else
+						tirocinio.setConvalidaAttivita(true);
 					documento.UploadTirocinio(tirocinio);
 
 					request.getSession().setAttribute("tirocinio", tirocinio);

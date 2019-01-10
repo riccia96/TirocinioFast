@@ -7,7 +7,7 @@ public class ConvenzioneBean implements java.io.Serializable {
 	/**Costruttore*/
 	
 	public ConvenzioneBean() {
-		this.id = 0;
+		this.id = -1;
 		this.azienda = "";
 		this.tutorAccademico = "";
 		this.impiegato = "";

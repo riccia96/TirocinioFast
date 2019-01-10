@@ -26,8 +26,8 @@ public class TirocinioBean implements java.io.Serializable {
 		this.convalidaRichiesta = false;
 		this.convalidaAttivita = false;
 		this.registroOre = "";
-		this.questionarioStudente = 0;
-		this.questionarioAzienda = 0;
+		this.questionarioStudente = -1;
+		this.questionarioAzienda = -1;
 		this.url = "";
 	}
 

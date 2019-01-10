@@ -26,7 +26,7 @@ public class ImpiegatoDAO extends AbstractDAO<ImpiegatoBean>{
 			Context initCtx = new InitialContext();
 			Context envCtx = (Context) initCtx.lookup("java:comp/env");
 
-			ds = (DataSource) envCtx.lookup("jdbc/TirocinioFast");
+			ds = (DataSource) envCtx.lookup("jdbc/tirociniofast");
 
 		} catch (NamingException e) {
 			System.out.println("Error:" + e.getMessage());
