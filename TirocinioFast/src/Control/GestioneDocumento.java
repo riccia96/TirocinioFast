@@ -166,7 +166,6 @@ public class GestioneDocumento extends HttpServlet {
 				questionarioStudente.setStudente(studente.getUsername());
 				questionarioStudente.setAzienda(azienda.getUsername());
 				questionarioStudente.setTutorAccademico(tutor.getUsername());
-				System.out.println(questionarioStudente.getId());
 				azienda = utente.getAzienda(azienda);
 
 				tutor = utente.getTutor(tutor);
@@ -180,9 +179,6 @@ public class GestioneDocumento extends HttpServlet {
 				}
 				tir.setQuestionarioStudente(questiona.getId());
 				documento.UploadTirocinio(tir);
-
-				System.out.println("dopo update "+tir);
-
 				
 				request.getSession().setAttribute("questionarioStudente", questionarioStudente);
 				request.getSession().setAttribute("studente", studente);
