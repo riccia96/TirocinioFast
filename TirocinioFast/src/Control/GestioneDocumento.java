@@ -644,23 +644,32 @@ public class GestioneDocumento extends HttpServlet {
 				
 				List<TirocinioBean> tirocini = new ArrayList<TirocinioBean>();
 				tirocini = documento.richiesteTirocinio();
+				
 
 				StudenteBean studente = (StudenteBean) request.getSession().getAttribute("utenteSessione");
-			
+				List<ConvenzioneBean> convenzioni = documento.convenzioni();
+				ConvenzioneBean conv = new ConvenzioneBean();
 				TutorBean tutor = new TutorBean();
 				AziendaBean azienda = new AziendaBean();
 				for(TirocinioBean t : tirocini) {
 					if(t.getStudente().equals(studente.getUsername())) {
 						
 						if(t.isConvalidaRichiesta()) {
-						
+							
 							tutor.setUsername(t.getTutorAccademico());
 							tutor = utente.getTutor(tutor);
 							azienda.setUsername(t.getAzienda());
 							azienda = utente.getAzienda(azienda);
+							for(ConvenzioneBean c : convenzioni) {
+								if(c.getAzienda().equals(azienda.getUsername())) {
+									conv = c;
+								}
+							}
 							request.getSession().setAttribute("tutorOre", tutor);
 							request.getSession().setAttribute("aziendaOre", azienda);
 							request.getSession().setAttribute("tirocinioOre", t);
+							request.getSession().setAttribute("studenteOre", studente);
+							request.getSession().setAttribute("convenzioneOre", conv);
 							RequestDispatcher view = request.getRequestDispatcher("registroOre.jsp");
 							view.forward(request, response);
 						} else {
