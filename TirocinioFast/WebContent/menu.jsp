@@ -61,7 +61,7 @@
 		<li><a href="GestioneDocumento?azioneDocumento=elencoRichiesteTirocinio">Richieste tirocinio</a>
 		<li><a href="GestioneDocumento?azioneDocumento=tirociniConclusi">Attività tirocinio</a>
 		<li><a href="GestioneTirocinio?azioneTirocinio=attivitaConvalidate">Tirocini conclusi</a></li>
-		<li><a href="GestioneConvenzione?azioneConvenzione=elencoRichiesteConvenzioni">Convenzioni aziende</a>
+		<li><a href="GestioneDocumento?azioneDocumento=elencoRichiesteConvenzioni">Convenzioni aziende</a>
 		<li><a href="GestioneConvenzione?azioneConvenzione=convenzioniConvalidate">Convenzioni accettate</a></li>
 		<li><a href="GestioneTirocinio?azioneTirocinio=elencoAziende">Elenco aziende convenzionate</a>
 		<li><a href="GestioneUtente?azioneUtente=logout">Logout</a> <%

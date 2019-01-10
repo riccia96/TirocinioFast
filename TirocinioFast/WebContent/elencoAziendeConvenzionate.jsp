@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" import="java.util.ArrayList, Bean.*"%>
 <%
-	ArrayList<AziendaBean> convenzioni = (ArrayList<AziendaBean>) request.getSession().getAttribute("listaAziende");
+	ArrayList<AziendaBean> convenzionate = (ArrayList<AziendaBean>) request.getSession().getAttribute("listaAziende");
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -21,7 +21,7 @@
 
 	<%@include file="ricerca.jsp"%>
 	
-	<%if (convenzioni.size() > 0){ %>
+	<%if (convenzionate.size() > 0){ %>
 
 <div id = "contenitore" style="margin-left: 25%;" >
 <table>
@@ -29,7 +29,7 @@
 <td></td>
 <td></td>
 <td></td>
-<% for(AziendaBean a: convenzioni){ %>
+<% for(AziendaBean a: convenzionate){ %>
 <tr>
 
 <figure class="azienda-figure"><div class="images"><img src="<%=a.getLogo()%>" alt="images-azienda"/></div>

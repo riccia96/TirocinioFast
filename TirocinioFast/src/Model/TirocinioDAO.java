@@ -267,7 +267,7 @@ public class TirocinioDAO extends AbstractDAO<TirocinioBean>{
 
 	@Override
 	public synchronized boolean doUpdate(TirocinioBean tirocinio) throws SQLException {
-
+		System.out.println("TIRO DAO UPDATE : "+ tirocinio);
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 

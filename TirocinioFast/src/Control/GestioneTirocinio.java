@@ -433,20 +433,23 @@ public class GestioneTirocinio extends HttpServlet {
 				List<ConvenzioneBean> convenzioni = documento.convenzioni();
 				List<AziendaBean> aziendeConv = new ArrayList<AziendaBean>();
 				String nome = request.getParameter("nomeAzienda").toLowerCase();
+				System.out.println("nome "+nome);
 				String sede = request.getParameter("sedeAzienda").toLowerCase();
-
+				System.out.println("sede"+sede);
 				for(AziendaBean a : aziende) {
 
 					for(ConvenzioneBean c : convenzioni) {
-
+						
 						if(a.getUsername().equals(c.getAzienda()) && c.isConvalida()) {
-
+							System.out.println(a);
 							aziendeConv.add(a);
+							
 						}
+						
 					}
 				}
 
-				if(aziendeConv.equals(null)) {
+				if(aziendeConv.size() == 0) {
 					RequestDispatcher view = request.getRequestDispatcher("nessunaRisorsa.jsp");
 					view.forward(request, response);
 				}
@@ -455,7 +458,7 @@ public class GestioneTirocinio extends HttpServlet {
 					List<AziendaBean> listaAziende = new ArrayList<AziendaBean>();
 					for(AziendaBean a : aziendeConv){
 						if(!(nome.equals(null)) && !(sede.equals(null))){
-							if(a.getNome().toLowerCase().contains(nome) || a.getIndirizzo().toLowerCase().contains(sede)){
+							if(a.getNome().toLowerCase().contains(nome) && a.getIndirizzo().toLowerCase().contains(sede)){
 								listaAziende.add(a);
 							}
 						}else if(!(nome.equals(null)) && sede.equals(null)){

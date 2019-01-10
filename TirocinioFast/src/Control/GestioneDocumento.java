@@ -155,24 +155,34 @@ public class GestioneDocumento extends HttpServlet {
 						azienda.setUsername(t.getAzienda());
 						tutor.setUsername(t.getTutorAccademico());
 						tir = t;
+						
 					}
 				}
-
+				
+				
 				questionarioStudente.setTitolo(titolo);
 				questionarioStudente.setPeriodo(periodo);
 				questionarioStudente.setScelte(scelte);
 				questionarioStudente.setStudente(studente.getUsername());
 				questionarioStudente.setAzienda(azienda.getUsername());
 				questionarioStudente.setTutorAccademico(tutor.getUsername());
-				tir.setQuestionarioStudente(questionarioStudente.getId());
-
+				System.out.println(questionarioStudente.getId());
 				azienda = utente.getAzienda(azienda);
 
 				tutor = utente.getTutor(tutor);
 				
-				documento.UploadTirocinio(tir);
 				documento.compilaQuestionarioStudente(questionarioStudente);
-				
+				QuestionarioStudenteBean questiona = new QuestionarioStudenteBean();
+				ArrayList<QuestionarioStudenteBean> questionari = (ArrayList<QuestionarioStudenteBean>)documento.questionariStudente();
+				for(QuestionarioStudenteBean q : questionari) {
+					if(q.getTitolo().equals(questionarioStudente.getTitolo()))
+						questiona = q;
+				}
+				tir.setQuestionarioStudente(questiona.getId());
+				documento.UploadTirocinio(tir);
+
+				System.out.println("dopo update "+tir);
+
 				
 				request.getSession().setAttribute("questionarioStudente", questionarioStudente);
 				request.getSession().setAttribute("studente", studente);

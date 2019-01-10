@@ -40,7 +40,7 @@
   					
 	  %>
   <tr>
-    <td><a href="#">ConvenzioneN<%= c.getId() %></a></td>
+    <td><a href="GestioneConvenzione?azioneConvenzione=selezionaConvenzione&idConv=<%=c.getId()%>">ConvenzioneN<%= c.getId() %></a></td>
     <td><%=a.getNome()  %></td>
   </tr>
   <% } %>

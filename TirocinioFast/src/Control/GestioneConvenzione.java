@@ -84,7 +84,7 @@ public class GestioneConvenzione extends HttpServlet {
 				ConvenzioneBean convenzione = new ConvenzioneBean();
 				convenzione.setId(id);
 				convenzione = documento.convenzione(convenzione);
-				
+				System.out.println(convenzione);
 				if(!convenzione.getUrl().equals("")) {
 					request.getSession().setAttribute("pdfConv", convenzione);
 					request.getSession().setAttribute("tipoDocumento", "convenzione");
