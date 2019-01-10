@@ -246,11 +246,18 @@ public class GestioneDocumento extends HttpServlet {
 					}
 				}
 				
-				tir.setQuestionarioAzienda(questionarioAzienda.getId());
 				
-				documento.UploadTirocinio(tir);
 				documento.compilaQuestionarioAzienda(questionarioAzienda);
 				
+				ArrayList<QuestionarioAziendaBean> questionari = (ArrayList<QuestionarioAziendaBean>)documento.questionariAzienda();
+				QuestionarioAziendaBean quest = new QuestionarioAziendaBean();
+				for(QuestionarioAziendaBean q : questionari){
+					if(q.getTitoloTirocinio().equals(questionarioAzienda.getTitoloTirocinio()))
+						quest = q;
+				}
+				tir.setQuestionarioAzienda(quest.getId());
+				documento.UploadTirocinio(tir);
+
 				request.getSession().setAttribute("questionarioAzienda", questionarioAzienda);
 				request.getSession().setAttribute("studente", studente);
 				request.getSession().setAttribute("tutor", tutor);
