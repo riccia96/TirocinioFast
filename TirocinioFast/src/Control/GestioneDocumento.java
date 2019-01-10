@@ -169,7 +169,8 @@ public class GestioneDocumento extends HttpServlet {
 				azienda = utente.getAzienda(azienda);
 
 				tutor = utente.getTutor(tutor);
-
+				
+				documento.UploadTirocinio(tir);
 				documento.compilaQuestionarioStudente(questionarioStudente);
 				
 				
@@ -212,10 +213,6 @@ public class GestioneDocumento extends HttpServlet {
 					scelte += r + "*";
 				}
 				
-				for(TirocinioBean t : tirocini){
-					
-				}
-				
 				int id = Integer.parseInt((String) request.getSession().getAttribute("id"));
 				QuestionarioAziendaBean questionarioAzienda = new QuestionarioAziendaBean();
 				StudenteBean studente = new StudenteBean();
@@ -233,14 +230,22 @@ public class GestioneDocumento extends HttpServlet {
 				tutor.setUsername(questionarioAzienda.getTutorAccademico());
 				tutor = utente.getTutor(tutor);
 
+				for(TirocinioBean t : tirocini){
+					if(t.getStudente().equals(studente.getUsername()) && t.getAzienda().equals(azienda.getUsername())){
+						tir = t;
+					}
+				}
 				
+				tir.setQuestionarioAzienda(questionarioAzienda.getId());
 				
+				documento.UploadTirocinio(tir);
+				documento.compilaQuestionarioAzienda(questionarioAzienda);
 				
 				request.getSession().setAttribute("questionarioAzienda", questionarioAzienda);
 				request.getSession().setAttribute("studente", studente);
 				request.getSession().setAttribute("tutor", tutor);
 				request.getSession().setAttribute("risposte", risposte);
-
+				
 				RequestDispatcher view = request.getRequestDispatcher("documentoQuestionarioAzienda.jsp");
 				view.forward(request, response);
 			} catch (SQLException e) {
