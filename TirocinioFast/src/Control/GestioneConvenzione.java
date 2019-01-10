@@ -86,19 +86,12 @@ public class GestioneConvenzione extends HttpServlet {
 				convenzione = documento.convenzione(convenzione);
 				
 				if(!convenzione.getUrl().equals("")) {
-					System.out.println(convenzione.getUrl());
 					request.getSession().setAttribute("pdfConv", convenzione);
-					System.out.println(convenzione.getUrl());
 					request.getSession().setAttribute("tipoDocumento", "convenzione");
-					System.out.println(convenzione.getUrl());
 					RequestDispatcher view = request.getRequestDispatcher("mostraPDF.jsp");
-					System.out.println(convenzione.getUrl());
 					view.forward(request, response);
-					System.out.println(convenzione.getUrl());
 				} else {
-					System.out.println(convenzione.getUrl());
 					request.getSession().setAttribute("doc", convenzione);
-					System.out.println(convenzione.getUrl());
 					RequestDispatcher view = request.getRequestDispatcher("documentoConvenzione.jsp");
 					view.forward(request, response);
 
@@ -122,7 +115,6 @@ public class GestioneConvenzione extends HttpServlet {
 				for(ConvenzioneBean c: convenzioni) {
 					if(c.getAzienda().equals(azienda.getUsername())) {
 						request.getSession().setAttribute("convenzioneA", c);
-						System.out.println(c);
 						flag = true;
 					}
 				}
