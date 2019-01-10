@@ -433,15 +433,12 @@ public class GestioneTirocinio extends HttpServlet {
 				List<ConvenzioneBean> convenzioni = documento.convenzioni();
 				List<AziendaBean> aziendeConv = new ArrayList<AziendaBean>();
 				String nome = request.getParameter("nomeAzienda").toLowerCase();
-				System.out.println("nome "+nome);
 				String sede = request.getParameter("sedeAzienda").toLowerCase();
-				System.out.println("sede"+sede);
 				for(AziendaBean a : aziende) {
 
 					for(ConvenzioneBean c : convenzioni) {
 						
 						if(a.getUsername().equals(c.getAzienda()) && c.isConvalida()) {
-							System.out.println(a);
 							aziendeConv.add(a);
 							
 						}
