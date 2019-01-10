@@ -454,7 +454,10 @@ public class GestioneDocumento extends HttpServlet {
 					tirocinio.setId(id);
 					tirocinio = richiesta.richiestaTirocinio(tirocinio);
 					tirocinio.setUrl("pdf/" + nomeFile);
-					tirocinio.setConvalidaStudente(true);
+					if(!tirocinio.isConvalidaRichiesta())
+						tirocinio.setConvalidaStudente(true);
+					else
+						tirocinio.setConvalidaAttivita(true);
 					documento.UploadTirocinio(tirocinio);
 
 					request.getSession().setAttribute("tirocinio", tirocinio);
@@ -572,7 +575,7 @@ public class GestioneDocumento extends HttpServlet {
 
 						documento.UploadConvenzione(conv);
 
-						RequestDispatcher view = request.getRequestDispatcher("GestioneConvenzione?azioneConvenzione=elencoRichiesteConvenzioni");
+						RequestDispatcher view = request.getRequestDispatcher("GestioneDocumento?azioneDocumento=elencoRichiesteConvenzioni");
 						view.forward(request, response);
 					}
 					else {

@@ -7,7 +7,7 @@ public class QuestionarioStudenteBean implements java.io.Serializable {
 	/**Costruttore*/
 
 	public QuestionarioStudenteBean() {
-		this.id = 0;
+		this.id = -1;
 		this.studente = "";
 		this.azienda = "";
 		this.tutorAccademico = "";
