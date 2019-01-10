@@ -25,7 +25,7 @@ public class QuestionarioAziendaDAO extends AbstractDAO<QuestionarioAziendaBean>
 			Context initCtx = new InitialContext();
 			Context envCtx = (Context) initCtx.lookup("java:comp/env");
 
-			ds = (DataSource) envCtx.lookup("jdbc/tirociniofast");
+			ds = (DataSource) envCtx.lookup("jdbc/TirocinioFast");
 
 		} catch (NamingException e) {
 			System.out.println("Error:" + e.getMessage());

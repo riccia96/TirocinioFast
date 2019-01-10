@@ -575,7 +575,7 @@ public class GestioneDocumento extends HttpServlet {
 
 						documento.UploadConvenzione(conv);
 
-						RequestDispatcher view = request.getRequestDispatcher("GestioneConvenzione?azioneConvenzione=elencoRichiesteConvenzioni");
+						RequestDispatcher view = request.getRequestDispatcher("GestioneDocumento?azioneDocumento=elencoRichiesteConvenzioni");
 						view.forward(request, response);
 					}
 					else {
