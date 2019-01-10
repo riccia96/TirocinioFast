@@ -10,6 +10,8 @@
 	ArrayList<StudenteBean> studenti = new ArrayList<StudenteBean>();
 	ArrayList<TutorBean> tutors = new ArrayList<TutorBean>();
 	ArrayList<QuestionarioAziendaBean> questionariA = new ArrayList<QuestionarioAziendaBean>();
+	QuestionarioAziendaBean qa = new QuestionarioAziendaBean();
+	StudenteBean studente = new StudenteBean();
 	
 	if(tipoUtente.equals("studente")){
 		questionarioS = (QuestionarioStudenteBean) request.getSession().getAttribute("questionarioStudente");

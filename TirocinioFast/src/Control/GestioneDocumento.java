@@ -122,6 +122,7 @@ public class GestioneDocumento extends HttpServlet {
 			try {
 				List<TirocinioBean> tirocini = documento.richiesteTirocinio();
 				ArrayList<String> risposte = new ArrayList<String>();
+				TirocinioBean tir = new TirocinioBean();
 				String titolo = request.getParameter("titolo");
 				String periodo = request.getParameter("periodo");
 				risposte.add(request.getParameter("prima"));
@@ -153,6 +154,7 @@ public class GestioneDocumento extends HttpServlet {
 					if(t.getStudente().equals(studente.getUsername())){
 						azienda.setUsername(t.getAzienda());
 						tutor.setUsername(t.getTutorAccademico());
+						tir = t;
 					}
 				}
 
@@ -162,7 +164,7 @@ public class GestioneDocumento extends HttpServlet {
 				questionarioStudente.setStudente(studente.getUsername());
 				questionarioStudente.setAzienda(azienda.getUsername());
 				questionarioStudente.setTutorAccademico(tutor.getUsername());
-
+				tir.setQuestionarioStudente(questionarioStudente.getId());
 
 				azienda = utente.getAzienda(azienda);
 
@@ -189,7 +191,8 @@ public class GestioneDocumento extends HttpServlet {
 		if(azioneDocumento.equals("compilaQuestionarioAzienda")) {
 			try {
 				ArrayList<String> risposte = new ArrayList<String>();
-
+				List<TirocinioBean> tirocini = documento.richiesteTirocinio();
+				TirocinioBean tir = new TirocinioBean();
 				String titolo = request.getParameter("titolo");
 				String posizione = request.getParameter("posizione");
 				risposte.add(request.getParameter("prima"));
@@ -208,6 +211,11 @@ public class GestioneDocumento extends HttpServlet {
 				for(String r: risposte) {
 					scelte += r + "*";
 				}
+				
+				for(TirocinioBean t : tirocini){
+					
+				}
+				
 				int id = Integer.parseInt((String) request.getSession().getAttribute("id"));
 				QuestionarioAziendaBean questionarioAzienda = new QuestionarioAziendaBean();
 				StudenteBean studente = new StudenteBean();
