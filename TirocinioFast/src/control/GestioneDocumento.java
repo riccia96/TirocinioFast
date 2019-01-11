@@ -637,17 +637,12 @@ public class GestioneDocumento extends HttpServlet {
 				documento.UploadTirocinio(tirocinio);
 				
 				QuestionarioAziendaBean questionarioA = new QuestionarioAziendaBean();
-				QuestionarioStudenteBean questionarioS = new QuestionarioStudenteBean();
 				
 				questionarioA.setAzienda(tirocinio.getAzienda());
 				questionarioA.setStudente(tirocinio.getStudente());
 				questionarioA.setTutorAccademico(tirocinio.getTutorAccademico());
-				questionarioS.setAzienda(tirocinio.getAzienda());
-				questionarioS.setStudente(tirocinio.getStudente());
-				questionarioS.setTutorAccademico(tirocinio.getTutorAccademico());
 				
 				documento.compilaQuestionarioAzienda(questionarioA);
-				documento.compilaQuestionarioStudente(questionarioS);
 				
 				RequestDispatcher view = request.getRequestDispatcher("GestioneDocumento?azioneDocumento=registroOre");
 				view.forward(request, response);
