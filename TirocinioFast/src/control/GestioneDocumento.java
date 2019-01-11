@@ -202,6 +202,7 @@ public class GestioneDocumento extends HttpServlet {
 				TirocinioBean tir = new TirocinioBean();
 				String titolo = request.getParameter("titolo");
 				String posizione = request.getParameter("posizione");
+				String periodo = request.getParameter("periodo");
 				risposte.add(request.getParameter("prima"));
 				risposte.add(request.getParameter("seconda"));
 				risposte.add(request.getParameter("terza"));
@@ -218,8 +219,8 @@ public class GestioneDocumento extends HttpServlet {
 				for(String r: risposte) {
 					scelte += r + "*";
 				}
-
-				int id = Integer.parseInt((String) request.getSession().getAttribute("id"));
+				
+				int id = Integer.parseInt((String) request.getParameter("id"));
 				QuestionarioAziendaBean questionarioAzienda = new QuestionarioAziendaBean();
 				StudenteBean studente = new StudenteBean();
 				AziendaBean azienda = (AziendaBean) request.getSession().getAttribute("utenteSessione");
@@ -227,10 +228,13 @@ public class GestioneDocumento extends HttpServlet {
 				questionarioAzienda.setId(id);
 				questionarioAzienda = documento.questionarioAzienda(questionarioAzienda);
 
+				questionarioAzienda.setPeriodoTirocinio(periodo);
 				questionarioAzienda.setTitoloTirocinio(titolo);
 				questionarioAzienda.setPosizioneRicoperta(posizione);
 				questionarioAzienda.setScelte(scelte);
-
+				
+				documento.UploadQuestionarioAzienda(questionarioAzienda);
+				
 				studente.setUsername(questionarioAzienda.getStudente());
 				studente = utente.getStudente(studente);
 				tutor.setUsername(questionarioAzienda.getTutorAccademico());
@@ -241,9 +245,6 @@ public class GestioneDocumento extends HttpServlet {
 						tir = t;
 					}
 				}
-
-
-				documento.compilaQuestionarioAzienda(questionarioAzienda);
 
 				ArrayList<QuestionarioAziendaBean> questionari = (ArrayList<QuestionarioAziendaBean>)documento.questionariAzienda();
 				QuestionarioAziendaBean quest = new QuestionarioAziendaBean();

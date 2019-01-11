@@ -229,7 +229,7 @@ public class QuestionarioAziendaDAO extends AbstractDAO<QuestionarioAziendaBean>
 		PreparedStatement preparedStatement = null;
 		
 		String querySQL = "UPDATE " + QuestionarioAziendaDAO.TABLE_NAME + " SET studente = ?, azienda = ?, tutorAccademico = ?,"
-				+ " impiegato = ?, periodoTirocinio = ?, titoloTirocinio = ?, posizioneRicoperta = ?, convalida = ?, url = ? WHERE id = ? ";
+				+ " impiegato = ?, periodoTirocinio = ?, titoloTirocinio = ?, posizioneRicoperta = ?, scelte = ?, convalida = ?, url = ? WHERE id = ?";
 		
 		try{
 			
@@ -242,15 +242,12 @@ public class QuestionarioAziendaDAO extends AbstractDAO<QuestionarioAziendaBean>
 			preparedStatement.setString(4, questionarioAzienda.getImpiegato());
 			preparedStatement.setString(5, questionarioAzienda.getPeriodoTirocinio());
 			preparedStatement.setString(6, questionarioAzienda.getTitoloTirocinio());
-			preparedStatement.setString(4, questionarioAzienda.getImpiegato());
-			preparedStatement.setString(5, questionarioAzienda.getPeriodoTirocinio());
-			preparedStatement.setString(6, questionarioAzienda.getTitoloTirocinio());
 			preparedStatement.setString(7, questionarioAzienda.getPosizioneRicoperta());
 			preparedStatement.setString(8, questionarioAzienda.getScelte());
 			preparedStatement.setBoolean(9, questionarioAzienda.isConvalida());
 			preparedStatement.setString(10, questionarioAzienda.getUrl());
 			
-			preparedStatement.setInt(10, questionarioAzienda.getId());
+			preparedStatement.setInt(11, questionarioAzienda.getId());
 			
 			preparedStatement.execute();
 			return true;
