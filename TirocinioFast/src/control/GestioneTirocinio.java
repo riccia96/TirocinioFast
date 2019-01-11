@@ -1,4 +1,4 @@
-package Control;
+package control;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -12,13 +12,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Bean.AziendaBean;
-import Bean.ConvenzioneBean;
-import Bean.QuestionarioAziendaBean;
-import Bean.QuestionarioStudenteBean;
-import Bean.StudenteBean;
-import Bean.TirocinioBean;
-import Bean.TutorBean;
+import bean.AziendaBean;
+import bean.ConvenzioneBean;
+import bean.QuestionarioAziendaBean;
+import bean.QuestionarioStudenteBean;
+import bean.StudenteBean;
+import bean.TirocinioBean;
+import bean.TutorBean;
 
 /**
  * Servlet implementation class GestioneTirocinio

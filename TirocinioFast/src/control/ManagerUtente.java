@@ -1,17 +1,17 @@
-package Control;
+package control;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import Bean.AziendaBean;
-import Bean.ImpiegatoBean;
-import Bean.StudenteBean;
-import Bean.TutorBean;
-import Model.AziendaDAO;
-import Model.ImpiegatoDAO;
-import Model.StudenteDAO;
-import Model.TutorDAO;
+import bean.AziendaBean;
+import bean.ImpiegatoBean;
+import bean.StudenteBean;
+import bean.TutorBean;
+import model.AziendaDAO;
+import model.ImpiegatoDAO;
+import model.StudenteDAO;
+import model.TutorDAO;
 
 public class ManagerUtente {
 

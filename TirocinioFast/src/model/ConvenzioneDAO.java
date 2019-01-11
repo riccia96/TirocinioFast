@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,7 +13,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import Bean.ConvenzioneBean;
+import bean.ConvenzioneBean;
 
 public class ConvenzioneDAO extends AbstractDAO<ConvenzioneBean>{
 	

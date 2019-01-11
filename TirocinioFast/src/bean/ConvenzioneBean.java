@@ -1,4 +1,4 @@
-package Bean;
+package bean;
 
 public class ConvenzioneBean implements java.io.Serializable {
 	

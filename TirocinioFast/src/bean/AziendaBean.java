@@ -1,4 +1,4 @@
-package Bean;
+package bean;
 
 public class AziendaBean implements java.io.Serializable {
 

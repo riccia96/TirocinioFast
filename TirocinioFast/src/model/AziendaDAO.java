@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 import java.sql.Statement;
 import java.sql.Connection;
@@ -9,12 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.sql.DataSource;
+
+import bean.AziendaBean;
+
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-
-
-import Bean.AziendaBean;
 
 public class AziendaDAO extends AbstractDAO<AziendaBean>{
 	

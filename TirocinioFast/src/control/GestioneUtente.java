@@ -1,4 +1,4 @@
-package Control;
+package control;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -12,10 +12,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Bean.AziendaBean;
-import Bean.ImpiegatoBean;
-import Bean.StudenteBean;
-import Bean.TutorBean;
+import bean.AziendaBean;
+import bean.ImpiegatoBean;
+import bean.StudenteBean;
+import bean.TutorBean;
 
 
 /**

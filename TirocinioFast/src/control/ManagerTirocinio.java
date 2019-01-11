@@ -1,14 +1,13 @@
-package Control;
+package control;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import Bean.AziendaBean;
-import Bean.TirocinioBean;
-import Model.AziendaDAO;
-
-import Model.TirocinioDAO;
+import bean.AziendaBean;
+import bean.TirocinioBean;
+import model.AziendaDAO;
+import model.TirocinioDAO;
 
 public class ManagerTirocinio {
 	

@@ -1,4 +1,4 @@
-package Control;
+package control;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -13,13 +13,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Bean.AziendaBean;
-import Bean.ConvenzioneBean;
-import Bean.QuestionarioAziendaBean;
-import Bean.QuestionarioStudenteBean;
-import Bean.StudenteBean;
-import Bean.TirocinioBean;
-import Bean.TutorBean;
+import bean.AziendaBean;
+import bean.ConvenzioneBean;
+import bean.QuestionarioAziendaBean;
+import bean.QuestionarioStudenteBean;
+import bean.StudenteBean;
+import bean.TirocinioBean;
+import bean.TutorBean;
 
 /**
  * Servlet implementation class GestioneDocumento
@@ -599,6 +599,7 @@ public class GestioneDocumento extends HttpServlet {
 				QuestionarioStudenteBean questionario = new QuestionarioStudenteBean();
 				questionario.setId(idQ);
 				questionario = documento.QuestionarioStudente(questionario);
+				questionario.setUrl("pdf/" + nomeFile);
 				documento.UploadQuestionarioStudente(questionario);
 				RequestDispatcher view = request.getRequestDispatcher("GestioneDocumento?azioneDocumento=questionarioStudente");
 				view.forward(request, response);
@@ -633,9 +634,21 @@ public class GestioneDocumento extends HttpServlet {
 				tirocinio = documento.DownloadTirocinio(tirocinio);
 
 				tirocinio.setRegistroOre("pdf/" + nomeFile);
-				System.out.print(nomeFile);
 				documento.UploadTirocinio(tirocinio);
-				System.out.print(tirocinio.getRegistroOre());
+				
+				QuestionarioAziendaBean questionarioA = new QuestionarioAziendaBean();
+				QuestionarioStudenteBean questionarioS = new QuestionarioStudenteBean();
+				
+				questionarioA.setAzienda(tirocinio.getAzienda());
+				questionarioA.setStudente(tirocinio.getStudente());
+				questionarioA.setTutorAccademico(tirocinio.getTutorAccademico());
+				questionarioS.setAzienda(tirocinio.getAzienda());
+				questionarioS.setStudente(tirocinio.getStudente());
+				questionarioS.setTutorAccademico(tirocinio.getTutorAccademico());
+				
+				documento.compilaQuestionarioAzienda(questionarioA);
+				documento.compilaQuestionarioStudente(questionarioS);
+				
 				RequestDispatcher view = request.getRequestDispatcher("GestioneDocumento?azioneDocumento=registroOre");
 				view.forward(request, response);
 			} catch (SQLException e) {
@@ -1181,31 +1194,34 @@ public class GestioneDocumento extends HttpServlet {
 		if(azioneDocumento.equals("questionarioAzienda")) {
 			try {
 				AziendaBean azienda = (AziendaBean) request.getSession().getAttribute("utenteSessione");
-				List<TirocinioBean> tirocini = new ArrayList<TirocinioBean>();
-				List<TirocinioBean> tir = new ArrayList<TirocinioBean>();
+				List<QuestionarioAziendaBean> questionari = documento.questionariAzienda();
+				List<QuestionarioAziendaBean> quest = new ArrayList<QuestionarioAziendaBean>();
 				List<StudenteBean> studenti = new ArrayList<StudenteBean>();
 				List<TutorBean> tutors = new ArrayList<TutorBean>();
 				StudenteBean studente = new StudenteBean();
 				TutorBean tutor = new TutorBean();
 				
-				tirocini = documento.richiesteTirocinio();
 
-				for(TirocinioBean t : tirocini){
-					if(t.getAzienda().equals(azienda.getUsername()) && t.isConvalidaRichiesta() && t.getQuestionarioAzienda() < 0){
-						tir.add(t);
-						studente.setUsername(t.getStudente());
+				for(QuestionarioAziendaBean q : questionari){
+					if(q.getAzienda().equals(azienda.getUsername())){
+						quest.add(q);
+						studente.setUsername(q.getStudente());
 						studenti.add(utente.getStudente(studente));
-						tutor.setUsername(t.getTutorAccademico());
+						tutor.setUsername(q.getTutorAccademico());
 						tutors.add(utente.getTutor(tutor));
 					}
 				}
-				
-				request.getSession().setAttribute("tiroQuestAzienda", tir);
-				request.getSession().setAttribute("studenti", studenti);
-				request.getSession().setAttribute("tutors", tutors);
+				if(quest.size() > 0){
+					request.getSession().setAttribute("tiroQuestAzienda", quest);
+					request.getSession().setAttribute("studenti", studenti);
+					request.getSession().setAttribute("tutors", tutors);
 
-				RequestDispatcher view = request.getRequestDispatcher("questionari.jsp");
-				view.forward(request, response);
+					RequestDispatcher view = request.getRequestDispatcher("questionari.jsp");
+					view.forward(request, response);
+				} else {
+					RequestDispatcher view = request.getRequestDispatcher("nessunaRisorsa.jsp");
+					view.forward(request, response);
+				}
 
 			} catch (SQLException e) {
 				e.printStackTrace();

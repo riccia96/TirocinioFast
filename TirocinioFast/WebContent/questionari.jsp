@@ -10,8 +10,8 @@
 	ArrayList<StudenteBean> studenti = new ArrayList<StudenteBean>();
 	ArrayList<TutorBean> tutors = new ArrayList<TutorBean>();
 	ArrayList<QuestionarioAziendaBean> questionariA = new ArrayList<QuestionarioAziendaBean>();
-	QuestionarioAziendaBean qa = new QuestionarioAziendaBean();
 	StudenteBean studente = new StudenteBean();
+	QuestionarioAziendaBean qa = new QuestionarioAziendaBean();
 	
 	if(tipoUtente.equals("studente")){
 		questionarioS = (QuestionarioStudenteBean) request.getSession().getAttribute("questionarioStudente");
@@ -19,7 +19,7 @@
 		tutor = (TutorBean) request.getSession().getAttribute("questSTutor");
 
 	} else if(tipoUtente.equals("azienda")){
-		questionariA = (ArrayList<QuestionarioAziendaBean>) request.getSession().getAttribute("questionariA");
+		questionariA = (ArrayList<QuestionarioAziendaBean>) request.getSession().getAttribute("tiroQuestAzienda");
 		studenti = (ArrayList<StudenteBean>) request.getSession().getAttribute("studenti");
 		tutors = (ArrayList<TutorBean>) request.getSession().getAttribute("tutors");
 	}
@@ -102,20 +102,20 @@
   			  		
 	  %>
   <tr>
-  <%if(!qa.getStudente().equals("")) {%>
-    <td><a href="GestioneDocumento?azioneDocumento=mostraQuestionario&idQ=<%=qa.getId()%>">Questionario N.<%=qa.getId() %></a></td>
+  <%if(!qa.getUrl().equals("")) {%>
+    <td><a href="GestioneDocumento?azioneDocumento=mostraQuestionario&idQ=<%=qa.getId() %>">Questionario N.<%=qa.getId() %></a></td>
   <%} else {%>
    <td><a href="GestioneDocumento?azioneDocumento=questionarioAzienda&idQ=<%=qa.getId()%>">Questionario N.<%=qa.getId() %></a></td>
   <%} %>
     <td><%= studente.getCognome() + " " + studente.getNome() %></td>
     <td>Prof/Prof.ssa <%= tutor.getCognome() + " " + tutor.getNome() %></td>
-    <td><%= qa.getTitoloTirocinio()%></td>
+    <td>Titolo Tirocinio</td>
    <%if (qa.getUrl().equals("")){ %>
         <td>
-    	<form>
+    	<form action="GestioneDocumento" method="POST">
   			Seleziona PDF del questionario relativo a questo tirocinio firmato<br>
   			<input type="file" name="questionarioFirmatoAzienda" accept=".pdf"><br>
-  			<input type="submit">
+  			<input type="submit" name="azioneDocumento" value="uploadQuestionarioAzienda">
 		</form>
 		</td>
 	<% } else { %>

@@ -1,17 +1,17 @@
-package Control;
+package control;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import Bean.ConvenzioneBean;
-import Bean.QuestionarioAziendaBean;
-import Bean.QuestionarioStudenteBean;
-import Bean.TirocinioBean;
-import Model.ConvenzioneDAO;
-import Model.QuestionarioAziendaDAO;
-import Model.QuestionarioStudenteDAO;
-import Model.TirocinioDAO;
+import bean.ConvenzioneBean;
+import bean.QuestionarioAziendaBean;
+import bean.QuestionarioStudenteBean;
+import bean.TirocinioBean;
+import model.ConvenzioneDAO;
+import model.QuestionarioAziendaDAO;
+import model.QuestionarioStudenteDAO;
+import model.TirocinioDAO;
 
 
 public class ManagerDocumento {
