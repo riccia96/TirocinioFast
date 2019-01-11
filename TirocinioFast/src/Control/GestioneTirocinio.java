@@ -43,6 +43,7 @@ public class GestioneTirocinio extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String azioneTirocinio = request.getParameter("azioneTirocinio");
+		
 		if(azioneTirocinio.equals("richiediTirocinio")){
 			try {
 				String aziendaTirocinio = request.getParameter("aziendaSelezionata");
