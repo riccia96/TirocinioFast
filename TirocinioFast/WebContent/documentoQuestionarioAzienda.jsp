@@ -70,7 +70,7 @@
 <br>
 <br>
 <div class ="new">
-    <button name = "azioneUtente" value="download" id="downloadButton" class=" button" type="submit" onclick="download()">Download</button> 
+    <button value="download" id="downloadButton" class=" button" type="submit" onclick="download()">Download</button> 
 </div>
 
 <script> 

@@ -54,7 +54,7 @@
 <br>
 <p align="right">Il responsabile dell'Ente ospitante e/o Presidente del C.A.D </p>
 <div class ="new">
-    <button name = "down" value="download" id="downloadButton" class=" button" type="submit" onclick="download()">Download</button> 
+    <button value="download" id="downloadButton" class=" button" type="submit" onclick="download()">Download</button> 
 </div>
 <br>
 <img alt="registro" src = "img/CCI04012019.jpg" height="650px" width="100%">

@@ -155,11 +155,11 @@ public class GestioneDocumento extends HttpServlet {
 						azienda.setUsername(t.getAzienda());
 						tutor.setUsername(t.getTutorAccademico());
 						tir = t;
-						
+
 					}
 				}
-				
-				
+
+
 				questionarioStudente.setTitolo(titolo);
 				questionarioStudente.setPeriodo(periodo);
 				questionarioStudente.setScelte(scelte);
@@ -169,7 +169,7 @@ public class GestioneDocumento extends HttpServlet {
 				azienda = utente.getAzienda(azienda);
 
 				tutor = utente.getTutor(tutor);
-				
+
 				documento.compilaQuestionarioStudente(questionarioStudente);
 				QuestionarioStudenteBean questiona = new QuestionarioStudenteBean();
 				ArrayList<QuestionarioStudenteBean> questionari = (ArrayList<QuestionarioStudenteBean>)documento.questionariStudente();
@@ -179,7 +179,7 @@ public class GestioneDocumento extends HttpServlet {
 				}
 				tir.setQuestionarioStudente(questiona.getId());
 				documento.UploadTirocinio(tir);
-				
+
 				request.getSession().setAttribute("questionarioStudente", questionarioStudente);
 				request.getSession().setAttribute("studente", studente);
 				request.getSession().setAttribute("questSAzienda", azienda);
@@ -218,7 +218,7 @@ public class GestioneDocumento extends HttpServlet {
 				for(String r: risposte) {
 					scelte += r + "*";
 				}
-				
+
 				int id = Integer.parseInt((String) request.getSession().getAttribute("id"));
 				QuestionarioAziendaBean questionarioAzienda = new QuestionarioAziendaBean();
 				StudenteBean studente = new StudenteBean();
@@ -241,10 +241,10 @@ public class GestioneDocumento extends HttpServlet {
 						tir = t;
 					}
 				}
-				
-				
+
+
 				documento.compilaQuestionarioAzienda(questionarioAzienda);
-				
+
 				ArrayList<QuestionarioAziendaBean> questionari = (ArrayList<QuestionarioAziendaBean>)documento.questionariAzienda();
 				QuestionarioAziendaBean quest = new QuestionarioAziendaBean();
 				for(QuestionarioAziendaBean q : questionari){
@@ -258,7 +258,7 @@ public class GestioneDocumento extends HttpServlet {
 				request.getSession().setAttribute("studente", studente);
 				request.getSession().setAttribute("tutor", tutor);
 				request.getSession().setAttribute("risposte", risposte);
-				
+
 				RequestDispatcher view = request.getRequestDispatcher("documentoQuestionarioAzienda.jsp");
 				view.forward(request, response);
 			} catch (SQLException e) {
@@ -337,7 +337,7 @@ public class GestioneDocumento extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		
+
 		if(azioneDocumento.equals("mostraQuestionario")){
 			try {
 				int id = Integer.parseInt((String) request.getParameter("idQ"));
@@ -352,8 +352,8 @@ public class GestioneDocumento extends HttpServlet {
 					questionarioS.setId(id);
 
 					questionarioS = documento.QuestionarioStudente(questionarioS);
-					
-					
+
+
 					if(!questionarioS.getUrl().equals("")){
 						request.getSession().setAttribute("questionarioStudente", questionarioS);
 						request.getSession().setAttribute("tipoDocumento", "questionarioStudente");
@@ -367,7 +367,7 @@ public class GestioneDocumento extends HttpServlet {
 						tutor.setUsername(questionarioS.getTutorAccademico());
 						String scelte = questionarioS.getScelte();
 						ArrayList<String> risposte = new ArrayList<String>();
-						
+
 						for(int i = 0; i < 14; i++){
 							int a = scelte.indexOf('*');
 							String risposta = scelte.substring(0, a);
@@ -375,14 +375,14 @@ public class GestioneDocumento extends HttpServlet {
 
 							risposte.add(risposta);
 						}
-												
+
 						for(ConvenzioneBean c : convenzioni){
 							if(c.getAzienda().equals(azienda.getUsername())){
 								convenzione = c;
 								break;
 							}
 						}
-						
+
 
 						request.getSession().setAttribute("questSAzienda", azienda);
 						request.getSession().setAttribute("questSTutor", tutor);
@@ -390,7 +390,7 @@ public class GestioneDocumento extends HttpServlet {
 						request.getSession().setAttribute("questionarioStudente", questionarioS);
 						request.getSession().setAttribute("risposte", risposte);
 						request.getSession().setAttribute("studente", studente);
-						
+
 						RequestDispatcher view = request.getRequestDispatcher("documentoQuestionarioStudente.jsp");
 						view.forward(request, response);
 					}
@@ -399,10 +399,10 @@ public class GestioneDocumento extends HttpServlet {
 
 					questionarioA.setId(id);
 					questionarioA = documento.QuestionarioAzienda(questionarioA);
-					
+
 					request.getSession().setAttribute("questionarioAzienda", questionarioA);
 					request.getSession().setAttribute("tipoDocumento", "questionarioAzienda");
-					
+
 					RequestDispatcher view = request.getRequestDispatcher("mostraPDF.jsp");
 					view.forward(request, response);
 				}
@@ -589,27 +589,27 @@ public class GestioneDocumento extends HttpServlet {
 		}
 
 
-	
+
 
 		if(azioneDocumento.equals("uploadQuestionarioStudente")) {
 			try {
 				String nomeFile = (String) request.getParameter("questionarioFirmatoStudente");
 				int idQ = Integer.parseInt((String) request.getParameter("id"));
-			
+
 				QuestionarioStudenteBean questionario = new QuestionarioStudenteBean();
 				questionario.setId(idQ);
 				questionario = documento.QuestionarioStudente(questionario);
 				documento.UploadQuestionarioStudente(questionario);
 				RequestDispatcher view = request.getRequestDispatcher("GestioneQuestionario?azioneQuestionario=questionarioStudente");
 				view.forward(request, response);
-				
-				
+
+
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
 
-/*
+		/*
 		if(azioneDocumento.equals("uploadQuestionarioAzienda")) {
 			try {
 
@@ -647,10 +647,10 @@ public class GestioneDocumento extends HttpServlet {
 
 		if(azioneDocumento.equals("registroOre")) {
 			try {
-				
+
 				List<TirocinioBean> tirocini = new ArrayList<TirocinioBean>();
 				tirocini = documento.richiesteTirocinio();
-				
+
 
 				StudenteBean studente = (StudenteBean) request.getSession().getAttribute("utenteSessione");
 				List<ConvenzioneBean> convenzioni = documento.convenzioni();
@@ -659,9 +659,9 @@ public class GestioneDocumento extends HttpServlet {
 				AziendaBean azienda = new AziendaBean();
 				for(TirocinioBean t : tirocini) {
 					if(t.getStudente().equals(studente.getUsername())) {
-						
+
 						if(t.isConvalidaRichiesta()) {
-							
+
 							tutor.setUsername(t.getTutorAccademico());
 							tutor = utente.getTutor(tutor);
 							azienda.setUsername(t.getAzienda());
@@ -679,7 +679,7 @@ public class GestioneDocumento extends HttpServlet {
 							RequestDispatcher view = request.getRequestDispatcher("registroOre.jsp");
 							view.forward(request, response);
 						} else {
-						
+
 							RequestDispatcher view = request.getRequestDispatcher("nessunaRisorsa.jsp");
 							view.forward(request, response);
 						}
