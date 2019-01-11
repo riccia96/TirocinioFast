@@ -105,7 +105,7 @@
   <%if(!qa.getStudente().equals("")) {%>
     <td><a href="GestioneDocumento?azioneDocumento=mostraQuestionario&idQ=<%=qa.getId()%>">Questionario N.<%=qa.getId() %></a></td>
   <%} else {%>
-   <td><a href="GestioneQuesionario?azioneQuestionario=questionarioAzienda&idQ=<%=qa.getId()%>">Questionario N.<%=qa.getId() %></a></td>
+   <td><a href="GestioneDocumento?azioneDocumento=questionarioAzienda&idQ=<%=qa.getId()%>">Questionario N.<%=qa.getId() %></a></td>
   <%} %>
     <td><%= studente.getCognome() + " " + studente.getNome() %></td>
     <td>Prof/Prof.ssa <%= tutor.getCognome() + " " + tutor.getNome() %></td>

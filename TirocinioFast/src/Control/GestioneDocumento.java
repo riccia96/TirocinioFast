@@ -600,7 +600,7 @@ public class GestioneDocumento extends HttpServlet {
 				questionario.setId(idQ);
 				questionario = documento.QuestionarioStudente(questionario);
 				documento.UploadQuestionarioStudente(questionario);
-				RequestDispatcher view = request.getRequestDispatcher("GestioneQuestionario?azioneQuestionario=questionarioStudente");
+				RequestDispatcher view = request.getRequestDispatcher("GestioneDocumento?azioneDocumento=questionarioStudente");
 				view.forward(request, response);
 
 
@@ -612,7 +612,7 @@ public class GestioneDocumento extends HttpServlet {
 		/*
 		if(azioneDocumento.equals("uploadQuestionarioAzienda")) {
 			try {
-
+				Richiamo GestioneDocumento?azioneDocumento=questionarioAzienda;
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -1123,6 +1123,95 @@ public class GestioneDocumento extends HttpServlet {
 			}
 
 		}
+		
+		if(azioneDocumento.equals("questionarioStudente")) {
+			try {
+
+				StudenteBean studente = (StudenteBean) request.getSession().getAttribute("utenteSessione");
+				List<TirocinioBean> tirocini = new ArrayList<TirocinioBean>(); 
+				List<QuestionarioStudenteBean> questionari = new ArrayList<QuestionarioStudenteBean>();
+				QuestionarioStudenteBean questionario = new QuestionarioStudenteBean();
+				TutorBean tutor = new TutorBean();
+				AziendaBean azienda = new AziendaBean();
+				boolean flag = false;
+
+				tirocini = documento.richiesteTirocinio();
+				questionari = documento.questionariStudente();
+				for(TirocinioBean t : tirocini){
+					if(t.getStudente().equals(studente.getUsername()) && t.isConvalidaRichiesta()){
+						flag = true;
+						for(QuestionarioStudenteBean q : questionari){
+							if(t.getStudente().equals(q.getStudente())){
+								questionario = q;
+								tutor.setUsername(questionario.getTutorAccademico());
+								tutor = utente.getTutor(tutor);
+								azienda.setUsername(questionario.getAzienda());
+								azienda = utente.getAzienda(azienda);
+							}
+
+						}
+					} 
+				}
+				if(flag) {
+					if(questionario.getTitolo().equals("")){
+
+						RequestDispatcher view = request.getRequestDispatcher("questionarioStudenteCompilazione.jsp");
+						view.forward(request, response);
+					} else {
+						
+						request.getSession().setAttribute("questionarioStudente", questionario);
+						request.getSession().setAttribute("questSAzienda", azienda);
+						request.getSession().setAttribute("questSTutor", tutor);
+						RequestDispatcher view = request.getRequestDispatcher("questionari.jsp");
+						view.forward(request, response);
+					}
+				} else {
+					RequestDispatcher view = request.getRequestDispatcher("nessunaRisorsa.jsp");
+					view.forward(request, response);
+				}
+				
+				
+
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		if(azioneDocumento.equals("questionarioAzienda")) {
+			try {
+				AziendaBean azienda = (AziendaBean) request.getSession().getAttribute("utenteSessione");
+				List<TirocinioBean> tirocini = new ArrayList<TirocinioBean>();
+				List<TirocinioBean> tir = new ArrayList<TirocinioBean>();
+				List<StudenteBean> studenti = new ArrayList<StudenteBean>();
+				List<TutorBean> tutors = new ArrayList<TutorBean>();
+				StudenteBean studente = new StudenteBean();
+				TutorBean tutor = new TutorBean();
+				
+				tirocini = documento.richiesteTirocinio();
+
+				for(TirocinioBean t : tirocini){
+					if(t.getAzienda().equals(azienda.getUsername()) && t.isConvalidaRichiesta() && t.getQuestionarioAzienda() < 0){
+						tir.add(t);
+						studente.setUsername(t.getStudente());
+						studenti.add(utente.getStudente(studente));
+						tutor.setUsername(t.getTutorAccademico());
+						tutors.add(utente.getTutor(tutor));
+					}
+				}
+				
+				request.getSession().setAttribute("tiroQuestAzienda", tir);
+				request.getSession().setAttribute("studenti", studenti);
+				request.getSession().setAttribute("tutors", tutors);
+
+				RequestDispatcher view = request.getRequestDispatcher("questionari.jsp");
+				view.forward(request, response);
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
 
 	}
 }
