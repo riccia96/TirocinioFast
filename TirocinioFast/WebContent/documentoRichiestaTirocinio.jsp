@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="Bean.*"%>
+    pageEncoding="ISO-8859-1" import="bean.*"%>
 <%
  	AziendaBean azienda = (AziendaBean) request.getSession().getAttribute("azienda");
 	StudenteBean studente = (StudenteBean) request.getSession().getAttribute("studente");

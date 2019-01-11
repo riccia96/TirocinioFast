@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="java.util.ArrayList, Bean.*"%>
+    pageEncoding="ISO-8859-1" import="java.util.ArrayList, bean.*"%>
  <%
  	ArrayList<TutorBean> tutors = (ArrayList<TutorBean>) request.getSession().getAttribute("elencoTutor");
  %>

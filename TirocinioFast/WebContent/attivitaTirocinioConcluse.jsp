@@ -1,6 +1,6 @@
-<%@page import="Control.ManagerUtente"%>
+<%@page import="control.ManagerUtente"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="Bean.*" %>
+<%@page import="bean.*" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%ArrayList<TirocinioBean> conclusi = (ArrayList<TirocinioBean>) request.getSession().getAttribute("listaTirociniConclusi");

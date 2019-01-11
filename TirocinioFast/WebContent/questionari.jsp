@@ -1,7 +1,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import="Bean.*" %>
+<%@ page import="bean.*" %>
 <% String tipoUtente = (String) request.getSession().getAttribute("tipoUtente");
 	
 	AziendaBean azienda = new AziendaBean();
