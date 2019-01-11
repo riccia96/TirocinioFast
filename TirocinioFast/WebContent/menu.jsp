@@ -60,7 +60,7 @@
 		<li><a href="GestioneUtente?azioneUtente=areaPersonale">Area Personale</a>
 		<li><a href="GestioneDocumento?azioneDocumento=elencoRichiesteTirocinio">Richieste tirocinio</a>
 		<li><a href="GestioneDocumento?azioneDocumento=tirociniConclusi">Attività tirocinio</a>
-		<li><a href="GestioneTirocinio?azioneTirocinio=attivitaConvalidate">Tirocini conclusi</a></li>
+		<li><a href="GestioneDocumento?azioneDocumento=attivitaConvalidate">Tirocini conclusi</a></li>
 		<li><a href="GestioneDocumento?azioneDocumento=elencoRichiesteConvenzioni">Convenzioni aziende</a>
 		<li><a href="GestioneDocumento?azioneDocumento=convenzioniConvalidate">Convenzioni accettate</a></li>
 		<li><a href="GestioneTirocinio?azioneTirocinio=elencoAziende">Elenco aziende convenzionate</a>

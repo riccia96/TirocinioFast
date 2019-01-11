@@ -9,7 +9,7 @@
 	if(tipoDocumento.equals("convenzione")){
 		convenzione = (ConvenzioneBean) request.getSession().getAttribute("pdfConv");
 	} else if(tipoDocumento.equals("tirocinio")){
-    	tirocinio = (TirocinioBean) request.getSession().getAttribute("richiesta");
+    	tirocinio = (TirocinioBean) request.getSession().getAttribute("richiestaSelezionata");
 	} else if(tipoDocumento.equals("questionarioAzienda")){
     	questionarioA = (QuestionarioAziendaBean) request.getSession().getAttribute("questionarioAzienda");
 	} else if(tipoDocumento.equals("questionarioStudente")){

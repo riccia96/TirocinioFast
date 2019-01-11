@@ -808,6 +808,228 @@ public class GestioneDocumento extends HttpServlet {
 			}
 
 		}
+		
+		if(azioneDocumento.equals("selezionaAttivita")){
+			try {
+
+				int idTirocinio = Integer.parseInt((String) request.getParameter("idTirocinio"));
+
+				TirocinioBean tirocinio = new TirocinioBean();
+				tirocinio.setId(idTirocinio);
+
+				tirocinio = richiesta.richiestaTirocinio(tirocinio);
+
+				QuestionarioStudenteBean questionarioStudente = new QuestionarioStudenteBean();
+				QuestionarioAziendaBean questionarioAzienda = new QuestionarioAziendaBean();
+
+				questionarioStudente.setId(tirocinio.getQuestionarioStudente());
+				questionarioAzienda.setId(tirocinio.getQuestionarioAzienda());
+
+				questionarioStudente = documento.QuestionarioStudente(questionarioStudente);
+				questionarioAzienda = documento.questionarioAzienda(questionarioAzienda);
+
+				request.getSession().setAttribute("tirocinio", tirocinio);
+				request.getSession().setAttribute("questionarioStudente", questionarioStudente);
+				request.getSession().setAttribute("questionarioAzienda", questionarioAzienda);
+
+				RequestDispatcher view = request.getRequestDispatcher("mostraPDFConferma.jsp");
+				view.forward(request, response);
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		}		
+		
+		if(azioneDocumento.equals("accettaAttivita")){
+			try {
+				int idTirocinio = Integer.parseInt((String) request.getParameter("idTirocinio"));
+
+				TirocinioBean tirocinio = new TirocinioBean();
+				tirocinio.setId(idTirocinio);
+
+				tirocinio = richiesta.richiestaTirocinio(tirocinio);
+
+				QuestionarioStudenteBean questionarioStudente = new QuestionarioStudenteBean();
+				QuestionarioAziendaBean questionarioAzienda = new QuestionarioAziendaBean();
+
+				questionarioStudente.setId(tirocinio.getQuestionarioStudente());
+				questionarioAzienda.setId(tirocinio.getQuestionarioAzienda());
+
+				questionarioStudente = documento.QuestionarioStudente(questionarioStudente);
+				questionarioAzienda = documento.questionarioAzienda(questionarioAzienda);
+
+				tirocinio.setConvalidaAttivita(true);
+				questionarioStudente.setConvalida(true);
+				questionarioAzienda.setConvalida(true);
+
+				documento.UploadQuestionarioStudente(questionarioStudente);
+				documento.UploadQuestionarioAzienda(questionarioAzienda);
+				documento.convalidaTirocinio(tirocinio);
+
+				RequestDispatcher view = request.getRequestDispatcher("attivitaTirocinioConcluse.jsp");
+				view.forward(request, response);
+			}  catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		if(azioneDocumento.equals("richiestaSelezionata")) {
+			try {
+				TirocinioBean tirocinio = new TirocinioBean();
+				List<TirocinioBean> tirocini = new ArrayList<TirocinioBean>();
+
+				String url = request.getParameter("richiesta");
+				tirocini.addAll(documento.richiesteTirocinio());
+
+				for(TirocinioBean t : tirocini){
+					if(t.getUrl().equals(url)){
+						tirocinio = t;
+					}
+				}
+
+				request.getSession().setAttribute("richiestaSelezionata", tirocinio);
+
+				if(tirocinio.equals(null)){
+					response.setContentType("text/html;charset=ISO-8859-1");
+					response.getWriter().write("nessuna richiesta");
+				}
+
+				request.getSession().setAttribute("tipoDocumento", "tirocinio");
+
+				RequestDispatcher view = request.getRequestDispatcher("mostraPDF.jsp");
+				view.forward(request, response);
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		if(azioneDocumento.equals("compilaAzienda")) {
+
+			try {
+				TirocinioBean tirocinio = new TirocinioBean();
+
+				int id = Integer.parseInt((String) request.getParameter("idTiro"));
+
+				tirocinio.setId(id);
+				tirocinio = richiesta.richiestaTirocinio(tirocinio);
+
+				request.getSession().setAttribute("richiestaTiro", tirocinio);
+				RequestDispatcher view = request.getRequestDispatcher("compilazioneCampiAzienda.jsp");
+				view.forward(request, response);
+
+			} catch (SQLException e) {
+
+				e.printStackTrace();
+			}
+		}
+		
+		if(azioneDocumento.equals("compilato")){
+			try {
+				TirocinioBean tirocinio = new TirocinioBean();
+				TutorBean tutor = new TutorBean();
+				AziendaBean azienda = new AziendaBean();
+				StudenteBean studente = new StudenteBean();
+				ConvenzioneBean convenzione = new ConvenzioneBean();
+				List<ConvenzioneBean> listaConv;
+
+				listaConv = documento.convenzioni();
+
+
+				int id = Integer.parseInt((String) request.getParameter("idTiro"));
+				tirocinio.setId(id);
+				tirocinio = richiesta.richiestaTirocinio(tirocinio);
+
+				String tuto = tirocinio.getTutorAccademico();
+				String azie = tirocinio.getAzienda();
+				String stud = tirocinio.getStudente();
+
+				for(ConvenzioneBean c : listaConv) {
+					if(c.getAzienda().equals(azie)) {
+						convenzione = c;
+						break;
+					}
+				}
+
+				tutor.setUsername(tuto);
+				tutor = utente.getTutor(tutor);
+				azienda.setUsername(azie);
+				azienda = utente.getAzienda(azienda);
+				studente.setUsername(stud);
+				studente = utente.getStudente(studente);
+
+				if(tirocinio.getUrl().equals("")){
+					request.getSession().setAttribute("richiesta", tirocinio);
+					request.getSession().setAttribute("tutor", tutor);
+					request.getSession().setAttribute("azienda", azienda);
+					request.getSession().setAttribute("studente", studente);
+					request.getSession().setAttribute("convenzione", convenzione);
+					RequestDispatcher view = request.getRequestDispatcher("documentoRichiestaTirocinio.jsp");
+					view.forward(request, response);
+				}else{
+					request.getSession().setAttribute("richiesta", tirocinio);
+					request.getSession().setAttribute("tipoDocumento", "tirocinio");
+					RequestDispatcher view = request.getRequestDispatcher("mostraPDF.jsp");
+					view.forward(request, response);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		if(azioneDocumento.equals("attivitaConvalidate")){
+			try{
+				List<TirocinioBean> tirocini = new ArrayList<TirocinioBean>();
+
+				tirocini = richiesta.richiesteTirocinio();
+
+				if(!(tirocini.size() == 0)) {
+
+					StudenteBean studente = new StudenteBean();
+					AziendaBean azienda = new AziendaBean();
+					TutorBean tutor = new TutorBean();
+
+
+					List<TirocinioBean> conclusi = new ArrayList<TirocinioBean>();
+					List<StudenteBean> studenti = new ArrayList<StudenteBean>();
+					List<AziendaBean> aziende = new ArrayList<AziendaBean>();
+					List<TutorBean> tutors = new ArrayList<TutorBean>();
+
+
+
+					for(TirocinioBean t: tirocini){
+						if(t.isConvalidaAttivita()){
+							conclusi.add(t);
+						}
+					}
+
+					for(TirocinioBean t: conclusi){
+						studente.setUsername(t.getStudente());
+						azienda.setUsername(t.getAzienda());
+						tutor.setUsername(t.getTutorAccademico());
+						studenti.add(utente.getStudente(studente));
+						aziende.add(utente.getAzienda(azienda));
+						tutors.add(utente.getTutor(tutor));
+					}
+
+					request.getSession().setAttribute("listaTirociniConclusi", conclusi);
+					request.getSession().setAttribute("listaStudenti", studenti);
+					request.getSession().setAttribute("listaAziende", aziende);
+					request.getSession().setAttribute("listaTutors", tutors);
+
+					RequestDispatcher view = request.getRequestDispatcher("elencoTirociniConclusi.jsp");
+					view.forward(request, response);
+				} else {
+					response.setContentType("text/html;charset=ISO-8859-1");
+					response.getWriter().write("nessuna attività conclusa");
+				}
+			} catch (SQLException e){
+				e.printStackTrace();
+			}
+		}
+
+
 
 		if(azioneDocumento.equals("selezionaConvenzione")){
 			try {
