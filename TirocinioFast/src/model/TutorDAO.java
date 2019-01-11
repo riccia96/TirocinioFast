@@ -26,7 +26,7 @@ public class TutorDAO extends AbstractDAO<TutorBean>{
 			Context initCtx = new InitialContext();
 			Context envCtx = (Context) initCtx.lookup("java:comp/env");
 
-			ds = (DataSource) envCtx.lookup("jdbc/TirocinioFast");
+			ds = (DataSource) envCtx.lookup("jdbc/tirociniofast");
 
 		} catch (NamingException e) {
 			System.out.println("Error:" + e.getMessage());
