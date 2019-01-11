@@ -41,68 +41,6 @@ public class GestioneConvenzione extends HttpServlet {
 
 		String azioneConvenzione = request.getParameter("azioneConvenzione");
 		
-		
-		
-
-		//no
-		if(azioneConvenzione.equals("convenzioniConvalidate")){
-			try{
-				List<ConvenzioneBean> convenzioni = documento.convenzioni();
-				List<ConvenzioneBean> richieste = new ArrayList<ConvenzioneBean>();
-				List<AziendaBean> aziende = new ArrayList<AziendaBean>();
-
-				for(ConvenzioneBean c : convenzioni) {
-					if((c.isConvalida())) {
-						AziendaBean a = new AziendaBean();
-						a.setUsername(c.getAzienda());
-						aziende.add(utente.getAzienda(a));
-						richieste.add(c);
-					}
-				}
-
-				request.getSession().setAttribute("listaConvenzioni", richieste);
-				request.getSession().setAttribute("listaAziende", aziende);
-
-				if(richieste.equals(null)) {
-					RequestDispatcher view = request.getRequestDispatcher("nessunaRisorsa.jsp");
-					view.forward(request, response);
-				}
-
-				RequestDispatcher view = request.getRequestDispatcher("elencoConvenzioniAccettate.jsp");
-				view.forward(request, response);
-			} catch (SQLException e){
-				e.printStackTrace();
-			}
-		}
-		
-	
-		//no
-		if(azioneConvenzione.equals("selezionaConvenzione")){
-			try {
-				
-				int id = Integer.parseInt((String) request.getParameter("idConv"));
-				ConvenzioneBean convenzione = new ConvenzioneBean();
-				convenzione.setId(id);
-				convenzione = documento.convenzione(convenzione);
-				System.out.println(convenzione);
-				if(!convenzione.getUrl().equals("")) {
-					request.getSession().setAttribute("pdfConv", convenzione);
-					request.getSession().setAttribute("tipoDocumento", "convenzione");
-					RequestDispatcher view = request.getRequestDispatcher("mostraPDF.jsp");
-					view.forward(request, response);
-				} else {
-					request.getSession().setAttribute("doc", convenzione);
-					RequestDispatcher view = request.getRequestDispatcher("documentoConvenzione.jsp");
-					view.forward(request, response);
-
-				}
-
-				
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-
 		//ok
 		if(azioneConvenzione.equals("apriForm")){
 			try {

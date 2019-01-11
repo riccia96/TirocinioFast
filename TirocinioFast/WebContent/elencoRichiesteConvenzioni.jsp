@@ -40,7 +40,7 @@
   					
 	  %>
   <tr>
-    <td><a href="GestioneConvenzione?azioneConvenzione=selezionaConvenzione&idConv=<%=c.getId()%>">RichiestaN<%= c.getId() %></a></td>
+    <td><a href="GestioneDocumento?azioneDocumento=selezionaConvenzione&idConv=<%=c.getId()%>">RichiestaN<%= c.getId() %></a></td>
     <td><%=a.getNome() %></td>
     <%if(!c.isConvalida()){ %>
     <td>
