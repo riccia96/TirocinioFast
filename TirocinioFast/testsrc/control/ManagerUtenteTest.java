@@ -1,9 +1,10 @@
-package Control;
+package control;
 
 import static org.junit.Assert.*;
 
 import java.sql.SQLException;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import bean.AziendaBean;
@@ -18,7 +19,7 @@ public class ManagerUtenteTest {
 	private static StudenteBean studente;
 	private static String username;
 	
-	@BeforeAll
+	@Before
 	static void setUp() throws Exception {
 		classUnderTest = new ManagerUtente();
 		username = "riccia96";
