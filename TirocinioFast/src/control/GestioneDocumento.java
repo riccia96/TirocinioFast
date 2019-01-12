@@ -30,7 +30,6 @@ public class GestioneDocumento extends HttpServlet {
 
 	static ManagerUtente utente = new ManagerUtente();
 	static ManagerDocumento documento = new ManagerDocumento();
-	static ManagerTirocinio richiesta = new ManagerTirocinio();
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -71,7 +70,7 @@ public class GestioneDocumento extends HttpServlet {
 				tirocinio.setCfu(cfu);
 				tirocinio.setHandicap(handicap);
 
-				richiesta.salvaTirocinio(tirocinio);
+				documento.salvaTirocinio(tirocinio);
 
 				RequestDispatcher view = request.getRequestDispatcher("home.jsp");
 				view.forward(request, response);
@@ -90,7 +89,7 @@ public class GestioneDocumento extends HttpServlet {
 
 				TirocinioBean tirocinio = new TirocinioBean();
 				tirocinio.setId(idT);
-				tirocinio = richiesta.richiestaTirocinio(tirocinio);
+				tirocinio = documento.getTirocinio(tirocinio);
 
 				azienda = (AziendaBean) request.getSession().getAttribute("utenteSessione");
 
@@ -339,7 +338,7 @@ public class GestioneDocumento extends HttpServlet {
 				TirocinioBean tirocinio = new TirocinioBean();
 
 				tirocinio.setId(id);
-				tirocinio = richiesta.richiestaTirocinio(tirocinio);
+				tirocinio = documento.getTirocinio(tirocinio);
 
 				request.getSession().setAttribute("richiesta", tirocinio);
 				request.getSession().setAttribute("tipoDocumento", "tirocinio");
@@ -473,7 +472,7 @@ public class GestioneDocumento extends HttpServlet {
 						int id = Integer.parseInt((String) request.getParameter("id"));
 						TirocinioBean tirocinio = new TirocinioBean();
 						tirocinio.setId(id);
-						tirocinio = richiesta.richiestaTirocinio(tirocinio);
+						tirocinio = documento.getTirocinio(tirocinio);
 						tirocinio.setUrl("pdf/" + nomeFile);
 						tirocinio.setConvalidaAzienda(true);
 						documento.aggiornaTirocinio(tirocinio);
@@ -489,7 +488,7 @@ public class GestioneDocumento extends HttpServlet {
 					int id = Integer.parseInt((String) request.getParameter("id"));
 					TirocinioBean tirocinio = new TirocinioBean();
 					tirocinio.setId(id);
-					tirocinio = richiesta.richiestaTirocinio(tirocinio);
+					tirocinio = documento.getTirocinio(tirocinio);
 					tirocinio.setUrl("pdf/" + nomeFile);
 					tirocinio.setConvalidaTutor(true);
 					documento.aggiornaTirocinio(tirocinio);
@@ -502,7 +501,7 @@ public class GestioneDocumento extends HttpServlet {
 					int id = Integer.parseInt((String) request.getParameter("id"));
 					TirocinioBean tirocinio = new TirocinioBean();
 					tirocinio.setId(id);
-					tirocinio = richiesta.richiestaTirocinio(tirocinio);
+					tirocinio = documento.getTirocinio(tirocinio);
 					tirocinio.setUrl("pdf/" + nomeFile);
 					if(!tirocinio.isConvalidaRichiesta())
 						tirocinio.setConvalidaStudente(true);
@@ -520,7 +519,7 @@ public class GestioneDocumento extends HttpServlet {
 					int id = Integer.parseInt((String) request.getParameter("id"));
 					TirocinioBean tirocinio = new TirocinioBean();
 					tirocinio.setId(id);
-					tirocinio = richiesta.richiestaTirocinio(tirocinio);
+					tirocinio = documento.getTirocinio(tirocinio);
 					tirocinio.setUrl("pdf/" + nomeFile);
 					tirocinio.setConvalidaRichiesta(true);
 					documento.aggiornaTirocinio(tirocinio);
@@ -555,7 +554,7 @@ public class GestioneDocumento extends HttpServlet {
 				List<AziendaBean> aziende = new ArrayList<AziendaBean>();
 				List<TutorBean> tutors = new ArrayList<TutorBean>();
 
-				tirocini = richiesta.richiesteTirocinio();
+				tirocini = documento.getTirocini();
 
 				for(TirocinioBean t: tirocini){
 					if(t.isConvalidaAzienda() && t.isConvalidaTutor() && 
@@ -883,7 +882,7 @@ public class GestioneDocumento extends HttpServlet {
 				TirocinioBean tirocinio = new TirocinioBean();
 				tirocinio.setId(idTirocinio);
 
-				tirocinio = richiesta.richiestaTirocinio(tirocinio);
+				tirocinio = documento.getTirocinio(tirocinio);
 
 				QuestionarioStudenteBean questionarioStudente = new QuestionarioStudenteBean();
 				QuestionarioAziendaBean questionarioAzienda = new QuestionarioAziendaBean();
@@ -917,7 +916,7 @@ public class GestioneDocumento extends HttpServlet {
 				TirocinioBean tirocinio = new TirocinioBean();
 				tirocinio.setId(idTirocinio);
 
-				tirocinio = richiesta.richiestaTirocinio(tirocinio);
+				tirocinio = documento.getTirocinio(tirocinio);
 
 				QuestionarioStudenteBean questionarioStudente = new QuestionarioStudenteBean();
 				QuestionarioAziendaBean questionarioAzienda = new QuestionarioAziendaBean();
@@ -982,7 +981,7 @@ public class GestioneDocumento extends HttpServlet {
 				int id = Integer.parseInt((String) request.getParameter("idTiro"));
 
 				tirocinio.setId(id);
-				tirocinio = richiesta.richiestaTirocinio(tirocinio);
+				tirocinio = documento.getTirocinio(tirocinio);
 
 				request.getSession().setAttribute("richiestaTiro", tirocinio);
 				RequestDispatcher view = request.getRequestDispatcher("compilazioneCampiAzienda.jsp");
@@ -1008,7 +1007,7 @@ public class GestioneDocumento extends HttpServlet {
 
 				int id = Integer.parseInt((String) request.getParameter("idTiro"));
 				tirocinio.setId(id);
-				tirocinio = richiesta.richiestaTirocinio(tirocinio);
+				tirocinio = documento.getTirocinio(tirocinio);
 
 				String tuto = tirocinio.getTutorAccademico();
 				String azie = tirocinio.getAzienda();
@@ -1051,7 +1050,7 @@ public class GestioneDocumento extends HttpServlet {
 			try{
 				List<TirocinioBean> tirocini = new ArrayList<TirocinioBean>();
 
-				tirocini = richiesta.richiesteTirocinio();
+				tirocini = documento.getTirocini();
 
 				if(!(tirocini.size() == 0)) {
 

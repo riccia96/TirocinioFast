@@ -28,7 +28,6 @@ public class GestioneTirocinio extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	static ManagerUtente utente = new ManagerUtente();
-	static ManagerTirocinio richiesta = new ManagerTirocinio();
 	static ManagerDocumento documento = new ManagerDocumento();
 
 	/**
@@ -66,10 +65,10 @@ public class GestioneTirocinio extends HttpServlet {
 				TirocinioBean tirocinio = new TirocinioBean();
 				int id = Integer.parseInt((String) request.getSession().getAttribute("idTirocinio"));
 				tirocinio.setId(id);
-				tirocinio = richiesta.richiestaTirocinio(tirocinio);
+				tirocinio = documento.getTirocinio(tirocinio);
 
 				tirocinio.setConvalidaAzienda(true);
-				richiesta.inoltraRichiesta(tirocinio);
+				documento.aggiornaTirocinio(tirocinio);
 
 				RequestDispatcher view = request.getRequestDispatcher("richiesteTirocinio.jsp");
 				view.forward(request, response);
@@ -83,10 +82,10 @@ public class GestioneTirocinio extends HttpServlet {
 				TirocinioBean tirocinio = new TirocinioBean();
 				int id = Integer.parseInt((String) request.getSession().getAttribute("idTirocinio"));
 				tirocinio.setId(id);
-				tirocinio = richiesta.richiestaTirocinio(tirocinio);
+				tirocinio = documento.getTirocinio(tirocinio);
 
 				tirocinio.setConvalidaTutor(true);
-				richiesta.inoltraRichiesta(tirocinio);
+				documento.aggiornaTirocinio(tirocinio);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -97,10 +96,10 @@ public class GestioneTirocinio extends HttpServlet {
 				TirocinioBean tirocinio = new TirocinioBean();
 				int id = Integer.parseInt((String) request.getSession().getAttribute("idTirocinio"));
 				tirocinio.setId(id);
-				tirocinio = richiesta.richiestaTirocinio(tirocinio);
+				tirocinio = documento.getTirocinio(tirocinio);
 
 				tirocinio.setConvalidaStudente(true);
-				richiesta.inoltraRichiesta(tirocinio);
+				documento.aggiornaTirocinio(tirocinio);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
