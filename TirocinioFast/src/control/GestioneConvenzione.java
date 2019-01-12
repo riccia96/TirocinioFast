@@ -48,7 +48,7 @@ public class GestioneConvenzione extends HttpServlet {
 				tutors = utente.getTutorAccademici();
 
 				AziendaBean azienda = (AziendaBean) request.getSession().getAttribute("utenteSessione");
-				List<ConvenzioneBean> convenzioni = documento.convenzioni();
+				List<ConvenzioneBean> convenzioni = documento.getConvenzioni();
 				boolean flag = false;
 				for(ConvenzioneBean c: convenzioni) {
 					if(c.getAzienda().equals(azienda.getUsername())) {

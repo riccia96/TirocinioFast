@@ -16,52 +16,109 @@ import model.TirocinioDAO;
 
 public class ManagerDocumento {
 	
-	public int generaCodice() throws SQLException {
+	public int generaCodiceTirocinio() throws SQLException {
+		TirocinioDAO tirocinio = new TirocinioDAO();
+		return tirocinio.generaCodice();
+	}
+	
+	public int generaCodiceConvenzione() throws SQLException {
 		ConvenzioneDAO convenzione = new ConvenzioneDAO();
 		return convenzione.generaCodice();
 	}
-
-	public TirocinioBean DownloadTirocinio(TirocinioBean tirocinio) throws SQLException {
+	
+	public int generaCodiceQuestionarioStudente() throws SQLException{
+		QuestionarioStudenteDAO questionario = new QuestionarioStudenteDAO();
+		return questionario.generaCodice();
+	}
+	
+	public int generaCodiceQuestionarioAzienda() throws SQLException{
+		QuestionarioAziendaDAO questionario = new QuestionarioAziendaDAO();
+		return questionario.generaCodice();
+	}
+	
+	public TirocinioBean getTirocinio(TirocinioBean tirocinio) throws SQLException {
 		TirocinioDAO tirocinioDAO = new TirocinioDAO();
 		return tirocinioDAO.doRetrieveByKey(tirocinio);
 	}
 
-	public boolean UploadTirocinio(TirocinioBean pathDoc) throws SQLException {
-		TirocinioDAO tirocinio = new TirocinioDAO();
-		return tirocinio.doUpdate(pathDoc);
-	}
-	
-	public ConvenzioneBean DownloadConvenzione(ConvenzioneBean pathDoc) throws SQLException {
+	public ConvenzioneBean getConvenzione(ConvenzioneBean pathDoc) throws SQLException {
 		ConvenzioneDAO convenzione = new ConvenzioneDAO();
 		return convenzione.doRetrieveByKey(pathDoc);
 	}
+	
+	public QuestionarioStudenteBean getQuestionarioStudente(QuestionarioStudenteBean questionario) throws SQLException {
+		QuestionarioStudenteDAO questionarioDAO = new QuestionarioStudenteDAO();
+		return questionarioDAO.doRetrieveByKey(questionario);
+	}
+	
+	public QuestionarioAziendaBean getQuestionarioAzienda(QuestionarioAziendaBean questionario) throws SQLException {
+		QuestionarioAziendaDAO questionarioDAO = new QuestionarioAziendaDAO();
+		return questionarioDAO.doRetrieveByKey(questionario);
+	}
+	
+	public int salvaTirocinio(TirocinioBean tirocinio) throws SQLException {
+		TirocinioDAO tDAO = new TirocinioDAO();
+		return tDAO.doSave(tirocinio);
+	}
+	
+	public int salvaConvenzione(ConvenzioneBean convenzione) throws SQLException {
+		ConvenzioneDAO cDAO = new ConvenzioneDAO();
+		return cDAO.doSave(convenzione);
+	}
 
-	public boolean UploadConvenzione(ConvenzioneBean convenzione) throws SQLException {
+	public int salvaQuestionarioStudente(QuestionarioStudenteBean questionarioS) throws SQLException {
+		QuestionarioStudenteDAO questionario = new QuestionarioStudenteDAO();
+		return questionario.doSave(questionarioS);
+	}
+
+	public int salvaQuestionarioAzienda(QuestionarioAziendaBean questionarioA) throws SQLException {
+		QuestionarioAziendaDAO questionario = new QuestionarioAziendaDAO();
+		return questionario.doSave(questionarioA);
+	}
+
+	
+	public boolean aggiornaTirocinio(TirocinioBean pathDoc) throws SQLException {
+		TirocinioDAO tirocinio = new TirocinioDAO();
+		return tirocinio.doUpdate(pathDoc);
+	}
+
+	public boolean aggiornaConvenzione(ConvenzioneBean convenzione) throws SQLException {
 		ConvenzioneDAO convenzioneDAO = new ConvenzioneDAO();
 		return convenzioneDAO.doUpdate(convenzione);
 	}
-	
-	public QuestionarioStudenteBean QuestionarioStudente(QuestionarioStudenteBean questionario) throws SQLException {
-		QuestionarioStudenteDAO questionarioDAO = new QuestionarioStudenteDAO();
-		return questionarioDAO.doRetrieveByKey(questionario);
-	}
 
-	public boolean UploadQuestionarioStudente(QuestionarioStudenteBean questionario) throws SQLException {
+	public boolean aggiornaQuestionarioStudente(QuestionarioStudenteBean questionario) throws SQLException {
 		QuestionarioStudenteDAO questionarioDAO = new QuestionarioStudenteDAO();
 		return questionarioDAO.doUpdate(questionario);
 	}
 	
-	public QuestionarioAziendaBean QuestionarioAzienda(QuestionarioAziendaBean questionario) throws SQLException {
-		QuestionarioAziendaDAO questionarioDAO = new QuestionarioAziendaDAO();
-		return questionarioDAO.doRetrieveByKey(questionario);
-	}
-
-	public boolean UploadQuestionarioAzienda(QuestionarioAziendaBean questionario) throws SQLException {
+	
+	public boolean aggiornaQuestionarioAzienda(QuestionarioAziendaBean questionario) throws SQLException {
 		QuestionarioAziendaDAO questionarioDAO = new QuestionarioAziendaDAO();
 		return questionarioDAO.doUpdate(questionario);
 	}
 	
-	public List<TirocinioBean> richiesteTirocinio() throws SQLException {
+	public boolean eliminaTirocinnio(TirocinioBean tirocinio) throws SQLException{
+		TirocinioDAO tDAO = new TirocinioDAO();
+		return tDAO.doDelete(tirocinio);
+	}
+	
+	public boolean eliminaConvenzione(ConvenzioneBean convenzione) throws SQLException{
+		ConvenzioneDAO cDAO = new ConvenzioneDAO();
+		return cDAO.doDelete(convenzione);
+	}
+	
+	public boolean eliminaQuestionarioStudente(QuestionarioStudenteBean questionario) throws SQLException{
+		QuestionarioStudenteDAO qDAO = new QuestionarioStudenteDAO();
+		return qDAO.doDelete(questionario);
+	}
+	
+	public boolean eliminaQuestionarioAzienda(QuestionarioAziendaBean questionario) throws SQLException{
+		QuestionarioAziendaDAO qDAO = new QuestionarioAziendaDAO();
+		return qDAO.doDelete(questionario);
+	}
+	
+	public List<TirocinioBean> getTirocini() throws SQLException {
 
 		List<TirocinioBean> lTirocinio = new ArrayList<TirocinioBean>();
 		TirocinioDAO tirocinio = new TirocinioDAO();
@@ -72,7 +129,7 @@ public class ManagerDocumento {
 
 	}
 
-	public List<ConvenzioneBean> convenzioni() throws SQLException {
+	public List<ConvenzioneBean> getConvenzioni() throws SQLException {
 
 		List<ConvenzioneBean> lConvenzioni = new ArrayList<ConvenzioneBean>();
 		ConvenzioneDAO convenzione = new ConvenzioneDAO();
@@ -82,59 +139,8 @@ public class ManagerDocumento {
 		return lConvenzioni;
 
 	}
-
-	public int compilaTirocinioStudente(TirocinioBean tirocinioS) throws SQLException {
-		TirocinioDAO tirocinio = new TirocinioDAO();
-		return tirocinio.doSave(tirocinioS);
-	}
-
-	public boolean compilaTirocinioAzienda(TirocinioBean tirocinioA) throws SQLException {
-		TirocinioDAO tirocinio = new TirocinioDAO();
-		return tirocinio.doUpdate(tirocinioA);
-	}
-
-	public int compilaConvenzione(ConvenzioneBean convenzioneA) throws SQLException {
-		ConvenzioneDAO convenzione = new ConvenzioneDAO();
-		return convenzione.doSave(convenzioneA);
-	}
-
-	public int compilaQuestionarioStudente(QuestionarioStudenteBean questionarioS) throws SQLException {
-		QuestionarioStudenteDAO questionario = new QuestionarioStudenteDAO();
-		return questionario.doSave(questionarioS);
-	}
-
-	public int compilaQuestionarioAzienda(QuestionarioAziendaBean questionarioA) throws SQLException {
-		QuestionarioAziendaDAO questionario = new QuestionarioAziendaDAO();
-		return questionario.doSave(questionarioA);
-	}
-
-	public boolean convalidaTirocinio(TirocinioBean tirocinioS) throws SQLException {
-		TirocinioDAO tirocinio = new TirocinioDAO();
-		return tirocinio.doUpdate(tirocinioS);
-	}
-
-
-	public boolean convalidaConvenzione(ConvenzioneBean convenzioneA) throws SQLException {
-		ConvenzioneDAO convenzione = new ConvenzioneDAO();
-		return convenzione.doUpdate(convenzioneA);
-	}
 	
-	public ConvenzioneBean convenzione(ConvenzioneBean convenzioneA) throws SQLException {
-		ConvenzioneDAO convenzione = new ConvenzioneDAO();
-		return convenzione.doRetrieveByKey(convenzioneA);
-	}
-	
-	public QuestionarioStudenteBean questionarioStudente(QuestionarioStudenteBean questionarioStudente) throws SQLException{
-		QuestionarioStudenteDAO questionario = new QuestionarioStudenteDAO();
-		return questionario.doRetrieveByKey(questionarioStudente);
-	}
-	
-	public QuestionarioAziendaBean questionarioAzienda(QuestionarioAziendaBean questionarioAzienda) throws SQLException{
-		QuestionarioAziendaDAO questionario = new QuestionarioAziendaDAO();
-		return questionario.doRetrieveByKey(questionarioAzienda);
-	}
-	
-	public List<QuestionarioStudenteBean> questionariStudente() throws SQLException{
+	public List<QuestionarioStudenteBean> getQuestionariStudente() throws SQLException{
 		QuestionarioStudenteDAO questionarioDAO = new QuestionarioStudenteDAO();
 		List<QuestionarioStudenteBean> questionari = new ArrayList<QuestionarioStudenteBean>();
 		questionari = questionarioDAO.doRetrieveAll();
@@ -142,7 +148,7 @@ public class ManagerDocumento {
 		return questionari;
 	}
 	
-	public List<QuestionarioAziendaBean> questionariAzienda() throws SQLException{
+	public List<QuestionarioAziendaBean> getQuestionariAzienda() throws SQLException{
 		QuestionarioAziendaDAO questionarioDAO = new QuestionarioAziendaDAO();
 		List<QuestionarioAziendaBean> questionari = new ArrayList<QuestionarioAziendaBean>();
 		questionari = questionarioDAO.doRetrieveAll();
