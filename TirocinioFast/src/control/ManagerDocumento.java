@@ -41,9 +41,9 @@ public class ManagerDocumento {
 		return tirocinioDAO.doRetrieveByKey(tirocinio);
 	}
 
-	public ConvenzioneBean getConvenzione(ConvenzioneBean pathDoc) throws SQLException {
-		ConvenzioneDAO convenzione = new ConvenzioneDAO();
-		return convenzione.doRetrieveByKey(pathDoc);
+	public ConvenzioneBean getConvenzione(ConvenzioneBean convenzione) throws SQLException {
+		ConvenzioneDAO convenzioneDAO = new ConvenzioneDAO();
+		return convenzioneDAO.doRetrieveByKey(convenzione);
 	}
 	
 	public QuestionarioStudenteBean getQuestionarioStudente(QuestionarioStudenteBean questionario) throws SQLException {
@@ -77,9 +77,9 @@ public class ManagerDocumento {
 	}
 
 	
-	public boolean aggiornaTirocinio(TirocinioBean pathDoc) throws SQLException {
-		TirocinioDAO tirocinio = new TirocinioDAO();
-		return tirocinio.doUpdate(pathDoc);
+	public boolean aggiornaTirocinio(TirocinioBean tirocinio) throws SQLException {
+		TirocinioDAO tirocinioDAO = new TirocinioDAO();
+		return tirocinioDAO.doUpdate(tirocinio);
 	}
 
 	public boolean aggiornaConvenzione(ConvenzioneBean convenzione) throws SQLException {

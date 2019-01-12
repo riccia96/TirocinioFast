@@ -171,8 +171,18 @@ public class ManagerUtenteTest {
 	 */
 	
 	@Test
-	public void testAggiornaStudentePresenteInDB() throws SQLException {
-		fail("Not yet implemented");
+	public void testAggiornaStudentePresenteInDBCompleto() throws SQLException {
+		System.out.println("doUpdate di aggiornaStudente");
+		
+		studente.setUsername(username);
+		studente = classUnderTest.getStudente(studente);
+		
+		studente.setNome("Anna Maria");
+		studente.setCitta("Somma Vesuviana");
+		
+		classUnderTest.aggiornaStudente(studente);
+		
+		studente = classUnderTest.getStudente(studente);
 	}
 
 
@@ -182,7 +192,7 @@ public class ManagerUtenteTest {
 	 */
 	
 	@Test
-	public void testAggiornaStudenteNonInDB() throws SQLException {
+	public void testAggiornaStudentePresenteInDBNonCompleto() throws SQLException {
 		fail("Not yet implemented");
 	}
 	
