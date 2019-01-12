@@ -7,10 +7,9 @@ import java.sql.SQLException;
 import org.junit.Before;
 import org.junit.Test;
 
-import bean.AziendaBean;
-import bean.ImpiegatoBean;
+
 import bean.StudenteBean;
-import bean.TutorBean;
+
 import control.ManagerUtente;
 
 public class ManagerUtenteTest {
