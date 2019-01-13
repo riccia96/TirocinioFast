@@ -10,7 +10,7 @@
 
 <body>
 <div class="cover">
-        <h1>Username e/o risposta alla domanda errati! </h1>
+        <h1>Username errato! </h1>
         <p><a href="index.jsp">Torna alla home.</a></p>
     </div>
 </body>
