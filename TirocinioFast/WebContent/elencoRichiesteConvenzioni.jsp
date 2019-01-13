@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="java.util.ArrayList, bean.*"%>  
 <%
+	String tipoUtente = (String) request.getSession().getAttribute("tipoUtente");
 	ArrayList<ConvenzioneBean> convenzioni = (ArrayList<ConvenzioneBean>) request.getSession().getAttribute("richiesteConvenzioni");
 	ArrayList<AziendaBean> listaAziende = (ArrayList<AziendaBean>) request.getSession().getAttribute("listaAziende");
 	AziendaBean a = new AziendaBean();
@@ -42,6 +43,7 @@
   <tr>
     <td><a href="GestioneDocumento?azioneDocumento=selezionaConvenzione&idConv=<%=c.getId()%>">RichiestaN<%= c.getId() %></a></td>
     <td><%=a.getNome() %></td>
+    <%if(tipoUtente.equals("azienda")){ %>
     <%if(!c.isConvalida()){ %>
     <td>
     	<form action="GestioneDocumento" method="POST">
@@ -53,7 +55,7 @@
 </td>
 <%} else {%>
 <td>Convenzione gi&agrave; caricata! </td>
-<%} %>
+<%}} %>
   </tr>
   <% } %>
   </table>
