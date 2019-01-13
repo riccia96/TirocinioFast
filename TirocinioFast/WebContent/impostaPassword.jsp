@@ -14,7 +14,11 @@ pageEncoding="ISO-8859-1" import="bean.*"%>
  
 <%@include file = "navbar.jsp" %>
 
-<%@include file = "menu.jsp" %>
+<ul id="menu">
+<li><a href="index.jsp">Home</a></li>
+<li><a href="registraStudente.jsp">Registra studente</a></li>
+<li><a href="registraAzienda.jsp">Registra azienda</a></li>
+</ul>
 
 <div style="margin-left:25%;width: 700px;">
 <form class="dialogo" id="recupero" action="GestioneUtente" method="POST">
