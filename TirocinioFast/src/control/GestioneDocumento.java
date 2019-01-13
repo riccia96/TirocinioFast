@@ -340,7 +340,7 @@ public class GestioneDocumento extends HttpServlet {
 				tirocinio.setId(id);
 				tirocinio = documento.getTirocinio(tirocinio);
 
-				request.getSession().setAttribute("richiesta", tirocinio);
+				request.getSession().setAttribute("richiestaSelezionata", tirocinio);
 				request.getSession().setAttribute("tipoDocumento", "tirocinio");
 
 				RequestDispatcher view = request.getRequestDispatcher("mostraPDF.jsp");
@@ -1036,7 +1036,7 @@ public class GestioneDocumento extends HttpServlet {
 					RequestDispatcher view = request.getRequestDispatcher("documentoRichiestaTirocinio.jsp");
 					view.forward(request, response);
 				}else{
-					request.getSession().setAttribute("richiesta", tirocinio);
+					request.getSession().setAttribute("richiestaSelezionata", tirocinio);
 					request.getSession().setAttribute("tipoDocumento", "tirocinio");
 					RequestDispatcher view = request.getRequestDispatcher("mostraPDF.jsp");
 					view.forward(request, response);
