@@ -896,10 +896,8 @@ public class GestioneDocumento extends HttpServlet {
 				request.getSession().setAttribute("tirocinio", tirocinio);
 				request.getSession().setAttribute("questionarioStudente", questionarioStudente);
 				request.getSession().setAttribute("questionarioAzienda", questionarioAzienda);
-				System.out.println("tirocinio " + tirocinio.getUrl());
-				System.out.println("registro ore " + tirocinio.getRegistroOre());
-				System.out.println("questionario S " + questionarioStudente.getUrl());
-				System.out.println("questionario A " + questionarioAzienda.getUrl());
+				request.getSession().setAttribute("convalida", "tirocinio");
+				
 				RequestDispatcher view = request.getRequestDispatcher("mostraPDFConferma.jsp");
 				view.forward(request, response);
 
@@ -911,32 +909,47 @@ public class GestioneDocumento extends HttpServlet {
 		
 		if(azioneDocumento.equals("accettaAttivita")){
 			try {
-				int idTirocinio = Integer.parseInt((String) request.getParameter("idTirocinio"));
+				String tipo = (String) request.getParameter("tipo");
+				int id = -1;
+				if(tipo.equals("tirocinio")){
+					id = Integer.parseInt((String) request.getParameter("idTirocinio"));
 
-				TirocinioBean tirocinio = new TirocinioBean();
-				tirocinio.setId(idTirocinio);
+					TirocinioBean tirocinio = new TirocinioBean();
+					tirocinio.setId(id);
 
-				tirocinio = documento.getTirocinio(tirocinio);
+					tirocinio = documento.getTirocinio(tirocinio);
 
-				QuestionarioStudenteBean questionarioStudente = new QuestionarioStudenteBean();
-				QuestionarioAziendaBean questionarioAzienda = new QuestionarioAziendaBean();
+					QuestionarioStudenteBean questionarioStudente = new QuestionarioStudenteBean();
+					QuestionarioAziendaBean questionarioAzienda = new QuestionarioAziendaBean();
 
-				questionarioStudente.setId(tirocinio.getQuestionarioStudente());
-				questionarioAzienda.setId(tirocinio.getQuestionarioAzienda());
+					questionarioStudente.setId(tirocinio.getQuestionarioStudente());
+					questionarioAzienda.setId(tirocinio.getQuestionarioAzienda());
 
-				questionarioStudente = documento.getQuestionarioStudente(questionarioStudente);
-				questionarioAzienda = documento.getQuestionarioAzienda(questionarioAzienda);
+					questionarioStudente = documento.getQuestionarioStudente(questionarioStudente);
+					questionarioAzienda = documento.getQuestionarioAzienda(questionarioAzienda);
 
-				tirocinio.setConvalidaAttivita(true);
-				questionarioStudente.setConvalida(true);
-				questionarioAzienda.setConvalida(true);
+					tirocinio.setConvalidaAttivita(true);
+					questionarioStudente.setConvalida(true);
+					questionarioAzienda.setConvalida(true);
 
-				documento.aggiornaQuestionarioStudente(questionarioStudente);
-				documento.salvaQuestionarioAzienda(questionarioAzienda);
-				documento.salvaTirocinio(tirocinio);
+					documento.aggiornaQuestionarioStudente(questionarioStudente);
+					documento.salvaQuestionarioAzienda(questionarioAzienda);
+					documento.salvaTirocinio(tirocinio);
 
-				RequestDispatcher view = request.getRequestDispatcher("attivitaTirocinioConcluse.jsp");
-				view.forward(request, response);
+					RequestDispatcher view = request.getRequestDispatcher("attivitaTirocinioConcluse.jsp");
+					view.forward(request, response);
+				} else {
+					id = Integer.parseInt((String) request.getParameter("idConvenzione"));
+					
+					ConvenzioneBean convenzione = new ConvenzioneBean();
+					convenzione.setId(id);
+					convenzione = documento.getConvenzione(convenzione);
+					convenzione.setConvalida(true);
+					documento.aggiornaConvenzione(convenzione);
+					
+					RequestDispatcher view = request.getRequestDispatcher("GestioneDocumento?azioneDocumento=elencoRichiesteConvenzioni");
+					view.forward(request, response);
+				}
 			}  catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -1058,6 +1071,7 @@ public class GestioneDocumento extends HttpServlet {
 					AziendaBean azienda = new AziendaBean();
 					TutorBean tutor = new TutorBean();
 
+					List<TirocinioBean> convalidare = new ArrayList<TirocinioBean>();
 					List<TirocinioBean> conclusi = new ArrayList<TirocinioBean>();
 					List<StudenteBean> studenti = new ArrayList<StudenteBean>();
 					List<AziendaBean> aziende = new ArrayList<AziendaBean>();
@@ -1068,6 +1082,8 @@ public class GestioneDocumento extends HttpServlet {
 					for(TirocinioBean t: tirocini){
 						if(t.isConvalidaAttivita()){
 							conclusi.add(t);
+						} else {
+							convalidare.add(t);
 						}
 					}
 					
@@ -1090,6 +1106,7 @@ public class GestioneDocumento extends HttpServlet {
 						RequestDispatcher view = request.getRequestDispatcher("GestioneDocumento?azioneDocumento=attivitaConvalidate");
 						view.forward(request, response);
 					} else {
+						
 						RequestDispatcher view = request.getRequestDispatcher("GestioneDocumento?azioneDocumento=tirociniConclusi");
 						view.forward(request, response);
 					}
@@ -1106,21 +1123,32 @@ public class GestioneDocumento extends HttpServlet {
 
 		if(azioneDocumento.equals("selezionaConvenzione")){
 			try {
-				
+				String tipoUtente = (String) request.getSession().getAttribute("tipoUtente");
+				System.out.println(tipoUtente);
 				int id = Integer.parseInt((String) request.getParameter("idConv"));
 				ConvenzioneBean convenzione = new ConvenzioneBean();
 				convenzione.setId(id);
 				convenzione = documento.getConvenzione(convenzione);
 				if(!convenzione.getUrl().equals("")) {
-					request.getSession().setAttribute("pdfConv", convenzione);
-					request.getSession().setAttribute("tipoDocumento", "convenzione");
-					RequestDispatcher view = request.getRequestDispatcher("mostraPDF.jsp");
-					view.forward(request, response);
+					if(tipoUtente.equals("azienda")){
+						request.getSession().setAttribute("pdfConv", convenzione);
+						request.getSession().setAttribute("tipoDocumento", "convenzione");
+						RequestDispatcher view = request.getRequestDispatcher("mostraPDF.jsp");
+						view.forward(request, response);
+					} else {
+						request.getSession().setAttribute("doc", convenzione);
+						request.getSession().setAttribute("convalida", "convenzione");
+						
+						RequestDispatcher view = request.getRequestDispatcher("mostraPDFConferma.jsp");
+						view.forward(request, response);
+					}
 				} else {
-					request.getSession().setAttribute("doc", convenzione);
-					RequestDispatcher view = request.getRequestDispatcher("documentoConvenzione.jsp");
-					view.forward(request, response);
-
+					
+						request.getSession().setAttribute("pdfConv", convenzione);
+						request.getSession().setAttribute("tipoDocumento", "convenzione");
+						RequestDispatcher view = request.getRequestDispatcher("documentoConvenzione.jsp");
+						view.forward(request, response);
+					
 				}
 
 				
