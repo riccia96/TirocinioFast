@@ -42,8 +42,9 @@
 	<label>Descrizione delle attivit&agrave; svolte</label>
     <textarea style= "margin-left: 10%" rows="4" cols="50" name="descrizioneAttivita"></textarea>
     <br>
-    <p>Eventuale docente di riferimento</p>
+    <p style="margin-left: 25%">Eventuale docente di riferimento</p>
     <select class ="scelte" name="tutor">
+    <option></option>
     <% for(TutorBean t : tutors){ %><option value="<%=t.getUsername()%>"><%=t.getNome()+" "+t.getCognome()%></option>
     <%} %></select></label>
     <br>
