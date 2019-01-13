@@ -878,7 +878,6 @@ public class GestioneDocumento extends HttpServlet {
 			try {
 
 				int idTirocinio = Integer.parseInt((String) request.getParameter("idTirocinio"));
-				System.out.println(idTirocinio);
 				TirocinioBean tirocinio = new TirocinioBean();
 				tirocinio.setId(idTirocinio);
 
@@ -1124,7 +1123,6 @@ public class GestioneDocumento extends HttpServlet {
 		if(azioneDocumento.equals("selezionaConvenzione")){
 			try {
 				String tipoUtente = (String) request.getSession().getAttribute("tipoUtente");
-				System.out.println(tipoUtente);
 				int id = Integer.parseInt((String) request.getParameter("idConv"));
 				ConvenzioneBean convenzione = new ConvenzioneBean();
 				convenzione.setId(id);
