@@ -105,7 +105,7 @@
   <%if(!qa.getUrl().equals("")) {%>
     <td><a href="GestioneDocumento?azioneDocumento=mostraQuestionario&idQ=<%=qa.getId() %>">Questionario N.<%=qa.getId() %></a></td>
   <%} else {%>
-   <td><a href="GestioneDocumento?azioneDocumento=questionarioAzienda&idQ=<%=qa.getId()%>">Questionario N.<%=qa.getId() %></a></td>
+   <td><a href="GestioneDocumento?azioneDocumento=questAziendaCompilazione&idQ=<%=qa.getId()%>">Questionario N.<%=qa.getId() %></a></td>
   <%} %>
     <td><%= studente.getCognome() + " " + studente.getNome() %></td>
     <td>Prof/Prof.ssa <%= tutor.getCognome() + " " + tutor.getNome() %></td>
@@ -115,6 +115,7 @@
     	<form action="GestioneDocumento" method="POST">
   			Seleziona PDF del questionario relativo a questo tirocinio firmato<br>
   			<input type="file" name="questionarioFirmatoAzienda" accept=".pdf"><br>
+  			<input type="hidden" name="id" value="<%=qa.getId() %>">
   			<input type="submit" name="azioneDocumento" value="uploadQuestionarioAzienda">
 		</form>
 		</td>

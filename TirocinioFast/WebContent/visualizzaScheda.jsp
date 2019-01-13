@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"  import="bean.*"%>
 <%
-	AziendaBean a = (AziendaBean) request.getSession().getAttribute("aziendaSelezionata");
+	AziendaBean azienda = (AziendaBean) request.getSession().getAttribute("aziendaSelezionata");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -17,9 +17,6 @@
 
 <%@include file = "menu.jsp" %>
 
-<%
-	AziendaBean azienda = (AziendaBean) request.getSession().getAttribute("aziendaSelezionata");
-%>
 
 <h3 class="perForm">Informazioni sull'azienda</h3>
 
@@ -34,7 +31,7 @@
 	<p style="text-align: center;"><%= azienda.getTelefono()%></p>
     <div class ="new">
     <form action="GestioneTirocinio" method="POST">
-    <input type="hidden" name="aziendaSelezionata" value="<%=a.getUsername()%>">
+    <input type="hidden" name="aziendaSelezionata" value="<%=azienda.getUsername()%>">
     <button name = "azioneTirocinio" value="richiediTirocinio" id="inoltraRichiestaTirocinioButton" class=" button" type="submit">Invia richiesta di tirocinio</button> 
     </form></div>
   

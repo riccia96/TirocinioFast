@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%
+    QuestionarioAziendaBean questionario = (QuestionarioAziendaBean) request.getSession().getAttribute("questAzienda");
+    %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -62,6 +65,7 @@
     <textarea name ="undici" style="margin-left: 10%" rows="4" cols="50"></textarea>
     <br>
     <div class ="new">
+    <input type="hidden" name="idQuest" value="<%= questionario.getId() %>">
     <button name = "azioneDocumento" value="compilaQuestionarioAzienda" id="questionarioAziendaButton" class=" button" type="submit">Invia questionario</button> 
     </div>
 </form>
