@@ -1,5 +1,7 @@
 sudo: false
 language: java
+java : 
+  -1.8.0_151
 
 notifications:
   email:
