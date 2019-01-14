@@ -1,8 +1,2 @@
-sudo: false
+
 language: java
-
-script: mvn test
-
-notifications:
-  email:
-    - a.riccio26@studenti.unisa.it
