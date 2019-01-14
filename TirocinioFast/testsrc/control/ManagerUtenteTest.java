@@ -217,16 +217,31 @@ public class ManagerUtenteTest {
 	}
 
 	/** 
-	 * Testa il metodo getStudenti 
+	 * Testa il metodo getStudenti senza order 
 	 * @throws SQLException
 	 */
 
 	@Test
-	public void testGetStudenti() throws SQLException {
+	public void testGetStudentiSenzaOrder() throws SQLException {
 		
 		System.out.println("doRetrieveAll di getStudenti");
 		
-		ArrayList<StudenteBean> list = (ArrayList<StudenteBean>) classUnderTest.getStudenti();
+		ArrayList<StudenteBean> list = (ArrayList<StudenteBean>) classUnderTest.getStudenti(null);
+		
+		assertNotNull(list);
+	}
+	
+	/** 
+	 * Testa il metodo getStudenti con order 
+	 * @throws SQLException
+	 */
+
+	@Test
+	public void testGetStudentiConOrder() throws SQLException {
+		
+		System.out.println("doRetrieveAll di getStudenti");
+		
+		ArrayList<StudenteBean> list = (ArrayList<StudenteBean>) classUnderTest.getStudenti("username ASC");
 		
 		assertNotNull(list);
 	}

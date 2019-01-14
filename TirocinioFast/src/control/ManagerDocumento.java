@@ -98,7 +98,7 @@ public class ManagerDocumento {
 		return qDAO.doUpdate(questionario);
 	}
 	
-	public boolean eliminaTirocinnio(TirocinioBean tirocinio) throws SQLException{
+	public boolean eliminaTirocinio(TirocinioBean tirocinio) throws SQLException{
 		TirocinioDAO tDAO = new TirocinioDAO();
 		return tDAO.doDelete(tirocinio);
 	}
