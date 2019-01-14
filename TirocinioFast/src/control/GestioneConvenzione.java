@@ -45,10 +45,10 @@ public class GestioneConvenzione extends HttpServlet {
 		if(azioneConvenzione.equals("apriForm")){
 			try {
 				List<TutorBean> tutors = new ArrayList<TutorBean>();
-				tutors = utente.getTutorAccademici();
+				tutors = utente.getTutorAccademici("username ASC");
 
 				AziendaBean azienda = (AziendaBean) request.getSession().getAttribute("utenteSessione");
-				List<ConvenzioneBean> convenzioni = documento.getConvenzioni();
+				List<ConvenzioneBean> convenzioni = documento.getConvenzioni("id ASC");
 				boolean flag = false;
 				for(ConvenzioneBean c: convenzioni) {
 					if(c.getAzienda().equals(azienda.getUsername())) {

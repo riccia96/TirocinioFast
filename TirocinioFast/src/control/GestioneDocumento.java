@@ -135,7 +135,7 @@ public class GestioneDocumento extends HttpServlet {
 		
 		if(azioneDocumento.equals("compilaQuestionarioStudente")) {
 			try {
-				List<TirocinioBean> tirocini = documento.getTirocini();
+				List<TirocinioBean> tirocini = documento.getTirocini("id ASC");
 				ArrayList<String> risposte = new ArrayList<String>();
 				TirocinioBean tir = new TirocinioBean();
 				String titolo = request.getParameter("titolo");
@@ -187,7 +187,7 @@ public class GestioneDocumento extends HttpServlet {
 
 				documento.salvaQuestionarioStudente(questionarioStudente);
 				QuestionarioStudenteBean questiona = new QuestionarioStudenteBean();
-				ArrayList<QuestionarioStudenteBean> questionari = (ArrayList<QuestionarioStudenteBean>)documento.getQuestionariStudente();
+				ArrayList<QuestionarioStudenteBean> questionari = (ArrayList<QuestionarioStudenteBean>)documento.getQuestionariStudente("id ASC");
 				for(QuestionarioStudenteBean q : questionari) {
 					if(q.getTitolo().equals(questionarioStudente.getTitolo()))
 						questiona = q;
@@ -213,7 +213,7 @@ public class GestioneDocumento extends HttpServlet {
 		if(azioneDocumento.equals("compilaQuestionarioAzienda")) {
 			try {
 				ArrayList<String> risposte = new ArrayList<String>();
-				List<TirocinioBean> tirocini = documento.getTirocini();
+				List<TirocinioBean> tirocini = documento.getTirocini("id ASC");
 				TirocinioBean tir = new TirocinioBean();
 				String titolo = request.getParameter("titolo");
 				String posizione = request.getParameter("posizione");
@@ -262,7 +262,7 @@ public class GestioneDocumento extends HttpServlet {
 
 				documento.salvaQuestionarioAzienda(questionarioAzienda);
 
-				ArrayList<QuestionarioAziendaBean> questionari = (ArrayList<QuestionarioAziendaBean>)documento.getQuestionariAzienda();
+				ArrayList<QuestionarioAziendaBean> questionari = (ArrayList<QuestionarioAziendaBean>)documento.getQuestionariAzienda("id ASC");
 				QuestionarioAziendaBean quest = new QuestionarioAziendaBean();
 				for(QuestionarioAziendaBean q : questionari){
 					if(q.getTitoloTirocinio().equals(questionarioAzienda.getTitoloTirocinio()))
@@ -360,7 +360,7 @@ public class GestioneDocumento extends HttpServlet {
 					AziendaBean azienda = new AziendaBean();
 					TutorBean tutor = new TutorBean();
 					ConvenzioneBean convenzione = new ConvenzioneBean();
-					List<ConvenzioneBean> convenzioni = documento.getConvenzioni();
+					List<ConvenzioneBean> convenzioni = documento.getConvenzioni("id ASC");
 					questionarioS.setId(id);
 
 					questionarioS = documento.getQuestionarioStudente(questionarioS);
@@ -411,7 +411,7 @@ public class GestioneDocumento extends HttpServlet {
 					StudenteBean studente = new StudenteBean();
 					TutorBean tutor = new TutorBean();
 					ConvenzioneBean convenzione = new ConvenzioneBean();
-					List<ConvenzioneBean> convenzioni = documento.getConvenzioni();
+					List<ConvenzioneBean> convenzioni = documento.getConvenzioni("id ASC");
 
 					questionarioA.setId(id);
 					questionarioA = documento.getQuestionarioAzienda(questionarioA);
@@ -554,7 +554,7 @@ public class GestioneDocumento extends HttpServlet {
 				List<AziendaBean> aziende = new ArrayList<AziendaBean>();
 				List<TutorBean> tutors = new ArrayList<TutorBean>();
 
-				tirocini = documento.getTirocini();
+				tirocini = documento.getTirocini("id ASC");
 
 				for(TirocinioBean t: tirocini){
 					if(t.isConvalidaAzienda() && t.isConvalidaTutor() && 
@@ -714,11 +714,11 @@ public class GestioneDocumento extends HttpServlet {
 			try {
 
 				List<TirocinioBean> tirocini = new ArrayList<TirocinioBean>();
-				tirocini = documento.getTirocini();
+				tirocini = documento.getTirocini("id ASC");
 
 
 				StudenteBean studente = (StudenteBean) request.getSession().getAttribute("utenteSessione");
-				List<ConvenzioneBean> convenzioni = documento.getConvenzioni();
+				List<ConvenzioneBean> convenzioni = documento.getConvenzioni("id ASC");
 				ConvenzioneBean conv = new ConvenzioneBean();
 				TutorBean tutor = new TutorBean();
 				AziendaBean azienda = new AziendaBean();
@@ -770,11 +770,11 @@ public class GestioneDocumento extends HttpServlet {
 				List<TirocinioBean> tirocini = new ArrayList<TirocinioBean>();
 				List<TirocinioBean> richieste = new ArrayList<TirocinioBean>();
 
-				studenti = utente.getStudenti();
-				aziende = utente.getAziende();
-				tutors = utente.getTutorAccademici();
+				studenti = utente.getStudenti("username ASC");
+				aziende = utente.getAziende("username ASC");
+				tutors = utente.getTutorAccademici("username ASC");
 
-				tirocini.addAll(documento.getTirocini());
+				tirocini.addAll(documento.getTirocini("id ASC"));
 
 				if(!(request.getSession().getAttribute("tipoUtente").equals("studente"))) {
 					if(!(request.getSession().getAttribute("tipoUtente").equals("azienda"))) {
@@ -960,7 +960,7 @@ public class GestioneDocumento extends HttpServlet {
 				List<TirocinioBean> tirocini = new ArrayList<TirocinioBean>();
 
 				String url = request.getParameter("richiesta");
-				tirocini.addAll(documento.getTirocini());
+				tirocini.addAll(documento.getTirocini("id ASC"));
 
 				for(TirocinioBean t : tirocini){
 					if(t.getUrl().equals(url)){
@@ -1014,7 +1014,7 @@ public class GestioneDocumento extends HttpServlet {
 				ConvenzioneBean convenzione = new ConvenzioneBean();
 				List<ConvenzioneBean> listaConv;
 
-				listaConv = documento.getConvenzioni();
+				listaConv = documento.getConvenzioni("id ASC");
 
 
 				int id = Integer.parseInt((String) request.getParameter("idTiro"));
@@ -1062,7 +1062,7 @@ public class GestioneDocumento extends HttpServlet {
 			try{
 				List<TirocinioBean> tirocini = new ArrayList<TirocinioBean>();
 
-				tirocini = documento.getTirocini();
+				tirocini = documento.getTirocini("id ASC");
 
 				if(!(tirocini.size() == 0)) {
 
@@ -1157,7 +1157,7 @@ public class GestioneDocumento extends HttpServlet {
 
 		if(azioneDocumento.equals("convenzioniConvalidate")){
 			try{
-				List<ConvenzioneBean> convenzioni = documento.getConvenzioni();
+				List<ConvenzioneBean> convenzioni = documento.getConvenzioni("id ASC");
 				List<ConvenzioneBean> richieste = new ArrayList<ConvenzioneBean>();
 				List<AziendaBean> aziende = new ArrayList<AziendaBean>();
 
@@ -1192,7 +1192,7 @@ public class GestioneDocumento extends HttpServlet {
 
 		if(azioneDocumento.equals("elencoRichiesteConvenzioni")) {
 			try {
-				List<ConvenzioneBean> convenzioni = documento.getConvenzioni();
+				List<ConvenzioneBean> convenzioni = documento.getConvenzioni("id ASC");
 				List<ConvenzioneBean> richieste = new ArrayList<ConvenzioneBean>();
 				List<AziendaBean> aziende = new ArrayList<AziendaBean>();
 
@@ -1233,8 +1233,8 @@ public class GestioneDocumento extends HttpServlet {
 				AziendaBean azienda = new AziendaBean();
 				boolean flag = false;
 
-				tirocini = documento.getTirocini();
-				questionari = documento.getQuestionariStudente();
+				tirocini = documento.getTirocini("id ASC");
+				questionari = documento.getQuestionariStudente("id ASC");
 				for(TirocinioBean t : tirocini){
 					if(t.getStudente().equals(studente.getUsername()) && t.isConvalidaRichiesta()){
 						flag = true;
@@ -1279,7 +1279,7 @@ public class GestioneDocumento extends HttpServlet {
 		if(azioneDocumento.equals("questionarioAzienda")) {
 			try {
 				AziendaBean azienda = (AziendaBean) request.getSession().getAttribute("utenteSessione");
-				List<QuestionarioAziendaBean> questionari = documento.getQuestionariAzienda();
+				List<QuestionarioAziendaBean> questionari = documento.getQuestionariAzienda("id ASC");
 				List<QuestionarioAziendaBean> quest = new ArrayList<QuestionarioAziendaBean>();
 				List<StudenteBean> studenti = new ArrayList<StudenteBean>();
 				List<TutorBean> tutors = new ArrayList<TutorBean>();

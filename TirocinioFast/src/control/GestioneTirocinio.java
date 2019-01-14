@@ -47,7 +47,7 @@ public class GestioneTirocinio extends HttpServlet {
 			try {
 				String aziendaTirocinio = request.getParameter("aziendaSelezionata");
 
-				List<TutorBean> tutorAccademici = utente.getTutorAccademici();
+				List<TutorBean> tutorAccademici = utente.getTutorAccademici("username ASC");
 
 				request.getSession().setAttribute("aziendaTirocinio", aziendaTirocinio);
 				request.getSession().setAttribute("elencoTutor", tutorAccademici);
@@ -108,8 +108,8 @@ public class GestioneTirocinio extends HttpServlet {
 		if(azioneTirocinio.equals("elencoAziende")) {
 			try {
 				List<AziendaBean> aziendeConv = new ArrayList<AziendaBean>();
-				List<AziendaBean> az = utente.getAziende();
-				List<ConvenzioneBean> conv = documento.getConvenzioni();
+				List<AziendaBean> az = utente.getAziende("username ASC");
+				List<ConvenzioneBean> conv = documento.getConvenzioni("id ASC");
 
 				request.getSession().removeAttribute("listaAziende");
 
@@ -160,8 +160,8 @@ public class GestioneTirocinio extends HttpServlet {
 
 		if(azioneTirocinio.equals("ricercaAzienda")) {
 			try {
-				List<AziendaBean> aziende = utente.getAziende();
-				List<ConvenzioneBean> convenzioni = documento.getConvenzioni();
+				List<AziendaBean> aziende = utente.getAziende("username ASC");
+				List<ConvenzioneBean> convenzioni = documento.getConvenzioni("id ASC");
 				List<AziendaBean> aziendeConv = new ArrayList<AziendaBean>();
 				String nome = request.getParameter("nomeAzienda").toLowerCase();
 				String sede = request.getParameter("sedeAzienda").toLowerCase();

@@ -336,7 +336,7 @@ public class GestioneUtente extends HttpServlet {
 				studente.setPassword(password);
 				studente.setDomanda(risposta);
 
-				studenti.addAll(utente.getStudenti());
+				studenti.addAll(utente.getStudenti("username ASC"));
 
 				if((nome.length()>2 && nome.length()<31) && (cognome.length()>2 && cognome.length()<31) && (luogoNascita.length()>2 && luogoNascita.length()<21) && (dataNascita.length()>7 && dataNascita.length()<11) && (indirizzo.length()>4 && indirizzo.length()<31) && (citta.length()>2 && citta.length()<21) && (codiceFiscale.length()== 16) && (matricola.length()== 10) && (email.length()>4 && email.length()<31) && (telefono.length()>6 && telefono.length()<14) && (username.length()>4 && username.length()<21) && (password.length()>7 && password.length()<21) && (risposta.length()>1 && risposta.length()<31)){
 										
@@ -411,7 +411,7 @@ public class GestioneUtente extends HttpServlet {
 				azienda.setDescrizione("");
 				azienda.setLogo("");
 
-				aziende.addAll(utente.getAziende());
+				aziende.addAll(utente.getAziende("username ASC"));
 
 				if((nome.length()>2 && nome.length()<31) && (partitaIva.length()==11) && (ceo.length()>4 && ceo.length()<51) && (indirizzo.length()>4 && indirizzo.length()<31) && (email.length()>4 && email.length()<31) && (telefono.length()>6 && telefono.length()<13) && (username.length()>4 && username.length()<21) && (password.length()>7 && password.length()<21) && (risposta.length()>1 && risposta.length()<31)){
 
