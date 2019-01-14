@@ -90,7 +90,7 @@ public class ManagerUtenteTest {
 		StudenteBean result = classUnderTest.getStudente(studente);
 
 		assertNotNull(result);
-		assertEquals("a.riccio26@studenti.unisa.it", result.getUsername());
+		assertEquals("riccia", result.getUsername());
 	}
 
 	/**
@@ -185,7 +185,7 @@ public class ManagerUtenteTest {
 		classUnderTest.aggiornaStudente(studente);
 		studente = classUnderTest.getStudente(studente);
 
-		assertEquals("Anna Maria", studente.getUsername());
+		assertEquals("Anna Maria", studente.getNome());
 
 	}
 
