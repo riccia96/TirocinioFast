@@ -72,7 +72,7 @@ public class GestioneDocumento extends HttpServlet {
 
 				documento.salvaTirocinio(tirocinio);
 
-				RequestDispatcher view = request.getRequestDispatcher("home.jsp");
+				RequestDispatcher view = request.getRequestDispatcher("elencoRichiesteTirocini.jsp");
 				view.forward(request, response);
 
 			} catch (SQLException e) {
