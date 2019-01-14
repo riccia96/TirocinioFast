@@ -118,40 +118,40 @@ public class ManagerDocumento {
 		return qDAO.doDelete(questionario);
 	}
 	
-	public List<TirocinioBean> getTirocini() throws SQLException {
+	public List<TirocinioBean> getTirocini(String order) throws SQLException {
 
 		List<TirocinioBean> tirocini = new ArrayList<TirocinioBean>();
 		TirocinioDAO tirocinio = new TirocinioDAO();
 
-		tirocini.addAll(tirocinio.doRetrieveAll());
+		tirocini.addAll(tirocinio.doRetrieveAll(order));
 
 		return tirocini;
 
 	}
 
-	public List<ConvenzioneBean> getConvenzioni() throws SQLException {
+	public List<ConvenzioneBean> getConvenzioni(String order) throws SQLException {
 
 		List<ConvenzioneBean> convenzioni = new ArrayList<ConvenzioneBean>();
 		ConvenzioneDAO convenzione = new ConvenzioneDAO();
 
-		convenzioni.addAll(convenzione.doRetrieveAll());
+		convenzioni.addAll(convenzione.doRetrieveAll(order));
 
 		return convenzioni;
 
 	}
 	
-	public List<QuestionarioStudenteBean> getQuestionariStudente() throws SQLException{
+	public List<QuestionarioStudenteBean> getQuestionariStudente(String order) throws SQLException{
 		QuestionarioStudenteDAO qDAO = new QuestionarioStudenteDAO();
 		List<QuestionarioStudenteBean> questionari = new ArrayList<QuestionarioStudenteBean>();
-		questionari = qDAO.doRetrieveAll();
+		questionari = qDAO.doRetrieveAll(order);
 		
 		return questionari;
 	}
 	
-	public List<QuestionarioAziendaBean> getQuestionariAzienda() throws SQLException{
+	public List<QuestionarioAziendaBean> getQuestionariAzienda(String order) throws SQLException{
 		QuestionarioAziendaDAO qDAO = new QuestionarioAziendaDAO();
 		List<QuestionarioAziendaBean> questionari = new ArrayList<QuestionarioAziendaBean>();
-		questionari = qDAO.doRetrieveAll();
+		questionari = qDAO.doRetrieveAll(order);
 		
 		return questionari;
 	}

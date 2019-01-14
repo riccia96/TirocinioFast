@@ -171,13 +171,17 @@ public class QuestionarioAziendaDAO extends AbstractDAO<QuestionarioAziendaBean>
 	}
 
 	@Override
-	public synchronized List<QuestionarioAziendaBean> doRetrieveAll() throws SQLException {
+	public synchronized List<QuestionarioAziendaBean> doRetrieveAll(String order) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet result = null;
 		List<QuestionarioAziendaBean> questionariAzienda = new ArrayList<QuestionarioAziendaBean>();
 		
 		String querySQL = "SELECT * FROM " + QuestionarioAziendaDAO.TABLE_NAME;
+
+		if (order != null && !order.equals("")) {
+			querySQL += " ORDER BY " + order;
+		}
 		
 		try {
 

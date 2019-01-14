@@ -144,7 +144,7 @@ public class AziendaDAO extends AbstractDAO<AziendaBean>{
 	}
 
 	@Override
-	public synchronized List<AziendaBean> doRetrieveAll() throws SQLException {
+	public synchronized List<AziendaBean> doRetrieveAll(String order) throws SQLException {
 		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -152,6 +152,10 @@ public class AziendaDAO extends AbstractDAO<AziendaBean>{
 		List<AziendaBean> aziende = new ArrayList<AziendaBean>();
 		
 		String querySQL = "SELECT * FROM " + AziendaDAO.TABLE_NAME;
+		
+		if (order != null && !order.equals("")) {
+			querySQL += " ORDER BY " + order;
+		}
 		
 		try {
 

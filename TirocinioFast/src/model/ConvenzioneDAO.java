@@ -176,7 +176,7 @@ private static DataSource ds;
 	}
 
 	@Override
-	public synchronized List<ConvenzioneBean> doRetrieveAll() throws SQLException {
+	public synchronized List<ConvenzioneBean> doRetrieveAll(String order) throws SQLException {
 		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -184,6 +184,10 @@ private static DataSource ds;
 		List<ConvenzioneBean> convenzioni = new ArrayList<ConvenzioneBean>();
 		
 		String querySQL = "SELECT * FROM " + ConvenzioneDAO.TABLE_NAME;
+
+		if (order != null && !order.equals("")) {
+			querySQL += " ORDER BY " + order;
+		}
 		
 		try {
 

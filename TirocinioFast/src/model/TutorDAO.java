@@ -138,7 +138,7 @@ public class TutorDAO extends AbstractDAO<TutorBean>{
 	}
 
 	@Override
-	public synchronized List<TutorBean> doRetrieveAll() throws SQLException {
+	public synchronized List<TutorBean> doRetrieveAll(String order) throws SQLException {
 		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -146,6 +146,10 @@ public class TutorDAO extends AbstractDAO<TutorBean>{
 		List<TutorBean> tutor = new ArrayList<TutorBean>();
 		
 		String querySQL = "SELECT * FROM " + TutorDAO.TABLE_NAME;
+
+		if (order != null && !order.equals("")) {
+			querySQL += " ORDER BY " + order;
+		}
 		
 		try {
 

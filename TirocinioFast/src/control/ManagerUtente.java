@@ -94,32 +94,32 @@ public class ManagerUtente {
 		return iDAO.doDelete(impiegato);
 	}
 	
-	public List<StudenteBean> getStudenti() throws SQLException{
+	public List<StudenteBean> getStudenti(String order) throws SQLException{
 		StudenteDAO sDAO = new StudenteDAO();
 		List<StudenteBean> studenti = new ArrayList<StudenteBean>();
-		studenti.addAll(sDAO.doRetrieveAll());
+		studenti.addAll(sDAO.doRetrieveAll(order));
 		return studenti;
 	}
 	
-	public List<AziendaBean> getAziende() throws SQLException{
+	public List<AziendaBean> getAziende(String order) throws SQLException{
 		AziendaDAO aDAO = new AziendaDAO();
 		List<AziendaBean> aziende = new ArrayList<AziendaBean>();
-		aziende.addAll(aDAO.doRetrieveAll());
+		aziende.addAll(aDAO.doRetrieveAll(order));
 		return aziende;
 	}
 	
-	public List<TutorBean> getTutorAccademici() throws SQLException{
+	public List<TutorBean> getTutorAccademici(String order) throws SQLException{
 		TutorDAO tDAO = new TutorDAO();
 		List<TutorBean> tutorAccademici = new ArrayList<TutorBean>();
-		tutorAccademici.addAll(tDAO.doRetrieveAll());
+		tutorAccademici.addAll(tDAO.doRetrieveAll(order));
 		
 		return tutorAccademici;
 	}
 	
-	public List<ImpiegatoBean> getImpiegati() throws SQLException{
+	public List<ImpiegatoBean> getImpiegati(String order) throws SQLException{
 		ImpiegatoDAO iDAO = new ImpiegatoDAO();
 		List<ImpiegatoBean> impiegati = new ArrayList<ImpiegatoBean>();
-	    impiegati.addAll(iDAO.doRetrieveAll());
+	    impiegati.addAll(iDAO.doRetrieveAll(order));
 		
 		return impiegati;
 	}

@@ -198,7 +198,7 @@ public class TirocinioDAO extends AbstractDAO<TirocinioBean>{
 	}
 
 	@Override
-	public synchronized List<TirocinioBean> doRetrieveAll() throws SQLException {
+	public synchronized List<TirocinioBean> doRetrieveAll(String order) throws SQLException {
 
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -207,6 +207,10 @@ public class TirocinioDAO extends AbstractDAO<TirocinioBean>{
 
 		String querySQL = "SELECT * FROM " + TirocinioDAO.TABLE_NAME; 
 
+		if (order != null && !order.equals("")) {
+			querySQL += " ORDER BY " + order;
+		}
+		
 		try {
 
 			connection = ds.getConnection();

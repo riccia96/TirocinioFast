@@ -155,16 +155,19 @@ public class StudenteDAO extends AbstractDAO<StudenteBean>{
 	}
 
 	@Override
-	public synchronized List<StudenteBean> doRetrieveAll() throws SQLException {
+	public synchronized List<StudenteBean> doRetrieveAll(String order) throws SQLException {
 
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet result = null;
 		List<StudenteBean> studenti = new ArrayList<StudenteBean>();
 		
-
 		String querySQL = "SELECT * FROM " + StudenteDAO.TABLE_NAME; 
 
+		if (order != null && !order.equals("")) {
+			querySQL += " ORDER BY " + order;
+		}
+		
 		try {
 
 			connection = ds.getConnection();

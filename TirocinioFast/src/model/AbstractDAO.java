@@ -9,7 +9,7 @@ public abstract class AbstractDAO <T> {
 
 	public abstract T doRetrieveByKey(T entity) throws SQLException;
 	
-	public abstract List<T> doRetrieveAll() throws SQLException;
+	public abstract List<T> doRetrieveAll(String order) throws SQLException;
 
 	public abstract boolean doUpdate(T entity) throws SQLException;
 

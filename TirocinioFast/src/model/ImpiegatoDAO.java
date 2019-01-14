@@ -138,13 +138,17 @@ public class ImpiegatoDAO extends AbstractDAO<ImpiegatoBean>{
 	}
 
 	@Override
-	public synchronized List<ImpiegatoBean> doRetrieveAll() throws SQLException {
+	public synchronized List<ImpiegatoBean> doRetrieveAll(String order) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet result = null;
 		List<ImpiegatoBean> impiegati = new ArrayList<ImpiegatoBean>();
 		
 		String querySQL = "SELECT * FROM " + ImpiegatoDAO.TABLE_NAME;
+
+		if (order != null && !order.equals("")) {
+			querySQL += " ORDER BY " + order;
+		}
 		
 		try {
 
