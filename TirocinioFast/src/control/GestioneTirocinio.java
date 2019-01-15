@@ -42,7 +42,7 @@ public class GestioneTirocinio extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String azioneTirocinio = request.getParameter("azioneTirocinio");
-		
+
 		if(azioneTirocinio.equals("richiediTirocinio")){
 			try {
 				String aziendaTirocinio = request.getParameter("aziendaSelezionata");
@@ -168,12 +168,12 @@ public class GestioneTirocinio extends HttpServlet {
 				for(AziendaBean a : aziende) {
 
 					for(ConvenzioneBean c : convenzioni) {
-						
+
 						if(a.getUsername().equals(c.getAzienda()) && c.isConvalida()) {
 							aziendeConv.add(a);
-							
+
 						}
-						
+
 					}
 				}
 

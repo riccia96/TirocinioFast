@@ -1,11 +1,11 @@
 package bean;
 
 public class ConvenzioneBean implements java.io.Serializable {
-	
+
 	private static final long serialVersionUID = 6L;
-	
+
 	/**Costruttore*/
-	
+
 	public ConvenzioneBean() {
 		this.id = -1;
 		this.azienda = "";
@@ -21,17 +21,17 @@ public class ConvenzioneBean implements java.io.Serializable {
 		this.convalida = false;
 		this.url = "";
 	}	
-	
+
 	/**Getter e Setter*/
-	
+
 	public int getId(){
 		return id;
 	}
-	
+
 	public void setId(int id){
 		this.id = id;
 	}
-	
+
 	public String getAzienda() {
 		return azienda;
 	}
@@ -55,7 +55,7 @@ public class ConvenzioneBean implements java.io.Serializable {
 	public void setImpiegato(String impiegato) {
 		this.impiegato = impiegato;
 	}
- 
+
 	public String getLuogoNascitaCeo() {
 		return luogoNascitaCeo;
 	}
@@ -127,9 +127,9 @@ public class ConvenzioneBean implements java.io.Serializable {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	
+
 	/**toString*/
-	
+
 	@Override
 	public String toString() {
 		return "ConvenzioneBean [Azienda: " + this.getAzienda() + 
@@ -145,10 +145,10 @@ public class ConvenzioneBean implements java.io.Serializable {
 				"][Convalida: " + this.isConvalida() + 
 				"][Url: " + this.getUrl() + "]";
 	}
-	
+
 	/**Variabili di istanza*/
-	
-	
+
+
 	private String azienda;
 	private String tutorAccademico;
 	private String impiegato;
@@ -162,5 +162,5 @@ public class ConvenzioneBean implements java.io.Serializable {
 	private boolean convalida;
 	private String url;
 	private int id;
-	
+
 }

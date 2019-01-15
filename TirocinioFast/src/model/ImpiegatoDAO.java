@@ -17,9 +17,9 @@ import bean.ImpiegatoBean;
 
 
 public class ImpiegatoDAO extends AbstractDAO<ImpiegatoBean>{
-	
+
 	private static DataSource ds;
-	
+
 	static {
 		try {
 
@@ -32,23 +32,23 @@ public class ImpiegatoDAO extends AbstractDAO<ImpiegatoBean>{
 			System.out.println("Error:" + e.getMessage());
 		}
 	}
-	
+
 	private static final String TABLE_NAME = "impiegato";
 
 	@Override
 	public synchronized int doSave(ImpiegatoBean impiegato) throws SQLException {
-		
+
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet result = null;
-		
+
 		String querySQL = "INSERT INTO " + ImpiegatoDAO.TABLE_NAME + " (nome, cognome, matricola, email, username, password, domanda)" +
 				"VALUES (?, ?, ?, ?, ?, ?, ?)";
 		try{
-			
+
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(querySQL, Statement.RETURN_GENERATED_KEYS);
-			
+
 			preparedStatement.setString(1, impiegato.getNome());
 			preparedStatement.setString(2, impiegato.getCognome());
 			preparedStatement.setString(3, impiegato.getMatricola());
@@ -56,10 +56,10 @@ public class ImpiegatoDAO extends AbstractDAO<ImpiegatoBean>{
 			preparedStatement.setString(5, impiegato.getUsername());
 			preparedStatement.setString(6, impiegato.getPassword());
 			preparedStatement.setString(7, impiegato.getDomanda());
-			
+
 			preparedStatement.execute();
 			result = preparedStatement.getGeneratedKeys();
-			
+
 			if(result.next() && result != null){
 				return result.getInt(1);
 			}else{
@@ -90,14 +90,14 @@ public class ImpiegatoDAO extends AbstractDAO<ImpiegatoBean>{
 
 	@Override
 	public synchronized ImpiegatoBean doRetrieveByKey(ImpiegatoBean impiegato) throws SQLException {
-		
+
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet result = null;
 		ImpiegatoBean i = new ImpiegatoBean();
-		
+
 		String querySQL = "SELECT * FROM " + ImpiegatoDAO.TABLE_NAME + " WHERE username = ?";
-		
+
 		try {
 
 			connection = ds.getConnection();
@@ -107,9 +107,9 @@ public class ImpiegatoDAO extends AbstractDAO<ImpiegatoBean>{
 
 			preparedStatement.execute();
 			result = preparedStatement.getResultSet();
-			
+
 			while(result.next()){
-				
+
 				i.setNome(result.getString("nome"));
 				i.setCognome(result.getString("cognome"));
 				i.setMatricola(result.getString("matricola"));
@@ -117,7 +117,7 @@ public class ImpiegatoDAO extends AbstractDAO<ImpiegatoBean>{
 				i.setUsername(result.getString("username"));
 				i.setPassword(result.getString("password"));
 				i.setDomanda(result.getString("domanda"));
-				
+
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -143,13 +143,13 @@ public class ImpiegatoDAO extends AbstractDAO<ImpiegatoBean>{
 		PreparedStatement preparedStatement = null;
 		ResultSet result = null;
 		List<ImpiegatoBean> impiegati = new ArrayList<ImpiegatoBean>();
-		
+
 		String querySQL = "SELECT * FROM " + ImpiegatoDAO.TABLE_NAME;
 
 		if (order != null && !order.equals("")) {
 			querySQL += " ORDER BY " + order;
 		}
-		
+
 		try {
 
 			connection = ds.getConnection();
@@ -157,11 +157,11 @@ public class ImpiegatoDAO extends AbstractDAO<ImpiegatoBean>{
 
 			preparedStatement.execute();
 			result = preparedStatement.getResultSet();
-			
+
 			while(result.next()){
-				
+
 				ImpiegatoBean i = new ImpiegatoBean();
-				
+
 				i.setNome(result.getString("nome"));
 				i.setCognome(result.getString("cognome"));
 				i.setMatricola(result.getString("matricola"));
@@ -169,7 +169,7 @@ public class ImpiegatoDAO extends AbstractDAO<ImpiegatoBean>{
 				i.setUsername(result.getString("username"));
 				i.setPassword(result.getString("password"));
 				i.setDomanda(result.getString("domanda"));
-				
+
 				impiegati.add(i);
 			}			
 		} catch (SQLException e) {
@@ -194,15 +194,15 @@ public class ImpiegatoDAO extends AbstractDAO<ImpiegatoBean>{
 	public synchronized boolean doUpdate(ImpiegatoBean impiegato) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		
+
 		String querySQL = "UPDATE " + ImpiegatoDAO.TABLE_NAME + " SET nome = ?, cognome = ?, matricola = ?, email = ?, username = ?,"
 				+ " password = ?, domanda = ? WHERE username = ?";
-		
+
 		try{
-			
+
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(querySQL);
-			
+
 			preparedStatement.setString(1, impiegato.getNome());
 			preparedStatement.setString(2, impiegato.getCognome());
 			preparedStatement.setString(3, impiegato.getMatricola());
@@ -210,9 +210,9 @@ public class ImpiegatoDAO extends AbstractDAO<ImpiegatoBean>{
 			preparedStatement.setString(5, impiegato.getUsername());
 			preparedStatement.setString(6, impiegato.getPassword());
 			preparedStatement.setString(7, impiegato.getDomanda());
-			
+
 			preparedStatement.setString(8, impiegato.getUsername());
-			
+
 			preparedStatement.execute();
 			return true;
 		} catch (SQLException e) {
@@ -229,26 +229,26 @@ public class ImpiegatoDAO extends AbstractDAO<ImpiegatoBean>{
 				cse.printStackTrace();
 			}
 		}
-		
+
 		return false;
 	}
 
 	@Override
 	public synchronized boolean doDelete(ImpiegatoBean impiegato) throws SQLException {
-		
+
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		
+
 		String querySQL = "DELETE FROM " + ImpiegatoDAO.TABLE_NAME + " WHERE username = ?";
-		
+
 		try{
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(querySQL);
-			
+
 			preparedStatement.setString(1, impiegato.getUsername());
-			
+
 			preparedStatement.execute();
-			
+
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -268,5 +268,5 @@ public class ImpiegatoDAO extends AbstractDAO<ImpiegatoBean>{
 		return false;
 	}
 
-	
+
 }

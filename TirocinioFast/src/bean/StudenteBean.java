@@ -3,11 +3,11 @@ package bean;
 import java.io.Serializable;
 
 public class StudenteBean implements Serializable{
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	/**Costruttore*/
-	
+
 	public StudenteBean() {
 		this.nome = "";
 		this.cognome = "";
@@ -67,7 +67,7 @@ public class StudenteBean implements Serializable{
 	public void setIndirizzo(String indirizzo) {
 		this.indirizzo = indirizzo;
 	}
- 
+
 	public String getCitta() {
 		return citta;
 	}
@@ -131,28 +131,28 @@ public class StudenteBean implements Serializable{
 	public void setDomanda(String domanda) {
 		this.domanda = domanda;
 	}
-	
+
 	/**toString*/
-	
+
 	@Override
 	public String toString(){
 		return "Studente [Nome: " + this.getNome() + 
-			   "][Cognome: " + this.getCognome() + 
-			   "][Matricola: " + this.getMatricola() +
-			   "][Luogo Nascita: " + this.getLuogoNascita() +
-			   "][Data Nascita: " + this.getDataNascita() +
-			   "][Indirizzo: " + this.getIndirizzo() +
-			   "][Città: " + this.getCitta() +
-			   "][Codice Fiscale: " + this.getCodiceFiscale() +
-			   "][Telefono: " + this.getTelefono() +
-			   "][E-mail: " + this.getEmail() +
-			   "][Username: " + this.getUsername() +
-			   "][Password: " + this.getPassword() +
-			   "][Risposta: " + this.getDomanda() + "]";
+				"][Cognome: " + this.getCognome() + 
+				"][Matricola: " + this.getMatricola() +
+				"][Luogo Nascita: " + this.getLuogoNascita() +
+				"][Data Nascita: " + this.getDataNascita() +
+				"][Indirizzo: " + this.getIndirizzo() +
+				"][Città: " + this.getCitta() +
+				"][Codice Fiscale: " + this.getCodiceFiscale() +
+				"][Telefono: " + this.getTelefono() +
+				"][E-mail: " + this.getEmail() +
+				"][Username: " + this.getUsername() +
+				"][Password: " + this.getPassword() +
+				"][Risposta: " + this.getDomanda() + "]";
 	}
 
 	/**Variabili di istanza*/
-	
+
 	private String nome;
 	private String cognome;
 	private String luogoNascita;

@@ -72,12 +72,12 @@ public class GestioneUtente extends HttpServlet {
 						pass=true;
 						RequestDispatcher view = request.getRequestDispatcher("home.jsp");
 						view.forward(request, response);
-												
-						
+
+
 					}else {
 						RequestDispatcher view = request.getRequestDispatcher("utenteNonTrovato.jsp");
 						view.forward(request, response);
-						
+
 					}
 				} else if(a.getUsername().equals(username)) {
 					user = true;
@@ -88,11 +88,11 @@ public class GestioneUtente extends HttpServlet {
 						RequestDispatcher view = request.getRequestDispatcher("home.jsp");
 						view.forward(request, response);
 						pass = true;
-						
+
 					}else {
 						RequestDispatcher view = request.getRequestDispatcher("utenteNonTrovato.jsp");
 						view.forward(request, response);
-						
+
 					}
 				}
 				else if(t.getUsername().equals(username)) {
@@ -103,9 +103,9 @@ public class GestioneUtente extends HttpServlet {
 
 						RequestDispatcher view = request.getRequestDispatcher("home.jsp");
 						view.forward(request, response);
-						
+
 						pass = true;
-						
+
 					}else {
 						RequestDispatcher view = request.getRequestDispatcher("utenteNonTrovato.jsp");
 						view.forward(request, response);
@@ -120,16 +120,16 @@ public class GestioneUtente extends HttpServlet {
 						RequestDispatcher view = request.getRequestDispatcher("home.jsp");
 						view.forward(request, response);
 						pass = true;
-						
+
 					}else {
 						RequestDispatcher view = request.getRequestDispatcher("utenteNonTrovato.jsp");
 						view.forward(request, response);
-						
+
 					}
 				} else if(!user) {
 					RequestDispatcher view = request.getRequestDispatcher("utenteNonTrovato.jsp");
 					view.forward(request, response);
-					
+
 				}
 			}catch (SQLException e) {
 				e.printStackTrace();
@@ -173,7 +173,7 @@ public class GestioneUtente extends HttpServlet {
 							if(i.getUsername().equals("")) {
 								RequestDispatcher view = request.getRequestDispatcher("usernameNo.jsp");
 								view.forward(request, response);
-								}else {
+							}else {
 								if(utente.getTutor(tutor).getDomanda().equals(risposta)){
 									request.getSession().setAttribute("utenteSessione", utente.getTutor(tutor));
 									request.getSession().setAttribute("tipoUtente", "tutor");
@@ -339,47 +339,47 @@ public class GestioneUtente extends HttpServlet {
 				studenti.addAll(utente.getStudenti("username ASC"));
 
 				if((nome.length()>2 && nome.length()<31) && (cognome.length()>2 && cognome.length()<31) && (luogoNascita.length()>2 && luogoNascita.length()<21) && (dataNascita.length()>7 && dataNascita.length()<11) && (indirizzo.length()>4 && indirizzo.length()<31) && (citta.length()>2 && citta.length()<21) && (codiceFiscale.length()== 16) && (matricola.length()== 10) && (email.length()>4 && email.length()<31) && (telefono.length()>6 && telefono.length()<14) && (username.length()>4 && username.length()<21) && (password.length()>7 && password.length()<21) && (risposta.length()>1 && risposta.length()<31)){
-										
-				if(!(studenti.equals(null))) {
-					for(StudenteBean s : studenti) {
-						if(s.getEmail().equals(email)) {
-							RequestDispatcher view = request.getRequestDispatcher("emailEsistente.jsp");
-							view.forward(request, response);
-								}
-						if(s.getMatricola().equals(matricola)) {
-							RequestDispatcher view = request.getRequestDispatcher("matricolaEsistente.jsp");
-							view.forward(request, response);
-								}
-						if(s.getCodiceFiscale().equals(codiceFiscale)) {
-							RequestDispatcher view = request.getRequestDispatcher("codiceFiscaleEsistente.jsp");
-							view.forward(request, response);
-								}
-						if(s.getUsername().equals(username)) {
-							RequestDispatcher view = request.getRequestDispatcher("usernameEsistente.jsp");
-							view.forward(request, response);
-								}
+
+					if(!(studenti.equals(null))) {
+						for(StudenteBean s : studenti) {
+							if(s.getEmail().equals(email)) {
+								RequestDispatcher view = request.getRequestDispatcher("emailEsistente.jsp");
+								view.forward(request, response);
+							}
+							if(s.getMatricola().equals(matricola)) {
+								RequestDispatcher view = request.getRequestDispatcher("matricolaEsistente.jsp");
+								view.forward(request, response);
+							}
+							if(s.getCodiceFiscale().equals(codiceFiscale)) {
+								RequestDispatcher view = request.getRequestDispatcher("codiceFiscaleEsistente.jsp");
+								view.forward(request, response);
+							}
+							if(s.getUsername().equals(username)) {
+								RequestDispatcher view = request.getRequestDispatcher("usernameEsistente.jsp");
+								view.forward(request, response);
 							}
 						}
-						if(!(password.equals(conferma))){
-							RequestDispatcher view = request.getRequestDispatcher("passwordNonCorrispondenti.jsp");
-							view.forward(request, response);
-								} 
-						
-						utente.salvaStudente(studente);
-						request.getSession().setAttribute("utenteSessione", studente);
-						request.getSession().setAttribute("tipoUtente", "studente");
-						RequestDispatcher view = request.getRequestDispatcher("home.jsp");
+					}
+					if(!(password.equals(conferma))){
+						RequestDispatcher view = request.getRequestDispatcher("passwordNonCorrispondenti.jsp");
 						view.forward(request, response);
-						
-					} else {
-							RequestDispatcher view = request.getRequestDispatcher("formatoSbagliato.jsp");
-							view.forward(request, response);
-					}
+					} 
+
+					utente.salvaStudente(studente);
+					request.getSession().setAttribute("utenteSessione", studente);
+					request.getSession().setAttribute("tipoUtente", "studente");
+					RequestDispatcher view = request.getRequestDispatcher("home.jsp");
+					view.forward(request, response);
+
+				} else {
+					RequestDispatcher view = request.getRequestDispatcher("formatoSbagliato.jsp");
+					view.forward(request, response);
+				}
 			}
-							catch(SQLException e){
-								e.printStackTrace();
-							}
-					}
+			catch(SQLException e){
+				e.printStackTrace();
+			}
+		}
 
 
 		if(azioneUtente.equals("registraAzienda")) {
@@ -415,41 +415,41 @@ public class GestioneUtente extends HttpServlet {
 
 				if((nome.length()>2 && nome.length()<31) && (partitaIva.length()==11) && (ceo.length()>4 && ceo.length()<51) && (indirizzo.length()>4 && indirizzo.length()<31) && (email.length()>4 && email.length()<31) && (telefono.length()>6 && telefono.length()<13) && (username.length()>4 && username.length()<21) && (password.length()>7 && password.length()<21) && (risposta.length()>1 && risposta.length()<31)){
 
-													if(!(aziende.equals(null))) {
-														for(AziendaBean a : aziende) {
-															if(a.getEmail().equals(email)) {
-																RequestDispatcher view = request.getRequestDispatcher("emailEsistente.jsp");
-																view.forward(request, response);
-																	}
-															if(a.getNome().equals(nome)) {
-																RequestDispatcher view = request.getRequestDispatcher("nomeEsistente.jsp");
-																view.forward(request, response);
-															}
-															if(a.getUsername().equals(username)) {
-																RequestDispatcher view = request.getRequestDispatcher("usernameEsistente.jsp");
-																view.forward(request, response);
-															}
-														}
-													}
+					if(!(aziende.equals(null))) {
+						for(AziendaBean a : aziende) {
+							if(a.getEmail().equals(email)) {
+								RequestDispatcher view = request.getRequestDispatcher("emailEsistente.jsp");
+								view.forward(request, response);
+							}
+							if(a.getNome().equals(nome)) {
+								RequestDispatcher view = request.getRequestDispatcher("nomeEsistente.jsp");
+								view.forward(request, response);
+							}
+							if(a.getUsername().equals(username)) {
+								RequestDispatcher view = request.getRequestDispatcher("usernameEsistente.jsp");
+								view.forward(request, response);
+							}
+						}
+					}
 
-													if(!(password.equals(conferma))){
-														RequestDispatcher view = request.getRequestDispatcher("passwordNonCorrispondenti.jsp");
-														view.forward(request, response);
-													} else {
-														utente.salvaAzienda(azienda);
+					if(!(password.equals(conferma))){
+						RequestDispatcher view = request.getRequestDispatcher("passwordNonCorrispondenti.jsp");
+						view.forward(request, response);
+					} else {
+						utente.salvaAzienda(azienda);
 
-														request.getSession().setAttribute("utenteSessione", azienda);
-														request.getSession().setAttribute("tipoUtente", "azienda");
+						request.getSession().setAttribute("utenteSessione", azienda);
+						request.getSession().setAttribute("tipoUtente", "azienda");
 
-														RequestDispatcher view = request.getRequestDispatcher("home.jsp");
-														view.forward(request, response);
-													}
-												}
+						RequestDispatcher view = request.getRequestDispatcher("home.jsp");
+						view.forward(request, response);
+					}
+				}
 
-												else{
-													RequestDispatcher view = request.getRequestDispatcher("formatoSbagliato.jsp");
-													view.forward(request, response);
-												}
+				else{
+					RequestDispatcher view = request.getRequestDispatcher("formatoSbagliato.jsp");
+					view.forward(request, response);
+				}
 			}
 			catch(SQLException e){
 				e.printStackTrace();

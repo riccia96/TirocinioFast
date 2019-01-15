@@ -33,7 +33,7 @@ public class TirocinioDAO extends AbstractDAO<TirocinioBean>{
 	}
 
 	private static final String TABLE_NAME = "tirocinio";
-	
+
 	public synchronized int generaCodice() throws SQLException{
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -76,7 +76,7 @@ public class TirocinioDAO extends AbstractDAO<TirocinioBean>{
 
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(querySQL, Statement.RETURN_GENERATED_KEYS);
-			
+
 			preparedStatement.setInt(1, generaCodice());
 			preparedStatement.setString(2, tirocinio.getStudente());
 			preparedStatement.setString(3, tirocinio.getAzienda());
@@ -108,7 +108,7 @@ public class TirocinioDAO extends AbstractDAO<TirocinioBean>{
 			} else {
 				return -1;
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -177,7 +177,7 @@ public class TirocinioDAO extends AbstractDAO<TirocinioBean>{
 				t.setUrl(result.getString("url"));
 
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -209,7 +209,7 @@ public class TirocinioDAO extends AbstractDAO<TirocinioBean>{
 		if (order != null && !order.equals("")) {
 			querySQL += " ORDER BY " + order;
 		}
-		
+
 		try {
 
 			connection = ds.getConnection();
@@ -219,9 +219,9 @@ public class TirocinioDAO extends AbstractDAO<TirocinioBean>{
 			result = preparedStatement.getResultSet();
 
 			while (result.next()) {
-				
+
 				TirocinioBean t = new TirocinioBean();
-				
+
 				t.setId(result.getInt("id"));
 				t.setStudente(result.getString("studente"));
 				t.setAzienda(result.getString("azienda"));
@@ -248,7 +248,7 @@ public class TirocinioDAO extends AbstractDAO<TirocinioBean>{
 				tirocini.add(t);
 
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -283,7 +283,7 @@ public class TirocinioDAO extends AbstractDAO<TirocinioBean>{
 
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(querySQL);
-			
+
 			preparedStatement.setString(1, tirocinio.getStudente());
 			preparedStatement.setString(2, tirocinio.getAzienda());
 			preparedStatement.setString(3, tirocinio.getTutorAccademico());
@@ -305,12 +305,12 @@ public class TirocinioDAO extends AbstractDAO<TirocinioBean>{
 			preparedStatement.setInt(19, tirocinio.getQuestionarioStudente());
 			preparedStatement.setInt(20, tirocinio.getQuestionarioAzienda());
 			preparedStatement.setString(21, tirocinio.getUrl());
-			
+
 			preparedStatement.setInt(22, tirocinio.getId());
 
 			preparedStatement.execute();
 			return true;
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -337,7 +337,7 @@ public class TirocinioDAO extends AbstractDAO<TirocinioBean>{
 		PreparedStatement preparedStatement = null;
 
 		String querySQL = "DELETE FROM " + TirocinioDAO.TABLE_NAME + " WHERE id = ? ";
-		
+
 		try {
 
 			connection = ds.getConnection();
@@ -346,9 +346,9 @@ public class TirocinioDAO extends AbstractDAO<TirocinioBean>{
 			preparedStatement.setInt(1, tirocinio.getId());
 
 			preparedStatement.execute();
-			
+
 			return true;
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

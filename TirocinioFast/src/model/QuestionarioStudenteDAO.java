@@ -16,9 +16,9 @@ import javax.sql.DataSource;
 import bean.QuestionarioStudenteBean;
 
 public class QuestionarioStudenteDAO extends AbstractDAO<QuestionarioStudenteBean>{
-	
+
 	private static DataSource ds;
-	
+
 	static {
 		try {
 
@@ -31,9 +31,9 @@ public class QuestionarioStudenteDAO extends AbstractDAO<QuestionarioStudenteBea
 			System.out.println("Error:" + e.getMessage());
 		}
 	}
-	
+
 	private static final String TABLE_NAME = "questionarioStudente";
-	
+
 	public synchronized int generaCodice() throws SQLException{
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -61,19 +61,19 @@ public class QuestionarioStudenteDAO extends AbstractDAO<QuestionarioStudenteBea
 
 	@Override
 	public synchronized int doSave(QuestionarioStudenteBean questionarioStudente) throws SQLException {
-		
+
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet result = null;
-		
+
 		String querySQL = "INSERT INTO " + QuestionarioStudenteDAO.TABLE_NAME + " (id, studente, azienda, tutorAccademico, impiegato, periodoTirocinio, "
 				+ "titoloTirocinio, scelte, convalida, url)" +
 				"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		try{
-			
+
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(querySQL, Statement.RETURN_GENERATED_KEYS);
-			
+
 			preparedStatement.setInt(1, generaCodice());
 			preparedStatement.setString(2, questionarioStudente.getStudente());
 			preparedStatement.setString(3, questionarioStudente.getAzienda());
@@ -84,10 +84,10 @@ public class QuestionarioStudenteDAO extends AbstractDAO<QuestionarioStudenteBea
 			preparedStatement.setString(8, questionarioStudente.getScelte());
 			preparedStatement.setBoolean(9, questionarioStudente.isConvalida());
 			preparedStatement.setString(10, questionarioStudente.getUrl());
-			
+
 			preparedStatement.execute();
 			result = preparedStatement.getGeneratedKeys();
-			
+
 			if(result.next() && result != null){
 				return result.getInt(1);
 			}else{
@@ -118,14 +118,14 @@ public class QuestionarioStudenteDAO extends AbstractDAO<QuestionarioStudenteBea
 
 	@Override
 	public synchronized QuestionarioStudenteBean doRetrieveByKey(QuestionarioStudenteBean questionarioStudente) throws SQLException {
-		
+
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet result = null;
 		QuestionarioStudenteBean qs = new QuestionarioStudenteBean();
-		
+
 		String querySQL = "SELECT * FROM " + QuestionarioStudenteDAO.TABLE_NAME + " WHERE id = ? ";
-		
+
 		try {
 
 			connection = ds.getConnection();
@@ -135,9 +135,9 @@ public class QuestionarioStudenteDAO extends AbstractDAO<QuestionarioStudenteBea
 
 			preparedStatement.execute();
 			result = preparedStatement.getResultSet();
-			
+
 			while(result.next()){
-				
+
 				qs.setId(result.getInt("id"));
 				qs.setStudente(result.getString("studente"));
 				qs.setAzienda(result.getString("azienda"));
@@ -148,7 +148,7 @@ public class QuestionarioStudenteDAO extends AbstractDAO<QuestionarioStudenteBea
 				qs.setScelte(result.getString("scelte"));
 				qs.setConvalida(result.getBoolean("convalida"));
 				qs.setUrl(result.getString("url"));
-				
+
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -174,13 +174,13 @@ public class QuestionarioStudenteDAO extends AbstractDAO<QuestionarioStudenteBea
 		PreparedStatement preparedStatement = null;
 		ResultSet result = null;
 		List<QuestionarioStudenteBean> questionariStudente = new ArrayList<QuestionarioStudenteBean>();
-		
+
 		String querySQL = "SELECT * FROM " + QuestionarioStudenteDAO.TABLE_NAME;
 
 		if (order != null && !order.equals("")) {
 			querySQL += " ORDER BY " + order;
 		}
-		
+
 		try {
 
 			connection = ds.getConnection();
@@ -188,11 +188,11 @@ public class QuestionarioStudenteDAO extends AbstractDAO<QuestionarioStudenteBea
 
 			preparedStatement.execute();
 			result = preparedStatement.getResultSet();
-			
+
 			while(result.next()){
-				
+
 				QuestionarioStudenteBean qs = new QuestionarioStudenteBean();
-				
+
 				qs.setId(result.getInt("id"));
 				qs.setStudente(result.getString("studente"));
 				qs.setAzienda(result.getString("azienda"));
@@ -203,7 +203,7 @@ public class QuestionarioStudenteDAO extends AbstractDAO<QuestionarioStudenteBea
 				qs.setScelte(result.getString("scelte"));
 				qs.setConvalida(result.getBoolean("convalida"));
 				qs.setUrl(result.getString("url"));
-				
+
 				questionariStudente.add(qs);
 			}			
 		} catch (SQLException e) {
@@ -228,15 +228,15 @@ public class QuestionarioStudenteDAO extends AbstractDAO<QuestionarioStudenteBea
 	public synchronized boolean doUpdate(QuestionarioStudenteBean questionarioStudente) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		
+
 		String querySQL = "UPDATE " + QuestionarioStudenteDAO.TABLE_NAME + " SET studente = ?, azienda = ?, tutorAccademico = ?,"
 				+ " impiegato = ?, periodoTirocinio = ?, titoloTirocinio = ?, scelte = ?, convalida = ?, url = ? WHERE id = ? ";
-		
+
 		try{
-			
+
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(querySQL);
-			
+
 			preparedStatement.setString(1, questionarioStudente.getStudente());
 			preparedStatement.setString(2, questionarioStudente.getAzienda());
 			preparedStatement.setString(3, questionarioStudente.getTutorAccademico());
@@ -246,9 +246,9 @@ public class QuestionarioStudenteDAO extends AbstractDAO<QuestionarioStudenteBea
 			preparedStatement.setString(7, questionarioStudente.getScelte());
 			preparedStatement.setBoolean(8, questionarioStudente.isConvalida());
 			preparedStatement.setString(9, questionarioStudente.getUrl());
-			
+
 			preparedStatement.setInt(10, questionarioStudente.getId());
-			
+
 			preparedStatement.execute();
 			return true;
 		} catch (SQLException e) {
@@ -265,26 +265,26 @@ public class QuestionarioStudenteDAO extends AbstractDAO<QuestionarioStudenteBea
 				cse.printStackTrace();
 			}
 		}
-		
+
 		return false;
 	}
 
 	@Override
 	public synchronized boolean doDelete(QuestionarioStudenteBean questionarioStudente) throws SQLException {
-		
+
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		
+
 		String querySQL = "DELETE FROM " + QuestionarioStudenteDAO.TABLE_NAME + " WHERE id = ? ";
-		
+
 		try{
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(querySQL);
-			
+
 			preparedStatement.setInt(1, questionarioStudente.getId());
-			
+
 			preparedStatement.execute();
-			
+
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -304,5 +304,5 @@ public class QuestionarioStudenteDAO extends AbstractDAO<QuestionarioStudenteBea
 		return false;
 	}
 
-	
+
 }

@@ -17,9 +17,9 @@ import bean.TutorBean;
 
 
 public class TutorDAO extends AbstractDAO<TutorBean>{
-	
+
 	private static DataSource ds;
-	
+
 	static {
 		try {
 
@@ -32,24 +32,24 @@ public class TutorDAO extends AbstractDAO<TutorBean>{
 			System.out.println("Error:" + e.getMessage());
 		}
 	}
-	
+
 	private static final String TABLE_NAME = "tutor";
 
 	@Override
 	public synchronized int doSave(TutorBean tutor) throws SQLException {
-		
+
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet result = null;
-		
+
 		String querySQL = "INSERT INTO " + TutorDAO.TABLE_NAME + " (nome, cognome, matricola, email, username, password, domanda)" +
 				"VALUES (?, ?, ?, ?, ?, ?, ?)";
-		
+
 		try{
-			
+
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(querySQL, Statement.RETURN_GENERATED_KEYS);
-			
+
 			preparedStatement.setString(1, tutor.getNome());
 			preparedStatement.setString(2, tutor.getCognome());
 			preparedStatement.setString(3, tutor.getMatricola());
@@ -57,10 +57,10 @@ public class TutorDAO extends AbstractDAO<TutorBean>{
 			preparedStatement.setString(5, tutor.getUsername());
 			preparedStatement.setString(6, tutor.getPassword());
 			preparedStatement.setString(7, tutor.getDomanda());
-			
+
 			preparedStatement.execute();
 			result = preparedStatement.getGeneratedKeys();
-			
+
 			if(result.next() && result != null){
 				return result.getInt(1);
 			}else{
@@ -95,9 +95,9 @@ public class TutorDAO extends AbstractDAO<TutorBean>{
 		PreparedStatement preparedStatement = null;
 		ResultSet result = null;
 		TutorBean t = new TutorBean();
-		
+
 		String querySQL = "SELECT * FROM " + TutorDAO.TABLE_NAME + " WHERE username = ?";
-		
+
 		try {
 
 			connection = ds.getConnection();
@@ -107,9 +107,9 @@ public class TutorDAO extends AbstractDAO<TutorBean>{
 
 			preparedStatement.execute();
 			result = preparedStatement.getResultSet();
-			
+
 			while(result.next()){
-				
+
 				t.setNome(result.getString("nome"));
 				t.setCognome(result.getString("cognome"));
 				t.setMatricola(result.getString("matricola"));
@@ -117,7 +117,7 @@ public class TutorDAO extends AbstractDAO<TutorBean>{
 				t.setUsername(result.getString("username"));
 				t.setPassword(result.getString("password"));
 				t.setDomanda(result.getString("domanda"));
-				
+
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -139,18 +139,18 @@ public class TutorDAO extends AbstractDAO<TutorBean>{
 
 	@Override
 	public synchronized List<TutorBean> doRetrieveAll(String order) throws SQLException {
-		
+
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet result = null;
 		List<TutorBean> tutor = new ArrayList<TutorBean>();
-		
+
 		String querySQL = "SELECT * FROM " + TutorDAO.TABLE_NAME;
 
 		if (order != null && !order.equals("")) {
 			querySQL += " ORDER BY " + order;
 		}
-		
+
 		try {
 
 			connection = ds.getConnection();
@@ -158,11 +158,11 @@ public class TutorDAO extends AbstractDAO<TutorBean>{
 
 			preparedStatement.execute();
 			result = preparedStatement.getResultSet();
-			
+
 			while(result.next()){
-				
+
 				TutorBean t = new TutorBean();
-				
+
 				t.setNome(result.getString("nome"));
 				t.setCognome(result.getString("cognome"));
 				t.setMatricola(result.getString("matricola"));
@@ -170,7 +170,7 @@ public class TutorDAO extends AbstractDAO<TutorBean>{
 				t.setUsername(result.getString("username"));
 				t.setPassword(result.getString("password"));
 				t.setDomanda(result.getString("domanda"));
-				
+
 				tutor.add(t);
 			}			
 		} catch (SQLException e) {
@@ -195,15 +195,15 @@ public class TutorDAO extends AbstractDAO<TutorBean>{
 	public synchronized boolean doUpdate(TutorBean tutor) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		
+
 		String querySQL = "UPDATE " + TutorDAO.TABLE_NAME + " SET nome = ?, cognome = ?, matricola = ?, email = ?, username = ?, password = ?, "
 				+ "domanda = ? WHERE  username = ?";
-		
+
 		try{
-			
+
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(querySQL);
-			
+
 			preparedStatement.setString(1, tutor.getNome());
 			preparedStatement.setString(2, tutor.getCognome());
 			preparedStatement.setString(3, tutor.getMatricola());
@@ -211,9 +211,9 @@ public class TutorDAO extends AbstractDAO<TutorBean>{
 			preparedStatement.setString(5, tutor.getUsername());
 			preparedStatement.setString(6, tutor.getPassword());
 			preparedStatement.setString(7, tutor.getDomanda());
-			
+
 			preparedStatement.setString(8, tutor.getUsername());
-			
+
 			preparedStatement.execute();
 			return true;
 		} catch (SQLException e) {
@@ -230,26 +230,26 @@ public class TutorDAO extends AbstractDAO<TutorBean>{
 				cse.printStackTrace();
 			}
 		}
-		
+
 		return false;
 	}
 
 	@Override
 	public synchronized boolean doDelete(TutorBean tutor) throws SQLException {
-		
+
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		
+
 		String querySQL = "DELETE FROM " + TutorDAO.TABLE_NAME + " WHERE username = ?";
-		
+
 		try{
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(querySQL);
-			
+
 			preparedStatement.setString(1, tutor.getUsername());
-			
+
 			preparedStatement.execute();
-			
+
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();

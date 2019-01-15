@@ -17,37 +17,37 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 public class AziendaDAO extends AbstractDAO<AziendaBean>{
-	
+
 	private static DataSource ds;
-	
+
 	static{
 		try{
 			Context initCtx = new InitialContext();
 			Context envCtx = (Context) initCtx.lookup("java:comp/env");
-			
+
 			ds = (DataSource) envCtx.lookup("jdbc/tirociniofast");
 		}catch (NamingException e) {
 			System.out.println("Error:" + e.getMessage());
 		}
 	}
-	
+
 	private static final String TABLE_NAME = "azienda";
-	
+
 	@Override
 	public synchronized int doSave(AziendaBean azienda) throws SQLException {
-		
+
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet result = null;
-		
+
 		String querySQL = "INSERT INTO " + AziendaDAO.TABLE_NAME + " (nome, partitaIva, ceo, indirizzo, email, telefono, username, password, domanda, descrizione, logo) " + 
 				"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-		
+
 		try{
-			
+
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(querySQL, Statement.RETURN_GENERATED_KEYS);
-			
+
 			preparedStatement.setString(1, azienda.getNome());
 			preparedStatement.setString(2, azienda.getPartitaIva());
 			preparedStatement.setString(3, azienda.getCeo());
@@ -59,10 +59,10 @@ public class AziendaDAO extends AbstractDAO<AziendaBean>{
 			preparedStatement.setString(9, azienda.getDomanda());
 			preparedStatement.setString(10, azienda.getDescrizione());
 			preparedStatement.setString(11, azienda.getLogo());
-			
+
 			preparedStatement.execute();
 			result = preparedStatement.getGeneratedKeys();
-			
+
 			if(result.next() && result != null){
 				return result.getInt(1);
 			} else {
@@ -97,21 +97,21 @@ public class AziendaDAO extends AbstractDAO<AziendaBean>{
 		PreparedStatement preparedStatement = null;
 		ResultSet result = null;
 		AziendaBean a = new AziendaBean();
-		
+
 		String querySQL = "SELECT * FROM " + AziendaDAO.TABLE_NAME + " WHERE username = ?";
-		
+
 		try{
-			
+
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(querySQL);
-			
+
 			preparedStatement.setString(1, azienda.getUsername());
-			
+
 			preparedStatement.execute();
 			result = preparedStatement.getResultSet();
-			
+
 			while(result.next()){
-				
+
 				a.setNome(result.getString("nome"));
 				a.setPartitaIva(result.getString("partitaIva"));
 				a.setCeo(result.getString("ceo"));
@@ -123,7 +123,7 @@ public class AziendaDAO extends AbstractDAO<AziendaBean>{
 				a.setDomanda(result.getString("domanda"));
 				a.setDescrizione(result.getString("descrizione"));
 				a.setLogo(result.getString("logo"));
-								
+
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -145,18 +145,18 @@ public class AziendaDAO extends AbstractDAO<AziendaBean>{
 
 	@Override
 	public synchronized List<AziendaBean> doRetrieveAll(String order) throws SQLException {
-		
+
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet result = null;
 		List<AziendaBean> aziende = new ArrayList<AziendaBean>();
-		
+
 		String querySQL = "SELECT * FROM " + AziendaDAO.TABLE_NAME;
-		
+
 		if (order != null && !order.equals("")) {
 			querySQL += " ORDER BY " + order;
 		}
-		
+
 		try {
 
 			connection = ds.getConnection();
@@ -166,9 +166,9 @@ public class AziendaDAO extends AbstractDAO<AziendaBean>{
 			result = preparedStatement.getResultSet();
 
 			while (result.next()) {
-				
+
 				AziendaBean a = new AziendaBean();
-				
+
 				a.setNome(result.getString("nome"));
 				a.setPartitaIva(result.getString("partitaIva"));
 				a.setCeo(result.getString("ceo"));
@@ -180,7 +180,7 @@ public class AziendaDAO extends AbstractDAO<AziendaBean>{
 				a.setDomanda(result.getString("domanda"));
 				a.setDescrizione(result.getString("descrizione"));
 				a.setLogo(result.getString("logo"));
-				
+
 				aziende.add(a);
 			}
 		} catch (SQLException e) {
@@ -205,15 +205,15 @@ public class AziendaDAO extends AbstractDAO<AziendaBean>{
 	public synchronized boolean doUpdate(AziendaBean azienda) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		
+
 		String querySQL = "UPDATE " + AziendaDAO.TABLE_NAME + " SET CEO = ?, indirizzo = ?, email = ?, "
 				+ "telefono = ?, password = ?, domanda = ?, descrizione = ?, logo = ? WHERE username = ?";
-		
+
 		try {
 
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(querySQL);
-			
+
 			preparedStatement.setString(1, azienda.getCeo());
 			preparedStatement.setString(2, azienda.getIndirizzo());
 			preparedStatement.setString(3, azienda.getEmail());
@@ -222,7 +222,7 @@ public class AziendaDAO extends AbstractDAO<AziendaBean>{
 			preparedStatement.setString(6, azienda.getDomanda());
 			preparedStatement.setString(7, azienda.getDescrizione());
 			preparedStatement.setString(8, azienda.getLogo());
-			
+
 			preparedStatement.setString(9, azienda.getUsername());
 
 			preparedStatement.execute();
@@ -246,21 +246,21 @@ public class AziendaDAO extends AbstractDAO<AziendaBean>{
 
 	@Override
 	public synchronized boolean doDelete(AziendaBean azienda) throws SQLException {
-		
+
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		
+
 		String querySQL = "DELETE FROM " + AziendaDAO.TABLE_NAME + " WHERE username = ?";
-		
+
 		try {
 
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(querySQL);
 
 			preparedStatement.setString(1, azienda.getUsername());
-			
+
 			preparedStatement.execute();
-			
+
 			return true;
 		} catch  (SQLException e) {
 			e.printStackTrace();

@@ -3,7 +3,7 @@ package bean;
 public class TirocinioBean implements java.io.Serializable {
 
 	private static final long serialVersionUID = 5L;
-	
+
 	/**Costruttore*/
 
 	public TirocinioBean() {
@@ -36,11 +36,11 @@ public class TirocinioBean implements java.io.Serializable {
 	public int getId(){
 		return id;
 	}
-	
+
 	public void setId(int id){
 		this.id = id;
 	}
-	
+
 	public String getStudente() {
 		return studente;
 	}
@@ -210,7 +210,7 @@ public class TirocinioBean implements java.io.Serializable {
 	}
 
 	/**toString*/
-	
+
 	@Override
 	public String toString(){
 		return "Tirocinio [Studente: " + this.getStudente() +
@@ -260,5 +260,5 @@ public class TirocinioBean implements java.io.Serializable {
 	private int questionarioAzienda;
 	private String url;
 	private int id;
-	
+
 }

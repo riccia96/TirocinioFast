@@ -72,7 +72,7 @@ public class StudenteDAO extends AbstractDAO<StudenteBean>{
 			} else {
 				return -1;
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -99,7 +99,7 @@ public class StudenteDAO extends AbstractDAO<StudenteBean>{
 
 	@Override
 	public synchronized StudenteBean doRetrieveByKey(StudenteBean studente) throws SQLException {
-		
+
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet result = null;
@@ -134,7 +134,7 @@ public class StudenteDAO extends AbstractDAO<StudenteBean>{
 				s.setDomanda(result.getString("domanda"));
 
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -149,9 +149,9 @@ public class StudenteDAO extends AbstractDAO<StudenteBean>{
 				cse.printStackTrace();
 			}
 		}
-	
+
 		return s;
-		
+
 	}
 
 	@Override
@@ -161,13 +161,13 @@ public class StudenteDAO extends AbstractDAO<StudenteBean>{
 		PreparedStatement preparedStatement = null;
 		ResultSet result = null;
 		List<StudenteBean> studenti = new ArrayList<StudenteBean>();
-		
+
 		String querySQL = "SELECT * FROM " + StudenteDAO.TABLE_NAME; 
 
 		if (order != null && !order.equals("")) {
 			querySQL += " ORDER BY " + order;
 		}
-		
+
 		try {
 
 			connection = ds.getConnection();
@@ -179,7 +179,7 @@ public class StudenteDAO extends AbstractDAO<StudenteBean>{
 			while (result.next()) {
 
 				StudenteBean s = new StudenteBean();
-				
+
 				s.setNome(result.getString("nome"));
 				s.setCognome(result.getString("cognome"));
 				s.setLuogoNascita(result.getString("luogoNascita"));
@@ -197,7 +197,7 @@ public class StudenteDAO extends AbstractDAO<StudenteBean>{
 				studenti.add(s);
 
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -230,7 +230,7 @@ public class StudenteDAO extends AbstractDAO<StudenteBean>{
 
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(querySQL);
-			
+
 			preparedStatement.setString(1, studente.getNome());
 			preparedStatement.setString(2, studente.getCognome());
 			preparedStatement.setString(3, studente.getLuogoNascita());
@@ -240,12 +240,12 @@ public class StudenteDAO extends AbstractDAO<StudenteBean>{
 			preparedStatement.setString(7, studente.getTelefono());
 			preparedStatement.setString(8, studente.getPassword());
 			preparedStatement.setString(9, studente.getDomanda());
-			
+
 			preparedStatement.setString(10, studente.getUsername());
 
 			preparedStatement.execute();
 			return true;
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -272,7 +272,7 @@ public class StudenteDAO extends AbstractDAO<StudenteBean>{
 		PreparedStatement preparedStatement = null;
 
 		String querySQL = "DELETE FROM " + StudenteDAO.TABLE_NAME + " WHERE username = ?";
-		
+
 		try {
 
 			connection = ds.getConnection();
@@ -281,9 +281,9 @@ public class StudenteDAO extends AbstractDAO<StudenteBean>{
 			preparedStatement.setString(1, studente.getUsername());
 
 			preparedStatement.execute();
-			
+
 			return true;
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

@@ -3,7 +3,7 @@ package bean;
 public class TutorBean implements java.io.Serializable {
 
 	private static final long serialVersionUID = 3L;
-	
+
 	/**Costruttore*/
 
 	public TutorBean() {
@@ -41,11 +41,11 @@ public class TutorBean implements java.io.Serializable {
 	public void setMatricola(String matricola) {
 		this.matricola = matricola;
 	}
-	
+
 	public String getEmail(){
 		return email;
 	}
-	
+
 	public void setEmail(String email){
 		this.email = email;
 	}
@@ -86,7 +86,7 @@ public class TutorBean implements java.io.Serializable {
 				"][Password: " + this.getPassword() +
 				"][Risposta: " + this.getDomanda() + "]";
 	}
- 
+
 	/**Variabili di istanza*/
 
 	private String nome;

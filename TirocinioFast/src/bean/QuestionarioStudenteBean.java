@@ -3,7 +3,7 @@ package bean;
 public class QuestionarioStudenteBean implements java.io.Serializable {
 
 	private static final long serialVersionUID = 7L;
-	
+
 	/**Costruttore*/
 
 	public QuestionarioStudenteBean() {
@@ -24,11 +24,11 @@ public class QuestionarioStudenteBean implements java.io.Serializable {
 	public int getId(){
 		return id;
 	}
-	
+
 	public void setId(int id){
 		this.id = id;
 	}
-	
+
 	public String getStudente() {
 		return studente;
 	}
@@ -52,7 +52,7 @@ public class QuestionarioStudenteBean implements java.io.Serializable {
 	public void setAzienda(String azienda) {
 		this.azienda = azienda;
 	}
-	
+
 	public String getImpiegato() {
 		return impiegato;
 	}
@@ -76,7 +76,7 @@ public class QuestionarioStudenteBean implements java.io.Serializable {
 	public void setTitolo(String titolo) {
 		this.titolo = titolo;
 	}
-	
+
 	public String getScelte() {
 		return scelte;
 	}
@@ -131,5 +131,5 @@ public class QuestionarioStudenteBean implements java.io.Serializable {
 	private boolean	convalida;
 	private String url;
 	private int id;
-	
+
 }

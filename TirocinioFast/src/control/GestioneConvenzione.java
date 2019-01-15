@@ -40,7 +40,7 @@ public class GestioneConvenzione extends HttpServlet {
 
 
 		String azioneConvenzione = request.getParameter("azioneConvenzione");
-		
+
 		//ok
 		if(azioneConvenzione.equals("apriForm")){
 			try {

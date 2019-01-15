@@ -3,7 +3,7 @@ package bean;
 public class AziendaBean implements java.io.Serializable {
 
 	private static final long serialVersionUID = 2L;
-	
+
 	/**Costruttore*/
 
 	public AziendaBean() {
@@ -25,92 +25,92 @@ public class AziendaBean implements java.io.Serializable {
 	public String getNome() {
 		return nome;
 	}
-	
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
+
 	public String getPartitaIva() {
 		return partitaIva;
 	}
-	
+
 	public void setPartitaIva(String partitaIva) {
 		this.partitaIva = partitaIva;
 	}
-	
+
 	public String getCeo() {
 		return ceo;
 	}
-	
+
 	public void setCeo(String ceo) {
 		this.ceo = ceo;
 	}
-	
+
 	public String getIndirizzo() {
 		return indirizzo;
 	}
-	
+
 	public void setIndirizzo(String indirizzo) {
 		this.indirizzo = indirizzo;
 	}
-	
+
 	public String getEmail() {
 		return email;
 	}
-	
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 	public String getTelefono() {
 		return telefono;
 	}
-	
+
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
-	
+
 	public String getUsername() {
 		return username;
 	}
-	
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
+
 	public String getPassword() {
 		return password;
 	}
-	
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 	public String getDomanda() {
 		return domanda;
 	}
-	
+
 	public void setDomanda(String domanda) {
 		this.domanda = domanda;
 	}
-	
+
 	public String getDescrizione(){
 		return this.descrizione;
 	}
-	
+
 	public void setDescrizione(String descrizione){
 		this.descrizione = descrizione;
 	}
-	
+
 	public String getLogo(){
 		return this.logo;
 	}
-	
+
 	public void setLogo(String logo){
 		this.logo = logo;
 	}
 	/**toString*/
-	
+
 	@Override
 	public String toString(){
 		return "Azienda [Nome: " + this.getNome() +
