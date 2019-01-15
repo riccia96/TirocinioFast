@@ -24,7 +24,7 @@ public class TirocinioDAO extends AbstractDAO<TirocinioBean>{
 
 			Context initCtx = new InitialContext();
 			Context envCtx = (Context) initCtx.lookup("java:comp/env");
-
+			System.out.println(envCtx.getEnvironment());
 			ds = (DataSource) envCtx.lookup("jdbc/tirociniofast");
 
 		} catch (NamingException e) {
@@ -143,8 +143,9 @@ public class TirocinioDAO extends AbstractDAO<TirocinioBean>{
 		String querySQL = "SELECT * FROM " + TirocinioDAO.TABLE_NAME + " WHERE id = ?";
 
 		try {
-
+			System.out.println("inizio connessione");
 			connection = ds.getConnection();
+			System.out.println("connessione effettuata");
 			preparedStatement = connection.prepareStatement(querySQL);
 
 			preparedStatement.setInt(1, tirocinio.getId());

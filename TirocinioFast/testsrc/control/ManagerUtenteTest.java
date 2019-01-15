@@ -5,13 +5,10 @@ import static org.junit.Assert.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
-
 import bean.StudenteBean;
-
-import control.ManagerUtente;
 
 public class ManagerUtenteTest {
 
@@ -19,8 +16,8 @@ public class ManagerUtenteTest {
 	private static StudenteBean studente;
 	private static String username;
 
-	@Before
-	static void setUp() throws Exception {
+	@BeforeClass
+	public static void setUp() throws Exception {
 		classUnderTest = new ManagerUtente();
 		username = "riccia96";
 

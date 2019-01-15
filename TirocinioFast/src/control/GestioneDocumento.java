@@ -188,6 +188,7 @@ public class GestioneDocumento extends HttpServlet {
 				documento.salvaQuestionarioStudente(questionarioStudente);
 				QuestionarioStudenteBean questiona = new QuestionarioStudenteBean();
 				ArrayList<QuestionarioStudenteBean> questionari = (ArrayList<QuestionarioStudenteBean>)documento.getQuestionariStudente("id ASC");
+				System.out.println("nuovo" +questionari);
 				for(QuestionarioStudenteBean q : questionari) {
 					if(q.getTitolo().equals(questionarioStudente.getTitolo()))
 						questiona = q;
@@ -201,7 +202,7 @@ public class GestioneDocumento extends HttpServlet {
 				request.getSession().setAttribute("questSTutor", tutor);
 				request.getSession().setAttribute("risposte", risposte);
 
-				RequestDispatcher view = request.getRequestDispatcher("GestioneQuestionario?azioneQuestionario=questionarioStudente");
+				RequestDispatcher view = request.getRequestDispatcher("GestioneDocumento?azioneDocumento=questionarioStudente");
 				view.forward(request, response);
 
 			} catch (SQLException e) {
@@ -260,7 +261,7 @@ public class GestioneDocumento extends HttpServlet {
 					}
 				}
 
-				documento.salvaQuestionarioAzienda(questionarioAzienda);
+				documento.aggiornaQuestionarioAzienda(questionarioAzienda);
 
 				ArrayList<QuestionarioAziendaBean> questionari = (ArrayList<QuestionarioAziendaBean>)documento.getQuestionariAzienda("id ASC");
 				QuestionarioAziendaBean quest = new QuestionarioAziendaBean();
@@ -668,7 +669,7 @@ public class GestioneDocumento extends HttpServlet {
 				questionario.setId(idQ);
 				questionario = documento.getQuestionarioAzienda(questionario);
 				questionario.setUrl("pdf/" + nomeFile);
-				documento.salvaQuestionarioAzienda(questionario);
+				documento.aggiornaQuestionarioAzienda(questionario);
 				RequestDispatcher view = request.getRequestDispatcher("GestioneDocumento?azioneDocumento=questionarioAzienda");
 				view.forward(request, response);
 			} catch (SQLException e) {
@@ -932,8 +933,8 @@ public class GestioneDocumento extends HttpServlet {
 					questionarioAzienda.setConvalida(true);
 
 					documento.aggiornaQuestionarioStudente(questionarioStudente);
-					documento.salvaQuestionarioAzienda(questionarioAzienda);
-					documento.salvaTirocinio(tirocinio);
+					documento.aggiornaQuestionarioAzienda(questionarioAzienda);
+					documento.aggiornaTirocinio(tirocinio);
 
 					RequestDispatcher view = request.getRequestDispatcher("attivitaTirocinioConcluse.jsp");
 					view.forward(request, response);
@@ -1070,7 +1071,6 @@ public class GestioneDocumento extends HttpServlet {
 					AziendaBean azienda = new AziendaBean();
 					TutorBean tutor = new TutorBean();
 
-					List<TirocinioBean> convalidare = new ArrayList<TirocinioBean>();
 					List<TirocinioBean> conclusi = new ArrayList<TirocinioBean>();
 					List<StudenteBean> studenti = new ArrayList<StudenteBean>();
 					List<AziendaBean> aziende = new ArrayList<AziendaBean>();
@@ -1081,34 +1081,28 @@ public class GestioneDocumento extends HttpServlet {
 					for(TirocinioBean t: tirocini){
 						if(t.isConvalidaAttivita()){
 							conclusi.add(t);
-						} else {
-							convalidare.add(t);
 						}
 					}
-					
-					if(conclusi.size() > 0){
-						for(TirocinioBean t: conclusi){
-							studente.setUsername(t.getStudente());
-							azienda.setUsername(t.getAzienda());
-							tutor.setUsername(t.getTutorAccademico());
-							studenti.add(utente.getStudente(studente));
-							aziende.add(utente.getAzienda(azienda));
-							tutors.add(utente.getTutor(tutor));
-						}
 
 
-						request.getSession().setAttribute("listaTirociniConclusi", conclusi);
-						request.getSession().setAttribute("listaStudenti", studenti);
-						request.getSession().setAttribute("listaAziende", aziende);
-						request.getSession().setAttribute("listaTutors", tutors);
-
-						RequestDispatcher view = request.getRequestDispatcher("GestioneDocumento?azioneDocumento=attivitaConvalidate");
-						view.forward(request, response);
-					} else {
-						
-						RequestDispatcher view = request.getRequestDispatcher("GestioneDocumento?azioneDocumento=tirociniConclusi");
-						view.forward(request, response);
+					for(TirocinioBean t: conclusi){
+						studente.setUsername(t.getStudente());
+						azienda.setUsername(t.getAzienda());
+						tutor.setUsername(t.getTutorAccademico());
+						studenti.add(utente.getStudente(studente));
+						aziende.add(utente.getAzienda(azienda));
+						tutors.add(utente.getTutor(tutor));
 					}
+
+
+					request.getSession().setAttribute("listaTirociniConclusi", conclusi);
+					request.getSession().setAttribute("listaStudenti", studenti);
+					request.getSession().setAttribute("listaAziende", aziende);
+					request.getSession().setAttribute("listaTutors", tutors);
+
+					RequestDispatcher view = request.getRequestDispatcher("attivitaTirocinioConcluse.jsp");
+					view.forward(request, response);
+
 				} else {
 					response.setContentType("text/html;charset=ISO-8859-1");
 					response.getWriter().write("nessuna attività conclusa");
@@ -1235,6 +1229,8 @@ public class GestioneDocumento extends HttpServlet {
 
 				tirocini = documento.getTirocini("id ASC");
 				questionari = documento.getQuestionariStudente("id ASC");
+				System.out.println("tirocinio" +tirocini);
+				System.out.println("questionari" +questionari);
 				for(TirocinioBean t : tirocini){
 					if(t.getStudente().equals(studente.getUsername()) && t.isConvalidaRichiesta()){
 						flag = true;
