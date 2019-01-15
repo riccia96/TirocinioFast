@@ -143,9 +143,7 @@ public class TirocinioDAO extends AbstractDAO<TirocinioBean>{
 		String querySQL = "SELECT * FROM " + TirocinioDAO.TABLE_NAME + " WHERE id = ?";
 
 		try {
-			System.out.println("inizio connessione");
 			connection = ds.getConnection();
-			System.out.println("connessione effettuata");
 			preparedStatement = connection.prepareStatement(querySQL);
 
 			preparedStatement.setInt(1, tirocinio.getId());

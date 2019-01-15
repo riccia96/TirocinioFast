@@ -5,25 +5,35 @@ import static org.junit.Assert.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 
 import bean.StudenteBean;
 
+
+
 public class ManagerUtenteTest {
+	
+	@InjectMocks
+	private ManagerUtente classUnderTest;
+	private ConnessioneDatabaseTest db = new ConnessioneDatabaseTest();
+	
+	@Mock
+	private StudenteBean studente;
+	private String username;
 
-	private static ManagerUtente classUnderTest;
-	private static StudenteBean studente;
-	private static String username;
-
-	@BeforeClass
-	public static void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception{
+		db.getConnessione();
 		classUnderTest = new ManagerUtente();
+		studente = new StudenteBean();
+		System.out.println(studente);
 		username = "riccia96";
-
-		assertNotNull(classUnderTest);
-
+		System.out.println(username);
 	}
+	
 	/**
 	 * Testa il metodo getStudente con uno studente già presente nel database.
 	 *  @throws SQLException
@@ -34,6 +44,7 @@ public class ManagerUtenteTest {
 		System.out.println("doRetrieveByKey di getStudente");
 
 		studente.setUsername(username);
+		
 		studente = classUnderTest.getStudente(studente);
 
 		assertNotNull(studente);

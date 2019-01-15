@@ -29,8 +29,7 @@
 
     <input type="text" placeholder="Anno accademico" name="annoAccademico" required>
 	<br>
-    <input style="width: 80%; padding: 12px 20px; margin: 8px 0; margin-left: 10%; display: inline-block; border: 1px solid #ccc; box-sizing: border-box;" type="number" placeholder="CFU tirocinio" name="cfu" required>
-    <br>
+	<label style="margin-left: 10%">CFU</label><select style="padding-left: 15px; margin-left: 1%;" name="cfu"><option value="5">5</option><option value="6">6</option><option value="11">11</option><option value="12">12</option><option value="17">17</option><option value="18">18</option></select>    <br>
     <p class="question" style="margin-top: 2%">Tutor accademico</p>
     
     <select class ="scelte" name="tutor">

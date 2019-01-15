@@ -292,7 +292,7 @@ public class GestioneUtente extends HttpServlet {
 					}
 				}
 				else {
-					RequestDispatcher view = request.getRequestDispatcher("formatoSbagliatoI.jsp");
+					RequestDispatcher view = request.getRequestDispatcher("formatoSbagliato.jsp");
 					view.forward(request, response);
 				}
 			}
@@ -372,7 +372,7 @@ public class GestioneUtente extends HttpServlet {
 						view.forward(request, response);
 						
 					} else {
-							RequestDispatcher view = request.getRequestDispatcher("formatoSbagliatoI.jsp");
+							RequestDispatcher view = request.getRequestDispatcher("formatoSbagliato.jsp");
 							view.forward(request, response);
 					}
 			}
@@ -447,7 +447,7 @@ public class GestioneUtente extends HttpServlet {
 												}
 
 												else{
-													RequestDispatcher view = request.getRequestDispatcher("formatoSbagliatoI.jsp");
+													RequestDispatcher view = request.getRequestDispatcher("formatoSbagliato.jsp");
 													view.forward(request, response);
 												}
 			}

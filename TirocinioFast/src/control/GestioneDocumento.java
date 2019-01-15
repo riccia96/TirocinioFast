@@ -62,19 +62,23 @@ public class GestioneDocumento extends HttpServlet {
 				} else {
 					handicap = false;
 				}
-
-				tirocinio.setStudente(studente.getUsername());
-				tirocinio.setAzienda(aziendaTirocinio);
-				tirocinio.setTutorAccademico(tutorAccademico);
-				tirocinio.setAnnoAccademico(annoAccademico);
-				tirocinio.setCfu(cfu);
-				tirocinio.setHandicap(handicap);
-
-				documento.salvaTirocinio(tirocinio);
-
-				RequestDispatcher view = request.getRequestDispatcher("elencoRichiesteTirocini.jsp");
-				view.forward(request, response);
-
+				
+				if(annoAccademico.length() > 8 && annoAccademico.length() < 45){
+					tirocinio.setStudente(studente.getUsername());
+					tirocinio.setAzienda(aziendaTirocinio);
+					tirocinio.setTutorAccademico(tutorAccademico);
+					tirocinio.setAnnoAccademico(annoAccademico);
+					tirocinio.setCfu(cfu);
+					tirocinio.setHandicap(handicap);
+	
+					documento.salvaTirocinio(tirocinio);
+	
+					RequestDispatcher view = request.getRequestDispatcher("GestioneDocumento?azioneDocumento=elencoRichiesteTirocinio");
+					view.forward(request, response);
+				} else {
+					RequestDispatcher view = request.getRequestDispatcher("formatoSbagliato.jsp");
+					view.forward(request, response);
+				}
 			} catch (SQLException e) {
 
 				e.printStackTrace();
@@ -188,7 +192,6 @@ public class GestioneDocumento extends HttpServlet {
 				documento.salvaQuestionarioStudente(questionarioStudente);
 				QuestionarioStudenteBean questiona = new QuestionarioStudenteBean();
 				ArrayList<QuestionarioStudenteBean> questionari = (ArrayList<QuestionarioStudenteBean>)documento.getQuestionariStudente("id ASC");
-				System.out.println("nuovo" +questionari);
 				for(QuestionarioStudenteBean q : questionari) {
 					if(q.getTitolo().equals(questionarioStudente.getTitolo()))
 						questiona = q;
@@ -742,7 +745,7 @@ public class GestioneDocumento extends HttpServlet {
 							request.getSession().setAttribute("tirocinioOre", t);
 							request.getSession().setAttribute("studenteOre", studente);
 							request.getSession().setAttribute("convenzioneOre", conv);
-							RequestDispatcher view = request.getRequestDispatcher("registroOre.jsp");
+							RequestDispatcher view = request.getRequestDispatcher("elencoRegistroOre.jsp");
 							view.forward(request, response);
 						} else {
 
@@ -1229,8 +1232,6 @@ public class GestioneDocumento extends HttpServlet {
 
 				tirocini = documento.getTirocini("id ASC");
 				questionari = documento.getQuestionariStudente("id ASC");
-				System.out.println("tirocinio" +tirocini);
-				System.out.println("questionari" +questionari);
 				for(TirocinioBean t : tirocini){
 					if(t.getStudente().equals(studente.getUsername()) && t.isConvalidaRichiesta()){
 						flag = true;
@@ -1256,7 +1257,7 @@ public class GestioneDocumento extends HttpServlet {
 						request.getSession().setAttribute("questionarioStudente", questionario);
 						request.getSession().setAttribute("questSAzienda", azienda);
 						request.getSession().setAttribute("questSTutor", tutor);
-						RequestDispatcher view = request.getRequestDispatcher("questionari.jsp");
+						RequestDispatcher view = request.getRequestDispatcher("elencoQuestionari.jsp");
 						view.forward(request, response);
 					}
 				} else {
@@ -1297,7 +1298,7 @@ public class GestioneDocumento extends HttpServlet {
 					request.getSession().setAttribute("studenti", studenti);
 					request.getSession().setAttribute("tutors", tutors);
 
-					RequestDispatcher view = request.getRequestDispatcher("questionari.jsp");
+					RequestDispatcher view = request.getRequestDispatcher("elencoQuestionari.jsp");
 					view.forward(request, response);
 				} else {
 					RequestDispatcher view = request.getRequestDispatcher("nessunaRisorsa.jsp");
