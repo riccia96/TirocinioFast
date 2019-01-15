@@ -44,7 +44,7 @@ public class ConnessioneDatabaseTest extends DBTestCase{
 		return this.getConnection();
 	}
 
-//	@Test
+//	@test
 //	public void testById() throws SQLException {
 //		String username = "riccia96";// get user id from database
 //		StudenteBean studente = new StudenteBean();

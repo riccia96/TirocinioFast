@@ -29,15 +29,39 @@ div.shootout {padding:2em;border:3px #4854A8 solid}
 <body>
 <table cellspacing=0 cellpadding=0 class="param">
 <tr><th>Test</th><th class="numi">Methods<br/>Passed</th><th class="numi">Scenarios<br/>Passed</th><th class="numi"># skipped</th><th class="numi"># failed</th><th class="numi">Total<br/>Time</th><th class="numi">Included<br/>Groups</th><th class="numi">Excluded<br/>Groups</th></tr>
-<tr><td style="text-align:left;padding-right:2em">Default test</td><td class="numi">1</td><td class="numi">1</td><td class="numi">0</td><td class="numi">0</td><td class="numi">5,2 seconds</td><td class="numi"></td><td class="numi"></td></tr>
+<tr><td style="text-align:left;padding-right:2em">Default test</td><td class="numi">0</td><td class="numi">0</td><td class="numi_attn">1</td><td class="numi">0</td><td class="numi">0,2 seconds</td><td class="numi"></td><td class="numi"></td></tr>
 </table>
 <a id="summary"></a>
 <table cellspacing=0 cellpadding=0 class="passed">
 <tr><th>Class</th><th>Method</th><th># of<br/>Scenarios</th><th>Start</th><th>Time<br/>(ms)</th></tr>
-<tr><th colspan="4">Default test &#8212; passed</th></tr>
-<tr class="passedodd"><td rowspan="1">control.Login<td><a href="#m1"><b>testLogin</b>  </a></td><td class="numi">1</td><td>1547545326692</td><td class="numi">709</td></tr>
+<tr><th colspan="4">Default test &#8212; failed (configuration methods)</th></tr>
+<tr class="failedodd"><td rowspan="2">test.LoginTestUsernameOKPasswordNO<td><a href="#m1"><b>setUp</b>  </a></td><td class="numi">1</td><td>1547588019817</td><td class="numi">0</td></tr><tr class="failedodd"><td><a href="#m2"><b>tearDown</b>  </a></td><td class="numi">1</td><td>1547588019951</td><td class="numi">0</td></tr>
+<tr><th colspan="4">Default test &#8212; skipped</th></tr>
+<tr class="skippedodd"><td rowspan="1">test.LoginTestUsernameOKPasswordNO<td><a href="#m3"><b>testLoginTestUoPn</b>  </a></td><td class="numi">1</td><td>1547588019947</td><td class="numi">1</td></tr>
 </table>
 <h1>Default test</h1>
-<a id="m1"></a><h2>control.Login:testLogin</h2>
+<a id="m1"></a><h2>test.LoginTestUsernameOKPasswordNO:tearDown</h2>
+<div style="padding-left:3em">
+<p>null</p>
+test.LoginTestUsernameOKPasswordNO.tearDown(LoginTestUsernameOKPasswordNO.java:38)
+<br/>25 lines not shown
+</div>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<a id="m2"></a><h2>test.LoginTestUsernameOKPasswordNO:setUp</h2>
+<div style="padding-left:3em">
+<p>The driver executable does not exist: C:\Users\Mario Greco\Desktop\chromedriver.exe</p>
+com.google.common.base.Preconditions.checkState(Preconditions.java:585)
+<br/>at org.openqa.selenium.remote.service.DriverService.checkExecutable(DriverService.java:146)
+<br/>at org.openqa.selenium.remote.service.DriverService.findExecutable(DriverService.java:141)
+<br/>at org.openqa.selenium.chrome.ChromeDriverService.access$000(ChromeDriverService.java:35)
+<br/>at org.openqa.selenium.chrome.ChromeDriverService$Builder.findDefaultExecutable(ChromeDriverService.java:159)
+<br/>at org.openqa.selenium.remote.service.DriverService$Builder.build(DriverService.java:355)
+<br/>at org.openqa.selenium.chrome.ChromeDriverService.createDefaultService(ChromeDriverService.java:94)
+<br/>at org.openqa.selenium.chrome.ChromeDriver.&lt;init&gt;(ChromeDriver.java:123)
+<br/>at test.LoginTestUsernameOKPasswordNO.setUp(LoginTestUsernameOKPasswordNO.java:19)
+<br/>25 lines not shown
+</div>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<a id="m3"></a><h2>test.LoginTestUsernameOKPasswordNO:testLoginTestUoPn</h2>
 <p class="totop"><a href="#summary">back to summary</a></p>
 </body></html>

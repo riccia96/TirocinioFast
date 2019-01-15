@@ -52,7 +52,7 @@ public class ManagerDocumentoTest {
 //	 * @throws SQLException
 //	 */
 //	
-//	@Test
+//	@test
 //	public void testGetTirocinioNonPresenteInDB() throws SQLException {
 //		
 //		System.out.println("doRetrieveByKey di getTirocinio");
@@ -68,7 +68,7 @@ public class ManagerDocumentoTest {
 //	 * @throws SQLException
 //	 */
 //	
-//	@Test
+//	@test
 //	public void testSalvaTirocinioNonInDB() throws SQLException {
 //		
 //		System.out.println("doSave di tirocinio");
@@ -109,7 +109,7 @@ public class ManagerDocumentoTest {
 //	 * @throws SQLException
 //	 */
 //	
-//	@Test
+//	@test
 //	public void testSalvaTirocinioPresenteInDB() throws SQLException {
 //
 //		System.out.println("doSave di tirocinio");
@@ -152,7 +152,7 @@ public class ManagerDocumentoTest {
 //	 * @throws SQLException
 //	 */
 //	
-//	@Test
+//	@test
 //	public void testSalvaTirocinioNonCompleto() throws SQLException {
 //		 
 //		System.out.println("doSave di salvaTirocino");
@@ -194,7 +194,7 @@ public class ManagerDocumentoTest {
 //	 * @throws SQLException 
 //	 */
 //	
-//	@Test
+//	@test
 //	public void testAggiornaTirocinioPresenteInDB() throws SQLException {
 //		
 //		System.out.println("doUpdate di aggiornaTirocinio");
@@ -218,7 +218,7 @@ public class ManagerDocumentoTest {
 //	 * @throws SQLException
 //	 */
 //	
-//	@Test
+//	@test
 //	public void testAggiornaTirocinioPresenteInDBNonCompleto() throws SQLException {
 //		
 //		System.out.println("doUpdate di aggiornaTirocinio");
@@ -246,7 +246,7 @@ public class ManagerDocumentoTest {
 //	 * @throws SQLException
 //	 */
 //	
-//	@Test
+//	@test
 //	public void testGetTirocini() throws SQLException {
 //		
 //		System.out.println("doRetrieveAll di getTirocini");
@@ -262,7 +262,7 @@ public class ManagerDocumentoTest {
 //	 * @throws SQLException
 //	 */
 //	
-//	@Test
+//	@test
 //	public void testEliminaTirocinioPresenteInDB() throws SQLException {
 //		
 //		System.out.println("doDelete di eliminaTirocinio");
@@ -304,7 +304,7 @@ public class ManagerDocumentoTest {
 //	 * @throws SQLException
 //	 */
 //	
-//	@Test
+//	@test
 //	public void testEliminaTirocinioNonPresenteInDB() throws SQLException {
 //		
 //		System.out.println("doDelete di eliminaTirocinio");
