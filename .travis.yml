@@ -1,5 +1,5 @@
-sudo: false
 language: java
+sudo: false
 services:
 - docker
 cache:
@@ -15,6 +15,14 @@ deploy:
 
 default_text_charset: 'utf-8'
 
-notifications:
-  email:
-    - a.riccio26@studenti.unisa.it
+addons:
+  apt:
+    packages:
+      - oracle-java8-installer
+    
+branches:
+  only:
+    - master
+
+install:
+  -
