@@ -2,9 +2,15 @@ language: java
 sudo: false
 services:
 - docker
+jdk: openjdk8
 cache:
   directories:
-  - "$HOME/.cache"
+    - $HOME/.m2
+dist: xenial
+script: | 
+    mvn test
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
 
 deploy:
   provider: script
@@ -24,5 +30,6 @@ branches:
   only:
     - master
 
-install:
-  -
+notifications:
+  email:
+    - a.riccio26@studenti.unisa.it
