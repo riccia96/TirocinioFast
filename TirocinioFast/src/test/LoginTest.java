@@ -15,7 +15,7 @@ public class LoginTest {
 
   @BeforeClass(alwaysRun = true)
   public void setUp() throws Exception {
-	System.setProperty("webdriver.chrome.driver", "/Users/decic/Desktop/drivers/chromedriver.exe");
+	System.setProperty("webdriver.chrome.driver", "/Users/Mario Greco/Desktop/drivers/chromedriver.exe");
     driver = new ChromeDriver();
     baseUrl = "https://www.katalon.com/";
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);

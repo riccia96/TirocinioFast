@@ -2,134 +2,142 @@ package bean;
 
 public class QuestionarioStudenteBean implements java.io.Serializable {
 
-	private static final long serialVersionUID = 7L;
+  private static final long serialVersionUID = 7L;
 
-	/**Costruttore*/
+  /**
+   * Costruttore
+   */
 
-	public QuestionarioStudenteBean() {
-		this.id = -1;
-		this.studente = "";
-		this.azienda = "";
-		this.tutorAccademico = "";
-		this.impiegato = "";
-		this.periodo = "";
-		this.titolo = "";
-		this.scelte = "";
-		this.convalida = false;
-		this.url = "";
-	}
+  public QuestionarioStudenteBean() {
+    this.id = -1;
+    this.studente = "";
+    this.azienda = "";
+    this.tutorAccademico = "";
+    this.impiegato = "";
+    this.periodo = "";
+    this.titolo = "";
+    this.scelte = "";
+    this.convalida = false;
+    this.url = "";
+  }
 
-	/**Getter e Setter*/
+  /**
+   * Getter e Setter
+   */
 
-	public int getId(){
-		return id;
-	}
+  public int getId() {
+    return id;
+  }
 
-	public void setId(int id){
-		this.id = id;
-	}
+  public void setId(int id) {
+    this.id = id;
+  }
 
-	public String getStudente() {
-		return studente;
-	}
+  public String getStudente() {
+    return studente;
+  }
 
-	public void setStudente(String studente) {
-		this.studente = studente;
-	}
+  public void setStudente(String studente) {
+    this.studente = studente;
+  }
 
-	public String getTutorAccademico() {
-		return tutorAccademico;
-	}
+  public String getTutorAccademico() {
+    return tutorAccademico;
+  }
 
-	public void setTutorAccademico(String tutorAccademico) {
-		this.tutorAccademico = tutorAccademico;
-	}
+  public void setTutorAccademico(String tutorAccademico) {
+    this.tutorAccademico = tutorAccademico;
+  }
 
-	public String getAzienda() {
-		return azienda;
-	}
+  public String getAzienda() {
+    return azienda;
+  }
 
-	public void setAzienda(String azienda) {
-		this.azienda = azienda;
-	}
+  public void setAzienda(String azienda) {
+    this.azienda = azienda;
+  }
 
-	public String getImpiegato() {
-		return impiegato;
-	}
+  public String getImpiegato() {
+    return impiegato;
+  }
 
-	public void setImpiegato(String impiegato) {
-		this.impiegato = impiegato;
-	}
+  public void setImpiegato(String impiegato) {
+    this.impiegato = impiegato;
+  }
 
-	public String getPeriodo() {
-		return periodo;
-	}
+  public String getPeriodo() {
+    return periodo;
+  }
 
-	public void setPeriodo(String periodo) {
-		this.periodo = periodo;
-	}
+  public void setPeriodo(String periodo) {
+    this.periodo = periodo;
+  }
 
-	public String getTitolo() {
-		return titolo;
-	}
+  public String getTitolo() {
+    return titolo;
+  }
 
-	public void setTitolo(String titolo) {
-		this.titolo = titolo;
-	}
+  public void setTitolo(String titolo) {
+    this.titolo = titolo;
+  }
 
-	public String getScelte() {
-		return scelte;
-	}
+  public String getScelte() {
+    return scelte;
+  }
 
-	public void setScelte(String scelte) {
-		this.scelte = scelte;
-	}
+  public void setScelte(String scelte) {
+    this.scelte = scelte;
+  }
 
-	public boolean isConvalida() {
-		return convalida;
-	}
+  public boolean isConvalida() {
+    return convalida;
+  }
 
-	public void setConvalida(boolean convalida) {
-		this.convalida = convalida;
-	}
+  public void setConvalida(boolean convalida) {
+    this.convalida = convalida;
+  }
 
-	public String getUrl() {
-		return url;
-	}
+  public String getUrl() {
+    return url;
+  }
 
-	public void setUrl(String url) {
-		this.url = url;
-	}
+  public void setUrl(String url) {
+    this.url = url;
+  }
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+  public static long getSerialversionuid() {
+    return serialVersionUID;
+  }
 
-	/**toString*/
+  /**
+   * toString
+   */
 
-	@Override
-	public String toString(){
-		return "Questionario azienda [Studente: " + this.getStudente() +
-				"][Azienda: " + this.getAzienda() +
-				"][Tutor accademico: " + this.getTutorAccademico() +
-				"][Impiegato: " + this.getImpiegato() +
-				"][Periodo: " + this.getPeriodo() +
-				"][Titolo: " + this.getTitolo() +
-				"][Convalida: " + this.isConvalida() +
-				"][Url: " + this.getUrl() + "]";
-	}
+  @Override
+  public String toString() {
+    return "Questionario azienda [Studente: " + this.getStudente() 
+        + "][Azienda: " + this.getAzienda() 
+        + "][Tutor accademico: " + this.getTutorAccademico() 
+        + "][Impiegato: " + this.getImpiegato() 
+        + "][Periodo: " + this.getPeriodo() 
+        + "][Titolo: " + this.getTitolo() 
+        + "][Convalida: " + this.isConvalida() 
+        + "][Url: " + this.getUrl() + "]";
+  }
 
-	/**Variabili di istanza*/
+  /**
+   * Variabili di istanza
+   */
 
-	private String studente;
-	private String azienda;
-	private String tutorAccademico;
-	private String impiegato;
-	private String periodo;
-	private String titolo;
-	private String scelte;
-	private boolean	convalida;
-	private String url;
-	private int id;
+  private String studente;
+  private String azienda;
+  private String tutorAccademico;
+  private String impiegato;
+  private String periodo;
+  private String titolo;
+  private String scelte;
+  private boolean  convalida;
+  private String url;
+  private int id;
 
 }

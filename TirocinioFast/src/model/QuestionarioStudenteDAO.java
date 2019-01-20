@@ -1,5 +1,7 @@
 package model;
 
+import bean.QuestionarioStudenteBean;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,301 +10,333 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
-
-import bean.QuestionarioStudenteBean;
-
 public class QuestionarioStudenteDAO extends AbstractDAO<QuestionarioStudenteBean>{
 
-	private static DataSource ds;
+  /**
+   * Il TABLE_NAME in cui vengono eseguite le query
+   */
+  private static final String TABLE_NAME = "questionarioStudente";
 
-	static {
-		try {
+  /**
+   * Metodo che genera l'id del questionarioStudente
+   * @return rowCount il totale delle righe nella tabella
+   * @throws SQLException eccezione che può verificarsi
+   */
+  public synchronized int generaCodice() throws SQLException {
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    String sql = "SELECT COUNT(*) AS TOTAL FROM " + QuestionarioStudenteDAO.TABLE_NAME;
+    Connessione con = new Connessione();
+    connection = con.getConnection();
+    preparedStatement = connection.prepareStatement(sql);
+    ResultSet rs = preparedStatement.executeQuery();
+    int rowCount = 0;
+    try {
+      while (rs.next()) {
+        rowCount = rs.getInt("total");
+      }
+    } finally {
+      try {
+        if (preparedStatement != null) {
+          preparedStatement.close();
+        }
+      } finally {
+        if (connection != null) {
+          connection.close();
+        }
+      }
+    }
 
-			Context initCtx = new InitialContext();
-			Context envCtx = (Context) initCtx.lookup("java:comp/env");
+    return rowCount;
+  }
 
-			ds = (DataSource) envCtx.lookup("jdbc/tirociniofast");
+  /**
+   * Salva il questionarioStudente nel database
+   * @param questionarioStudente che si vuole salvare
+   * @return result risultato della query appena eseguita
+   * @throws SQLException eccezione che può verificarsi
+   */
+  @Override
+  public synchronized int doSave(QuestionarioStudenteBean questionarioStudente) 
+        throws SQLException {
 
-		} catch (NamingException e) {
-			System.out.println("Error:" + e.getMessage());
-		}
-	}
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    ResultSet result = null;
 
-	private static final String TABLE_NAME = "questionarioStudente";
+    String querySql = "INSERT INTO " + QuestionarioStudenteDAO.TABLE_NAME 
+        + " (id, studente, azienda, tutorAccademico, impiegato, periodoTirocinio, "
+        + "titoloTirocinio, scelte, convalida, url)" 
+        + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    try {
 
-	public synchronized int generaCodice() throws SQLException{
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		String sql = "SELECT COUNT(*) AS TOTAL FROM "+ QuestionarioStudenteDAO.TABLE_NAME;
-		connection = ds.getConnection();
-		preparedStatement = connection.prepareStatement(sql);
-		ResultSet rs = preparedStatement.executeQuery();
-		int rowCount = 0;
-		try{
-			while(rs.next()){
-				rowCount = rs.getInt("total");
-			}
-		}finally {
-			try {
-				if (preparedStatement != null)
-					preparedStatement.close();
-			} finally {
-				if (connection != null)
-					connection.close();
-			}
-		}
+      Connessione con = new Connessione();
+      connection = con.getConnection();
+      preparedStatement = connection.prepareStatement(querySql, Statement.RETURN_GENERATED_KEYS);
 
-		return rowCount;
-	}
+      preparedStatement.setInt(1, generaCodice());
+      preparedStatement.setString(2, questionarioStudente.getStudente());
+      preparedStatement.setString(3, questionarioStudente.getAzienda());
+      preparedStatement.setString(4, questionarioStudente.getTutorAccademico());
+      preparedStatement.setString(5, questionarioStudente.getImpiegato());
+      preparedStatement.setString(6, questionarioStudente.getPeriodo());
+      preparedStatement.setString(7, questionarioStudente.getTitolo());
+      preparedStatement.setString(8, questionarioStudente.getScelte());
+      preparedStatement.setBoolean(9, questionarioStudente.isConvalida());
+      preparedStatement.setString(10, questionarioStudente.getUrl());
 
-	@Override
-	public synchronized int doSave(QuestionarioStudenteBean questionarioStudente) throws SQLException {
+      preparedStatement.execute();
+      result = preparedStatement.getGeneratedKeys();
 
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		ResultSet result = null;
+      if (result.next() && result != null) {
+        return result.getInt(1);
+      } else {
+        return -1;
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    } finally {
+      try {
+        result.close();
+      } catch (Exception rse) {
+        rse.printStackTrace();
+      }
+      try {
+        preparedStatement.close();
+      } catch (Exception sse) {
+        sse.printStackTrace();
+      }
+      try {
+        connection.close();
+      } catch (Exception cse) {
+        cse.printStackTrace();
+      }
+    }
 
-		String querySQL = "INSERT INTO " + QuestionarioStudenteDAO.TABLE_NAME + " (id, studente, azienda, tutorAccademico, impiegato, periodoTirocinio, "
-				+ "titoloTirocinio, scelte, convalida, url)" +
-				"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-		try{
+    return -1;
+  }
 
-			connection = ds.getConnection();
-			preparedStatement = connection.prepareStatement(querySQL, Statement.RETURN_GENERATED_KEYS);
+  /**
+   * Cerca il questionario nel database in base all'id
+   * @param questionarioStudente che si vuole recuperare
+   * @return questionarioStudente ricercato nel database
+   * @throws SQLException eccezione che può verificarsi
+   */
+  @Override
+  public synchronized QuestionarioStudenteBean doRetrieveByKey(QuestionarioStudenteBean 
+        questionarioStudente) throws SQLException {
 
-			preparedStatement.setInt(1, generaCodice());
-			preparedStatement.setString(2, questionarioStudente.getStudente());
-			preparedStatement.setString(3, questionarioStudente.getAzienda());
-			preparedStatement.setString(4, questionarioStudente.getTutorAccademico());
-			preparedStatement.setString(5, questionarioStudente.getImpiegato());
-			preparedStatement.setString(6, questionarioStudente.getPeriodo());
-			preparedStatement.setString(7, questionarioStudente.getTitolo());
-			preparedStatement.setString(8, questionarioStudente.getScelte());
-			preparedStatement.setBoolean(9, questionarioStudente.isConvalida());
-			preparedStatement.setString(10, questionarioStudente.getUrl());
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    ResultSet result = null;
+    QuestionarioStudenteBean qs = new QuestionarioStudenteBean();
 
-			preparedStatement.execute();
-			result = preparedStatement.getGeneratedKeys();
+    String querySql = "SELECT * FROM " + QuestionarioStudenteDAO.TABLE_NAME + " WHERE id = ? ";
 
-			if(result.next() && result != null){
-				return result.getInt(1);
-			}else{
-				return -1;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				result.close();
-			} catch (Exception rse) {
-				rse.printStackTrace();
-			}
-			try {
-				preparedStatement.close();
-			} catch (Exception sse) {
-				sse.printStackTrace();
-			}
-			try {
-				connection.close();
-			} catch (Exception cse) {
-				cse.printStackTrace();
-			}
-		}
+    try {
 
-		return -1;
-	}
+      Connessione con = new Connessione();
+      connection = con.getConnection();
+      preparedStatement = connection.prepareStatement(querySql);
 
-	@Override
-	public synchronized QuestionarioStudenteBean doRetrieveByKey(QuestionarioStudenteBean questionarioStudente) throws SQLException {
+      preparedStatement.setInt(1, questionarioStudente.getId());
 
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		ResultSet result = null;
-		QuestionarioStudenteBean qs = new QuestionarioStudenteBean();
+      preparedStatement.execute();
+      result = preparedStatement.getResultSet();
 
-		String querySQL = "SELECT * FROM " + QuestionarioStudenteDAO.TABLE_NAME + " WHERE id = ? ";
+      while (result.next()) {
 
-		try {
+        qs.setId(result.getInt("id"));
+        qs.setStudente(result.getString("studente"));
+        qs.setAzienda(result.getString("azienda"));
+        qs.setTutorAccademico(result.getString("tutorAccademico"));
+        qs.setImpiegato(result.getString("impiegato"));
+        qs.setPeriodo(result.getString("periodoTirocinio"));
+        qs.setTitolo(result.getString("titoloTirocinio"));
+        qs.setScelte(result.getString("scelte"));
+        qs.setConvalida(result.getBoolean("convalida"));
+        qs.setUrl(result.getString("url"));
 
-			connection = ds.getConnection();
-			preparedStatement = connection.prepareStatement(querySQL);
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    } finally {
+      try {
+        preparedStatement.close();
+      } catch (Exception sse) {
+        sse.printStackTrace();
+      }
+      try {
+        connection.close();
+      } catch (Exception cse) {
+        cse.printStackTrace();
+      }
+    }
 
-			preparedStatement.setInt(1, questionarioStudente.getId());
+    return qs;
+  }
 
-			preparedStatement.execute();
-			result = preparedStatement.getResultSet();
+  /**
+   * Cerca tutti questionari nel database
+   * @param order è l'ordine in cui si ragruppano tutti i questionari
+   * @return ArrayList questionariStudente la lista dei questionari contenute nel database
+   * @throws SQLException eccezione che può verificarsi
+   */
+  @Override
+  public synchronized List<QuestionarioStudenteBean> doRetrieveAll(String order)
+        throws SQLException {
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    ResultSet result = null;
+    List<QuestionarioStudenteBean> questionariStudente = new ArrayList<QuestionarioStudenteBean>();
 
-			while(result.next()){
+    String querySql = "SELECT * FROM " + QuestionarioStudenteDAO.TABLE_NAME;
 
-				qs.setId(result.getInt("id"));
-				qs.setStudente(result.getString("studente"));
-				qs.setAzienda(result.getString("azienda"));
-				qs.setTutorAccademico(result.getString("tutorAccademico"));
-				qs.setImpiegato(result.getString("impiegato"));
-				qs.setPeriodo(result.getString("periodoTirocinio"));
-				qs.setTitolo(result.getString("titoloTirocinio"));
-				qs.setScelte(result.getString("scelte"));
-				qs.setConvalida(result.getBoolean("convalida"));
-				qs.setUrl(result.getString("url"));
+    if (order != null && !order.equals("")) {
+      querySql += " ORDER BY " + order;
+    }
 
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				preparedStatement.close();
-			} catch (Exception sse) {
-				sse.printStackTrace();
-			}
-			try {
-				connection.close();
-			} catch (Exception cse) {
-				cse.printStackTrace();
-			}
-		}
+    try {
 
-		return qs;
-	}
+      Connessione con = new Connessione();
+      connection = con.getConnection();
+      preparedStatement = connection.prepareStatement(querySql);
 
-	@Override
-	public synchronized List<QuestionarioStudenteBean> doRetrieveAll(String order) throws SQLException {
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		ResultSet result = null;
-		List<QuestionarioStudenteBean> questionariStudente = new ArrayList<QuestionarioStudenteBean>();
+      preparedStatement.execute();
+      result = preparedStatement.getResultSet();
 
-		String querySQL = "SELECT * FROM " + QuestionarioStudenteDAO.TABLE_NAME;
+      while (result.next()) {
 
-		if (order != null && !order.equals("")) {
-			querySQL += " ORDER BY " + order;
-		}
+        QuestionarioStudenteBean qs = new QuestionarioStudenteBean();
 
-		try {
+        qs.setId(result.getInt("id"));
+        qs.setStudente(result.getString("studente"));
+        qs.setAzienda(result.getString("azienda"));
+        qs.setTutorAccademico(result.getString("tutorAccademico"));
+        qs.setImpiegato(result.getString("impiegato"));
+        qs.setPeriodo(result.getString("periodoTirocinio"));
+        qs.setTitolo(result.getString("titoloTirocinio"));
+        qs.setScelte(result.getString("scelte"));
+        qs.setConvalida(result.getBoolean("convalida"));
+        qs.setUrl(result.getString("url"));
 
-			connection = ds.getConnection();
-			preparedStatement = connection.prepareStatement(querySQL);
+        questionariStudente.add(qs);
+      }      
+    } catch (SQLException e) {
+      e.printStackTrace();
+    } finally {
+      try {
+        preparedStatement.close();
+      } catch (Exception sse) {
+        sse.printStackTrace();
+      }
+      try {
+        connection.close();
+      } catch (Exception cse) {
+        cse.printStackTrace();
+      }
+    }
 
-			preparedStatement.execute();
-			result = preparedStatement.getResultSet();
+    return questionariStudente;
+  }
 
-			while(result.next()){
+  /**
+   * Aggiorna i questionari nel database
+   * @param questionarioStudente da aggiornare con i campi modificati
+   * @return true, false valore boolean che descrivono il successo o il fallimento del doUpdate
+   * @throws SQLException eccezione che può verificarsi
+   */
+  @Override
+  public synchronized boolean doUpdate(QuestionarioStudenteBean questionarioStudente)
+        throws SQLException {
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
 
-				QuestionarioStudenteBean qs = new QuestionarioStudenteBean();
+    String querySql = "UPDATE " + QuestionarioStudenteDAO.TABLE_NAME 
+        + " SET studente = ?, azienda = ?, tutorAccademico = ?,"
+        + " impiegato = ?, periodoTirocinio = ?, titoloTirocinio = ?, "
+        + "scelte = ?, convalida = ?, url = ? WHERE id = ? ";
 
-				qs.setId(result.getInt("id"));
-				qs.setStudente(result.getString("studente"));
-				qs.setAzienda(result.getString("azienda"));
-				qs.setTutorAccademico(result.getString("tutorAccademico"));
-				qs.setImpiegato(result.getString("impiegato"));
-				qs.setPeriodo(result.getString("periodoTirocinio"));
-				qs.setTitolo(result.getString("titoloTirocinio"));
-				qs.setScelte(result.getString("scelte"));
-				qs.setConvalida(result.getBoolean("convalida"));
-				qs.setUrl(result.getString("url"));
+    try {
 
-				questionariStudente.add(qs);
-			}			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				preparedStatement.close();
-			} catch (Exception sse) {
-				sse.printStackTrace();
-			}
-			try {
-				connection.close();
-			} catch (Exception cse) {
-				cse.printStackTrace();
-			}
-		}
+      Connessione con = new Connessione();
+      connection = con.getConnection();
+      preparedStatement = connection.prepareStatement(querySql);
 
-		return questionariStudente;
-	}
+      preparedStatement.setString(1, questionarioStudente.getStudente());
+      preparedStatement.setString(2, questionarioStudente.getAzienda());
+      preparedStatement.setString(3, questionarioStudente.getTutorAccademico());
+      preparedStatement.setString(4, questionarioStudente.getImpiegato());
+      preparedStatement.setString(5, questionarioStudente.getPeriodo());
+      preparedStatement.setString(6, questionarioStudente.getTitolo());
+      preparedStatement.setString(7, questionarioStudente.getScelte());
+      preparedStatement.setBoolean(8, questionarioStudente.isConvalida());
+      preparedStatement.setString(9, questionarioStudente.getUrl());
 
-	@Override
-	public synchronized boolean doUpdate(QuestionarioStudenteBean questionarioStudente) throws SQLException {
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
+      preparedStatement.setInt(10, questionarioStudente.getId());
 
-		String querySQL = "UPDATE " + QuestionarioStudenteDAO.TABLE_NAME + " SET studente = ?, azienda = ?, tutorAccademico = ?,"
-				+ " impiegato = ?, periodoTirocinio = ?, titoloTirocinio = ?, scelte = ?, convalida = ?, url = ? WHERE id = ? ";
+      preparedStatement.execute();
+      return true;
+    } catch (SQLException e) {
+      e.printStackTrace();
+    } finally {
+      try {
+        preparedStatement.close();
+      } catch (Exception sse) {
+        sse.printStackTrace();
+      }
+      try {
+        connection.close();
+      } catch (Exception cse) {
+        cse.printStackTrace();
+      }
+    }
 
-		try{
+    return false;
+  }
 
-			connection = ds.getConnection();
-			preparedStatement = connection.prepareStatement(querySQL);
+  /**
+   * Elimina il questionario dal database
+   * @param questionarioStudente da eliminare
+   * @return true, false valori boolean che descrivono il successo o il fallimento del doDelete
+   * @throws SQLException eccezione che può verificarsi
+   */
+  @Override
+  public synchronized boolean doDelete(QuestionarioStudenteBean questionarioStudente)
+        throws SQLException {
 
-			preparedStatement.setString(1, questionarioStudente.getStudente());
-			preparedStatement.setString(2, questionarioStudente.getAzienda());
-			preparedStatement.setString(3, questionarioStudente.getTutorAccademico());
-			preparedStatement.setString(4, questionarioStudente.getImpiegato());
-			preparedStatement.setString(5, questionarioStudente.getPeriodo());
-			preparedStatement.setString(6, questionarioStudente.getTitolo());
-			preparedStatement.setString(7, questionarioStudente.getScelte());
-			preparedStatement.setBoolean(8, questionarioStudente.isConvalida());
-			preparedStatement.setString(9, questionarioStudente.getUrl());
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
 
-			preparedStatement.setInt(10, questionarioStudente.getId());
+    String querySql = "DELETE FROM " + QuestionarioStudenteDAO.TABLE_NAME + " WHERE id = ? ";
 
-			preparedStatement.execute();
-			return true;
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				preparedStatement.close();
-			} catch (Exception sse) {
-				sse.printStackTrace();
-			}
-			try {
-				connection.close();
-			} catch (Exception cse) {
-				cse.printStackTrace();
-			}
-		}
+    try {
+      Connessione con = new Connessione();
+      connection = con.getConnection();
+      preparedStatement = connection.prepareStatement(querySql);
 
-		return false;
-	}
+      preparedStatement.setInt(1, questionarioStudente.getId());
 
-	@Override
-	public synchronized boolean doDelete(QuestionarioStudenteBean questionarioStudente) throws SQLException {
+      preparedStatement.execute();
 
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
+      return true;
+    } catch (SQLException e) {
+      e.printStackTrace();
+    } finally {
+      try {
+        preparedStatement.close();
+      } catch (Exception sse) {
+        sse.printStackTrace();
+      }
+      try {
+        connection.close();
+      } catch (Exception cse) {
+        cse.printStackTrace();
+      }
+    }
 
-		String querySQL = "DELETE FROM " + QuestionarioStudenteDAO.TABLE_NAME + " WHERE id = ? ";
-
-		try{
-			connection = ds.getConnection();
-			preparedStatement = connection.prepareStatement(querySQL);
-
-			preparedStatement.setInt(1, questionarioStudente.getId());
-
-			preparedStatement.execute();
-
-			return true;
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				preparedStatement.close();
-			} catch (Exception sse) {
-				sse.printStackTrace();
-			}
-			try {
-				connection.close();
-			} catch (Exception cse) {
-				cse.printStackTrace();
-			}
-		}
-
-		return false;
-	}
+    return false;
+  }
 
 
 }

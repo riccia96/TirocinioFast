@@ -24,32 +24,35 @@ import bean.TutorBean;
  */
 @WebServlet("/GestioneQuestionario")
 public class GestioneQuestionario extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	static ManagerDocumento documento = new ManagerDocumento();
-	static ManagerUtente utente = new ManagerUtente();
+  static ManagerDocumento documento = new ManagerDocumento();
+  static ManagerUtente utente = new ManagerUtente();
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
-	}
+  /**
+   * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+   */
+  protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+      throws ServletException, IOException {
+    doPost(request, response);
+  }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String azioneQuestionario = request.getParameter("azioneQuestionario");
+  /**
+   * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+   * @param azioneQuestionario tipo di azione che viene catturata tramite la jsp
+   */
+  protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+      throws ServletException, IOException {
+    String azioneQuestionario = request.getParameter("azioneQuestionario");
 
-		if(azioneQuestionario.equals("inoltraQuestionarioStudente")) {
+    if (azioneQuestionario.equals("inoltraQuestionarioStudente")) {
 
-		}
+    }
 
-		if(azioneQuestionario.equals("inoltraQuestionarioAzienda")) {
+    if (azioneQuestionario.equals("inoltraQuestionarioAzienda")) {
 
-		}
+    }
 
-	}
+  }
 
 }

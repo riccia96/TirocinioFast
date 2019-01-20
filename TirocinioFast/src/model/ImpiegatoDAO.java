@@ -1,5 +1,7 @@
 package model;
 
+import bean.ImpiegatoBean;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,265 +10,282 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
-
-import bean.ImpiegatoBean;
-
-
 public class ImpiegatoDAO extends AbstractDAO<ImpiegatoBean>{
 
-	private static DataSource ds;
+  /**
+   * Il TABLE_NAME in cui vengono eseguite le query
+   */
+  private static final String TABLE_NAME = "impiegato";
 
-	static {
-		try {
+  /**
+   * Salva l'impiegato nel database
+   * @param impiegato che si vuole salvare
+   * @return result risultato della query appena eseguita
+   * @throws SQLException eccezione che può verificarsi
+   */
+  @Override
+  public synchronized int doSave(ImpiegatoBean impiegato) throws SQLException {
 
-			Context initCtx = new InitialContext();
-			Context envCtx = (Context) initCtx.lookup("java:comp/env");
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    ResultSet result = null;
 
-			ds = (DataSource) envCtx.lookup("jdbc/tirociniofast");
+    String querySql = "INSERT INTO " + ImpiegatoDAO.TABLE_NAME 
+        + " (nome, cognome, matricola, email, username, password, domanda)" 
+        + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+    try {
 
-		} catch (NamingException e) {
-			System.out.println("Error:" + e.getMessage());
-		}
-	}
+      Connessione con = new Connessione();
+      connection = con.getConnection();
+      preparedStatement = connection.prepareStatement(querySql, Statement.RETURN_GENERATED_KEYS);
 
-	private static final String TABLE_NAME = "impiegato";
+      preparedStatement.setString(1, impiegato.getNome());
+      preparedStatement.setString(2, impiegato.getCognome());
+      preparedStatement.setString(3, impiegato.getMatricola());
+      preparedStatement.setString(4, impiegato.getEmail());
+      preparedStatement.setString(5, impiegato.getUsername());
+      preparedStatement.setString(6, impiegato.getPassword());
+      preparedStatement.setString(7, impiegato.getDomanda());
 
-	@Override
-	public synchronized int doSave(ImpiegatoBean impiegato) throws SQLException {
+      preparedStatement.execute();
+      result = preparedStatement.getGeneratedKeys();
 
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		ResultSet result = null;
+      if (result.next() && result != null) {
+        return result.getInt(1);
+      } else{
+        return -1;
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    } finally {
+      try {
+        result.close();
+      } catch (Exception rse) {
+        rse.printStackTrace();
+      }
+      try {
+        preparedStatement.close();
+      } catch (Exception sse) {
+        sse.printStackTrace();
+      }
+      try {
+        connection.close();
+      } catch (Exception cse) {
+        cse.printStackTrace();
+      }
+    }
 
-		String querySQL = "INSERT INTO " + ImpiegatoDAO.TABLE_NAME + " (nome, cognome, matricola, email, username, password, domanda)" +
-				"VALUES (?, ?, ?, ?, ?, ?, ?)";
-		try{
+    return -1;
+  }
 
-			connection = ds.getConnection();
-			preparedStatement = connection.prepareStatement(querySQL, Statement.RETURN_GENERATED_KEYS);
+  /**
+   * Cerca l'impiegato nel database in base all'username
+   * @param impiegato che si vuole recuperare
+   * @return impiegato ricercato nel database   
+   * @throws SQLException eccezione che può verificarsi
+   */
+  @Override
+  public synchronized ImpiegatoBean doRetrieveByKey(ImpiegatoBean impiegato) throws SQLException {
 
-			preparedStatement.setString(1, impiegato.getNome());
-			preparedStatement.setString(2, impiegato.getCognome());
-			preparedStatement.setString(3, impiegato.getMatricola());
-			preparedStatement.setString(4, impiegato.getEmail());
-			preparedStatement.setString(5, impiegato.getUsername());
-			preparedStatement.setString(6, impiegato.getPassword());
-			preparedStatement.setString(7, impiegato.getDomanda());
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    ResultSet result = null;
+    ImpiegatoBean i = new ImpiegatoBean();
 
-			preparedStatement.execute();
-			result = preparedStatement.getGeneratedKeys();
+    String querySql = "SELECT * FROM " + ImpiegatoDAO.TABLE_NAME + " WHERE username = ?";
 
-			if(result.next() && result != null){
-				return result.getInt(1);
-			}else{
-				return -1;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				result.close();
-			} catch (Exception rse) {
-				rse.printStackTrace();
-			}
-			try {
-				preparedStatement.close();
-			} catch (Exception sse) {
-				sse.printStackTrace();
-			}
-			try {
-				connection.close();
-			} catch (Exception cse) {
-				cse.printStackTrace();
-			}
-		}
+    try {
 
-		return -1;
-	}
+      Connessione con = new Connessione();
+      connection = con.getConnection();
+      preparedStatement = connection.prepareStatement(querySql);
 
-	@Override
-	public synchronized ImpiegatoBean doRetrieveByKey(ImpiegatoBean impiegato) throws SQLException {
+      preparedStatement.setString(1, impiegato.getUsername());
 
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		ResultSet result = null;
-		ImpiegatoBean i = new ImpiegatoBean();
+      preparedStatement.execute();
+      result = preparedStatement.getResultSet();
 
-		String querySQL = "SELECT * FROM " + ImpiegatoDAO.TABLE_NAME + " WHERE username = ?";
+      while (result.next()) {
 
-		try {
+        i.setNome(result.getString("nome"));
+        i.setCognome(result.getString("cognome"));
+        i.setMatricola(result.getString("matricola"));
+        i.setEmail(result.getString("email"));
+        i.setUsername(result.getString("username"));
+        i.setPassword(result.getString("password"));
+        i.setDomanda(result.getString("domanda"));
 
-			connection = ds.getConnection();
-			preparedStatement = connection.prepareStatement(querySQL);
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    } finally {
+      try {
+        preparedStatement.close();
+      } catch (Exception sse) {
+        sse.printStackTrace();
+      }
+      try {
+        connection.close();
+      } catch (Exception cse) {
+        cse.printStackTrace();
+      }
+    }
 
-			preparedStatement.setString(1, impiegato.getUsername());
+    return i;
+  }
 
-			preparedStatement.execute();
-			result = preparedStatement.getResultSet();
+  /**
+   * Cerca tutti gli impiegati nel database
+   * @param order è l'ordine in cui si ragruppano tutti gli impiegati
+   * @return ArrayList impiegati la lista degli impiegati contenuti nel database
+   * @throws SQLException eccezione che può verificarsi
+   */
+  @Override
+  public synchronized List<ImpiegatoBean> doRetrieveAll(String order) throws SQLException {
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    ResultSet result = null;
+    List<ImpiegatoBean> impiegati = new ArrayList<ImpiegatoBean>();
 
-			while(result.next()){
+    String querySql = "SELECT * FROM " + ImpiegatoDAO.TABLE_NAME;
 
-				i.setNome(result.getString("nome"));
-				i.setCognome(result.getString("cognome"));
-				i.setMatricola(result.getString("matricola"));
-				i.setEmail(result.getString("email"));
-				i.setUsername(result.getString("username"));
-				i.setPassword(result.getString("password"));
-				i.setDomanda(result.getString("domanda"));
+    if (order != null && !order.equals("")) {
+      querySql += " ORDER BY " + order;
+    }
 
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				preparedStatement.close();
-			} catch (Exception sse) {
-				sse.printStackTrace();
-			}
-			try {
-				connection.close();
-			} catch (Exception cse) {
-				cse.printStackTrace();
-			}
-		}
+    try {
 
-		return i;
-	}
+      Connessione con = new Connessione();
+      connection = con.getConnection();
+      preparedStatement = connection.prepareStatement(querySql);
 
-	@Override
-	public synchronized List<ImpiegatoBean> doRetrieveAll(String order) throws SQLException {
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		ResultSet result = null;
-		List<ImpiegatoBean> impiegati = new ArrayList<ImpiegatoBean>();
+      preparedStatement.execute();
+      result = preparedStatement.getResultSet();
 
-		String querySQL = "SELECT * FROM " + ImpiegatoDAO.TABLE_NAME;
+      while (result.next()) {
 
-		if (order != null && !order.equals("")) {
-			querySQL += " ORDER BY " + order;
-		}
+        ImpiegatoBean i = new ImpiegatoBean();
 
-		try {
+        i.setNome(result.getString("nome"));
+        i.setCognome(result.getString("cognome"));
+        i.setMatricola(result.getString("matricola"));
+        i.setEmail(result.getString("email"));
+        i.setUsername(result.getString("username"));
+        i.setPassword(result.getString("password"));
+        i.setDomanda(result.getString("domanda"));
 
-			connection = ds.getConnection();
-			preparedStatement = connection.prepareStatement(querySQL);
+        impiegati.add(i);
+      }      
+    } catch (SQLException e) {
+      e.printStackTrace();
+    } finally {
+      try {
+        preparedStatement.close();
+      } catch (Exception sse) {
+        sse.printStackTrace();
+      }
+      try {
+        connection.close();
+      } catch (Exception cse) {
+        cse.printStackTrace();
+      }
+    }
 
-			preparedStatement.execute();
-			result = preparedStatement.getResultSet();
+    return impiegati;
+  }
 
-			while(result.next()){
+  /**
+   * Aggiorna l'impiegato nel database
+   * @param impiegato da aggiornare con i campi modificati
+   * @return true, false valore boolean che descrivono il successo o il fallimento del doUpdate
+   * @throws SQLException eccezione che può verificarsi
+   */
+  @Override
+  public synchronized boolean doUpdate(ImpiegatoBean impiegato) throws SQLException {
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
 
-				ImpiegatoBean i = new ImpiegatoBean();
+    String querySql = "UPDATE " + ImpiegatoDAO.TABLE_NAME 
+        + " SET nome = ?, cognome = ?, matricola = ?, email = ?, username = ?,"
+        + " password = ?, domanda = ? WHERE username = ?";
 
-				i.setNome(result.getString("nome"));
-				i.setCognome(result.getString("cognome"));
-				i.setMatricola(result.getString("matricola"));
-				i.setEmail(result.getString("email"));
-				i.setUsername(result.getString("username"));
-				i.setPassword(result.getString("password"));
-				i.setDomanda(result.getString("domanda"));
+    try {
 
-				impiegati.add(i);
-			}			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				preparedStatement.close();
-			} catch (Exception sse) {
-				sse.printStackTrace();
-			}
-			try {
-				connection.close();
-			} catch (Exception cse) {
-				cse.printStackTrace();
-			}
-		}
+      Connessione con = new Connessione();
+      connection = con.getConnection();
+      preparedStatement = connection.prepareStatement(querySql);
 
-		return impiegati;
-	}
+      preparedStatement.setString(1, impiegato.getNome());
+      preparedStatement.setString(2, impiegato.getCognome());
+      preparedStatement.setString(3, impiegato.getMatricola());
+      preparedStatement.setString(4, impiegato.getEmail());
+      preparedStatement.setString(5, impiegato.getUsername());
+      preparedStatement.setString(6, impiegato.getPassword());
+      preparedStatement.setString(7, impiegato.getDomanda());
 
-	@Override
-	public synchronized boolean doUpdate(ImpiegatoBean impiegato) throws SQLException {
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
+      preparedStatement.setString(8, impiegato.getUsername());
 
-		String querySQL = "UPDATE " + ImpiegatoDAO.TABLE_NAME + " SET nome = ?, cognome = ?, matricola = ?, email = ?, username = ?,"
-				+ " password = ?, domanda = ? WHERE username = ?";
+      preparedStatement.execute();
+      return true;
+    } catch (SQLException e) {
+      e.printStackTrace();
+    } finally {
+      try {
+        preparedStatement.close();
+      } catch (Exception sse) {
+        sse.printStackTrace();
+      }
+      try {
+        connection.close();
+      } catch (Exception cse) {
+        cse.printStackTrace();
+      }
+    }
 
-		try{
+    return false;
+  }
 
-			connection = ds.getConnection();
-			preparedStatement = connection.prepareStatement(querySQL);
+  /**
+   * Elimina l'impiegato dal database
+   * @param impiegato da eliminare
+   * @return true, false valori boolean che descrivono il successo o il fallimento del doDelete
+   * @throws SQLException eccezione che può verificarsi
+   */
+  @Override
+  public synchronized boolean doDelete(ImpiegatoBean impiegato) throws SQLException {
 
-			preparedStatement.setString(1, impiegato.getNome());
-			preparedStatement.setString(2, impiegato.getCognome());
-			preparedStatement.setString(3, impiegato.getMatricola());
-			preparedStatement.setString(4, impiegato.getEmail());
-			preparedStatement.setString(5, impiegato.getUsername());
-			preparedStatement.setString(6, impiegato.getPassword());
-			preparedStatement.setString(7, impiegato.getDomanda());
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
 
-			preparedStatement.setString(8, impiegato.getUsername());
+    String querySql = "DELETE FROM " + ImpiegatoDAO.TABLE_NAME + " WHERE username = ?";
 
-			preparedStatement.execute();
-			return true;
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				preparedStatement.close();
-			} catch (Exception sse) {
-				sse.printStackTrace();
-			}
-			try {
-				connection.close();
-			} catch (Exception cse) {
-				cse.printStackTrace();
-			}
-		}
+    try {
+      Connessione con = new Connessione();
+      connection = con.getConnection();
+      preparedStatement = connection.prepareStatement(querySql);
 
-		return false;
-	}
+      preparedStatement.setString(1, impiegato.getUsername());
 
-	@Override
-	public synchronized boolean doDelete(ImpiegatoBean impiegato) throws SQLException {
+      preparedStatement.execute();
 
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
+      return true;
+    } catch (SQLException e) {
+      e.printStackTrace();
+    } finally {
+      try {
+        preparedStatement.close();
+      } catch (Exception sse) {
+        sse.printStackTrace();
+      }
+      try {
+        connection.close();
+      } catch (Exception cse) {
+        cse.printStackTrace();
+      }
+    }
 
-		String querySQL = "DELETE FROM " + ImpiegatoDAO.TABLE_NAME + " WHERE username = ?";
-
-		try{
-			connection = ds.getConnection();
-			preparedStatement = connection.prepareStatement(querySQL);
-
-			preparedStatement.setString(1, impiegato.getUsername());
-
-			preparedStatement.execute();
-
-			return true;
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				preparedStatement.close();
-			} catch (Exception sse) {
-				sse.printStackTrace();
-			}
-			try {
-				connection.close();
-			} catch (Exception cse) {
-				cse.printStackTrace();
-			}
-		}
-
-		return false;
-	}
+    return false;
+  }
 
 
 }

@@ -1,5 +1,7 @@
 package model;
 
+import bean.TirocinioBean;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,363 +10,389 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
-
-import bean.TirocinioBean;
-
 public class TirocinioDAO extends AbstractDAO<TirocinioBean>{
 
-	private static DataSource ds;
+  /**
+   * Il TABLE_NAME in cui vengono eseguite le query
+   */
+  private static final String TABLE_NAME = "tirocinio";
 
-	static {
-		try {
+  /**
+   * Metodo che genera l'id del tirocinio
+   * @return rowCount il totale delle righe nella tabella
+   * @throws SQLException eccezione che può verificarsi
+   */
+  public synchronized int generaCodice() throws SQLException {
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    String sql = "SELECT COUNT(*) AS TOTAL FROM " + TirocinioDAO.TABLE_NAME;
+    Connessione con = new Connessione();
+    connection = con.getConnection();
+    preparedStatement = connection.prepareStatement(sql);
+    ResultSet rs = preparedStatement.executeQuery();
+    int rowCount = 0;
+    try {
+      while (rs.next()) {
+        rowCount = rs.getInt("total");
+      }
+    } finally {
+      try {
+        if (preparedStatement != null) {
+          preparedStatement.close();
+        }
+      } finally {
+        if (connection != null) {
+          connection.close();
+        }
+      }
+    }
 
-			Context initCtx = new InitialContext();
-			Context envCtx = (Context) initCtx.lookup("java:comp/env");
-			System.out.println(envCtx.getEnvironment());
-			ds = (DataSource) envCtx.lookup("jdbc/tirociniofast");
+    return rowCount;
+  }
 
-		} catch (NamingException e) {
-			System.out.println("Error:" + e.getMessage());
-		}
-	}
+  /**
+   * Salva il tirocinio nel database
+   * @param tirocinio che si vuole salvare
+   * @return result risultato della query appena eseguita
+   * @throws SQLException eccezione che può verificarsi
+   */
+  @Override
+  public synchronized int doSave(TirocinioBean tirocinio) throws SQLException {
 
-	private static final String TABLE_NAME = "tirocinio";
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    ResultSet result = null;
 
-	public synchronized int generaCodice() throws SQLException{
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		String sql = "SELECT COUNT(*) AS TOTAL FROM "+ TirocinioDAO.TABLE_NAME;
-		connection = ds.getConnection();
-		preparedStatement = connection.prepareStatement(sql);
-		ResultSet rs = preparedStatement.executeQuery();
-		int rowCount = 0;
-		try{
-			while(rs.next()){
-				rowCount = rs.getInt("total");
-			}
-		}finally {
-			try {
-				if (preparedStatement != null)
-					preparedStatement.close();
-			} finally {
-				if (connection != null)
-					connection.close();
-			}
-		}
+    String querySql = "INSERT INTO " + TirocinioDAO.TABLE_NAME
+        + " (id, studente, azienda, tutorAccademico, impiegato, "
+        + "annoAccademico, cfu, handicap, sedeTirocinio, accessoLocali, periodoTirocinio, "
+        + "obiettivoTirocinio, facilitazioni, convalidaAzienda, convalidaTutor, "
+        + "convalidaStudente, convalidaRichiesta, convalidaAttivita, registroOre, "
+        + "questionarioStudente, questionarioAzienda, url) "
+        + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    try {
 
-		return rowCount;
-	}
+      Connessione con = new Connessione();
+      connection = con.getConnection();
+      preparedStatement = connection.prepareStatement(querySql, Statement.RETURN_GENERATED_KEYS);
 
-	@Override
-	public synchronized int doSave(TirocinioBean tirocinio) throws SQLException {
+      preparedStatement.setInt(1, generaCodice());
+      preparedStatement.setString(2, tirocinio.getStudente());
+      preparedStatement.setString(3, tirocinio.getAzienda());
+      preparedStatement.setString(4, tirocinio.getTutorAccademico());
+      preparedStatement.setString(5, tirocinio.getImpiegato());
+      preparedStatement.setString(6, tirocinio.getAnnoAccademico());
+      preparedStatement.setInt(7, tirocinio.getCfu());
+      preparedStatement.setBoolean(8, tirocinio.isHandicap());
+      preparedStatement.setString(9, tirocinio.getSedeTirocinio());
+      preparedStatement.setString(10, tirocinio.getAccessoLocali());
+      preparedStatement.setString(11, tirocinio.getPeriodoTirocinio());
+      preparedStatement.setString(12, tirocinio.getObiettivoTirocinio());
+      preparedStatement.setString(13, tirocinio.getFacilitazioni());
+      preparedStatement.setBoolean(14, tirocinio.isConvalidaAzienda());
+      preparedStatement.setBoolean(15, tirocinio.isConvalidaTutor());
+      preparedStatement.setBoolean(16, tirocinio.isConvalidaStudente());
+      preparedStatement.setBoolean(17, tirocinio.isConvalidaRichiesta());
+      preparedStatement.setBoolean(18, tirocinio.isConvalidaAttivita());
+      preparedStatement.setString(19, tirocinio.getRegistroOre());
+      preparedStatement.setInt(20, tirocinio.getQuestionarioStudente());
+      preparedStatement.setInt(21, tirocinio.getQuestionarioAzienda());
+      preparedStatement.setString(22, tirocinio.getUrl());
 
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		ResultSet result = null;
+      preparedStatement.execute();
+      result = preparedStatement.getGeneratedKeys();
 
-		String querySQL = "INSERT INTO " + TirocinioDAO.TABLE_NAME
-				+ " (id, studente, azienda, tutorAccademico, impiegato, "
-				+ "annoAccademico, cfu, handicap, sedeTirocinio, accessoLocali, periodoTirocinio, obiettivoTirocinio, facilitazioni, "
-				+ "convalidaAzienda, convalidaTutor, convalidaStudente, convalidaRichiesta, convalidaAttivita, registroOre, questionarioStudente, "
-				+ "questionarioAzienda, url) "
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-		try {
+      if (result.next() && result != null) {
+        return result.getInt(1);
+      } else {
+        return -1;
+      }
 
-			connection = ds.getConnection();
-			preparedStatement = connection.prepareStatement(querySQL, Statement.RETURN_GENERATED_KEYS);
+    } catch (SQLException e) {
+      e.printStackTrace();
+    } finally {
+      try {
+        result.close();
+      } catch (Exception rse) {
+        rse.printStackTrace();
+      }
+      try {
+        preparedStatement.close();
+      } catch (Exception sse) {
+        sse.printStackTrace();
+      }
+      try {
+        connection.close();
+      } catch (Exception cse) {
+        cse.printStackTrace();
+      }
+    }
 
-			preparedStatement.setInt(1, generaCodice());
-			preparedStatement.setString(2, tirocinio.getStudente());
-			preparedStatement.setString(3, tirocinio.getAzienda());
-			preparedStatement.setString(4, tirocinio.getTutorAccademico());
-			preparedStatement.setString(5, tirocinio.getImpiegato());
-			preparedStatement.setString(6, tirocinio.getAnnoAccademico());
-			preparedStatement.setInt(7, tirocinio.getCfu());
-			preparedStatement.setBoolean(8, tirocinio.isHandicap());
-			preparedStatement.setString(9, tirocinio.getSedeTirocinio());
-			preparedStatement.setString(10, tirocinio.getAccessoLocali());
-			preparedStatement.setString(11, tirocinio.getPeriodoTirocinio());
-			preparedStatement.setString(12, tirocinio.getObiettivoTirocinio());
-			preparedStatement.setString(13, tirocinio.getFacilitazioni());
-			preparedStatement.setBoolean(14, tirocinio.isConvalidaAzienda());
-			preparedStatement.setBoolean(15, tirocinio.isConvalidaTutor());
-			preparedStatement.setBoolean(16, tirocinio.isConvalidaStudente());
-			preparedStatement.setBoolean(17, tirocinio.isConvalidaRichiesta());
-			preparedStatement.setBoolean(18, tirocinio.isConvalidaAttivita());
-			preparedStatement.setString(19, tirocinio.getRegistroOre());
-			preparedStatement.setInt(20, tirocinio.getQuestionarioStudente());
-			preparedStatement.setInt(21, tirocinio.getQuestionarioAzienda());
-			preparedStatement.setString(22, tirocinio.getUrl());
+    return -1;
+  }
 
-			preparedStatement.execute();
-			result = preparedStatement.getGeneratedKeys();
+  /**
+   * Cerca lo studente nel database in base all'id
+   * @param tirocinio che si vuole recuperare
+   * @return studente ricercato nel database
+   * @throws SQLException eccezione che può verificarsi
+   */
+  @Override
+  public synchronized TirocinioBean doRetrieveByKey(TirocinioBean tirocinio) throws SQLException {
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    ResultSet result = null;
+    TirocinioBean t = new TirocinioBean();
 
-			if (result.next() && result != null) {
-				return result.getInt(1);
-			} else {
-				return -1;
-			}
+    String querySql = "SELECT * FROM " + TirocinioDAO.TABLE_NAME + " WHERE id = ?";
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				result.close();
-			} catch (Exception rse) {
-				rse.printStackTrace();
-			}
-			try {
-				preparedStatement.close();
-			} catch (Exception sse) {
-				sse.printStackTrace();
-			}
-			try {
-				connection.close();
-			} catch (Exception cse) {
-				cse.printStackTrace();
-			}
-		}
+    try {
+      Connessione con = new Connessione();
+      connection = con.getConnection();
+      preparedStatement = connection.prepareStatement(querySql);
 
-		return -1;
-	}
+      preparedStatement.setInt(1, tirocinio.getId());
 
+      preparedStatement.execute();
+      result = preparedStatement.getResultSet();
 
-	@Override
-	public synchronized TirocinioBean doRetrieveByKey(TirocinioBean tirocinio) throws SQLException {
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		ResultSet result = null;
-		TirocinioBean t = new TirocinioBean();
+      while (result.next()) {
 
-		String querySQL = "SELECT * FROM " + TirocinioDAO.TABLE_NAME + " WHERE id = ?";
+        t.setId(result.getInt("id"));
+        t.setStudente(result.getString("studente"));
+        t.setAzienda(result.getString("azienda"));
+        t.setTutorAccademico(result.getString("tutorAccademico"));
+        t.setImpiegato(result.getString("impiegato"));
+        t.setAnnoAccademico(result.getString("annoAccademico"));
+        t.setCfu(result.getInt("cfu"));
+        t.setHandicap(result.getBoolean("handicap"));
+        t.setSedeTirocinio(result.getString("sedeTirocinio"));
+        t.setAccessoLocali(result.getString("accessoLocali"));
+        t.setPeriodoTirocinio(result.getString("periodoTirocinio"));
+        t.setObiettivoTirocinio(result.getString("obiettivoTirocinio"));
+        t.setFacilitazioni(result.getString("facilitazioni"));
+        t.setConvalidaAzienda(result.getBoolean("convalidaAzienda"));
+        t.setConvalidaTutor(result.getBoolean("convalidaTutor"));
+        t.setConvalidaStudente(result.getBoolean("convalidaStudente"));
+        t.setConvalidaRichiesta(result.getBoolean("convalidaRichiesta"));
+        t.setConvalidaAttivita(result.getBoolean("convalidaAttivita"));
+        t.setRegistroOre(result.getString("registroOre"));
+        t.setQuestionarioStudente(result.getInt("questionarioStudente"));
+        t.setQuestionarioAzienda(result.getInt("questionarioAzienda"));
+        t.setUrl(result.getString("url"));
 
-		try {
-			connection = ds.getConnection();
-			preparedStatement = connection.prepareStatement(querySQL);
+      }
 
-			preparedStatement.setInt(1, tirocinio.getId());
+    } catch (SQLException e) {
+      e.printStackTrace();
+    } finally {
+      try {
+        preparedStatement.close();
+      } catch (Exception sse) {
+        sse.printStackTrace();
+      }
+      try {
+        connection.close();
+      } catch (Exception cse) {
+        cse.printStackTrace();
+      }
+    }
 
-			preparedStatement.execute();
-			result = preparedStatement.getResultSet();
+    return t;
+  }
 
-			while (result.next()) {
+  /**
+   * Cerca tutti gli studenti nel database
+   * @param order parametro di ordinamento
+   * @return ArrayList studenti la lista degli studenti
+   * @throws SQLException eccezione che può verificarsi
+   */
+  @Override
+  public synchronized List<TirocinioBean> doRetrieveAll(String order) throws SQLException {
 
-				t.setId(result.getInt("id"));
-				t.setStudente(result.getString("studente"));
-				t.setAzienda(result.getString("azienda"));
-				t.setTutorAccademico(result.getString("tutorAccademico"));
-				t.setImpiegato(result.getString("impiegato"));
-				t.setAnnoAccademico(result.getString("annoAccademico"));
-				t.setCfu(result.getInt("cfu"));
-				t.setHandicap(result.getBoolean("handicap"));
-				t.setSedeTirocinio(result.getString("sedeTirocinio"));
-				t.setAccessoLocali(result.getString("accessoLocali"));
-				t.setPeriodoTirocinio(result.getString("periodoTirocinio"));
-				t.setObiettivoTirocinio(result.getString("obiettivoTirocinio"));
-				t.setFacilitazioni(result.getString("facilitazioni"));
-				t.setConvalidaAzienda(result.getBoolean("convalidaAzienda"));
-				t.setConvalidaTutor(result.getBoolean("convalidaTutor"));
-				t.setConvalidaStudente(result.getBoolean("convalidaStudente"));
-				t.setConvalidaRichiesta(result.getBoolean("convalidaRichiesta"));
-				t.setConvalidaAttivita(result.getBoolean("convalidaAttivita"));
-				t.setRegistroOre(result.getString("registroOre"));
-				t.setQuestionarioStudente(result.getInt("questionarioStudente"));
-				t.setQuestionarioAzienda(result.getInt("questionarioAzienda"));
-				t.setUrl(result.getString("url"));
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    ResultSet result = null;
+    List<TirocinioBean> tirocini = new ArrayList<TirocinioBean>();
 
-			}
+    String querySql = "SELECT * FROM " + TirocinioDAO.TABLE_NAME; 
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				preparedStatement.close();
-			} catch (Exception sse) {
-				sse.printStackTrace();
-			}
-			try {
-				connection.close();
-			} catch (Exception cse) {
-				cse.printStackTrace();
-			}
-		}
+    if (order != null && !order.equals("")) {
+      querySql += " ORDER BY " + order;
+    }
 
-		return t;
-	}
+    try {
 
-	@Override
-	public synchronized List<TirocinioBean> doRetrieveAll(String order) throws SQLException {
+      Connessione con = new Connessione();
+      connection = con.getConnection();
+      preparedStatement = connection.prepareStatement(querySql);
 
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		ResultSet result = null;
-		List<TirocinioBean> tirocini = new ArrayList<TirocinioBean>();
+      preparedStatement.execute();
+      result = preparedStatement.getResultSet();
 
-		String querySQL = "SELECT * FROM " + TirocinioDAO.TABLE_NAME; 
+      while (result.next()) {
 
-		if (order != null && !order.equals("")) {
-			querySQL += " ORDER BY " + order;
-		}
+        TirocinioBean t = new TirocinioBean();
 
-		try {
+        t.setId(result.getInt("id"));
+        t.setStudente(result.getString("studente"));
+        t.setAzienda(result.getString("azienda"));
+        t.setTutorAccademico(result.getString("tutorAccademico"));
+        t.setImpiegato(result.getString("impiegato"));
+        t.setAnnoAccademico(result.getString("annoAccademico"));
+        t.setCfu(result.getInt("cfu"));
+        t.setHandicap(result.getBoolean("handicap"));
+        t.setSedeTirocinio(result.getString("sedeTirocinio"));
+        t.setAccessoLocali(result.getString("accessoLocali"));
+        t.setPeriodoTirocinio(result.getString("periodoTirocinio"));
+        t.setObiettivoTirocinio(result.getString("obiettivoTirocinio"));
+        t.setFacilitazioni(result.getString("facilitazioni"));
+        t.setConvalidaAzienda(result.getBoolean("convalidaAzienda"));
+        t.setConvalidaTutor(result.getBoolean("convalidaTutor"));
+        t.setConvalidaStudente(result.getBoolean("convalidaStudente"));
+        t.setConvalidaRichiesta(result.getBoolean("convalidaRichiesta"));
+        t.setConvalidaAttivita(result.getBoolean("convalidaAttivita"));
+        t.setRegistroOre(result.getString("registroOre"));
+        t.setQuestionarioStudente(result.getInt("questionarioStudente"));
+        t.setQuestionarioAzienda(result.getInt("questionarioAzienda"));
+        t.setUrl(result.getString("url"));
 
-			connection = ds.getConnection();
-			preparedStatement = connection.prepareStatement(querySQL);
+        tirocini.add(t);
 
-			preparedStatement.execute();
-			result = preparedStatement.getResultSet();
+      }
 
-			while (result.next()) {
+    } catch (SQLException e) {
+      e.printStackTrace();
+    } finally {
+      try {
+        preparedStatement.close();
+      } catch (Exception sse) {
+        sse.printStackTrace();
+      }
+      try {
+        connection.close();
+      } catch (Exception cse) {
+        cse.printStackTrace();
+      }
+    }
 
-				TirocinioBean t = new TirocinioBean();
+    return tirocini;
+  }
 
-				t.setId(result.getInt("id"));
-				t.setStudente(result.getString("studente"));
-				t.setAzienda(result.getString("azienda"));
-				t.setTutorAccademico(result.getString("tutorAccademico"));
-				t.setImpiegato(result.getString("impiegato"));
-				t.setAnnoAccademico(result.getString("annoAccademico"));
-				t.setCfu(result.getInt("cfu"));
-				t.setHandicap(result.getBoolean("handicap"));
-				t.setSedeTirocinio(result.getString("sedeTirocinio"));
-				t.setAccessoLocali(result.getString("accessoLocali"));
-				t.setPeriodoTirocinio(result.getString("periodoTirocinio"));
-				t.setObiettivoTirocinio(result.getString("obiettivoTirocinio"));
-				t.setFacilitazioni(result.getString("facilitazioni"));
-				t.setConvalidaAzienda(result.getBoolean("convalidaAzienda"));
-				t.setConvalidaTutor(result.getBoolean("convalidaTutor"));
-				t.setConvalidaStudente(result.getBoolean("convalidaStudente"));
-				t.setConvalidaRichiesta(result.getBoolean("convalidaRichiesta"));
-				t.setConvalidaAttivita(result.getBoolean("convalidaAttivita"));
-				t.setRegistroOre(result.getString("registroOre"));
-				t.setQuestionarioStudente(result.getInt("questionarioStudente"));
-				t.setQuestionarioAzienda(result.getInt("questionarioAzienda"));
-				t.setUrl(result.getString("url"));
+  /**
+   * Aggiorna il tirocinio nel database
+   * @param tirocinio da aggiornare con i campi modificati
+   * @return true, false valore boolean che descrivono il successo o il fallimento del doUpdate
+   * @throws SQLException eccezione che può verificarsi
+   */
+  @Override
+  public synchronized boolean doUpdate(TirocinioBean tirocinio) throws SQLException {
 
-				tirocini.add(t);
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
 
-			}
+    String querySql = "UPDATE " + TirocinioDAO.TABLE_NAME 
+        + " SET studente = ?, azienda = ?, tutorAccademico = ?, impiegato = ?,"
+        + " annoAccademico = ?, cfu = ?, handicap = ?, sedeTirocinio = ?, "
+        + "accessoLocali = ?, periodoTirocinio = ?, obiettivoTirocinio = ?, "
+        + "facilitazioni = ?, convalidaAzienda = ?, convalidaTutor = ?, "
+        + "convalidaStudente = ?, convalidaRichiesta = ?, convalidaAttivita = ?, "
+        + "registroOre = ?, questionarioStudente = ?, questionarioAzienda = ?, "
+        + "url = ? WHERE id = ? ";
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				preparedStatement.close();
-			} catch (Exception sse) {
-				sse.printStackTrace();
-			}
-			try {
-				connection.close();
-			} catch (Exception cse) {
-				cse.printStackTrace();
-			}
-		}
+    try {
 
-		return tirocini;
-	}
+      Connessione con = new Connessione();
+      connection = con.getConnection();
+      preparedStatement = connection.prepareStatement(querySql);
 
+      preparedStatement.setString(1, tirocinio.getStudente());
+      preparedStatement.setString(2, tirocinio.getAzienda());
+      preparedStatement.setString(3, tirocinio.getTutorAccademico());
+      preparedStatement.setString(4, tirocinio.getImpiegato());
+      preparedStatement.setString(5, tirocinio.getAnnoAccademico());
+      preparedStatement.setInt(6, tirocinio.getCfu());
+      preparedStatement.setBoolean(7, tirocinio.isHandicap());
+      preparedStatement.setString(8, tirocinio.getSedeTirocinio());
+      preparedStatement.setString(9, tirocinio.getAccessoLocali());
+      preparedStatement.setString(10, tirocinio.getPeriodoTirocinio());
+      preparedStatement.setString(11, tirocinio.getObiettivoTirocinio());
+      preparedStatement.setString(12, tirocinio.getFacilitazioni());
+      preparedStatement.setBoolean(13, tirocinio.isConvalidaAzienda());
+      preparedStatement.setBoolean(14, tirocinio.isConvalidaTutor());
+      preparedStatement.setBoolean(15, tirocinio.isConvalidaStudente());
+      preparedStatement.setBoolean(16, tirocinio.isConvalidaRichiesta());
+      preparedStatement.setBoolean(17, tirocinio.isConvalidaAttivita());
+      preparedStatement.setString(18, tirocinio.getRegistroOre());
+      preparedStatement.setInt(19, tirocinio.getQuestionarioStudente());
+      preparedStatement.setInt(20, tirocinio.getQuestionarioAzienda());
+      preparedStatement.setString(21, tirocinio.getUrl());
 
-	@Override
-	public synchronized boolean doUpdate(TirocinioBean tirocinio) throws SQLException {
+      preparedStatement.setInt(22, tirocinio.getId());
 
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
+      preparedStatement.execute();
+      return true;
 
-		String querySQL = "UPDATE " + TirocinioDAO.TABLE_NAME + " SET studente = ?, azienda = ?, tutorAccademico = ?, impiegato = ?,"
-				+ " annoAccademico = ?, cfu = ?, handicap = ?, sedeTirocinio = ?, accessoLocali = ?, periodoTirocinio = ?, obiettivoTirocinio = ?, "
-				+ "facilitazioni = ?, convalidaAzienda = ?, convalidaTutor = ?, convalidaStudente = ?, convalidaRichiesta = ?, convalidaAttivita = ?, "
-				+ "registroOre = ?, questionarioStudente = ?, questionarioAzienda = ?, url = ? WHERE id = ? ";
+    } catch (SQLException e) {
+      e.printStackTrace();
+    } finally {
+      try {
+        preparedStatement.close();
+      } catch (Exception sse) {
+        sse.printStackTrace();
+      }
+      try {
+        connection.close();
+      } catch (Exception cse) {
+        cse.printStackTrace();
+      }
+    }
 
-		try {
+    return false;
+  }
 
-			connection = ds.getConnection();
-			preparedStatement = connection.prepareStatement(querySQL);
+  /**
+   * Elimina il tirocinio dal database
+   * @param tirocinio da eliminare
+   * @return true, false valori boolean che descrivono il successo o il fallimento del doDelete
+   * @throws SQLException eccezione che può verificarsi
+   */
+  @Override
+  public boolean doDelete(TirocinioBean tirocinio) throws SQLException {
 
-			preparedStatement.setString(1, tirocinio.getStudente());
-			preparedStatement.setString(2, tirocinio.getAzienda());
-			preparedStatement.setString(3, tirocinio.getTutorAccademico());
-			preparedStatement.setString(4, tirocinio.getImpiegato());
-			preparedStatement.setString(5, tirocinio.getAnnoAccademico());
-			preparedStatement.setInt(6, tirocinio.getCfu());
-			preparedStatement.setBoolean(7, tirocinio.isHandicap());
-			preparedStatement.setString(8, tirocinio.getSedeTirocinio());
-			preparedStatement.setString(9, tirocinio.getAccessoLocali());
-			preparedStatement.setString(10, tirocinio.getPeriodoTirocinio());
-			preparedStatement.setString(11, tirocinio.getObiettivoTirocinio());
-			preparedStatement.setString(12, tirocinio.getFacilitazioni());
-			preparedStatement.setBoolean(13, tirocinio.isConvalidaAzienda());
-			preparedStatement.setBoolean(14, tirocinio.isConvalidaTutor());
-			preparedStatement.setBoolean(15, tirocinio.isConvalidaStudente());
-			preparedStatement.setBoolean(16, tirocinio.isConvalidaRichiesta());
-			preparedStatement.setBoolean(17, tirocinio.isConvalidaAttivita());
-			preparedStatement.setString(18, tirocinio.getRegistroOre());
-			preparedStatement.setInt(19, tirocinio.getQuestionarioStudente());
-			preparedStatement.setInt(20, tirocinio.getQuestionarioAzienda());
-			preparedStatement.setString(21, tirocinio.getUrl());
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
 
-			preparedStatement.setInt(22, tirocinio.getId());
+    String querySql = "DELETE FROM " + TirocinioDAO.TABLE_NAME + " WHERE id = ? ";
 
-			preparedStatement.execute();
-			return true;
+    try {
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				preparedStatement.close();
-			} catch (Exception sse) {
-				sse.printStackTrace();
-			}
-			try {
-				connection.close();
-			} catch (Exception cse) {
-				cse.printStackTrace();
-			}
-		}
+      Connessione con = new Connessione();
+      connection = con.getConnection();
+      preparedStatement = connection.prepareStatement(querySql);
 
-		return false;
-	}
+      preparedStatement.setInt(1, tirocinio.getId());
 
+      preparedStatement.execute();
 
-	@Override
-	public boolean doDelete(TirocinioBean tirocinio) throws SQLException {
+      return true;
 
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
+    } catch (SQLException e) {
+      e.printStackTrace();
+    } finally {
+      try {
+        preparedStatement.close();
+      } catch (Exception sse) {
+        sse.printStackTrace();
+      }
+      try {
+        connection.close();
+      } catch (Exception cse) {
+        cse.printStackTrace();
+      }
+    }
 
-		String querySQL = "DELETE FROM " + TirocinioDAO.TABLE_NAME + " WHERE id = ? ";
-
-		try {
-
-			connection = ds.getConnection();
-			preparedStatement = connection.prepareStatement(querySQL);
-
-			preparedStatement.setInt(1, tirocinio.getId());
-
-			preparedStatement.execute();
-
-			return true;
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				preparedStatement.close();
-			} catch (Exception sse) {
-				sse.printStackTrace();
-			}
-			try {
-				connection.close();
-			} catch (Exception cse) {
-				cse.printStackTrace();
-			}
-		}
-
-		return false;
-	}
+    return false;
+  }
 
 }

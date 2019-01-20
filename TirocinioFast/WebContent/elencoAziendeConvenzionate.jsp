@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" import="java.util.ArrayList, bean.*"%>
 <%
-	ArrayList<AziendaBean> convenzionate = (ArrayList<AziendaBean>) request.getSession().getAttribute("listaAziende");
+	ArrayList<AziendaBean> convenzionate = new ArrayList<AziendaBean>();
+	convenzionate = (ArrayList<AziendaBean>) request.getSession().getAttribute("listaAziende");
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -59,4 +60,3 @@
 
 </body>
 </html>
-

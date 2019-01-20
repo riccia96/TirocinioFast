@@ -1,5 +1,7 @@
 package model;
 
+import bean.TutorBean;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,264 +10,281 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
+public class TutorDAO extends AbstractDAO <TutorBean> {
 
-import bean.TutorBean;
+  /**
+   * Il TABLE_NAME in cui vengono eseguite le query
+   */
+  private static final String TABLE_NAME = "tutor";
 
+  /**
+   * Salva il tutor nel database
+   * @param tutor che si vuole salvare
+   * @return result risultato della query appena eseguita
+   * @throws SQLException eccezione che può verificarsi
+   */
+  @Override
+  public synchronized int doSave(TutorBean tutor) throws SQLException {
 
-public class TutorDAO extends AbstractDAO<TutorBean>{
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    ResultSet result = null;
 
-	private static DataSource ds;
+    String querySql = "INSERT INTO " + TutorDAO.TABLE_NAME 
+        + " (nome, cognome, matricola, email, username, password, domanda)"
+        + "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-	static {
-		try {
+    try {
 
-			Context initCtx = new InitialContext();
-			Context envCtx = (Context) initCtx.lookup("java:comp/env");
+      Connessione con = new Connessione();
+      connection = con.getConnection();
+      preparedStatement = connection.prepareStatement(querySql, Statement.RETURN_GENERATED_KEYS);
 
-			ds = (DataSource) envCtx.lookup("jdbc/tirociniofast");
+      preparedStatement.setString(1, tutor.getNome());
+      preparedStatement.setString(2, tutor.getCognome());
+      preparedStatement.setString(3, tutor.getMatricola());
+      preparedStatement.setString(4, tutor.getEmail());
+      preparedStatement.setString(5, tutor.getUsername());
+      preparedStatement.setString(6, tutor.getPassword());
+      preparedStatement.setString(7, tutor.getDomanda());
 
-		} catch (NamingException e) {
-			System.out.println("Error:" + e.getMessage());
-		}
-	}
+      preparedStatement.execute();
+      result = preparedStatement.getGeneratedKeys();
 
-	private static final String TABLE_NAME = "tutor";
+      if (result.next() && result != null) {
+        return result.getInt(1);
+      } else {
+        return -1;
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    } finally {
+      try {
+        result.close();
+      } catch (Exception rse) {
+        rse.printStackTrace();
+      }
+      try {
+        preparedStatement.close();
+      } catch (Exception sse) {
+        sse.printStackTrace();
+      }
+      try {
+        connection.close();
+      } catch (Exception cse) {
+        cse.printStackTrace();
+      }
+    }
 
-	@Override
-	public synchronized int doSave(TutorBean tutor) throws SQLException {
+    return -1;
+  }
+  
+  /**
+   * Cerca il tutor nel database in base all'username
+   * @param tutor che si vuole recuperare
+   * @return tutor ricercata nel database   
+   * @throws SQLException eccezione che può verificarsi
+   */
+  @Override
+  public synchronized TutorBean doRetrieveByKey(TutorBean tutor) throws SQLException {
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    ResultSet result = null;
+    TutorBean t = new TutorBean();
 
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		ResultSet result = null;
+    String querySql = "SELECT * FROM " + TutorDAO.TABLE_NAME + " WHERE username = ?";
 
-		String querySQL = "INSERT INTO " + TutorDAO.TABLE_NAME + " (nome, cognome, matricola, email, username, password, domanda)" +
-				"VALUES (?, ?, ?, ?, ?, ?, ?)";
+    try {
 
-		try{
+      Connessione con = new Connessione();
+      connection = con.getConnection();
+      preparedStatement = connection.prepareStatement(querySql);
 
-			connection = ds.getConnection();
-			preparedStatement = connection.prepareStatement(querySQL, Statement.RETURN_GENERATED_KEYS);
+      preparedStatement.setString(1, tutor.getUsername());
 
-			preparedStatement.setString(1, tutor.getNome());
-			preparedStatement.setString(2, tutor.getCognome());
-			preparedStatement.setString(3, tutor.getMatricola());
-			preparedStatement.setString(4, tutor.getEmail());
-			preparedStatement.setString(5, tutor.getUsername());
-			preparedStatement.setString(6, tutor.getPassword());
-			preparedStatement.setString(7, tutor.getDomanda());
+      preparedStatement.execute();
+      result = preparedStatement.getResultSet();
 
-			preparedStatement.execute();
-			result = preparedStatement.getGeneratedKeys();
+      while (result.next()) {
 
-			if(result.next() && result != null){
-				return result.getInt(1);
-			}else{
-				return -1;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				result.close();
-			} catch (Exception rse) {
-				rse.printStackTrace();
-			}
-			try {
-				preparedStatement.close();
-			} catch (Exception sse) {
-				sse.printStackTrace();
-			}
-			try {
-				connection.close();
-			} catch (Exception cse) {
-				cse.printStackTrace();
-			}
-		}
+        t.setNome(result.getString("nome"));
+        t.setCognome(result.getString("cognome"));
+        t.setMatricola(result.getString("matricola"));
+        t.setEmail(result.getString("email"));
+        t.setUsername(result.getString("username"));
+        t.setPassword(result.getString("password"));
+        t.setDomanda(result.getString("domanda"));
 
-		return -1;
-	}
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    } finally {
+      try {
+        preparedStatement.close();
+      } catch (Exception sse) {
+        sse.printStackTrace();
+      }
+      try {
+        connection.close();
+      } catch (Exception cse) {
+        cse.printStackTrace();
+      }
+    }
 
-	@Override
-	public synchronized TutorBean doRetrieveByKey(TutorBean tutor) throws SQLException {
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		ResultSet result = null;
-		TutorBean t = new TutorBean();
+    return t;
+  }
 
-		String querySQL = "SELECT * FROM " + TutorDAO.TABLE_NAME + " WHERE username = ?";
+  /**
+   * Cerca tutti i tutor nel database
+   * @param order parametro di ordinamento
+   * @return ArrayList tutor la lista dei tutor
+   * @throws SQLException eccezione che può verificarsi
+   */
+  @Override
+  public synchronized List<TutorBean> doRetrieveAll(String order) throws SQLException {
 
-		try {
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    ResultSet result = null;
+    List<TutorBean> tutor = new ArrayList<TutorBean>();
 
-			connection = ds.getConnection();
-			preparedStatement = connection.prepareStatement(querySQL);
+    String querySql = "SELECT * FROM " + TutorDAO.TABLE_NAME;
 
-			preparedStatement.setString(1, tutor.getUsername());
+    if (order != null && !order.equals("")) {
+      querySql += " ORDER BY " + order;
+    }
 
-			preparedStatement.execute();
-			result = preparedStatement.getResultSet();
+    try {
 
-			while(result.next()){
+      Connessione con = new Connessione();
+      connection = con.getConnection();
+      preparedStatement = connection.prepareStatement(querySql);
 
-				t.setNome(result.getString("nome"));
-				t.setCognome(result.getString("cognome"));
-				t.setMatricola(result.getString("matricola"));
-				t.setEmail(result.getString("email"));
-				t.setUsername(result.getString("username"));
-				t.setPassword(result.getString("password"));
-				t.setDomanda(result.getString("domanda"));
+      preparedStatement.execute();
+      result = preparedStatement.getResultSet();
 
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				preparedStatement.close();
-			} catch (Exception sse) {
-				sse.printStackTrace();
-			}
-			try {
-				connection.close();
-			} catch (Exception cse) {
-				cse.printStackTrace();
-			}
-		}
+      while (result.next()) {
 
-		return t;
-	}
+        TutorBean t = new TutorBean();
 
-	@Override
-	public synchronized List<TutorBean> doRetrieveAll(String order) throws SQLException {
+        t.setNome(result.getString("nome"));
+        t.setCognome(result.getString("cognome"));
+        t.setMatricola(result.getString("matricola"));
+        t.setEmail(result.getString("email"));
+        t.setUsername(result.getString("username"));
+        t.setPassword(result.getString("password"));
+        t.setDomanda(result.getString("domanda"));
 
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		ResultSet result = null;
-		List<TutorBean> tutor = new ArrayList<TutorBean>();
+        tutor.add(t);
+      }      
+    } catch (SQLException e) {
+      e.printStackTrace();
+    } finally {
+      try {
+        preparedStatement.close();
+      } catch (Exception sse) {
+        sse.printStackTrace();
+      }
+      try {
+        connection.close();
+      } catch (Exception cse) {
+        cse.printStackTrace();
+      }
+    }
 
-		String querySQL = "SELECT * FROM " + TutorDAO.TABLE_NAME;
+    return tutor;
+  }
 
-		if (order != null && !order.equals("")) {
-			querySQL += " ORDER BY " + order;
-		}
+  /**
+   * Aggiorna il tutor nel database
+   * @param tutor da aggiornare con i campi modificati
+   * @return true, false valore boolean che descrivono il successo o il fallimento del doUpdate
+   * @throws SQLException eccezione che può verificarsi
+   */
+  @Override
+  public synchronized boolean doUpdate(TutorBean tutor) throws SQLException {
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
 
-		try {
+    String querySql = "UPDATE " + TutorDAO.TABLE_NAME 
+        + " SET nome = ?, cognome = ?, matricola = ?, email = ?, username = ?, password = ?, "
+        + "domanda = ? WHERE  username = ?";
 
-			connection = ds.getConnection();
-			preparedStatement = connection.prepareStatement(querySQL);
+    try {
 
-			preparedStatement.execute();
-			result = preparedStatement.getResultSet();
+      Connessione con = new Connessione();
+      connection = con.getConnection();
+      preparedStatement = connection.prepareStatement(querySql);
 
-			while(result.next()){
+      preparedStatement.setString(1, tutor.getNome());
+      preparedStatement.setString(2, tutor.getCognome());
+      preparedStatement.setString(3, tutor.getMatricola());
+      preparedStatement.setString(4, tutor.getEmail());
+      preparedStatement.setString(5, tutor.getUsername());
+      preparedStatement.setString(6, tutor.getPassword());
+      preparedStatement.setString(7, tutor.getDomanda());
 
-				TutorBean t = new TutorBean();
+      preparedStatement.setString(8, tutor.getUsername());
 
-				t.setNome(result.getString("nome"));
-				t.setCognome(result.getString("cognome"));
-				t.setMatricola(result.getString("matricola"));
-				t.setEmail(result.getString("email"));
-				t.setUsername(result.getString("username"));
-				t.setPassword(result.getString("password"));
-				t.setDomanda(result.getString("domanda"));
+      preparedStatement.execute();
+      return true;
+    } catch (SQLException e) {
+      e.printStackTrace();
+    } finally {
+      try {
+        preparedStatement.close();
+      } catch (Exception sse) {
+        sse.printStackTrace();
+      }
+      try {
+        connection.close();
+      } catch (Exception cse) {
+        cse.printStackTrace();
+      }
+    }
 
-				tutor.add(t);
-			}			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				preparedStatement.close();
-			} catch (Exception sse) {
-				sse.printStackTrace();
-			}
-			try {
-				connection.close();
-			} catch (Exception cse) {
-				cse.printStackTrace();
-			}
-		}
+    return false;
+  }
 
-		return tutor;
-	}
+  /**
+   * Elimina il tutor dal database
+   * @param tutor da eliminare
+   * @return true, false valori boolean che descrivono il successo o il fallimento del doDelete
+   * @throws SQLException eccezione che può verificarsi
+   */
+  @Override
+  public synchronized boolean doDelete(TutorBean tutor) throws SQLException {
 
-	@Override
-	public synchronized boolean doUpdate(TutorBean tutor) throws SQLException {
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
 
-		String querySQL = "UPDATE " + TutorDAO.TABLE_NAME + " SET nome = ?, cognome = ?, matricola = ?, email = ?, username = ?, password = ?, "
-				+ "domanda = ? WHERE  username = ?";
+    String querySql = "DELETE FROM " + TutorDAO.TABLE_NAME + " WHERE username = ?";
 
-		try{
+    try {
+      Connessione con = new Connessione();
+      connection = con.getConnection();
+      preparedStatement = connection.prepareStatement(querySql);
 
-			connection = ds.getConnection();
-			preparedStatement = connection.prepareStatement(querySQL);
+      preparedStatement.setString(1, tutor.getUsername());
 
-			preparedStatement.setString(1, tutor.getNome());
-			preparedStatement.setString(2, tutor.getCognome());
-			preparedStatement.setString(3, tutor.getMatricola());
-			preparedStatement.setString(4, tutor.getEmail());
-			preparedStatement.setString(5, tutor.getUsername());
-			preparedStatement.setString(6, tutor.getPassword());
-			preparedStatement.setString(7, tutor.getDomanda());
+      preparedStatement.execute();
 
-			preparedStatement.setString(8, tutor.getUsername());
+      return true;
+    } catch (SQLException e) {
+      e.printStackTrace();
+    } finally {
+      try {
+        preparedStatement.close();
+      } catch (Exception sse) {
+        sse.printStackTrace();
+      }
+      try {
+        connection.close();
+      } catch (Exception cse) {
+        cse.printStackTrace();
+      }
+    }
 
-			preparedStatement.execute();
-			return true;
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				preparedStatement.close();
-			} catch (Exception sse) {
-				sse.printStackTrace();
-			}
-			try {
-				connection.close();
-			} catch (Exception cse) {
-				cse.printStackTrace();
-			}
-		}
-
-		return false;
-	}
-
-	@Override
-	public synchronized boolean doDelete(TutorBean tutor) throws SQLException {
-
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-
-		String querySQL = "DELETE FROM " + TutorDAO.TABLE_NAME + " WHERE username = ?";
-
-		try{
-			connection = ds.getConnection();
-			preparedStatement = connection.prepareStatement(querySQL);
-
-			preparedStatement.setString(1, tutor.getUsername());
-
-			preparedStatement.execute();
-
-			return true;
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				preparedStatement.close();
-			} catch (Exception sse) {
-				sse.printStackTrace();
-			}
-			try {
-				connection.close();
-			} catch (Exception cse) {
-				cse.printStackTrace();
-			}
-		}
-
-		return false;
-	}
+    return false;
+  }
 }

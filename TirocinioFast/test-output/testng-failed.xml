@@ -3,6 +3,55 @@
 <suite name="Failed suite [Default suite]">
   <test name="Default test(failed)" preserve-order="true">
     <classes>
+      <class name="test.RegistraAziendaTestEmailNO">
+        <methods>
+          <include name="testRegistraAziendaTestEno"/>
+          <include name="tearDown"/>
+          <include name="setUp"/>
+        </methods>
+      </class> <!-- test.RegistraAziendaTestEmailNO -->
+      <class name="test.LoginTest">
+        <methods>
+          <include name="testLogin"/>
+          <include name="setUp"/>
+          <include name="tearDown"/>
+        </methods>
+      </class> <!-- test.LoginTest -->
+      <class name="test.RegistraAziendaTestEsiste">
+        <methods>
+          <include name="tearDown"/>
+          <include name="setUp"/>
+          <include name="testRegistraAziendaTestEsiste"/>
+        </methods>
+      </class> <!-- test.RegistraAziendaTestEsiste -->
+      <class name="test.RegistraAziendaTestUsernameInUso">
+        <methods>
+          <include name="tearDown"/>
+          <include name="testRegistraAziendaTestUserINUSO"/>
+          <include name="setUp"/>
+        </methods>
+      </class> <!-- test.RegistraAziendaTestUsernameInUso -->
+      <class name="test.RegistraAziendaTestPasswordNonCorrispondenti">
+        <methods>
+          <include name="setUp"/>
+          <include name="tearDown"/>
+          <include name="testRegistraAziendaTestPassnoCor"/>
+        </methods>
+      </class> <!-- test.RegistraAziendaTestPasswordNonCorrispondenti -->
+      <class name="test.RichiestaAttivitTirocinioTestOK">
+        <methods>
+          <include name="setUp"/>
+          <include name="tearDown"/>
+          <include name="testRichiestaAttivitTirocinioTestOK"/>
+        </methods>
+      </class> <!-- test.RichiestaAttivitTirocinioTestOK -->
+      <class name="test.RegistraAziendaTestPasswordNO">
+        <methods>
+          <include name="setUp"/>
+          <include name="tearDown"/>
+          <include name="testRegistraAziendaTestPassno"/>
+        </methods>
+      </class> <!-- test.RegistraAziendaTestPasswordNO -->
       <class name="test.LoginTestUsernameOKPasswordNO">
         <methods>
           <include name="setUp"/>
@@ -10,6 +59,83 @@
           <include name="tearDown"/>
         </methods>
       </class> <!-- test.LoginTestUsernameOKPasswordNO -->
+      <class name="test.RicercaAziendaNomeNoSedeSi">
+        <methods>
+          <include name="setUp"/>
+          <include name="tearDown"/>
+          <include name="testRicercaAziendaNomeNoSedeSi"/>
+        </methods>
+      </class> <!-- test.RicercaAziendaNomeNoSedeSi -->
+      <class name="test.RegistraAziendaTest">
+        <methods>
+          <include name="setUp"/>
+          <include name="tearDown"/>
+          <include name="testRegistraAzienda"/>
+        </methods>
+      </class> <!-- test.RegistraAziendaTest -->
+      <class name="test.RicercaAziendaOk">
+        <methods>
+          <include name="tearDown"/>
+          <include name="setUp"/>
+          <include name="testRicercaAziendaOk"/>
+        </methods>
+      </class> <!-- test.RicercaAziendaOk -->
+      <class name="test.RicercaAziendaNomeErratoSedeSi">
+        <methods>
+          <include name="tearDown"/>
+          <include name="setUp"/>
+          <include name="testRicercaAziendaNomeErratoSedeSi"/>
+        </methods>
+      </class> <!-- test.RicercaAziendaNomeErratoSedeSi -->
+      <class name="test.LoginTestUsernameNOPasswordOK">
+        <methods>
+          <include name="setUp"/>
+          <include name="testLoginTestUnPo"/>
+          <include name="tearDown"/>
+        </methods>
+      </class> <!-- test.LoginTestUsernameNOPasswordOK -->
+      <class name="test.RecuperaPasswordTestPasswordNonCorrispondenti">
+        <methods>
+          <include name="setUp"/>
+          <include name="tearDown"/>
+          <include name="testRecuperaPasswordTestPassNoCorr"/>
+        </methods>
+      </class> <!-- test.RecuperaPasswordTestPasswordNonCorrispondenti -->
+      <class name="test.RicercaAziendaNomeSiSedeNo">
+        <methods>
+          <include name="setUp"/>
+          <include name="tearDown"/>
+          <include name="testRicercaAziendaNomeSiSedeNo"/>
+        </methods>
+      </class> <!-- test.RicercaAziendaNomeSiSedeNo -->
+      <class name="test.RegistraAziendaTestPartitaIvaNO">
+        <methods>
+          <include name="setUp"/>
+          <include name="tearDown"/>
+          <include name="testRegistraAziendaTestPno"/>
+        </methods>
+      </class> <!-- test.RegistraAziendaTestPartitaIvaNO -->
+      <class name="test.RichiestaAttivitTirocinioTestAAno">
+        <methods>
+          <include name="tearDown"/>
+          <include name="testRichiestaAttivitTirocinioTestAAno"/>
+          <include name="setUp"/>
+        </methods>
+      </class> <!-- test.RichiestaAttivitTirocinioTestAAno -->
+      <class name="test.RecuperaPasswordTest">
+        <methods>
+          <include name="testRecuperaPassword"/>
+          <include name="tearDown"/>
+          <include name="setUp"/>
+        </methods>
+      </class> <!-- test.RecuperaPasswordTest -->
+      <class name="test.RecuperaPasswordTestPasswordNo">
+        <methods>
+          <include name="testRecuperaPasswordTestPassNo"/>
+          <include name="tearDown"/>
+          <include name="setUp"/>
+        </methods>
+      </class> <!-- test.RecuperaPasswordTestPasswordNo -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

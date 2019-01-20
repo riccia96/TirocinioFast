@@ -25,191 +25,188 @@ import bean.TutorBean;
  */
 @WebServlet("/GestioneTirocinio")
 public class GestioneTirocinio extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	static ManagerUtente utente = new ManagerUtente();
-	static ManagerDocumento documento = new ManagerDocumento();
+  static ManagerUtente utente = new ManagerUtente();
+  static ManagerDocumento documento = new ManagerDocumento();
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
-	}
+  /**
+   * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+   */
+  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    doPost(request, response);
+  }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String azioneTirocinio = request.getParameter("azioneTirocinio");
+  /**
+   * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+   * @param azioneTirocinio il tipo di azione che si cattura tramite la jsp
+   */
+  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    String azioneTirocinio = request.getParameter("azioneTirocinio");
 
-		if(azioneTirocinio.equals("richiediTirocinio")){
-			try {
-				String aziendaTirocinio = request.getParameter("aziendaSelezionata");
+    if (azioneTirocinio.equals("richiediTirocinio")) {
+      try {
+        String aziendaTirocinio = request.getParameter("aziendaSelezionata");
 
-				List<TutorBean> tutorAccademici = utente.getTutorAccademici("username ASC");
+        List<TutorBean> tutorAccademici = utente.getTutorAccademici("username ASC");
 
-				request.getSession().setAttribute("aziendaTirocinio", aziendaTirocinio);
-				request.getSession().setAttribute("elencoTutor", tutorAccademici);
-				RequestDispatcher view = request.getRequestDispatcher("richiestaTirocinioStudente.jsp");
-				view.forward(request, response);
-			} catch (SQLException e) {
+        request.getSession().setAttribute("aziendaTirocinio", aziendaTirocinio);
+        request.getSession().setAttribute("elencoTutor", tutorAccademici);
+        RequestDispatcher view = request.getRequestDispatcher("richiestaTirocinioStudente.jsp");
+        view.forward(request, response);
+      } catch (SQLException e) {
 
-				e.printStackTrace();
-			}
-		}
+        e.printStackTrace();
+      }
+    }
 
-		if(azioneTirocinio.equals("inoltroRichiestaTutor")) {
+    if (azioneTirocinio.equals("inoltroRichiestaTutor")) {
 
-			try {
-				TirocinioBean tirocinio = new TirocinioBean();
-				int id = Integer.parseInt((String) request.getSession().getAttribute("idTirocinio"));
-				tirocinio.setId(id);
-				tirocinio = documento.getTirocinio(tirocinio);
+      try {
+        TirocinioBean tirocinio = new TirocinioBean();
+        int id = Integer.parseInt((String) request.getSession().getAttribute("idTirocinio"));
+        tirocinio.setId(id);
+        tirocinio = documento.getTirocinio(tirocinio);
 
-				tirocinio.setConvalidaAzienda(true);
-				documento.aggiornaTirocinio(tirocinio);
+        tirocinio.setConvalidaAzienda(true);
+        documento.aggiornaTirocinio(tirocinio);
 
-				RequestDispatcher view = request.getRequestDispatcher("richiesteTirocinio.jsp");
-				view.forward(request, response);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
+        RequestDispatcher view = request.getRequestDispatcher("richiesteTirocinio.jsp");
+        view.forward(request, response);
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+    }
 
-		if(azioneTirocinio.equals("inoltroRichiestaStudente")) {
-			try {
-				TirocinioBean tirocinio = new TirocinioBean();
-				int id = Integer.parseInt((String) request.getSession().getAttribute("idTirocinio"));
-				tirocinio.setId(id);
-				tirocinio = documento.getTirocinio(tirocinio);
+    if (azioneTirocinio.equals("inoltroRichiestaStudente")) {
+      try {
+        TirocinioBean tirocinio = new TirocinioBean();
+        int id = Integer.parseInt((String) request.getSession().getAttribute("idTirocinio"));
+        tirocinio.setId(id);
+        tirocinio = documento.getTirocinio(tirocinio);
 
-				tirocinio.setConvalidaTutor(true);
-				documento.aggiornaTirocinio(tirocinio);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
+        tirocinio.setConvalidaTutor(true);
+        documento.aggiornaTirocinio(tirocinio);
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+    }
 
-		if(azioneTirocinio.equals("inoltroRichiestaImpiegato")) {
-			try{
-				TirocinioBean tirocinio = new TirocinioBean();
-				int id = Integer.parseInt((String) request.getSession().getAttribute("idTirocinio"));
-				tirocinio.setId(id);
-				tirocinio = documento.getTirocinio(tirocinio);
+    if (azioneTirocinio.equals("inoltroRichiestaImpiegato")) {
+      try {
+        TirocinioBean tirocinio = new TirocinioBean();
+        int id = Integer.parseInt((String) request.getSession().getAttribute("idTirocinio"));
+        tirocinio.setId(id);
+        tirocinio = documento.getTirocinio(tirocinio);
 
-				tirocinio.setConvalidaStudente(true);
-				documento.aggiornaTirocinio(tirocinio);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
+        tirocinio.setConvalidaStudente(true);
+        documento.aggiornaTirocinio(tirocinio);
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+    }
 
-		if(azioneTirocinio.equals("elencoAziende")) {
-			try {
-				List<AziendaBean> aziendeConv = new ArrayList<AziendaBean>();
-				List<AziendaBean> az = utente.getAziende("username ASC");
-				List<ConvenzioneBean> conv = documento.getConvenzioni("id ASC");
+    if (azioneTirocinio.equals("elencoAziende")) {
+      try {
+        List<AziendaBean> aziendeConv = new ArrayList<AziendaBean>();
+        List<AziendaBean> az = utente.getAziende("username ASC");
+        List<ConvenzioneBean> conv = documento.getConvenzioni("id ASC");
+        for (AziendaBean a : az) {
+          for (ConvenzioneBean c : conv) {
+            if (a.getUsername().equals(c.getAzienda()) && c.isConvalida()) {
+              aziendeConv.add(a);
+              conv.remove(c);
+              break;
+            }
+          }
+        }
 
-				request.getSession().removeAttribute("listaAziende");
+        if (aziendeConv.equals(null)) {
+          RequestDispatcher view = request.getRequestDispatcher("nessunaRisorsa.jsp");
+          view.forward(request, response);
+        } else {
+          
+          request.getSession().setAttribute("listaAziende", aziendeConv);
+          
+          RequestDispatcher view = request.getRequestDispatcher("elencoAziendeConvenzionate.jsp");
+          view.forward(request, response);
+        }
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+    }
 
-				for(AziendaBean a : az) {
+    if (azioneTirocinio.equals("schedaAzienda")) {
+      try {
 
-					for(ConvenzioneBean c : conv) {
+        String username = request.getParameter("scheda");
 
-						if(a.getUsername().equals(c.getAzienda()) && c.isConvalida()) {
+        AziendaBean azienda = new AziendaBean();
+        azienda.setUsername(username);
 
-							aziendeConv.add(a);
-						}
-					}
-				}
+        AziendaBean a = utente.getAzienda(azienda);
 
-				if(aziendeConv.equals(null)) {
-					RequestDispatcher view = request.getRequestDispatcher("nessunaRisorsa.jsp");
-					view.forward(request, response);
-				}
-				else {
+        request.getSession().setAttribute("aziendaSelezionata", a);
+        RequestDispatcher view = request.getRequestDispatcher("visualizzaScheda.jsp");
+        view.forward(request, response);
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+    }
 
-					request.getSession().setAttribute("listaAziende", aziendeConv);
+    if (azioneTirocinio.equals("ricercaAzienda")) {
+      try {
+        List<AziendaBean> aziende = utente.getAziende("username ASC");
+        List<ConvenzioneBean> convenzioni = documento.getConvenzioni("id ASC");
+        List<AziendaBean> aziendeConv = new ArrayList<AziendaBean>();
+        String nome = request.getParameter("nomeAzienda").toLowerCase();
+        String sede = request.getParameter("sedeAzienda").toLowerCase();
+        for (AziendaBean a : aziende) {
 
-					RequestDispatcher view = request.getRequestDispatcher("elencoAziendeConvenzionate.jsp");
-					view.forward(request, response);
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
+          for (ConvenzioneBean c : convenzioni) {
 
-		if(azioneTirocinio.equals("schedaAzienda")) {
-			try {
+            if (a.getUsername().equals(c.getAzienda()) && c.isConvalida()) {
+              aziendeConv.add(a);
+              convenzioni.remove(c);
+              break;
+            }
 
-				String username = request.getParameter("scheda");
+          }
+        }
 
-				AziendaBean azienda = new AziendaBean();
-				azienda.setUsername(username);
+        if (aziendeConv.size() == 0) {
+          RequestDispatcher view = request.getRequestDispatcher("nessunaRisorsa.jsp");
+          view.forward(request, response);
+        } else {
 
-				AziendaBean a = utente.getAzienda(azienda);
+          List<AziendaBean> listaAziende = new ArrayList<AziendaBean>();
+          for (AziendaBean a : aziendeConv) {
+            if (!(nome.equals(null)) && !(sede.equals(null))) {
+              if (a.getNome().toLowerCase().contains(nome) 
+                    && a.getIndirizzo().toLowerCase().contains(sede)) {
+                listaAziende.add(a);
+              }
+            } else if (!(nome.equals(null)) && sede.equals(null)) {
+              if (a.getNome().toLowerCase().contains(nome)) {
+                listaAziende.add(a);
+              }
+            } else if (nome.equals(null) && !(sede.equals(null))) {
+              if (a.getIndirizzo().toLowerCase().contains(sede)) {
+                listaAziende.add(a);
+              }
+            } 
+          }
 
-				request.getSession().setAttribute("aziendaSelezionata", a);
-				RequestDispatcher view = request.getRequestDispatcher("visualizzaScheda.jsp");
-				view.forward(request, response);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
+          request.getSession().setAttribute("listaAziende", listaAziende);
 
-		if(azioneTirocinio.equals("ricercaAzienda")) {
-			try {
-				List<AziendaBean> aziende = utente.getAziende("username ASC");
-				List<ConvenzioneBean> convenzioni = documento.getConvenzioni("id ASC");
-				List<AziendaBean> aziendeConv = new ArrayList<AziendaBean>();
-				String nome = request.getParameter("nomeAzienda").toLowerCase();
-				String sede = request.getParameter("sedeAzienda").toLowerCase();
-				for(AziendaBean a : aziende) {
+          RequestDispatcher view = request.getRequestDispatcher("elencoAziendeConvenzionate.jsp");
+          view.forward(request, response);
+        } 
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+    }
 
-					for(ConvenzioneBean c : convenzioni) {
-
-						if(a.getUsername().equals(c.getAzienda()) && c.isConvalida()) {
-							aziendeConv.add(a);
-
-						}
-
-					}
-				}
-
-				if(aziendeConv.size() == 0) {
-					RequestDispatcher view = request.getRequestDispatcher("nessunaRisorsa.jsp");
-					view.forward(request, response);
-				}
-				else {
-
-					List<AziendaBean> listaAziende = new ArrayList<AziendaBean>();
-					for(AziendaBean a : aziendeConv){
-						if(!(nome.equals(null)) && !(sede.equals(null))){
-							if(a.getNome().toLowerCase().contains(nome) && a.getIndirizzo().toLowerCase().contains(sede)){
-								listaAziende.add(a);
-							}
-						}else if(!(nome.equals(null)) && sede.equals(null)){
-							if(a.getNome().toLowerCase().contains(nome)){
-								listaAziende.add(a);
-							}
-						}else if(nome.equals(null) && !(sede.equals(null))){
-							if(a.getIndirizzo().toLowerCase().contains(sede)){
-								listaAziende.add(a);
-							}
-						} 
-					}
-
-					request.getSession().setAttribute("listaAziende", listaAziende);
-
-					RequestDispatcher view = request.getRequestDispatcher("elencoAziendeConvenzionate.jsp");
-					view.forward(request, response);
-				} 
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-
-	}
+  }
 
 }
